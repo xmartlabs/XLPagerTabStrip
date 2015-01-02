@@ -2,8 +2,9 @@ Pod::Spec.new do |s|
   s.name     = 'XLPagerTabStrip'
   s.version  = '1.0.0'
   s.license  = 'MIT'
-  s.summary  = 'Android PagerTabStrip for iOS and much more!'
+  s.summary  = 'PagerTabStrip for iOS and much more!'
   s.description = <<-DESC 
+                    Android PagerTabStrip for iOS and much more
                   DESC
   s.homepage = 'https://github.com/xmartlabs/XLPagerTabStrip'
   s.authors  = { 'Martin Barreto' => 'martin@xmartlabs.com', 'Washington Miranda' => 'mirandaacevedo@gmail.com' }
