@@ -13,8 +13,8 @@
 		28B63AA61A459F5900225C66 /* XLPagerTabStripTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B63AA51A459F5900225C66 /* XLPagerTabStripTests.m */; };
 		28B63AC31A45A4C500225C66 /* BarExampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B63AB11A45A4C500225C66 /* BarExampleViewController.m */; };
 		28B63AC41A45A4C500225C66 /* ButtonBarExampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B63AB31A45A4C500225C66 /* ButtonBarExampleViewController.m */; };
-		28B63AC51A45A4C500225C66 /* MailBoxChildViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B63AB61A45A4C500225C66 /* MailBoxChildViewController.m */; };
-		28B63AC61A45A4C500225C66 /* MailBoxTableChildViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B63AB81A45A4C500225C66 /* MailBoxTableChildViewController.m */; };
+		28B63AC51A45A4C500225C66 /* ChildExampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B63AB61A45A4C500225C66 /* ChildExampleViewController.m */; };
+		28B63AC61A45A4C500225C66 /* TableChildExampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B63AB81A45A4C500225C66 /* TableChildExampleViewController.m */; };
 		28B63AC71A45A4C500225C66 /* PostCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B63ABB1A45A4C500225C66 /* PostCell.m */; };
 		28B63AC81A45A4C500225C66 /* XLJSONSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B63ABE1A45A4C500225C66 /* XLJSONSerialization.m */; };
 		28B63AC91A45A4C500225C66 /* PagerSlidingTabStrip.gif in Resources */ = {isa = PBXBuildFile; fileRef = 28B63ABF1A45A4C500225C66 /* PagerSlidingTabStrip.gif */; };
@@ -28,6 +28,7 @@
 		28B63AF01A45B26600225C66 /* XLButtonBarPagerTabStripViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B63AEA1A45B26600225C66 /* XLButtonBarPagerTabStripViewController.m */; };
 		28B63AF11A45B26600225C66 /* XLPagerTabStripViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B63AEC1A45B26600225C66 /* XLPagerTabStripViewController.m */; };
 		28B63AF21A45B26600225C66 /* XLSegmentedPagerTabStripViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B63AEE1A45B26600225C66 /* XLSegmentedPagerTabStripViewController.m */; };
+		28B63AF51A465E5E00225C66 /* ReloadExampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B63AF41A465E5E00225C66 /* ReloadExampleViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,10 +55,10 @@
 		28B63AB11A45A4C500225C66 /* BarExampleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BarExampleViewController.m; sourceTree = "<group>"; };
 		28B63AB21A45A4C500225C66 /* ButtonBarExampleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ButtonBarExampleViewController.h; sourceTree = "<group>"; };
 		28B63AB31A45A4C500225C66 /* ButtonBarExampleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ButtonBarExampleViewController.m; sourceTree = "<group>"; };
-		28B63AB51A45A4C500225C66 /* MailBoxChildViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MailBoxChildViewController.h; sourceTree = "<group>"; };
-		28B63AB61A45A4C500225C66 /* MailBoxChildViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MailBoxChildViewController.m; sourceTree = "<group>"; };
-		28B63AB71A45A4C500225C66 /* MailBoxTableChildViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MailBoxTableChildViewController.h; sourceTree = "<group>"; };
-		28B63AB81A45A4C500225C66 /* MailBoxTableChildViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MailBoxTableChildViewController.m; sourceTree = "<group>"; };
+		28B63AB51A45A4C500225C66 /* ChildExampleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChildExampleViewController.h; sourceTree = "<group>"; };
+		28B63AB61A45A4C500225C66 /* ChildExampleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChildExampleViewController.m; sourceTree = "<group>"; };
+		28B63AB71A45A4C500225C66 /* TableChildExampleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableChildExampleViewController.h; sourceTree = "<group>"; };
+		28B63AB81A45A4C500225C66 /* TableChildExampleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableChildExampleViewController.m; sourceTree = "<group>"; };
 		28B63ABA1A45A4C500225C66 /* PostCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostCell.h; sourceTree = "<group>"; };
 		28B63ABB1A45A4C500225C66 /* PostCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostCell.m; sourceTree = "<group>"; };
 		28B63ABD1A45A4C500225C66 /* XLJSONSerialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLJSONSerialization.h; sourceTree = "<group>"; };
@@ -81,6 +82,8 @@
 		28B63AEC1A45B26600225C66 /* XLPagerTabStripViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XLPagerTabStripViewController.m; path = Controllers/XLPagerTabStripViewController.m; sourceTree = "<group>"; };
 		28B63AED1A45B26600225C66 /* XLSegmentedPagerTabStripViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XLSegmentedPagerTabStripViewController.h; path = Controllers/XLSegmentedPagerTabStripViewController.h; sourceTree = "<group>"; };
 		28B63AEE1A45B26600225C66 /* XLSegmentedPagerTabStripViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XLSegmentedPagerTabStripViewController.m; path = Controllers/XLSegmentedPagerTabStripViewController.m; sourceTree = "<group>"; };
+		28B63AF31A465E5E00225C66 /* ReloadExampleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReloadExampleViewController.h; sourceTree = "<group>"; };
+		28B63AF41A465E5E00225C66 /* ReloadExampleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReloadExampleViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -179,10 +182,10 @@
 		28B63AB41A45A4C500225C66 /* ChildViewController */ = {
 			isa = PBXGroup;
 			children = (
-				28B63AB51A45A4C500225C66 /* MailBoxChildViewController.h */,
-				28B63AB61A45A4C500225C66 /* MailBoxChildViewController.m */,
-				28B63AB71A45A4C500225C66 /* MailBoxTableChildViewController.h */,
-				28B63AB81A45A4C500225C66 /* MailBoxTableChildViewController.m */,
+				28B63AB51A45A4C500225C66 /* ChildExampleViewController.h */,
+				28B63AB61A45A4C500225C66 /* ChildExampleViewController.m */,
+				28B63AB71A45A4C500225C66 /* TableChildExampleViewController.h */,
+				28B63AB81A45A4C500225C66 /* TableChildExampleViewController.m */,
 				28B63AB91A45A4C500225C66 /* Views */,
 			);
 			path = ChildViewController;
@@ -202,6 +205,8 @@
 			children = (
 				28B63ABD1A45A4C500225C66 /* XLJSONSerialization.h */,
 				28B63ABE1A45A4C500225C66 /* XLJSONSerialization.m */,
+				28B63AF31A465E5E00225C66 /* ReloadExampleViewController.h */,
+				28B63AF41A465E5E00225C66 /* ReloadExampleViewController.m */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -344,7 +349,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				28B63AC51A45A4C500225C66 /* MailBoxChildViewController.m in Sources */,
+				28B63AC51A45A4C500225C66 /* ChildExampleViewController.m in Sources */,
 				28B63AF11A45B26600225C66 /* XLPagerTabStripViewController.m in Sources */,
 				28B63AC41A45A4C500225C66 /* ButtonBarExampleViewController.m in Sources */,
 				28B63ADC1A45A4CD00225C66 /* XLBarView.m in Sources */,
@@ -356,10 +361,11 @@
 				28B63A8F1A459F5900225C66 /* AppDelegate.m in Sources */,
 				28B63AF21A45B26600225C66 /* XLSegmentedPagerTabStripViewController.m in Sources */,
 				28B63AEF1A45B26600225C66 /* XLBarPagerTabStripViewController.m in Sources */,
+				28B63AF51A465E5E00225C66 /* ReloadExampleViewController.m in Sources */,
 				28B63AC31A45A4C500225C66 /* BarExampleViewController.m in Sources */,
 				28B63AF01A45B26600225C66 /* XLButtonBarPagerTabStripViewController.m in Sources */,
 				28B63A8C1A459F5900225C66 /* main.m in Sources */,
-				28B63AC61A45A4C500225C66 /* MailBoxTableChildViewController.m in Sources */,
+				28B63AC61A45A4C500225C66 /* TableChildExampleViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -34,7 +34,7 @@
                     <navigationItem key="navigationItem" id="l1f-vB-6A8">
                         <nil key="title"/>
                         <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="31B-gy-WIH">
-                            <rect key="frame" x="8" y="7" width="304" height="30"/>
+                            <rect key="frame" x="148" y="7" width="304" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <segments>
                                 <segment title="First"/>
@@ -42,6 +42,12 @@
                             </segments>
                             <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         </segmentedControl>
+                        <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="Ndu-OA-iL5">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <action selector="reloadTapped:" destination="h8P-u9-NhP" id="6uG-1h-owY"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="containerView" destination="D5t-1q-KDh" id="EwQ-Ub-iYS"/>
@@ -52,10 +58,10 @@
             </objects>
             <point key="canvasLocation" x="2227.5" y="-583.09859154929575"/>
         </scene>
-        <!--View Controller-->
+        <!--Reload Example View Controller-->
         <scene sceneID="sWd-rV-F4O">
             <objects>
-                <viewController id="uba-Iz-2L2" sceneMemberID="viewController">
+                <viewController id="uba-Iz-2L2" customClass="ReloadExampleViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Emc-3r-MJi"/>
                         <viewControllerLayoutGuide type="bottom" id="NbE-e0-l2n"/>
@@ -77,13 +83,24 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jSE-G2-qe6">
+                                <rect key="frame" x="527" y="83" width="57" height="34"/>
+                                <state key="normal" title="Reload">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="reloadTapped:" destination="uba-Iz-2L2" eventType="touchUpInside" id="KNI-Zr-Zz0"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.027450980390000001" green="0.72549019609999998" blue="0.60784313729999995" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="centerX" secondItem="cZN-qT-VUq" secondAttribute="centerX" id="AYy-gw-Ryh"/>
                             <constraint firstItem="NbE-e0-l2n" firstAttribute="top" secondItem="qkQ-UG-MKG" secondAttribute="bottom" id="K6Q-s5-nzV"/>
+                            <constraint firstItem="jSE-G2-qe6" firstAttribute="top" secondItem="Emc-3r-MJi" secondAttribute="bottom" constant="63" id="NWc-fy-XOc"/>
                             <constraint firstItem="cZN-qT-VUq" firstAttribute="top" secondItem="Emc-3r-MJi" secondAttribute="bottom" constant="32" id="RvZ-BV-1SL"/>
                             <constraint firstItem="qkQ-UG-MKG" firstAttribute="leading" secondItem="Mqm-sG-Qyv" secondAttribute="leading" id="Slo-zY-IGj"/>
+                            <constraint firstItem="jSE-G2-qe6" firstAttribute="trailing" secondItem="Mqm-sG-Qyv" secondAttribute="trailingMargin" id="hbB-fi-M5S"/>
                             <constraint firstItem="qkQ-UG-MKG" firstAttribute="top" secondItem="Emc-3r-MJi" secondAttribute="bottom" constant="101" id="nJw-ag-ddh"/>
                             <constraint firstAttribute="trailing" secondItem="qkQ-UG-MKG" secondAttribute="trailing" id="pTb-BC-Duc"/>
                         </constraints>
@@ -93,12 +110,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jkN-pv-eFH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1340.625" y="139.43661971830986"/>
+            <point key="canvasLocation" x="1340" y="139"/>
         </scene>
         <!--Buttons Example-->
         <scene sceneID="c3d-TB-Hyh">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="3jo-Zp-rsN" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="3jo-Zp-rsN" customClass="ReloadExampleViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="sYC-OQ-Mga"/>
                         <viewControllerLayoutGuide type="bottom" id="LUh-C3-i05"/>
@@ -122,7 +139,14 @@
                             <constraint firstItem="9rp-Lg-ckk" firstAttribute="leading" secondItem="TXd-Bq-amB" secondAttribute="leadingMargin" constant="-16" id="vBT-dV-v2T"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Buttons Example" id="anf-yu-jjb"/>
+                    <navigationItem key="navigationItem" title="Buttons Example" id="anf-yu-jjb">
+                        <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="frU-Vs-ZeP">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <action selector="reloadTapped:" destination="3jo-Zp-rsN" id="TWU-tP-nLj"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="79T-iZ-rpA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

@@ -25,8 +25,8 @@
 
 #import "XLJSONSerialization.h"
 #import "XLSegmentedPagerTabStripViewController.h"
-#import "MailBoxChildViewController.h"
-#import "MailBoxTableChildViewController.h"
+#import "ChildExampleViewController.h"
+#import "TableChildExampleViewController.h"
 
 #import "AppDelegate.h"
 

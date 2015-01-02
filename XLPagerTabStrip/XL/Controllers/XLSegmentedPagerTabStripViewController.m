@@ -60,24 +60,20 @@
     if (!self.segmentedControl.superview) {
         [self.navigationItem setTitleView:self.segmentedControl];
     }
-    [self.segmentedControl removeAllSegments];
     [self.segmentedControl addTarget:self
                               action:@selector(segmentedControlChanged:)
                     forControlEvents:UIControlEventValueChanged];
-    [self.pagerTabStripChildViewControllers enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        NSAssert([obj conformsToProtocol:@protocol(XLPagerTabStripChildItem)], @"child view controller must conform to XLPagerTabStripChildItem");
-        UIViewController<XLPagerTabStripChildItem> * childViewController = (UIViewController<XLPagerTabStripChildItem> *)obj;
-        if ([childViewController respondsToSelector:@selector(imageForPagerTabStripViewController:)]){
+    [self reloadSegmentedControl];
+}
 
-            [self.segmentedControl insertSegmentWithImage:[childViewController imageForPagerTabStripViewController:self]  atIndex:idx animated:NO];
-        }
-        else{
-            [self.segmentedControl insertSegmentWithTitle:[childViewController titleForPagerTabStripViewController:self] atIndex:idx animated:NO];
-        }
 
-    }];
-    [self.segmentedControl setSelectedSegmentIndex:self.currentIndex];
-
+-(void)reloadPagerTabStripView
+{
+    [super reloadPagerTabStripView];
+    if ([self isViewLoaded]){
+        [self reloadSegmentedControl];
+    }
+    
 }
 
 
@@ -89,11 +85,33 @@
     return _segmentedControl;
 }
 
+#pragma mark - Helpers
+
+-(void)reloadSegmentedControl
+{
+    [self.segmentedControl removeAllSegments];
+    [self.pagerTabStripChildViewControllers enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        NSAssert([obj conformsToProtocol:@protocol(XLPagerTabStripChildItem)], @"child view controller must conform to XLPagerTabStripChildItem");
+        UIViewController<XLPagerTabStripChildItem> * childViewController = (UIViewController<XLPagerTabStripChildItem> *)obj;
+        if ([childViewController respondsToSelector:@selector(imageForPagerTabStripViewController:)]){
+            
+            [self.segmentedControl insertSegmentWithImage:[childViewController imageForPagerTabStripViewController:self]  atIndex:idx animated:NO];
+        }
+        else{
+            [self.segmentedControl insertSegmentWithTitle:[childViewController titleForPagerTabStripViewController:self] atIndex:idx animated:NO];
+        }
+        
+    }];
+    [self.segmentedControl setSelectedSegmentIndex:self.currentIndex];
+}
+
+#pragma mark - Events
+
 
 -(void)segmentedControlChanged:(UISegmentedControl *)sender
 {
     NSInteger index = [sender selectedSegmentIndex];
-    [self pagerTabStripViewController:self updateIndicatorToViewController:[[self.dataSource childViewControllersForPagerTabStripViewController:self] objectAtIndex:index] fromViewController:nil];
+    [self pagerTabStripViewController:self updateIndicatorToViewController:[self.pagerTabStripChildViewControllers objectAtIndex:index] fromViewController:nil];
     self.shouldUpdateSegmentedControl = NO;
     [self moveToViewControllerAtIndex:index];
 }

@@ -64,10 +64,8 @@
 
 -(void)moveToIndex:(NSUInteger)index animated:(BOOL)animated swipeDirection:(XLPagerTabStripDirection)swipeDirection
 {
-    if (self.selectedOptionIndex != index){
-        self.selectedOptionIndex = index;
-        [self updateSelectedBarPositionWithAnimation:animated swipeDirection:swipeDirection];
-    }
+    self.selectedOptionIndex = index;
+    [self updateSelectedBarPositionWithAnimation:animated swipeDirection:swipeDirection];
 }
 
 

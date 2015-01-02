@@ -46,7 +46,6 @@ Customization
 The most interesting customizable features are:
 
 * Ability to skip intermediate view controllers when tapped on a "tab".
-* Update the bar view indicator either when scroll offset changes or at the middle of the screen.
 * Indicators can be added at any position of the screen through storyboard layouts. 
 * Add space padding between view controllers.
 
@@ -73,7 +72,7 @@ Contributors
 * Washington Miranda
 
 
-XLPagerTabStrip was inspired by [Tell Marquet](http://about.tellmarket.com/) app.
+XLPagerTabStrip was inspired by [Tell market](http://about.tellmarket.com/) app.
 
 Contact
 ----------------

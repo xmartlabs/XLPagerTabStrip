@@ -25,10 +25,6 @@
 
 #import "XLBarPagerTabStripViewController.h"
 
-@interface XLBarPagerTabStripViewController ()
-
-@end
-
 @implementation XLBarPagerTabStripViewController
 
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -55,15 +51,29 @@
         [self.view addSubview:self.barView];
     }
     else{
-        [self.barView setOptionsAmount:[self.dataSource childViewControllersForPagerTabStripViewController:self].count animated:NO];
+        [self.barView setOptionsAmount:self.pagerTabStripChildViewControllers.count animated:NO];
         [self.barView moveToIndex:self.currentIndex animated:NO];
     }
 }
 
+
+-(void)reloadPagerTabStripView
+{
+    [super reloadPagerTabStripView];
+    if ([self isViewLoaded])
+    {
+        [self.barView setOptionsAmount:self.pagerTabStripChildViewControllers.count animated:NO];
+        [self.barView moveToIndex:self.currentIndex animated:NO];
+    }
+}
+
+
+#pragma mark - Properties
+
 -(XLBarView *)barView
 {
     if (_barView) return _barView;
-    _barView = [[XLBarView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 5.0f) optionsAmount:[self.dataSource childViewControllersForPagerTabStripViewController:self].count selectedOptionIndex:self.currentIndex];
+    _barView = [[XLBarView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 5.0f) optionsAmount:self.pagerTabStripChildViewControllers.count selectedOptionIndex:self.currentIndex];
     _barView.backgroundColor = [UIColor orangeColor];
     _barView.selectedBar.backgroundColor = [UIColor blackColor];
     _barView.autoresizingMask = UIViewAutoresizingFlexibleWidth;

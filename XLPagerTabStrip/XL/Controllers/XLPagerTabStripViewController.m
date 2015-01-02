@@ -250,6 +250,26 @@
 }
 
 
+-(void)reloadPagerTabStripView
+{
+    if ([self isViewLoaded]){
+        [self.pagerTabStripChildViewControllers enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+            UIViewController * childController = (UIViewController *)obj;
+            if ([childController parentViewController]){
+                [childController.view removeFromSuperview];
+                [childController willMoveToParentViewController:nil];
+                [childController removeFromParentViewController];
+            }
+        }];
+        _pagerTabStripChildViewControllers = self.dataSource ? [self.dataSource childViewControllersForPagerTabStripViewController:self] : @[];
+        self.containerView.contentSize = CGSizeMake(CGRectGetWidth(self.containerView.bounds) * _pagerTabStripChildViewControllers.count, self.containerView.contentSize.height);
+        if (self.currentIndex >= _pagerTabStripChildViewControllers.count){
+            [self.containerView setContentOffset:CGPointMake([self pageOffsetForChildIndex:(_pagerTabStripChildViewControllers.count - 1)], 0)  animated:NO];
+        }
+        [self updateContent];
+    }
+}
+
 #pragma mark - UIScrollViewDelegte
 
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView
@@ -302,13 +322,17 @@
 
 -(void)setCurrentIndex:(NSUInteger)currentIndex
 {
-    UIViewController * fromViewController = [self.pagerTabStripChildViewControllers objectAtIndex:_currentIndex];
-    _currentIndex = currentIndex;
-    // invoke delegate method
-    if ([self.delegate respondsToSelector:@selector(pagerTabStripViewController:updateIndicatorToViewController:fromViewController:)]){
-        [self.delegate pagerTabStripViewController:self updateIndicatorToViewController:[self.pagerTabStripChildViewControllers objectAtIndex:_currentIndex] fromViewController:fromViewController];
+    if (self.pagerTabStripChildViewControllers.count > currentIndex){
+        UIViewController * fromViewController = nil;
+        if (self.pagerTabStripChildViewControllers.count > _currentIndex){
+            fromViewController = [self.pagerTabStripChildViewControllers objectAtIndex:_currentIndex];
+        }
+        
+        _currentIndex = currentIndex;
+        if ([self.delegate respondsToSelector:@selector(pagerTabStripViewController:updateIndicatorToViewController:fromViewController:)]){
+            [self.delegate pagerTabStripViewController:self updateIndicatorToViewController:[self.pagerTabStripChildViewControllers objectAtIndex:_currentIndex] fromViewController:fromViewController];
+        }
     }
-    //
 }
 
 #pragma mark - Orientation

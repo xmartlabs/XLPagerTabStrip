@@ -84,6 +84,18 @@
     [self.buttonBarView.selectedBar setFrame:CGRectMake(cellRect.origin.x, self.buttonBarView.frame.size.height - 5, cellRect.size.width, 5)];
 }
 
+-(void)reloadPagerTabStripView
+{
+    [super reloadPagerTabStripView];
+    if ([self isViewLoaded])
+    {
+        [self.buttonBarView reloadData];
+        [self.buttonBarView moveToIndex:self.currentIndex animated:NO swipeDirection:XLPagerTabStripDirectionNone];
+    }
+}
+
+
+#pragma mark - Properties
 
 -(XLButtonBarView *)buttonBarView
 {

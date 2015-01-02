@@ -23,19 +23,23 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "MailBoxTableChildViewController.h"
-#import "MailBoxChildViewController.h"
+#import "TableChildExampleViewController.h"
+#import "ChildExampleViewController.h"
 #import "BarExampleViewController.h"
 
 @interface BarExampleViewController ()
 @end
 
 @implementation BarExampleViewController
+{
+    BOOL _isReload;
+}
 
 - (instancetype)initWithCoder:(NSCoder *)coder
 {
     self = [super initWithCoder:coder];
     if (self) {
+        _isReload = NO;
     }
     return self;
 }
@@ -54,11 +58,30 @@
 -(NSArray *)childViewControllersForPagerTabStripViewController:(XLPagerTabStripViewController *)pagerTabStripViewController
 {
     // create child view controllers that will be managed by XLPagerTabStripViewController
-    MailBoxTableChildViewController * child_1 = [[MailBoxTableChildViewController alloc] initWithStyle:UITableViewStylePlain];
-    MailBoxChildViewController * child_2 = [[MailBoxChildViewController alloc] init];
-    MailBoxTableChildViewController * child_3 = [[MailBoxTableChildViewController alloc] initWithStyle:UITableViewStyleGrouped];
-    MailBoxChildViewController * child_4 = [[MailBoxChildViewController alloc] init];
-    return @[child_1, child_2, child_3, child_4];
+    TableChildExampleViewController * child_1 = [[TableChildExampleViewController alloc] initWithStyle:UITableViewStylePlain];
+    ChildExampleViewController * child_2 = [[ChildExampleViewController alloc] init];
+    TableChildExampleViewController * child_3 = [[TableChildExampleViewController alloc] initWithStyle:UITableViewStyleGrouped];
+    ChildExampleViewController * child_4 = [[ChildExampleViewController alloc] init];
+    if (!_isReload){
+        return @[child_1, child_2, child_3, child_4];
+    }
+    
+    NSMutableArray * childViewControllers = [NSMutableArray arrayWithObjects:child_1, child_2, child_3, child_4, nil];
+    NSUInteger count = [childViewControllers count];
+    for (NSUInteger i = 0; i < count; ++i) {
+        // Select a random element between i and end of array to swap with.
+        NSUInteger nElements = count - i;
+        NSUInteger n = (arc4random() % nElements) + i;
+        [childViewControllers exchangeObjectAtIndex:i withObjectAtIndex:n];
+    }
+    NSUInteger nItems = 1 + (rand() % 4);
+    return [childViewControllers subarrayWithRange:NSMakeRange(0, nItems)];
+}
+
+-(void)reloadPagerTabStripView
+{
+    _isReload = YES;
+    [super reloadPagerTabStripView];
 }
 
 @end

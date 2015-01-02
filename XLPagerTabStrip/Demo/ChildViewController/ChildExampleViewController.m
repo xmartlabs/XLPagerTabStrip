@@ -1,5 +1,5 @@
 //
-//  MailBoxChildViewController.m
+//  ChildExampleViewController.m
 //  XLPagerTabStrip ( https://github.com/xmartlabs/XLPagerTabStrip )
 //
 //  Copyright (c) 2014 Xmartlabs ( http://xmartlabs.com )
@@ -23,9 +23,9 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "MailBoxChildViewController.h"
+#import "ChildExampleViewController.h"
 
-@implementation MailBoxChildViewController
+@implementation ChildExampleViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {

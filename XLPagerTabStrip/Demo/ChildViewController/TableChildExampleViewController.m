@@ -1,5 +1,5 @@
 //
-//  MailBoxTableChildViewController.m
+//  TableChildExampleViewController.m
 //  XLPagerTabStrip ( https://github.com/xmartlabs/XLPagerTabStrip )
 //
 //  Copyright (c) 2014 Xmartlabs ( http://xmartlabs.com )
@@ -25,11 +25,11 @@
 
 #import "XLJSONSerialization.h"
 #import "PostCell.h"
-#import "MailBoxTableChildViewController.h"
+#import "TableChildExampleViewController.h"
 
 NSString *const kCellIdentifier = @"PostCell";
 
-@implementation MailBoxTableChildViewController
+@implementation TableChildExampleViewController
 {
     NSArray * _posts;
     PostCell * _offScreenCell;

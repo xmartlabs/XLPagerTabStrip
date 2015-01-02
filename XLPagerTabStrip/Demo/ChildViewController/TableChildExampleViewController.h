@@ -1,5 +1,5 @@
 //
-//  MailBoxTableChildViewController.h
+//  TableChildExampleViewController.h
 //  XLPagerTabStrip ( https://github.com/xmartlabs/XLPagerTabStrip )
 //
 //  Copyright (c) 2014 Xmartlabs ( http://xmartlabs.com )
@@ -26,7 +26,7 @@
 #import <UIKit/UIKit.h>
 #import "XLPagerTabStripViewController.h"
 
-@interface MailBoxTableChildViewController : UITableViewController <XLPagerTabStripChildItem>
+@interface TableChildExampleViewController : UITableViewController <XLPagerTabStripChildItem>
 
 
 @end
