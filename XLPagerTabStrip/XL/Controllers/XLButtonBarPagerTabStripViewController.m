@@ -71,6 +71,7 @@
     }
     self.buttonBarView.labelFont = [UIFont fontWithName:@"Helvetica-Bold" size:18.0f];
     self.buttonBarView.leftRightMargin = 8;
+    [self.buttonBarView setScrollsToTop:NO];
     UICollectionViewFlowLayout * flowLayout = (id)self.buttonBarView.collectionViewLayout;
     [flowLayout setScrollDirection:UICollectionViewScrollDirectionHorizontal];
     [self.buttonBarView setShowsHorizontalScrollIndicator:NO];
