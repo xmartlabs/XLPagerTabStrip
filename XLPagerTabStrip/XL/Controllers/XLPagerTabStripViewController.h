@@ -82,6 +82,8 @@ typedef NS_ENUM(NSUInteger, XLPagerTabStripDirection) {
 
 @property (readonly) NSUInteger currentIndex;
 @property BOOL skipIntermediateViewControllers;
+// When user scroll the pager, waiting did end decelerating update page index, Default is NO.
+@property BOOL shouldDidEndDeceleratingUpdatePage;
 
 -(void)moveToViewControllerAtIndex:(NSUInteger)index;
 -(void)moveToViewController:(UIViewController *)viewController;

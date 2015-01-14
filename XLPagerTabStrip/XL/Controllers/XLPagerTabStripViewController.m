@@ -71,6 +71,7 @@
     _dataSource = self;
     _lastContentOffset = 0.0f;
     _skipIntermediateViewControllers = YES;
+    _shouldDidEndDeceleratingUpdatePage = NO;
 }
 
 - (void)viewDidLoad
@@ -212,13 +213,20 @@
     return fmodf(self.containerView.contentOffset.x, [self pageWidth]) / [self pageWidth];
 }
 
+- (void)updateCurrentPage
+{
+    NSUInteger currentPage = [self pageForContentOffset:self.containerView.contentOffset.x];
+    if (currentPage != self.currentIndex){
+        self.currentIndex = currentPage;
+    }
+}
+
 -(void)updateContent
 {
     NSArray * childViewControllers = self.pagerTabStripChildViewControllers;
     self.containerView.contentSize = CGSizeMake(CGRectGetWidth(self.containerView.bounds) * childViewControllers.count, self.containerView.contentSize.height);
-    NSUInteger currentPage = [self pageForContentOffset:self.containerView.contentOffset.x];
-    if (currentPage != self.currentIndex){
-        self.currentIndex = currentPage;
+    if (!self.shouldDidEndDeceleratingUpdatePage) {
+        [self updateCurrentPage];
     }
 
     [childViewControllers enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
@@ -293,6 +301,12 @@
     if (self.containerView == scrollView){
         _lastPageNumber = [self pageForContentOffset:scrollView.contentOffset.x];
         _lastContentOffset = scrollView.contentOffset.x;
+    }
+}
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+    if (self.shouldDidEndDeceleratingUpdatePage) {
+        [self updateCurrentPage];
     }
 }
 
