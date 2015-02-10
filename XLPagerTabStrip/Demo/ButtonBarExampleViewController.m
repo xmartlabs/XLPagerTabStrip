@@ -32,9 +32,9 @@
     BOOL _isReload;
 }
 
-
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.isProgressiveIndicator = NO;
     // Do any additional setup after loading the view.
     [self.buttonBarView.selectedBar setBackgroundColor:[UIColor orangeColor]];
 }
@@ -71,8 +71,9 @@
 -(void)reloadPagerTabStripView
 {
     _isReload = YES;
+    self.isProgressiveIndicator = (rand() % 2 == 0);
+    self.isElasticIndicatorLimit = (rand() % 2 == 0);
     [super reloadPagerTabStripView];
 }
-
 
 @end

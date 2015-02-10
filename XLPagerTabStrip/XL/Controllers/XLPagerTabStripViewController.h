@@ -60,6 +60,11 @@ typedef NS_ENUM(NSUInteger, XLPagerTabStripDirection) {
 
 -(void)pagerTabStripViewController:(XLPagerTabStripViewController *)pagerTabStripViewController updateIndicatorToViewController:(UIViewController *)toViewController fromViewController:(UIViewController *)fromViewController;
 
+-(void)pagerTabStripViewController:(XLPagerTabStripViewController *)pagerTabStripViewController
+          updateIndicatorFromIndex:(NSInteger)fromIndex
+                           toIndex:(NSInteger)toIndex
+            withProgressPercentage:(CGFloat)progressPercentage;
+
 @end
 
 
@@ -82,6 +87,8 @@ typedef NS_ENUM(NSUInteger, XLPagerTabStripDirection) {
 
 @property (readonly) NSUInteger currentIndex;
 @property BOOL skipIntermediateViewControllers;
+@property BOOL isProgressiveIndicator;
+@property BOOL isElasticIndicatorLimit;
 
 -(void)moveToViewControllerAtIndex:(NSUInteger)index;
 -(void)moveToViewController:(UIViewController *)viewController;

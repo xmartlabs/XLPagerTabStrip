@@ -32,6 +32,7 @@
 -(id)initWithFrame:(CGRect)frame optionsAmount:(NSUInteger)optionsAmount selectedOptionIndex:(NSUInteger)selectedOptionIndex;
 
 -(void)moveToIndex:(NSUInteger)index animated:(BOOL)animated;
+-(void)moveFromIndex:(NSInteger)fromIndex toIndex:(NSInteger)toIndex withProgressPercentage:(CGFloat)progressPercentage;
 -(void)setOptionsAmount:(NSUInteger)optionsAmount animated:(BOOL)animated;
 
 @end

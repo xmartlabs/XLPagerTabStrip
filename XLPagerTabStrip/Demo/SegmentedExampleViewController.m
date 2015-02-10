@@ -70,6 +70,8 @@
 
 - (IBAction)reloadTapped:(id)sender {
     _isReload = YES;
+    self.isProgressiveIndicator = (rand() % 2 == 0);
+    self.isElasticIndicatorLimit = (rand() % 2 == 0);
     [self reloadPagerTabStripView];
 }
 

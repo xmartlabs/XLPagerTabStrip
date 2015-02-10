@@ -73,7 +73,6 @@
     if ([self isViewLoaded]){
         [self reloadSegmentedControl];
     }
-    
 }
 
 
@@ -103,6 +102,7 @@
         
     }];
     [self.segmentedControl setSelectedSegmentIndex:self.currentIndex];
+    [self.segmentedControl setTintColor:[[self.pagerTabStripChildViewControllers objectAtIndex:self.currentIndex]colorForPagerTabStripViewController:self]];
 }
 
 #pragma mark - Events
@@ -127,6 +127,22 @@
         }
         [self.segmentedControl setSelectedSegmentIndex:[self.pagerTabStripChildViewControllers indexOfObject:childViewController]];
     }
+}
+
+-(void)pagerTabStripViewController:(XLPagerTabStripViewController *)pagerTabStripViewController
+          updateIndicatorFromIndex:(NSInteger)fromIndex
+                           toIndex:(NSInteger)toIndex
+            withProgressPercentage:(CGFloat)progressPercentage
+{
+    if (self.shouldUpdateSegmentedControl){
+        NSInteger currentIndex = (progressPercentage > 0.5) ? toIndex : fromIndex;
+        UIViewController<XLPagerTabStripChildItem> * childViewController = (UIViewController<XLPagerTabStripChildItem> *)[self.pagerTabStripChildViewControllers objectAtIndex:currentIndex];
+        if ([childViewController respondsToSelector:@selector(colorForPagerTabStripViewController:)]){
+            [self.segmentedControl setTintColor:[childViewController colorForPagerTabStripViewController:self]];
+        }
+        [self.segmentedControl setSelectedSegmentIndex:MIN(MAX(0, currentIndex), self.pagerTabStripChildViewControllers.count -1)];
+    }
+
 }
 
 
