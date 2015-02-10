@@ -40,6 +40,7 @@
     self = [super initWithCoder:coder];
     if (self) {
         _isReload = NO;
+        self.isProgressiveIndicator = YES;
     }
     return self;
 }
@@ -81,6 +82,8 @@
 -(void)reloadPagerTabStripView
 {
     _isReload = YES;
+    self.isProgressiveIndicator = (rand() % 2 == 0);
+    self.isElasticIndicatorLimit = (rand() % 2 == 0);;
     [super reloadPagerTabStripView];
 }
 

@@ -58,7 +58,9 @@
 -(void)initializeXLButtonBarView
 {
     _selectedOptionIndex = 0;
-    [self addSubview:self.selectedBar];
+    if ([self.selectedBar superview] == nil){
+        [self addSubview:self.selectedBar];
+    }
 }
 
 
@@ -68,28 +70,51 @@
     [self updateSelectedBarPositionWithAnimation:animated swipeDirection:swipeDirection];
 }
 
+-(void)moveFromIndex:(NSInteger)fromIndex toIndex:(NSInteger)toIndex withProgressPercentage:(CGFloat)progressPercentage
+{
+    self.selectedOptionIndex = (progressPercentage > 0.5 ) ? toIndex : fromIndex;
+    
+    UICollectionViewLayoutAttributes *attributes = [self layoutAttributesForItemAtIndexPath:[NSIndexPath indexPathForItem:fromIndex inSection:0]];
+    CGRect fromFrame = attributes.frame;
+    NSInteger numberOfItems = [self.dataSource collectionView:self numberOfItemsInSection:0];
+    CGRect toFrame;
+    if (toIndex < 0 || toIndex > [self.dataSource collectionView:self numberOfItemsInSection:0] - 1){
+        if (toIndex < 0) {
+            UICollectionViewLayoutAttributes * cellAtts = [self layoutAttributesForItemAtIndexPath:[NSIndexPath indexPathForItem:0 inSection:0]];
+            toFrame = CGRectOffset(cellAtts.frame, -cellAtts.frame.size.width, 0);
+        }
+        else{
+            UICollectionViewLayoutAttributes * cellAtts = [self layoutAttributesForItemAtIndexPath:[NSIndexPath indexPathForItem:(numberOfItems - 1) inSection:0]];
+            toFrame = CGRectOffset(cellAtts.frame, cellAtts.frame.size.width, 0);
+        }
+    }
+    else{
+        toFrame = [self layoutAttributesForItemAtIndexPath:[NSIndexPath indexPathForItem:toIndex inSection:0]].frame;
+    }
+    CGRect targetFrame = fromFrame;
+    targetFrame.size.height = self.selectedBar.frame.size.height;
+    targetFrame.size.width += (toFrame.size.width - fromFrame.size.width) * progressPercentage;
+    targetFrame.origin.x += (toFrame.origin.x - fromFrame.origin.x) * progressPercentage;
+    NSUInteger offset = 35;
+    float xValue = 0;
+    if (self.contentSize.width > self.frame.size.width){
+        xValue = MIN(self.contentSize.width - self.frame.size.width, targetFrame.origin.x - offset <= 0 ? 0 : targetFrame.origin.x - offset);
+    }
+    //NSLog(@"X value: %@", @(xValue));
+    [self setContentOffset:CGPointMake(xValue, 0) animated:NO];
+    self.selectedBar.frame = CGRectMake(targetFrame.origin.x, self.selectedBar.frame.origin.y, targetFrame.size.width, self.selectedBar.frame.size.height);
+}
+
 
 -(void)updateSelectedBarPositionWithAnimation:(BOOL)animation swipeDirection:(XLPagerTabStripDirection)swipeDirection
 {
     CGRect frame = self.selectedBar.frame;
     UICollectionViewCell * cell = [self.dataSource collectionView:self cellForItemAtIndexPath:[NSIndexPath indexPathForItem:self.selectedOptionIndex inSection:0]];
-    if (cell){
-        if (swipeDirection != XLPagerTabStripDirectionNone){
-            if (swipeDirection == XLPagerTabStripDirectionLeft)
-            {
-                float xValue = MIN(self.contentSize.width - self.frame.size.width, cell.frame.origin.x <= 35 ? 0 : cell.frame.origin.x - 35);
-                [self  setContentOffset:CGPointMake(xValue, 0) animated:animation];
-            }
-            else if (swipeDirection == XLPagerTabStripDirectionRight){
-                float xValue = MAX(0, cell.frame.origin.x + cell.frame.size.width - self.frame.size.width + 35);
-                [self  setContentOffset:CGPointMake(xValue, 0) animated:animation];
-            }
-            
-        }
-    }
+    
+    [self updateContentOffset];
+    
     frame.size.width = cell.frame.size.width;
     frame.origin.x = cell.frame.origin.x;
-    frame.origin.y = cell.frame.size.height - frame.size.height;
     if (animation){
         [UIView animateWithDuration:0.3 animations:^{
             [self.selectedBar setFrame:frame];
@@ -97,6 +122,26 @@
     }
     else{
         self.selectedBar.frame = frame;
+    }
+}
+
+
+
+#pragma mark - Helpers
+
+-(void)updateContentOffset
+{
+    UICollectionViewCell * cell = [self.dataSource collectionView:self cellForItemAtIndexPath:[NSIndexPath indexPathForItem:self.selectedOptionIndex inSection:0]];
+    if (cell){
+        NSUInteger offset = 35;
+        float xValue = MIN(
+                           MAX(0,
+                               self.contentSize.width - self.frame.size.width), // dont scroll if we are at the end of scroll view, if content is smaller than container width we scroll 0
+                           MAX(((UICollectionViewFlowLayout *)self.collectionViewLayout).sectionInset.left - cell.frame.origin.x,
+                               cell.frame.origin.x - ((UICollectionViewFlowLayout *)self.collectionViewLayout).sectionInset.left -  offset)
+                           
+                           );
+        [self setContentOffset:CGPointMake(xValue, 0) animated:YES];
     }
 }
 

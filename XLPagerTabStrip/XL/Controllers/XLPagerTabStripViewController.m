@@ -70,7 +70,9 @@
     _delegate = self;
     _dataSource = self;
     _lastContentOffset = 0.0f;
+    _isElasticIndicatorLimit = NO;
     _skipIntermediateViewControllers = YES;
+    _isProgressiveIndicator = NO;
 }
 
 - (void)viewDidLoad
@@ -110,30 +112,6 @@
     [self moveToViewControllerAtIndex:index animated:YES];
 }
 
--(void)moveToViewControllerAtIndex:(NSInteger)index withDirection:(XLPagerTabStripDirection)direction animated:(BOOL)animated
-{
-    if (self.skipIntermediateViewControllers && fabs(self.currentIndex - index) > 1){
-        NSArray * originalPagerTabStripChildViewControllers = self.pagerTabStripChildViewControllers;
-        NSMutableArray * tempChildViewControllers = [NSMutableArray arrayWithArray:originalPagerTabStripChildViewControllers];
-        UIViewController * currentChildVC = [originalPagerTabStripChildViewControllers objectAtIndex:self.currentIndex];
-        NSUInteger fromIndex = (direction == XLPagerTabStripDirectionLeft) ? index - 1 : index + 1;
-                [tempChildViewControllers setObject:[originalPagerTabStripChildViewControllers objectAtIndex:fromIndex] atIndexedSubscript:self.currentIndex];
-        [tempChildViewControllers setObject:currentChildVC atIndexedSubscript:fromIndex];
-        _pagerTabStripChildViewControllers = tempChildViewControllers;
-        [self.containerView setContentOffset:CGPointMake([self pageOffsetForChildIndex:fromIndex], 0) animated:NO];
-        if (self.navigationController){
-            self.navigationController.view.userInteractionEnabled = NO;
-        }
-        else{
-            self.view.userInteractionEnabled = NO;
-        }
-        _originalPagerTabStripChildViewControllers = originalPagerTabStripChildViewControllers;
-        [self.containerView setContentOffset:CGPointMake([self pageOffsetForChildIndex:index], 0) animated:YES];
-    }
-    else{
-        [self.containerView setContentOffset:CGPointMake([self pageOffsetForChildIndex:index], 0) animated:animated];
-    }
-}
 
 -(void)moveToViewControllerAtIndex:(NSUInteger)index animated:(bool)animated
 {
@@ -141,12 +119,28 @@
         self.currentIndex = index;
     }
     else{
-        if (self.currentIndex < index){
-            [self moveToViewControllerAtIndex:index withDirection:XLPagerTabStripDirectionLeft animated:YES];
+        if (self.skipIntermediateViewControllers && fabs(self.currentIndex - index) > 1){
+            NSArray * originalPagerTabStripChildViewControllers = self.pagerTabStripChildViewControllers;
+            NSMutableArray * tempChildViewControllers = [NSMutableArray arrayWithArray:originalPagerTabStripChildViewControllers];
+            UIViewController * currentChildVC = [originalPagerTabStripChildViewControllers objectAtIndex:self.currentIndex];
+            NSUInteger fromIndex = (self.currentIndex < index) ? index - 1 : index + 1;
+            [tempChildViewControllers setObject:[originalPagerTabStripChildViewControllers objectAtIndex:fromIndex] atIndexedSubscript:self.currentIndex];
+            [tempChildViewControllers setObject:currentChildVC atIndexedSubscript:fromIndex];
+            _pagerTabStripChildViewControllers = tempChildViewControllers;
+            [self.containerView setContentOffset:CGPointMake([self pageOffsetForChildIndex:fromIndex], 0) animated:NO];
+            if (self.navigationController){
+                self.navigationController.view.userInteractionEnabled = NO;
+            }
+            else{
+                self.view.userInteractionEnabled = NO;
+            }
+            _originalPagerTabStripChildViewControllers = originalPagerTabStripChildViewControllers;
+            [self.containerView setContentOffset:CGPointMake([self pageOffsetForChildIndex:index], 0) animated:YES];
         }
-        else if (self.currentIndex > index){
-            [self moveToViewControllerAtIndex:index withDirection:XLPagerTabStripDirectionRight animated:YES];
+        else{
+            [self.containerView setContentOffset:CGPointMake([self pageOffsetForChildIndex:index], 0) animated:animated];
         }
+        
     }
 }
 
@@ -159,7 +153,15 @@
 
 #pragma mark - XLPagerTabStripViewControllerDelegate
 
--(void)pagerTabStripViewController:(XLPagerTabStripViewController *)pagerTabStripViewController updateIndicatorToViewController:(UIViewController *)toViewController fromViewController:(UIViewController *)fromViewController{
+-(void)pagerTabStripViewController:(XLPagerTabStripViewController *)pagerTabStripViewController
+   updateIndicatorToViewController:(UIViewController *)toViewController
+                fromViewController:(UIViewController *)fromViewController{
+}
+
+-(void)pagerTabStripViewController:(XLPagerTabStripViewController *)pagerTabStripViewController
+          updateIndicatorFromIndex:(NSInteger)fromIndex
+                           toIndex:(NSInteger)toIndex
+            withProgressPercentage:(CGFloat)progressPercentage{
 }
 
 
@@ -172,6 +174,17 @@
 
 
 #pragma mark - Helpers
+
+-(XLPagerTabStripDirection)scrollDirection
+{
+    if (self.containerView.contentOffset.x > _lastContentOffset){
+        return XLPagerTabStripDirectionLeft;
+    }
+    else if (self.containerView.contentOffset.x < _lastContentOffset){
+        return XLPagerTabStripDirectionRight;
+    }
+    return XLPagerTabStripDirectionNone;
+}
 
 -(BOOL)canMoveToIndex:(NSUInteger)index
 {
@@ -199,7 +212,25 @@
 
 -(NSUInteger)pageForContentOffset:(CGFloat)contentOffset
 {
-    return (contentOffset + (0.5f * [self pageWidth])) / [self pageWidth];
+    NSInteger result = [self virtualPageForContentOffset:contentOffset];
+    return [self pageForVirtualPage:result];
+}
+
+-(NSInteger)virtualPageForContentOffset:(CGFloat)contentOffset
+{
+    NSInteger result = (contentOffset + (1.5f * [self pageWidth])) / [self pageWidth];
+    return result - 1;
+}
+
+-(NSUInteger)pageForVirtualPage:(NSInteger)virtualPage
+{
+    if (virtualPage < 0){
+        return 0;
+    }
+    if (virtualPage > self.pagerTabStripChildViewControllers.count - 1){
+        return self.pagerTabStripChildViewControllers.count - 1;
+    }
+    return virtualPage;
 }
 
 -(CGFloat)pageWidth
@@ -209,17 +240,16 @@
 
 -(CGFloat)scrollPercentage
 {
-    return fmodf(self.containerView.contentOffset.x, [self pageWidth]) / [self pageWidth];
+    if ([self scrollDirection] == XLPagerTabStripDirectionLeft || [self scrollDirection] == XLPagerTabStripDirectionNone){
+        return fmodf(self.containerView.contentOffset.x, [self pageWidth]) / [self pageWidth];
+    }
+    return 1 - fmodf(self.containerView.contentOffset.x >= 0 ? self.containerView.contentOffset.x : [self pageWidth] + self.containerView.contentOffset.x, [self pageWidth]) / [self pageWidth];
 }
 
 -(void)updateContent
 {
     NSArray * childViewControllers = self.pagerTabStripChildViewControllers;
     self.containerView.contentSize = CGSizeMake(CGRectGetWidth(self.containerView.bounds) * childViewControllers.count, self.containerView.contentSize.height);
-    NSUInteger currentPage = [self pageForContentOffset:self.containerView.contentOffset.x];
-    if (currentPage != self.currentIndex){
-        self.currentIndex = currentPage;
-    }
 
     [childViewControllers enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         UIViewController * childController = (UIViewController *)obj;
@@ -247,6 +277,63 @@
             }
         }
     }];
+    
+    NSUInteger oldCurrentIndex = self.currentIndex;
+    NSInteger virtualPage = [self virtualPageForContentOffset:self.containerView.contentOffset.x];
+    NSUInteger newCurrentIndex = [self pageForVirtualPage:virtualPage];
+    self.currentIndex = newCurrentIndex;
+
+    if (self.isProgressiveIndicator){
+        if ([self.delegate respondsToSelector:@selector(pagerTabStripViewController:updateIndicatorFromIndex:toIndex:withProgressPercentage:)]){
+            CGFloat scrollPercentage = [self scrollPercentage];
+            if (scrollPercentage > 0) {
+                NSInteger fromIndex = self.currentIndex;
+                NSInteger toIndex = self.currentIndex;
+                XLPagerTabStripDirection scrollDirection = [self scrollDirection];
+                if (scrollDirection == XLPagerTabStripDirectionLeft){
+                    if (virtualPage > self.pagerTabStripChildViewControllers.count - 1){
+                        fromIndex = self.pagerTabStripChildViewControllers.count - 1;
+                        toIndex = self.pagerTabStripChildViewControllers.count;
+                    }
+                    else{
+                        if (scrollPercentage > 0.5f){
+                            fromIndex = MAX(toIndex - 1, 0);
+                        }
+                        else{
+                            toIndex = fromIndex + 1;
+                        }
+                    }
+                }
+                else if (scrollDirection == XLPagerTabStripDirectionRight) {
+                    if (virtualPage < 0){
+                        fromIndex = 0;
+                        toIndex = -1;
+                    }
+                    else{
+                        if (scrollPercentage > 0.5f){
+                            fromIndex = MIN(toIndex + 1, self.pagerTabStripChildViewControllers.count - 1);
+                        }
+                        else{
+                            toIndex = fromIndex - 1;
+                        }
+                    }
+                }
+                [self.delegate pagerTabStripViewController:self updateIndicatorFromIndex:fromIndex toIndex:toIndex withProgressPercentage:(self.isElasticIndicatorLimit ? scrollPercentage : ( toIndex < 0 || toIndex >= self.pagerTabStripChildViewControllers.count ? 0 : scrollPercentage ))];
+            }
+        }
+    }
+    else{
+        if ([self.delegate respondsToSelector:@selector(pagerTabStripViewController:updateIndicatorToViewController:fromViewController:)] && oldCurrentIndex != newCurrentIndex){
+            UIViewController * fromViewController = nil;
+            if (self.pagerTabStripChildViewControllers.count > oldCurrentIndex){
+                fromViewController = [self.pagerTabStripChildViewControllers objectAtIndex:oldCurrentIndex];
+            }
+            [self.delegate pagerTabStripViewController:self
+                       updateIndicatorToViewController:[self.pagerTabStripChildViewControllers
+                                                        objectAtIndex:newCurrentIndex]
+                                    fromViewController:fromViewController];
+        }
+    }
 }
 
 
@@ -264,6 +351,7 @@
         _pagerTabStripChildViewControllers = self.dataSource ? [self.dataSource childViewControllersForPagerTabStripViewController:self] : @[];
         self.containerView.contentSize = CGSizeMake(CGRectGetWidth(self.containerView.bounds) * _pagerTabStripChildViewControllers.count, self.containerView.contentSize.height);
         if (self.currentIndex >= _pagerTabStripChildViewControllers.count){
+            self.currentIndex = _pagerTabStripChildViewControllers.count;
             [self.containerView setContentOffset:CGPointMake([self pageOffsetForChildIndex:(_pagerTabStripChildViewControllers.count - 1)], 0)  animated:NO];
         }
         [self updateContent];
@@ -275,14 +363,6 @@
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     if (self.containerView == scrollView){
-        //  pan direction
-        XLPagerTabStripDirection direction = XLPagerTabStripDirectionNone;
-        if (scrollView.contentOffset.x > _lastContentOffset){
-            direction = XLPagerTabStripDirectionLeft;
-        }
-        else if (scrollView.contentOffset.x < _lastContentOffset){
-            direction = XLPagerTabStripDirectionRight;
-        }
         [self updateContent];
     }
 }
@@ -312,28 +392,6 @@
 }
 
 
-#pragma mark - Properties
-
-
--(NSUInteger)currentIndex
-{
-    return _currentIndex;
-}
-
--(void)setCurrentIndex:(NSUInteger)currentIndex
-{
-    if (self.pagerTabStripChildViewControllers.count > currentIndex){
-        UIViewController * fromViewController = nil;
-        if (self.pagerTabStripChildViewControllers.count > _currentIndex){
-            fromViewController = [self.pagerTabStripChildViewControllers objectAtIndex:_currentIndex];
-        }
-        
-        _currentIndex = currentIndex;
-        if ([self.delegate respondsToSelector:@selector(pagerTabStripViewController:updateIndicatorToViewController:fromViewController:)]){
-            [self.delegate pagerTabStripViewController:self updateIndicatorToViewController:[self.pagerTabStripChildViewControllers objectAtIndex:_currentIndex] fromViewController:fromViewController];
-        }
-    }
-}
 
 #pragma mark - Orientation
 
@@ -354,9 +412,9 @@
 
 -(void)viewDidLayoutSubviews
 {
-    //NSLog(@"%s", __PRETTY_FUNCTION__);
     [super viewDidLayoutSubviews];
     [self updateContent];
+    
 }
 
 

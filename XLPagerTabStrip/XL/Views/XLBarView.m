@@ -100,6 +100,21 @@
     [self updateSelectedBarPositionWithAnimation:animated];
 }
 
+-(void)moveFromIndex:(NSInteger)fromIndex toIndex:(NSInteger)toIndex withProgressPercentage:(CGFloat)progressPercentage
+{
+    self.selectedOptionIndex = (progressPercentage > 0.5) ? toIndex : fromIndex;
+    
+    CGRect newFrame = self.selectedBar.frame;
+    newFrame.size.width = self.frame.size.width / self.optionsAmount;
+    CGRect fromFrame = newFrame;
+    fromFrame.origin.x = newFrame.size.width * fromIndex;
+    CGRect toFrame = newFrame;
+    toFrame.origin.x = toFrame.size.width * toIndex;
+    CGRect targetFrame = fromFrame;
+    targetFrame.origin.x += (toFrame.origin.x-targetFrame.origin.x)*progressPercentage;
+    self.selectedBar.frame = targetFrame;
+}
+
 
 -(void)setOptionsAmount:(NSUInteger)optionsAmount animated:(BOOL)animated
 {

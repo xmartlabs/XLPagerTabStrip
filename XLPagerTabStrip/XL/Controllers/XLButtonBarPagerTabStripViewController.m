@@ -125,6 +125,18 @@
     }
 }
 
+-(void)pagerTabStripViewController:(XLPagerTabStripViewController *)pagerTabStripViewController
+          updateIndicatorFromIndex:(NSInteger)fromIndex
+                           toIndex:(NSInteger)toIndex
+            withProgressPercentage:(CGFloat)progressPercentage
+{
+    if (self.shouldUpdateButtonBarView){
+        [self.buttonBarView moveFromIndex:fromIndex
+                                  toIndex:toIndex
+                   withProgressPercentage:progressPercentage];
+    }
+}
+
 
 
 #pragma merk - UICollectionViewDelegateFlowLayout

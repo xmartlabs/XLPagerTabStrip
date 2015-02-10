@@ -84,7 +84,18 @@
 
 -(void)pagerTabStripViewController:(XLPagerTabStripViewController *)pagerTabStripViewController updateIndicatorToViewController:(UIViewController *)toViewController fromViewController:(UIViewController *)fromViewController
 {
-    [self.barView moveToIndex:[self.pagerTabStripChildViewControllers indexOfObject:toViewController] animated:YES];
+    [self.barView moveToIndex:[self.pagerTabStripChildViewControllers indexOfObject:toViewController]
+                     animated:YES];
+}
+
+-(void)pagerTabStripViewController:(XLPagerTabStripViewController *)pagerTabStripViewController
+          updateIndicatorFromIndex:(NSInteger)fromIndex
+                           toIndex:(NSInteger)toIndex
+            withProgressPercentage:(CGFloat)progressPercentage
+{
+    [self.barView moveFromIndex:fromIndex
+                        toIndex:toIndex
+         withProgressPercentage:progressPercentage];
 }
 
 

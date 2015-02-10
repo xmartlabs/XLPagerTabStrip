@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="ptL-BW-nEP">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="ptL-BW-nEP">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -77,12 +77,6 @@
                                     <segue destination="MOL-Zx-vbf" kind="embed" id="i47-4L-xIB"/>
                                 </connections>
                             </containerView>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Storyboard Demo" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cZN-qT-VUq">
-                                <rect key="frame" x="207" y="52" width="187" height="27.5"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="23"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jSE-G2-qe6">
                                 <rect key="frame" x="527" y="83" width="57" height="34"/>
                                 <state key="normal" title="Reload">
@@ -92,11 +86,19 @@
                                     <action selector="reloadTapped:" destination="uba-Iz-2L2" eventType="touchUpInside" id="KNI-Zr-Zz0"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Storyboard Demo" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="cZN-qT-VUq">
+                                <rect key="frame" x="207" y="52" width="187" height="27.5"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="23"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.027450980390000001" green="0.72549019609999998" blue="0.60784313729999995" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstItem="cZN-qT-VUq" firstAttribute="leading" secondItem="Mqm-sG-Qyv" secondAttribute="leadingMargin" id="9eC-5j-2zk"/>
                             <constraint firstAttribute="centerX" secondItem="cZN-qT-VUq" secondAttribute="centerX" id="AYy-gw-Ryh"/>
                             <constraint firstItem="NbE-e0-l2n" firstAttribute="top" secondItem="qkQ-UG-MKG" secondAttribute="bottom" id="K6Q-s5-nzV"/>
+                            <constraint firstItem="cZN-qT-VUq" firstAttribute="trailing" secondItem="Mqm-sG-Qyv" secondAttribute="trailingMargin" id="Lma-fO-UC9"/>
                             <constraint firstItem="jSE-G2-qe6" firstAttribute="top" secondItem="Emc-3r-MJi" secondAttribute="bottom" constant="63" id="NWc-fy-XOc"/>
                             <constraint firstItem="cZN-qT-VUq" firstAttribute="top" secondItem="Emc-3r-MJi" secondAttribute="bottom" constant="32" id="RvZ-BV-1SL"/>
                             <constraint firstItem="qkQ-UG-MKG" firstAttribute="leading" secondItem="Mqm-sG-Qyv" secondAttribute="leading" id="Slo-zY-IGj"/>
@@ -104,13 +106,28 @@
                             <constraint firstItem="qkQ-UG-MKG" firstAttribute="top" secondItem="Emc-3r-MJi" secondAttribute="bottom" constant="101" id="nJw-ag-ddh"/>
                             <constraint firstAttribute="trailing" secondItem="qkQ-UG-MKG" secondAttribute="trailing" id="pTb-BC-Duc"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="9eC-5j-2zk"/>
+                                <exclude reference="Lma-fO-UC9"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=compact">
+                            <mask key="constraints">
+                                <include reference="9eC-5j-2zk"/>
+                                <include reference="Lma-fO-UC9"/>
+                            </mask>
+                        </variation>
                     </view>
                     <tabBarItem key="tabBarItem" systemItem="contacts" id="1d9-i6-g9L"/>
                     <navigationItem key="navigationItem" id="ni8-Kh-JRq"/>
+                    <connections>
+                        <outlet property="titleLabel" destination="cZN-qT-VUq" id="tRG-O0-13z"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jkN-pv-eFH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1340" y="139"/>
+            <point key="canvasLocation" x="1339.5" y="138.75"/>
         </scene>
         <!--Buttons Example-->
         <scene sceneID="c3d-TB-Hyh">

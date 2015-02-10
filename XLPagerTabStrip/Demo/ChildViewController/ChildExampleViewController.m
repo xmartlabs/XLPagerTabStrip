@@ -66,7 +66,7 @@
 
 -(UIColor *)colorForPagerTabStripViewController:(XLPagerTabStripViewController *)pagerTabStripViewController
 {
-    return [UIColor whiteColor];
+    return [UIColor blackColor];
 }
 
 @end
