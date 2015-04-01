@@ -155,13 +155,15 @@
 
 -(void)pagerTabStripViewController:(XLPagerTabStripViewController *)pagerTabStripViewController
    updateIndicatorToViewController:(UIViewController *)toViewController
-                fromViewController:(UIViewController *)fromViewController{
+                fromViewController:(UIViewController *)fromViewController
+{
 }
 
 -(void)pagerTabStripViewController:(XLPagerTabStripViewController *)pagerTabStripViewController
           updateIndicatorFromIndex:(NSInteger)fromIndex
                            toIndex:(NSInteger)toIndex
-            withProgressPercentage:(CGFloat)progressPercentage{
+            withProgressPercentage:(CGFloat)progressPercentage
+{
 }
 
 
