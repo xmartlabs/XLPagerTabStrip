@@ -12,15 +12,14 @@
 #import "FXPageControl.h"
 
 @interface XLTwitterPagerTabStripViewController ()
-{
-    BOOL _isReload;
-}
+
 @property (nonatomic) IBOutlet UIView * navigationView;
 @property (nonatomic) UIScrollView * navigationScrollView;
 @property (nonatomic) FXPageControl * navigationPageControl;
 @property (nonatomic, strong) NSMutableArray * navigationItemsViews;
 
 @end
+
 
 @implementation XLTwitterPagerTabStripViewController
 
@@ -39,8 +38,6 @@
         [self.navigationView addSubview:self.navigationPageControl];
     }
     
-    self.isProgressiveIndicator = YES;
-    
     _navigationScrollView.bounces = YES;
     _navigationScrollView.scrollsToTop = NO;
     _navigationScrollView.delegate = self;
@@ -54,32 +51,24 @@
     [self reloadNavigatorContainerView];
 }
 
--(void)reloadNavigatorContainerView
+-(void)viewWillAppear:(BOOL)animated
 {
-    __block NSMutableArray *items = [[NSMutableArray alloc] init];
-    [self.pagerTabStripChildViewControllers enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        NSAssert([obj conformsToProtocol:@protocol(XLPagerTabStripChildItem)], @"child view controller must conform to XLPagerTabStripChildItem");
-        UIViewController<XLPagerTabStripChildItem> * childViewController = (UIViewController<XLPagerTabStripChildItem> *)obj;
-        if ([childViewController respondsToSelector:@selector(titleForPagerTabStripViewController:)]){
-            UILabel *navTitleLabel = [self createNewLabelWithText:[childViewController titleForPagerTabStripViewController:self]];
-            [navTitleLabel setAlpha: self.currentIndex == idx ? 1 : 0];
-            [items addObject:navTitleLabel];
-        }
-    }];
-    
-    [items enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        if([obj isKindOfClass:UIView.class])
-            [self addNavigationViewItem:obj index:idx];
-    }];
-    
-    // Update Navigation Page Control
-    [self.navigationPageControl setNumberOfPages:[self.navigationItemsViews count]];
-    [self.navigationPageControl setCurrentPage:self.currentIndex];
-    CGSize viewSize = [self.navigationPageControl sizeForNumberOfPages:[self.navigationItemsViews count]];
-    CGFloat distance = CGRectGetWidth(self.navigationScrollView.frame) / 2;
-    CGFloat originX = (distance - viewSize.width/2);
-    [self.navigationPageControl setFrame:(CGRect){originX, 34, viewSize.width, viewSize.height}];
+    [super viewWillAppear:animated];
+    [self setCurrentNavigationScrollViewOffset];
 }
+
+-(void)reloadPagerTabStripView
+{
+    [super reloadPagerTabStripView];
+    if ([self isViewLoaded])
+    {
+        [self reloadNavigatorContainerView];
+        [self setCurrentNavigationScrollViewOffset];
+    }
+}
+
+
+#pragma mark - Properties
 
 -(UIView *)navigationView
 {
@@ -127,7 +116,6 @@
     CGFloat distance = CGRectGetWidth(self.navigationScrollView.frame) / 2;
     UIAccelerationValue xOffset = fromIndex < toIndex ? distance * fromIndex + distance * progressPercentage : distance * fromIndex - distance * progressPercentage;
     [self.navigationScrollView setContentOffset:CGPointMake(xOffset, 0)];
-    
     [self setAlphaToItemAtIndex:fromIndex withOffset:xOffset];
     [self setAlphaToItemAtIndex:toIndex withOffset:xOffset];
     
@@ -136,6 +124,38 @@
 
 
 #pragma mark - Helpers
+
+-(void)reloadNavigatorContainerView
+{
+    [self.navigationItemsViews enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        [obj removeFromSuperview];
+    }];
+    [self.navigationItemsViews removeAllObjects];
+    
+    __block NSMutableArray *items = [[NSMutableArray alloc] init];
+    [self.pagerTabStripChildViewControllers enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        NSAssert([obj conformsToProtocol:@protocol(XLPagerTabStripChildItem)], @"child view controller must conform to XLPagerTabStripChildItem");
+        UIViewController<XLPagerTabStripChildItem> * childViewController = (UIViewController<XLPagerTabStripChildItem> *)obj;
+        if ([childViewController respondsToSelector:@selector(titleForPagerTabStripViewController:)]){
+            UILabel *navTitleLabel = [self createNewLabelWithText:[childViewController titleForPagerTabStripViewController:self]];
+            [navTitleLabel setAlpha: self.currentIndex == idx ? 1 : 0];
+            [items addObject:navTitleLabel];
+        }
+    }];
+    
+    [items enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        if([obj isKindOfClass:UIView.class])
+            [self addNavigationViewItem:obj index:idx];
+    }];
+    
+    // Update Navigation Page Control
+    [self.navigationPageControl setNumberOfPages:[self.navigationItemsViews count]];
+    [self.navigationPageControl setCurrentPage:self.currentIndex];
+    CGSize viewSize = [self.navigationPageControl sizeForNumberOfPages:[self.navigationItemsViews count]];
+    CGFloat distance = CGRectGetWidth(self.navigationScrollView.frame) / 2;
+    CGFloat originX = (distance - viewSize.width/2);
+    [self.navigationPageControl setFrame:(CGRect){originX, 34, viewSize.width, viewSize.height}];
+}
 
 - (void)addNavigationViewItem:(UIView*)view index:(NSInteger)index
 {
@@ -147,20 +167,6 @@
     
     [_navigationScrollView addSubview:view];
     [_navigationItemsViews addObject:view];
-}
-
--(CGSize) getLabelSize:(UILabel *)label
-{
-    return [[label text] sizeWithAttributes:@{NSFontAttributeName:[label font]}];;
-}
-
--(UILabel *)createNewLabelWithText:(NSString *)text
-{
-    UILabel *navTitleLabel = [UILabel new];
-    navTitleLabel.text = text;
-    navTitleLabel.font = [UIFont fontWithName:@"Helvetica" size:18];
-    navTitleLabel.textColor = [UIColor whiteColor];
-    return navTitleLabel;
 }
 
 -(void)setAlphaToItemAtIndex:(NSInteger)index withOffset:(UIAccelerationValue)xOffset
@@ -182,43 +188,26 @@
     [label setAlpha:alpha];
 }
 
-
-#pragma mark - XLPagerTabStripViewControllerDataSource
-
--(NSArray *)childViewControllersForPagerTabStripViewController:(XLPagerTabStripViewController *)pagerTabStripViewController
+-(CGSize) getLabelSize:(UILabel *)label
 {
-    // create child view controllers that will be managed by XLPagerTabStripViewController
-    TableChildExampleViewController * child_1 = [[TableChildExampleViewController alloc] initWithStyle:UITableViewStylePlain];
-    ChildExampleViewController * child_2 = [[ChildExampleViewController alloc] init];
-    TableChildExampleViewController * child_3 = [[TableChildExampleViewController alloc] initWithStyle:UITableViewStyleGrouped];
-    ChildExampleViewController * child_4 = [[ChildExampleViewController alloc] init];
-    TableChildExampleViewController * child_5 = [[TableChildExampleViewController alloc] initWithStyle:UITableViewStylePlain];
-    ChildExampleViewController * child_6 = [[ChildExampleViewController alloc] init];
-    TableChildExampleViewController * child_7 = [[TableChildExampleViewController alloc] initWithStyle:UITableViewStyleGrouped];
-    ChildExampleViewController * child_8 = [[ChildExampleViewController alloc] init];
-    if (!_isReload){
-        return @[child_1, child_2, child_3, child_4, child_5, child_6, child_7, child_8];
-    }
-    
-    NSMutableArray * childViewControllers = [NSMutableArray arrayWithObjects:child_1, child_2, child_3, child_4, child_5, child_6, child_7, child_8, nil];
-    NSUInteger count = [childViewControllers count];
-    for (NSUInteger i = 0; i < count; ++i) {
-        // Select a random element between i and end of array to swap with.
-        NSUInteger nElements = count - i;
-        NSUInteger n = (arc4random() % nElements) + i;
-        [childViewControllers exchangeObjectAtIndex:i withObjectAtIndex:n];
-    }
-    NSUInteger nItems = 1 + (rand() % 8);
-    return [childViewControllers subarrayWithRange:NSMakeRange(0, nItems)];
+    return [[label text] sizeWithAttributes:@{NSFontAttributeName:[label font]}];;
 }
 
--(void)reloadPagerTabStripView
+-(UILabel *)createNewLabelWithText:(NSString *)text
 {
-    _isReload = YES;
-    self.isProgressiveIndicator = (rand() % 2 == 0);
-    self.isElasticIndicatorLimit = (rand() % 2 == 0);
-    [super reloadPagerTabStripView];
+    UILabel *navTitleLabel = [UILabel new];
+    navTitleLabel.text = text;
+    navTitleLabel.font = [UIFont fontWithName:@"Helvetica" size:18];
+    navTitleLabel.textColor = [UIColor whiteColor];
+    navTitleLabel.alpha = 0;
+    return navTitleLabel;
 }
 
+-(void)setCurrentNavigationScrollViewOffset
+{
+    CGFloat distance = CGRectGetWidth(self.navigationScrollView.frame) / 2;
+    UIAccelerationValue xOffset = distance * self.currentIndex;
+    [self.navigationScrollView setContentOffset:CGPointMake(xOffset, 0)];
+}
 
 @end
