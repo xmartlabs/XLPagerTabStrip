@@ -29,6 +29,17 @@ Integrate `XLPagerTabStrip` is as easy as following these steps:
 
 For further details take a look at the [Demo folder](XLPagerTabStrip/Demo) to see the code of examples shown above.
 
+FAQ
+----------------------
+
+#####How to change the visible child view controller programmatically
+
+`XLPagerTabStripViewController` provides the following methods to programmatically change the visible child view controller:
+
+```objc
+-(void)moveToViewControllerAtIndex:(NSUInteger)index;
+-(void)moveToViewController:(UIViewController *)viewController;
+```
 
 Installation
 --------------------------
