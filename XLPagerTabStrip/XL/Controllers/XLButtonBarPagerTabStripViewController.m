@@ -113,15 +113,16 @@
 
 #pragma mark - XLPagerTabStripViewControllerDelegate
 
--(void)pagerTabStripViewController:(XLPagerTabStripViewController *)pagerTabStripViewController updateIndicatorToViewController:(UIViewController *)toViewController fromViewController:(UIViewController *)fromViewController
+-(void)pagerTabStripViewController:(XLPagerTabStripViewController *)pagerTabStripViewController
+          updateIndicatorFromIndex:(NSInteger)fromIndex
+                           toIndex:(NSInteger)toIndex
 {
     if (self.shouldUpdateButtonBarView){
-        NSUInteger newIndex = [self.pagerTabStripChildViewControllers indexOfObject:toViewController];
         XLPagerTabStripDirection direction = XLPagerTabStripDirectionLeft;
-        if (newIndex < [self.pagerTabStripChildViewControllers indexOfObject:fromViewController]){
+        if (toIndex < fromIndex){
             direction = XLPagerTabStripDirectionRight;
         }
-        [self.buttonBarView moveToIndex:newIndex animated:YES swipeDirection:direction];
+        [self.buttonBarView moveToIndex:toIndex animated:YES swipeDirection:direction];
     }
 }
 
@@ -136,8 +137,6 @@
                    withProgressPercentage:progressPercentage];
     }
 }
-
-
 
 #pragma merk - UICollectionViewDelegateFlowLayout
 
