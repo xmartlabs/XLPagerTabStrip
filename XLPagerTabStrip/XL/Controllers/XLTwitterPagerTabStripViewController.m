@@ -44,29 +44,31 @@
                                    target:self
                                    action:nil];
     UIBarButtonItem *searchButton = [[UIBarButtonItem alloc]
-                                     initWithTitle:@"Flip"
+                                     initWithTitle:@"Search"
                                      style:UIBarButtonItemStyleDone
                                      target:self
                                      action:nil];
     self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:flipButton, searchButton, nil];
+    self.navigationItem.leftBarButtonItem = flipButton;
     
-    [self reloadNavigatorContainerView];
+    [self reloadNavigationViewItems];
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     [self.navigationView setFrame:CGRectMake(0, 0, CGRectGetWidth(self.navigationController.navigationBar.frame) , CGRectGetHeight(self.navigationController.navigationBar.frame))];
-    [self setCurrentNavigationScrollViewOffset];
+    [self.navigationView addObserver:self forKeyPath:@"frame" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:0];
 }
+
 
 -(void)reloadPagerTabStripView
 {
     [super reloadPagerTabStripView];
     if ([self isViewLoaded])
     {
-        [self reloadNavigatorContainerView];
-        [self setCurrentNavigationScrollViewOffset];
+        [self reloadNavigationViewItems];
+        [self setNavigationViewItemsPosition];
     }
 }
 
@@ -78,8 +80,6 @@
     if (_navigationView) return _navigationView;
     _navigationView = [[UIView alloc] init];
     _navigationView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-    _navigationView.frame = CGRectMake(0, 0, CGRectGetWidth(self.navigationController.navigationBar.frame) - 16, CGRectGetHeight(self.navigationController.navigationBar.frame));
-    [_navigationView setBackgroundColor:[UIColor redColor]];
     return _navigationView;
 }
 
@@ -147,51 +147,77 @@
 }
 
 
+#pragma mark - KVO
+
+-(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+    if ((object == self.navigationItem.titleView && [keyPath isEqualToString:@"frame"])){
+        if ([[change objectForKey:NSKeyValueChangeKindKey] isEqualToNumber:@(NSKeyValueChangeSetting)]){
+            CGRect oldRect = [change[NSKeyValueChangeOldKey] CGRectValue];
+            CGRect newRect = [change[NSKeyValueChangeNewKey] CGRectValue];
+            if (!CGRectEqualToRect(newRect,oldRect)) {
+                [self.navigationScrollView setFrame:CGRectMake(0, 0, CGRectGetWidth(self.navigationView.frame) , CGRectGetHeight(self.navigationScrollView.frame))];
+                [self setNavigationViewItemsPosition];
+            }
+        }
+    }
+}
+
+-(void)dealloc
+{
+    [self.navigationView removeObserver:self forKeyPath:@"frame"];
+}
+
+
 #pragma mark - Helpers
 
--(void)reloadNavigatorContainerView
+-(void)reloadNavigationViewItems
 {
     [self.navigationItemsViews enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         [obj removeFromSuperview];
     }];
     [self.navigationItemsViews removeAllObjects];
     
-    __block NSMutableArray *items = [[NSMutableArray alloc] init];
+
     [self.pagerTabStripChildViewControllers enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         NSAssert([obj conformsToProtocol:@protocol(XLPagerTabStripChildItem)], @"child view controller must conform to XLPagerTabStripChildItem");
         UIViewController<XLPagerTabStripChildItem> * childViewController = (UIViewController<XLPagerTabStripChildItem> *)obj;
         if ([childViewController respondsToSelector:@selector(titleForPagerTabStripViewController:)]){
             UILabel *navTitleLabel = [self createNewLabelWithText:[childViewController titleForPagerTabStripViewController:self]];
             [navTitleLabel setAlpha: self.currentIndex == idx ? 1 : 0];
-            [items addObject:navTitleLabel];
+            [_navigationScrollView addSubview:navTitleLabel];
+            [_navigationItemsViews addObject:navTitleLabel];
         }
     }];
+}
+
+-(void)setNavigationViewItemsPosition
+{
+    CGFloat distance = [self getDistanceValue];
     
-    [items enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        if([obj isKindOfClass:UIView.class])
-            [self addNavigationViewItem:obj index:idx];
+    [self.navigationItemsViews enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        int index = (int)idx;
+        UIView *view = (UIView *)obj;
+        CGSize viewSize = [view isKindOfClass:[UILabel class]] ? [self getLabelSize:(UILabel*)view] : view.frame.size;
+        CGFloat originX = (distance - viewSize.width/2) + index * distance;
+        view.frame = (CGRect){originX, 8, viewSize.width, viewSize.height};
+        view.tag = index;
     }];
+    
+    
+    UIAccelerationValue xOffset = distance * self.currentIndex;
+    [self.navigationScrollView setContentOffset:CGPointMake(xOffset, 0)];
     
     // Update Navigation Page Control
     [self.navigationPageControl setNumberOfPages:[self.navigationItemsViews count]];
     [self.navigationPageControl setCurrentPage:self.currentIndex];
     CGSize viewSize = [self.navigationPageControl sizeForNumberOfPages:[self.navigationItemsViews count]];
-    CGFloat distance = [self getDistanceValue];
     CGFloat originX = (distance - viewSize.width/2);
     [self.navigationPageControl setFrame:(CGRect){originX, 34, viewSize.width, viewSize.height}];
 }
 
-- (void)addNavigationViewItem:(UIView*)view index:(NSInteger)index
-{
-    CGFloat distance = [self getDistanceValue];
-    CGSize viewSize = [view isKindOfClass:[UILabel class]] ? [self getLabelSize:(UILabel*)view] : view.frame.size;
-    CGFloat originX = (distance - viewSize.width/2) + self.navigationItemsViews.count * distance;
-    view.frame = (CGRect){originX, 8, viewSize.width, viewSize.height};
-    view.tag = index;
-    
-    [_navigationScrollView addSubview:view];
-    [_navigationItemsViews addObject:view];
-}
+
+
 
 -(void)setAlphaWithOffset:(UIAccelerationValue)xOffset
 {
@@ -220,17 +246,10 @@
 
 -(CGFloat)getDistanceValue
 {
-//    CGPoint middle = [self.navigationController.navigationBar convertPoint:self.navigationController.navigationBar.center toView:self.navigationView];
-//    CGFloat width = middle.x - self.navigationView.frame.origin.x;
-    CGFloat width = CGRectGetWidth(self.navigationView.frame);
-    return width / 2;
+    CGPoint middle = [self.navigationController.navigationBar convertPoint:self.navigationController.navigationBar.center toView:self.navigationView];
+    return middle.x ;
 }
 
--(void)setCurrentNavigationScrollViewOffset
-{
-    CGFloat distance = [self getDistanceValue];
-    UIAccelerationValue xOffset = distance * self.currentIndex;
-    [self.navigationScrollView setContentOffset:CGPointMake(xOffset, 0)];
-}
+
 
 @end
