@@ -320,6 +320,7 @@
 				TargetAttributes = {
 					28B63A851A459F5900225C66 = {
 						CreatedOnToolsVersion = 6.1.1;
+						DevelopmentTeam = 6F2G55XL63;
 					};
 					28B63A9E1A459F5900225C66 = {
 						CreatedOnToolsVersion = 6.1.1;
@@ -505,6 +506,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = XLPagerTabStrip/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -515,6 +517,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = XLPagerTabStrip/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
