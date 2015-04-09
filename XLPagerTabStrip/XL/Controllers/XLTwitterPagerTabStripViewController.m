@@ -58,6 +58,11 @@
     }
 }
 
+-(void)setIsProgressiveIndicator:(BOOL)isProgressiveIndicator
+{
+    [super setIsProgressiveIndicator:YES];
+}
+
 
 #pragma mark - Properties
 
@@ -108,9 +113,11 @@
 
 #pragma mark - XLPagerTabStripViewControllerDataSource
 
--(void)pagerTabStripViewController:(XLPagerTabStripViewController *)pagerTabStripViewController updateIndicatorFromIndex:(NSInteger)fromIndex toIndex:(NSInteger)toIndex
+-(void)pagerTabStripViewController:(XLPagerTabStripViewController *)pagerTabStripViewController
+          updateIndicatorFromIndex:(NSInteger)fromIndex
+                           toIndex:(NSInteger)toIndex
 {
-    
+    // not accept no progressive indicator
 }
 
 -(void)pagerTabStripViewController:(XLPagerTabStripViewController *)pagerTabStripViewController
@@ -177,12 +184,12 @@
     [self.navigationItemsViews enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         int index = (int)idx;
         UIView *view = (UIView *)obj;
+        [view setAlpha: self.currentIndex == idx ? 1 : 0];
         CGSize viewSize = [view isKindOfClass:[UILabel class]] ? [self getLabelSize:(UILabel*)view] : view.frame.size;
         CGFloat originX = (distance - viewSize.width/2) + index * distance;
         view.frame = (CGRect){originX, 8, viewSize.width, viewSize.height};
         view.tag = index;
     }];
-    
     
     UIAccelerationValue xOffset = distance * self.currentIndex;
     [self.navigationScrollView setContentOffset:CGPointMake(xOffset, 0)];
@@ -194,9 +201,6 @@
     CGFloat originX = (distance - viewSize.width/2);
     [self.navigationPageControl setFrame:(CGRect){originX, 34, viewSize.width, viewSize.height}];
 }
-
-
-
 
 -(void)setAlphaWithOffset:(UIAccelerationValue)xOffset
 {

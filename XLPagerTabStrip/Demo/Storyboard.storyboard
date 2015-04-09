@@ -88,8 +88,8 @@
                                 </connections>
                             </button>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Storyboard Demo" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="cZN-qT-VUq">
-                                <rect key="frame" x="207" y="52" width="187" height="28"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="23"/>
+                                <rect key="frame" x="230" y="52" width="140" height="21"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -273,6 +273,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.027450980390000001" green="0.72549019609999998" blue="0.60784313729999995" alpha="1" colorSpace="calibratedRGB"/>
                         <textAttributes key="titleTextAttributes">
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </textAttributes>
                     </navigationBar>
