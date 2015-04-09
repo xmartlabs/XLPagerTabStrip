@@ -23,7 +23,6 @@
 		28B63ADC1A45A4CD00225C66 /* XLBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B63ACF1A45A4CD00225C66 /* XLBarView.m */; };
 		28B63ADD1A45A4CD00225C66 /* XLButtonBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B63AD11A45A4CD00225C66 /* XLButtonBarView.m */; };
 		28B63ADE1A45A4CD00225C66 /* XLButtonBarViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B63AD31A45A4CD00225C66 /* XLButtonBarViewCell.m */; };
-		28B63AE51A45A8EE00225C66 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28B63AE31A45A8EE00225C66 /* LaunchScreen.xib */; };
 		28B63AEF1A45B26600225C66 /* XLBarPagerTabStripViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B63AE81A45B26600225C66 /* XLBarPagerTabStripViewController.m */; };
 		28B63AF01A45B26600225C66 /* XLButtonBarPagerTabStripViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B63AEA1A45B26600225C66 /* XLButtonBarPagerTabStripViewController.m */; };
 		28B63AF11A45B26600225C66 /* XLPagerTabStripViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B63AEC1A45B26600225C66 /* XLPagerTabStripViewController.m */; };
@@ -76,7 +75,6 @@
 		28B63AD11A45A4CD00225C66 /* XLButtonBarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLButtonBarView.m; sourceTree = "<group>"; };
 		28B63AD21A45A4CD00225C66 /* XLButtonBarViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLButtonBarViewCell.h; sourceTree = "<group>"; };
 		28B63AD31A45A4CD00225C66 /* XLButtonBarViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLButtonBarViewCell.m; sourceTree = "<group>"; };
-		28B63AE41A45A8EE00225C66 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = XLPagerTabStrip/Base.lproj/LaunchScreen.xib; sourceTree = SOURCE_ROOT; };
 		28B63AE71A45B26600225C66 /* XLBarPagerTabStripViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XLBarPagerTabStripViewController.h; path = Controllers/XLBarPagerTabStripViewController.h; sourceTree = "<group>"; };
 		28B63AE81A45B26600225C66 /* XLBarPagerTabStripViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XLBarPagerTabStripViewController.m; path = Controllers/XLBarPagerTabStripViewController.m; sourceTree = "<group>"; };
 		28B63AE91A45B26600225C66 /* XLButtonBarPagerTabStripViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XLButtonBarPagerTabStripViewController.h; path = Controllers/XLButtonBarPagerTabStripViewController.h; sourceTree = "<group>"; };
@@ -185,7 +183,6 @@
 				C262204C1AD44A4D002E5226 /* TwitterExampleViewController.h */,
 				C262204D1AD44A4D002E5226 /* TwitterExampleViewController.m */,
 				28B63ABF1A45A4C500225C66 /* PagerSlidingTabStrip.gif */,
-				28B63AE31A45A8EE00225C66 /* LaunchScreen.xib */,
 				28B63AC21A45A4C500225C66 /* Storyboard.storyboard */,
 			);
 			path = Demo;
@@ -320,6 +317,7 @@
 				TargetAttributes = {
 					28B63A851A459F5900225C66 = {
 						CreatedOnToolsVersion = 6.1.1;
+						DevelopmentTeam = 6F2G55XL63;
 					};
 					28B63A9E1A459F5900225C66 = {
 						CreatedOnToolsVersion = 6.1.1;
@@ -351,7 +349,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				28B63AE51A45A8EE00225C66 /* LaunchScreen.xib in Resources */,
 				28B63AC91A45A4C500225C66 /* PagerSlidingTabStrip.gif in Resources */,
 				28B63A971A459F5900225C66 /* Images.xcassets in Resources */,
 				28B63ACB1A45A4C500225C66 /* Storyboard.storyboard in Resources */,
@@ -412,17 +409,6 @@
 			targetProxy = 28B63AA01A459F5900225C66 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		28B63AE31A45A8EE00225C66 /* LaunchScreen.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				28B63AE41A45A8EE00225C66 /* Base */,
-			);
-			name = LaunchScreen.xib;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		28B63AA71A459F5900225C66 /* Debug */ = {
@@ -505,7 +491,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = XLPagerTabStrip/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -515,7 +504,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = XLPagerTabStrip/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};

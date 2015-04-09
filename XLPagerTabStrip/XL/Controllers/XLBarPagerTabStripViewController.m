@@ -82,9 +82,11 @@
 
 #pragma mark - XLPagerTabStripViewControllerDelegate
 
--(void)pagerTabStripViewController:(XLPagerTabStripViewController *)pagerTabStripViewController updateIndicatorToViewController:(UIViewController *)toViewController fromViewController:(UIViewController *)fromViewController
+-(void)pagerTabStripViewController:(XLPagerTabStripViewController *)pagerTabStripViewController
+          updateIndicatorFromIndex:(NSInteger)fromIndex
+                           toIndex:(NSInteger)toIndex
 {
-    [self.barView moveToIndex:[self.pagerTabStripChildViewControllers indexOfObject:toViewController]
+    [self.barView moveToIndex:toIndex
                      animated:YES];
 }
 

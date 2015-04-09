@@ -23,12 +23,23 @@ Integrate `XLPagerTabStrip` is as easy as following these steps:
 
 2. The recently created concrete view controller should conform to `XLPagerTabStripViewControllerDataSource` implementing: `-(NSArray *)childViewControllersForPagerTabStripViewController:(XLPagerTabStripViewController *)pagerTabStripViewController;`
 
-3. (Recomended) Set up your view controllers using a nib file or a Storyboard. We need to connect some IBOutlets (take a look at the [Demo folder](XLPagerTabStrip/Demo)). 
+3. (Recomended) Set up your view controllers using a nib file or a Storyboard. We need to connect some IBOutlets (take a look at the [Demo folder](XLPagerTabStrip/Demo)).
 
 4.  Enjoy!
 
 For further details take a look at the [Demo folder](XLPagerTabStrip/Demo) to see the code of examples shown above.
 
+FAQ
+----------------------
+
+#####How to change the visible child view controller programmatically
+
+`XLPagerTabStripViewController` provides the following methods to programmatically change the visible child view controller:
+
+```objc
+-(void)moveToViewControllerAtIndex:(NSUInteger)index;
+-(void)moveToViewController:(UIViewController *)viewController;
+```
 
 Installation
 --------------------------
@@ -46,7 +57,8 @@ Customization
 The most interesting customizable features are:
 
 * Ability to skip intermediate view controllers when tapped on a "tab".
-* Indicators can be added at any position of the screen through storyboard layouts. 
+* Indicators can be added at any position of the screen through storyboard layouts.
+* Choose between progressive, non-progressive indicators.
 * Add space padding between view controllers.
 
 

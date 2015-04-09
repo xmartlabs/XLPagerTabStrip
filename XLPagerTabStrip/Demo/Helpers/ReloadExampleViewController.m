@@ -51,19 +51,15 @@
 
 -(void)updateTitle:(XLPagerTabStripViewController *)pagerController
 {
-    NSString * title = @"isProgressiveIndicator = NO";
-    if (pagerController.isProgressiveIndicator){
-        if (pagerController.isElasticIndicatorLimit){
-            title = @"isProgressiveIndicator = YES,  isElasticIndicatorLimit = YES";
-        }
-        else{
-            title = @"isProgressiveIndicator = YES, isElasticIndicatorLimit = NO";
-        }
-    }
-    
+    NSString * title = [NSString stringWithFormat:@"Progressive = %@  ElasticLimit = %@",[self stringFromBool:pagerController.isProgressiveIndicator] ,[self stringFromBool:pagerController.isElasticIndicatorLimit]];
     self.titleLabel.text = title;
     ((UILabel *)self.navigationItem.titleView).text = title;
     [((UILabel *)self.navigationItem.titleView) sizeToFit];
+}
+
+-(NSString *)stringFromBool:(BOOL)value
+{
+    return value ? @"YES" : @"NO";
 }
 
 @end
