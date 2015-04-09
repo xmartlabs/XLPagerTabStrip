@@ -35,6 +35,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     [[XLJSONSerialization sharedInstance] postsData];
+    [application setStatusBarStyle:UIStatusBarStyleLightContent];
     return YES;
     
 }

@@ -154,9 +154,9 @@
 #pragma mark - XLPagerTabStripViewControllerDelegate
 
 -(void)pagerTabStripViewController:(XLPagerTabStripViewController *)pagerTabStripViewController
-   updateIndicatorToViewController:(UIViewController *)toViewController
-                fromViewController:(UIViewController *)fromViewController
-{
+          updateIndicatorFromIndex:(NSInteger)fromIndex
+                           toIndex:(NSInteger)toIndex{
+
 }
 
 -(void)pagerTabStripViewController:(XLPagerTabStripViewController *)pagerTabStripViewController
@@ -325,15 +325,10 @@
         }
     }
     else{
-        if ([self.delegate respondsToSelector:@selector(pagerTabStripViewController:updateIndicatorToViewController:fromViewController:)] && oldCurrentIndex != newCurrentIndex){
-            UIViewController * fromViewController = nil;
-            if (self.pagerTabStripChildViewControllers.count > oldCurrentIndex){
-                fromViewController = [self.pagerTabStripChildViewControllers objectAtIndex:oldCurrentIndex];
-            }
+        if ([self.delegate respondsToSelector:@selector(pagerTabStripViewController:updateIndicatorFromIndex:toIndex:)] && oldCurrentIndex != newCurrentIndex){
             [self.delegate pagerTabStripViewController:self
-                       updateIndicatorToViewController:[self.pagerTabStripChildViewControllers
-                                                        objectAtIndex:newCurrentIndex]
-                                    fromViewController:fromViewController];
+                              updateIndicatorFromIndex:MAX(oldCurrentIndex, self.pagerTabStripChildViewControllers.count - 1)
+                                               toIndex:newCurrentIndex];
         }
     }
 }
@@ -410,7 +405,6 @@
     
     [self updateContent];
 }
-
 
 -(void)viewDidLayoutSubviews
 {
