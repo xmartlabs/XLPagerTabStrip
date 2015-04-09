@@ -53,4 +53,10 @@
     return [childViewControllers subarrayWithRange:NSMakeRange(0, nItems)];
 }
 
+- (IBAction)reloadTapped:(id)sender {
+    _isReload = YES;
+    self.isElasticIndicatorLimit = (rand() % 2 == 0);
+    [self reloadPagerTabStripView];
+}
+
 @end

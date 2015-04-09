@@ -37,20 +37,6 @@
         [self.navigationView addSubview:self.navigationPageControl];
     }
     
-    
-    UIBarButtonItem *flipButton = [[UIBarButtonItem alloc]
-                                   initWithTitle:@"Flip"
-                                   style:UIBarButtonItemStyleDone
-                                   target:self
-                                   action:nil];
-    UIBarButtonItem *searchButton = [[UIBarButtonItem alloc]
-                                     initWithTitle:@"Search"
-                                     style:UIBarButtonItemStyleDone
-                                     target:self
-                                     action:nil];
-    self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:flipButton, searchButton, nil];
-    self.navigationItem.leftBarButtonItem = flipButton;
-    
     [self reloadNavigationViewItems];
 }
 
@@ -122,16 +108,9 @@
 
 #pragma mark - XLPagerTabStripViewControllerDataSource
 
--(void)pagerTabStripViewController:(XLPagerTabStripViewController *)pagerTabStripViewController updateIndicatorToViewController:(UIViewController *)toViewController fromViewController:(UIViewController *)fromViewController
+-(void)pagerTabStripViewController:(XLPagerTabStripViewController *)pagerTabStripViewController updateIndicatorFromIndex:(NSInteger)fromIndex toIndex:(NSInteger)toIndex
 {
-//    if (self.shouldUpdateButtonBarView){
-//        NSUInteger newIndex = [self.pagerTabStripChildViewControllers indexOfObject:toViewController];
-//        XLPagerTabStripDirection direction = XLPagerTabStripDirectionLeft;
-//        if (newIndex < [self.pagerTabStripChildViewControllers indexOfObject:fromViewController]){
-//            direction = XLPagerTabStripDirectionRight;
-//        }
-//        [self.buttonBarView moveToIndex:newIndex animated:YES swipeDirection:direction];
-//    }
+    
 }
 
 -(void)pagerTabStripViewController:(XLPagerTabStripViewController *)pagerTabStripViewController
@@ -139,11 +118,11 @@
                            toIndex:(NSInteger)toIndex
             withProgressPercentage:(CGFloat)progressPercentage
 {
-        CGFloat distance = [self getDistanceValue];
-        UIAccelerationValue xOffset = fromIndex < toIndex ? distance * fromIndex + distance * progressPercentage : distance * fromIndex - distance * progressPercentage;
-        [self.navigationScrollView setContentOffset:CGPointMake(xOffset, 0)];
-        [self setAlphaWithOffset:xOffset];
-        [_navigationPageControl setCurrentPage:self.currentIndex];
+    CGFloat distance = [self getDistanceValue];
+    UIAccelerationValue xOffset = fromIndex < toIndex ? distance * fromIndex + distance * progressPercentage : distance * fromIndex - distance * progressPercentage;
+    [self.navigationScrollView setContentOffset:CGPointMake(xOffset, 0)];
+    [self setAlphaWithOffset:xOffset];
+    [_navigationPageControl setCurrentPage:self.currentIndex];
 }
 
 
