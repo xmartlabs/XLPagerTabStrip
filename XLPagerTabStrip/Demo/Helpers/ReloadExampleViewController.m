@@ -3,7 +3,7 @@
 //  XLPagerTabStrip
 //
 //  Created by Martin Barreto on 12/20/14.
-//  Copyright (c) 2014 Xmartlabs. All rights reserved.
+//  Copyright (c) 2015 Xmartlabs. All rights reserved.
 //
 #import "XLPagerTabStripViewController.h"
 #import "ReloadExampleViewController.h"
@@ -51,19 +51,15 @@
 
 -(void)updateTitle:(XLPagerTabStripViewController *)pagerController
 {
-    NSString * title = @"isProgressiveIndicator = NO";
-    if (pagerController.isProgressiveIndicator){
-        if (pagerController.isElasticIndicatorLimit){
-            title = @"isProgressiveIndicator = YES,  isElasticIndicatorLimit = YES";
-        }
-        else{
-            title = @"isProgressiveIndicator = YES, isElasticIndicatorLimit = NO";
-        }
-    }
-    
+    NSString * title = [NSString stringWithFormat:@"Progressive = %@  ElasticLimit = %@",[self stringFromBool:pagerController.isProgressiveIndicator] ,[self stringFromBool:pagerController.isElasticIndicatorLimit]];
     self.titleLabel.text = title;
     ((UILabel *)self.navigationItem.titleView).text = title;
     [((UILabel *)self.navigationItem.titleView) sizeToFit];
+}
+
+-(NSString *)stringFromBool:(BOOL)value
+{
+    return value ? @"YES" : @"NO";
 }
 
 @end

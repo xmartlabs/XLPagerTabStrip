@@ -1,5 +1,5 @@
 //
-//  SegmentedContainerViewController.h
+//  XLTwitterPagerTabStripViewController.h
 //  XLPagerTabStrip ( https://github.com/xmartlabs/XLPagerTabStrip )
 //
 //  Copyright (c) 2015 Xmartlabs ( http://xmartlabs.com )
@@ -23,8 +23,10 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "XLSegmentedPagerTabStripViewController.h"
+#import "XLPagerTabStripViewController.h"
 
-@interface SegmentedExampleViewController : XLSegmentedPagerTabStripViewController
+@interface XLTwitterPagerTabStripViewController : XLPagerTabStripViewController
+
+@property (nonatomic, readonly) UIView * navigationView;
 
 @end
