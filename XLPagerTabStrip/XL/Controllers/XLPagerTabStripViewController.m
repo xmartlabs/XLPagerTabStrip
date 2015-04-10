@@ -37,6 +37,7 @@
     CGFloat _lastContentOffset;
     NSUInteger _pageBeforeRotate;
     NSArray * _originalPagerTabStripChildViewControllers;
+    CGSize _lastSize;
 }
 
 @synthesize currentIndex = _currentIndex;
@@ -101,9 +102,25 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self.containerView setContentOffset:CGPointMake([self pageOffsetForChildIndex:self.currentIndex], 0) animated:NO];
+    _lastSize = self.containerView.bounds.size;
 }
 
+
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    [self updateIfNeeded];
+}
+
+-(void)viewDidLayoutSubviews
+{
+    [super viewDidLayoutSubviews];
+    [self updateIfNeeded];
+    if  ([[[UIDevice currentDevice] systemVersion] compare:@"8.0" options:NSNumericSearch] == NSOrderedAscending){
+        // SYSTEM_VERSION_LESS_THAN 8.0
+        [self.view layoutSubviews];
+    }
+}
 
 #pragma mark - move to another view controller
 
@@ -176,6 +193,15 @@
 
 
 #pragma mark - Helpers
+
+-(void)updateIfNeeded
+{
+    if (!CGSizeEqualToSize(_lastSize, self.containerView.bounds.size)){
+        _lastSize = self.containerView.bounds.size;
+        [self.containerView setContentOffset:CGPointMake([self pageOffsetForChildIndex:self.currentIndex], 0) animated:NO];
+        [self updateContent];
+    }
+}
 
 -(XLPagerTabStripDirection)scrollDirection
 {
@@ -348,9 +374,9 @@
         _pagerTabStripChildViewControllers = self.dataSource ? [self.dataSource childViewControllersForPagerTabStripViewController:self] : @[];
         self.containerView.contentSize = CGSizeMake(CGRectGetWidth(self.containerView.bounds) * _pagerTabStripChildViewControllers.count, self.containerView.contentSize.height);
         if (self.currentIndex >= _pagerTabStripChildViewControllers.count){
-            self.currentIndex = _pagerTabStripChildViewControllers.count;
-            [self.containerView setContentOffset:CGPointMake([self pageOffsetForChildIndex:(_pagerTabStripChildViewControllers.count - 1)], 0)  animated:NO];
+            self.currentIndex = _pagerTabStripChildViewControllers.count - 1;
         }
+        [self.containerView setContentOffset:CGPointMake([self pageOffsetForChildIndex:self.currentIndex], 0)  animated:NO];
         [self updateContent];
     }
 }
@@ -392,25 +418,28 @@
 
 #pragma mark - Orientation
 
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
+{
+    [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
+    _pageBeforeRotate = self.currentIndex;
+        __typeof__(self) __weak weakSelf = self;
+    
+    UIInterfaceOrientation fromOrientation = [[UIApplication sharedApplication] statusBarOrientation];
+    [coordinator animateAlongsideTransition:nil
+                                 completion:^(id<UIViewControllerTransitionCoordinatorContext> context) {
+        [weakSelf didRotateFromInterfaceOrientation:fromOrientation];
+    }];
+}
+
 -(void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
     _pageBeforeRotate = self.currentIndex;
 }
 
--(void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+-(void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
 {
     self.currentIndex = _pageBeforeRotate;
-    self.containerView.contentSize = CGSizeMake(CGRectGetWidth(self.containerView.bounds) * self.pagerTabStripChildViewControllers.count, self.containerView.contentSize.height);
-    [self.containerView setContentOffset:CGPointMake([self pageOffsetForChildIndex:_pageBeforeRotate], 0) animated:NO];
-    
-    [self updateContent];
-}
-
--(void)viewDidLayoutSubviews
-{
-    [super viewDidLayoutSubviews];
-    [self updateContent];
-    
+    [self updateIfNeeded];
 }
 
 

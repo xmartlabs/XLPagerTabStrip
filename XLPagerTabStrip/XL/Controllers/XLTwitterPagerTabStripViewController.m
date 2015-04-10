@@ -46,6 +46,10 @@
     if (!self.navigationView.superview) {
         self.navigationItem.titleView = self.navigationView;
     }
+    if (self.navigationItem.titleView == self.navigationView){
+        [self.navigationView addObserver:self forKeyPath:@"frame" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:0];
+        [self.navigationView setFrame:CGRectMake(0, 0, CGRectGetWidth(self.navigationController.navigationBar.frame) , CGRectGetHeight(self.navigationController.navigationBar.frame))];
+    }
     if (!self.navigationScrollView.superview) {
         [self.navigationView addSubview:self.navigationScrollView];
     }
@@ -60,8 +64,6 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self.navigationView setFrame:CGRectMake(0, 0, CGRectGetWidth(self.navigationController.navigationBar.frame) , CGRectGetHeight(self.navigationController.navigationBar.frame))];
-    [self.navigationView addObserver:self forKeyPath:@"frame" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:0];
 }
 
 
@@ -77,7 +79,7 @@
 
 -(void)setIsProgressiveIndicator:(BOOL)isProgressiveIndicator
 {
-    [super setIsProgressiveIndicator:YES];
+    super.isProgressiveIndicator = YES;
 }
 
 
