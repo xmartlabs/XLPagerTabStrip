@@ -29,4 +29,7 @@
 
 @property (nonatomic, readonly) UIView * navigationView;
 
+@property (nonatomic) UIFont * landscapeTitleFont;
+@property (nonatomic) UIFont * portraitTitleFont;
+
 @end

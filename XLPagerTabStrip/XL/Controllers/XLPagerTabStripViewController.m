@@ -197,8 +197,6 @@
 -(void)updateIfNeeded
 {
     if (!CGSizeEqualToSize(_lastSize, self.containerView.bounds.size)){
-        _lastSize = self.containerView.bounds.size;
-        [self.containerView setContentOffset:CGPointMake([self pageOffsetForChildIndex:self.currentIndex], 0) animated:NO];
         [self updateContent];
     }
 }
@@ -276,6 +274,10 @@
 
 -(void)updateContent
 {
+    if (!CGSizeEqualToSize(_lastSize, self.containerView.bounds.size)){
+        _lastSize = self.containerView.bounds.size;
+        [self.containerView setContentOffset:CGPointMake([self pageOffsetForChildIndex:self.currentIndex], 0) animated:NO];
+    }
     NSArray * childViewControllers = self.pagerTabStripChildViewControllers;
     self.containerView.contentSize = CGSizeMake(CGRectGetWidth(self.containerView.bounds) * childViewControllers.count, self.containerView.contentSize.height);
 

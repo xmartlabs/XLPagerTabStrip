@@ -46,10 +46,8 @@
     if (!self.navigationView.superview) {
         self.navigationItem.titleView = self.navigationView;
     }
-    if (self.navigationItem.titleView == self.navigationView){
-        [self.navigationView addObserver:self forKeyPath:@"frame" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:0];
-        [self.navigationView setFrame:CGRectMake(0, 0, CGRectGetWidth(self.navigationController.navigationBar.frame) , CGRectGetHeight(self.navigationController.navigationBar.frame))];
-    }
+    [self.navigationView addObserver:self forKeyPath:@"frame" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:0];
+    [self.navigationView setFrame:CGRectMake(0, 0, CGRectGetWidth(self.navigationController.navigationBar.frame) , CGRectGetHeight(self.navigationController.navigationBar.frame))];
     if (!self.navigationScrollView.superview) {
         [self.navigationView addSubview:self.navigationScrollView];
     }
@@ -64,6 +62,7 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    [self setNavigationViewItemsPosition];
 }
 
 
@@ -156,7 +155,7 @@
 
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
-    if ((object == self.navigationItem.titleView && [keyPath isEqualToString:@"frame"])){
+    if ((object == self.navigationView && [keyPath isEqualToString:@"frame"])){
         if ([[change objectForKey:NSKeyValueChangeKindKey] isEqualToNumber:@(NSKeyValueChangeSetting)]){
             CGRect oldRect = [change[NSKeyValueChangeOldKey] CGRectValue];
             CGRect newRect = [change[NSKeyValueChangeNewKey] CGRectValue];
@@ -187,27 +186,31 @@
     [self.pagerTabStripChildViewControllers enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         NSAssert([obj conformsToProtocol:@protocol(XLPagerTabStripChildItem)], @"child view controller must conform to XLPagerTabStripChildItem");
         UIViewController<XLPagerTabStripChildItem> * childViewController = (UIViewController<XLPagerTabStripChildItem> *)obj;
-        if ([childViewController respondsToSelector:@selector(titleForPagerTabStripViewController:)]){
-            UILabel *navTitleLabel = [self createNewLabelWithText:[childViewController titleForPagerTabStripViewController:self]];
-            [navTitleLabel setAlpha: self.currentIndex == idx ? 1 : 0];
-            [_navigationScrollView addSubview:navTitleLabel];
-            [_navigationItemsViews addObject:navTitleLabel];
-        }
+        NSString * childText = [childViewController respondsToSelector:@selector(titleForPagerTabStripViewController:)] ? [childViewController titleForPagerTabStripViewController:self] : NSStringFromClass([obj class]);
+        UILabel *navTitleLabel = [self createNewLabelWithText:childText];
+        [navTitleLabel setAlpha: self.currentIndex == idx ? 1 : 0];
+        UIColor * childTextColor = [childViewController respondsToSelector:@selector(colorForPagerTabStripViewController:)] ? [childViewController colorForPagerTabStripViewController:self] : [UIColor whiteColor];;
+        [navTitleLabel setTextColor:childTextColor];
+        [_navigationScrollView addSubview:navTitleLabel];
+        [_navigationItemsViews addObject:navTitleLabel];
     }];
 }
 
 -(void)setNavigationViewItemsPosition
 {
     CGFloat distance = [self getDistanceValue];
-    
+    BOOL isPortrait = UIDeviceOrientationIsPortrait([UIDevice currentDevice].orientation);
+    CGFloat labelHeighSpace = isPortrait ? 34: 25;
     [self.navigationItemsViews enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         int index = (int)idx;
-        UIView *view = (UIView *)obj;
-        [view setAlpha: self.currentIndex == idx ? 1 : 0];
-        CGSize viewSize = [view isKindOfClass:[UILabel class]] ? [self getLabelSize:(UILabel*)view] : view.frame.size;
+        UILabel *label = (UILabel *)obj;
+        [label setAlpha:self.currentIndex == idx ? 1 : 0];
+        label.font = isPortrait ? self.portraitTitleFont : self.landscapeTitleFont;
+        CGSize viewSize = [self getLabelSize:label];
         CGFloat originX = (distance - viewSize.width/2) + index * distance;
-        view.frame = (CGRect){originX, 8, viewSize.width, viewSize.height};
-        view.tag = index;
+        CGFloat originY = (labelHeighSpace - viewSize.height) / 2;
+        label.frame = (CGRect){originX, originY + 2, viewSize.width, viewSize.height};
+        label.tag = index;
     }];
     
     UIAccelerationValue xOffset = distance * self.currentIndex;
@@ -218,7 +221,7 @@
     [self.navigationPageControl setCurrentPage:self.currentIndex];
     CGSize viewSize = [self.navigationPageControl sizeForNumberOfPages:[self.navigationItemsViews count]];
     CGFloat originX = (distance - viewSize.width/2);
-    [self.navigationPageControl setFrame:(CGRect){originX, 34, viewSize.width, viewSize.height}];
+    [self.navigationPageControl setFrame:(CGRect){originX, labelHeighSpace, viewSize.width, viewSize.height}];
 }
 
 -(void)setAlphaWithOffset:(UIAccelerationValue)xOffset
@@ -235,7 +238,7 @@
 {
     UILabel *navTitleLabel = [UILabel new];
     navTitleLabel.text = text;
-    navTitleLabel.font = [UIFont fontWithName:@"Helvetica" size:18];
+    navTitleLabel.font = self.landscapeTitleFont;
     navTitleLabel.textColor = [UIColor whiteColor];
     navTitleLabel.alpha = 0;
     return navTitleLabel;
@@ -253,5 +256,18 @@
 }
 
 
+-(UIFont *)landscapeTitleFont
+{
+    if (_landscapeTitleFont) return _landscapeTitleFont;
+    _landscapeTitleFont = [UIFont systemFontOfSize:14];
+    return _landscapeTitleFont;
+}
+
+-(UIFont *)portraitTitleFont
+{
+    if (_portraitTitleFont) return _portraitTitleFont;
+    _portraitTitleFont = [UIFont systemFontOfSize:18];
+    return _portraitTitleFont;
+}
 
 @end
