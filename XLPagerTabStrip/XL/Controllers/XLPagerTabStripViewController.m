@@ -136,7 +136,7 @@
         self.currentIndex = index;
     }
     else{
-        if (self.skipIntermediateViewControllers && fabs(self.currentIndex - index) > 1){
+        if (self.skipIntermediateViewControllers && ABS(self.currentIndex - index) > 1){
             NSArray * originalPagerTabStripChildViewControllers = self.pagerTabStripChildViewControllers;
             NSMutableArray * tempChildViewControllers = [NSMutableArray arrayWithArray:originalPagerTabStripChildViewControllers];
             UIViewController * currentChildVC = [originalPagerTabStripChildViewControllers objectAtIndex:self.currentIndex];

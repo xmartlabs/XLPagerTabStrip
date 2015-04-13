@@ -24,8 +24,6 @@
 // THE SOFTWARE.
 
 #import "XLTwitterPagerTabStripViewController.h"
-#import "TableChildExampleViewController.h"
-#import "ChildExampleViewController.h"
 #import "FXPageControl.h"
 
 @interface XLTwitterPagerTabStripViewController ()
