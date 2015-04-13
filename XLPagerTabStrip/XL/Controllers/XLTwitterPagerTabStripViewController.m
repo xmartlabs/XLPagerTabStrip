@@ -46,8 +46,10 @@
     if (!self.navigationView.superview) {
         self.navigationItem.titleView = self.navigationView;
     }
+    
     [self.navigationView addObserver:self forKeyPath:@"frame" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:0];
     [self.navigationView setFrame:CGRectMake(0, 0, CGRectGetWidth(self.navigationController.navigationBar.frame) , CGRectGetHeight(self.navigationController.navigationBar.frame))];
+    
     if (!self.navigationScrollView.superview) {
         [self.navigationView addSubview:self.navigationScrollView];
     }

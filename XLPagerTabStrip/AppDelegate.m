@@ -35,6 +35,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     [[XLJSONSerialization sharedInstance] postsData];
+    [[UITabBar appearance] setTintColor:[UIColor colorWithRed:0.027 green:0.725 blue:0.608 alpha:1]];
     [application setStatusBarStyle:UIStatusBarStyleLightContent];
     return YES;
     

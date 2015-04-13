@@ -93,7 +93,7 @@ Contributors
 ----------------
 
 * Washington Miranda
-* Martin Pastorin
+* Martin Pastorin ([@dmpastorin](http://twitter.com/dmpastorin "@dmpastorin"))
 * [Full contributors list](https://github.com/xmartlabs/XLPagerTabStrip/graphs/contributors)
 
 Contact

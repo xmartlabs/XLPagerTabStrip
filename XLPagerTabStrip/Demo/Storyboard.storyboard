@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="ptL-BW-nEP">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="ptL-BW-nEP">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -57,7 +57,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7KA-v4-CBs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2214" y="-1341"/>
+            <point key="canvasLocation" x="2214" y="-167"/>
         </scene>
         <!--Bar-->
         <scene sceneID="sWd-rV-F4O">
@@ -120,8 +120,8 @@
                             </mask>
                         </variation>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Bar" image="logoCircle" id="1d9-i6-g9L">
-                        <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="-2"/>
+                    <tabBarItem key="tabBarItem" title="Bar" image="icon_bar" id="1d9-i6-g9L">
+                        <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="-4"/>
                     </tabBarItem>
                     <navigationItem key="navigationItem" id="ni8-Kh-JRq"/>
                     <connections>
@@ -170,7 +170,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="79T-iZ-rpA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2214" y="-527"/>
+            <point key="canvasLocation" x="2214" y="-839"/>
         </scene>
         <!--Bar Example View Controller-->
         <scene sceneID="Ufs-nK-0Io">
@@ -228,22 +228,22 @@
                         <color key="tintColor" red="0.027450980390000001" green="0.72549019609999998" blue="0.60784313729999995" alpha="1" colorSpace="calibratedRGB"/>
                     </tabBar>
                     <connections>
-                        <segue destination="uba-Iz-2L2" kind="relationship" relationship="viewControllers" id="hNx-yW-oR3"/>
-                        <segue destination="g7J-zS-0bu" kind="relationship" relationship="viewControllers" id="WG0-Of-C4e"/>
                         <segue destination="jWp-2W-r7X" kind="relationship" relationship="viewControllers" id="fRU-HE-nNs"/>
                         <segue destination="uPL-4b-W3j" kind="relationship" relationship="viewControllers" id="Ovh-Wq-NjP"/>
+                        <segue destination="uba-Iz-2L2" kind="relationship" relationship="viewControllers" id="hNx-yW-oR3"/>
+                        <segue destination="g7J-zS-0bu" kind="relationship" relationship="viewControllers" id="WG0-Of-C4e"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YsA-SS-Qae" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="176" y="-957"/>
+            <point key="canvasLocation" x="310" y="-167"/>
         </scene>
         <!--Segmented-->
         <scene sceneID="gqT-2d-jBf">
             <objects>
                 <navigationController id="g7J-zS-0bu" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Segmented" image="logoCircle" id="cv3-rF-uFc">
-                        <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="-2"/>
+                    <tabBarItem key="tabBarItem" title="Segmented" image="icon_segmented" id="cv3-rF-uFc">
+                        <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="-4"/>
                     </tabBarItem>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" opaque="NO" contentMode="scaleToFill" translucent="NO" id="TRx-vY-PeE">
@@ -258,14 +258,14 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lsc-9V-4Tm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1329" y="-1341"/>
+            <point key="canvasLocation" x="1329" y="-167"/>
         </scene>
         <!--Button-->
         <scene sceneID="aQc-cn-j2T">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="jWp-2W-r7X" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Button" image="logoCircle" id="xNX-u1-4Tr">
-                        <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="-2"/>
+                    <tabBarItem key="tabBarItem" title="Button" image="icon_button" id="xNX-u1-4Tr">
+                        <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="-4"/>
                     </tabBarItem>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="2I8-g6-D4S">
@@ -284,7 +284,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="U4T-yC-y5O" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1329" y="-527"/>
+            <point key="canvasLocation" x="1329" y="-839"/>
         </scene>
         <!--Button Bar Example View Controller-->
         <scene sceneID="Ctn-j0-KV6">
@@ -361,7 +361,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ls9-Xb-7by" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3022" y="-527.5"/>
+            <point key="canvasLocation" x="3012" y="-839.5"/>
         </scene>
         <!--Twitter Example View Controller-->
         <scene sceneID="Zfp-Dk-WxL">
@@ -404,14 +404,14 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6HK-op-tmY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2214" y="328"/>
+            <point key="canvasLocation" x="2214" y="-1490"/>
         </scene>
         <!--Twitter-->
         <scene sceneID="xRb-7u-bt9">
             <objects>
                 <navigationController id="uPL-4b-W3j" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Twitter" image="logoCircle" id="Iyb-I5-OSg">
-                        <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="-2"/>
+                    <tabBarItem key="tabBarItem" title="Twitter" image="icon_twitter" id="Iyb-I5-OSg">
+                        <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="-4"/>
                     </tabBarItem>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" opaque="NO" contentMode="scaleToFill" translucent="NO" id="iMm-hr-oOU">
@@ -426,10 +426,13 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="O48-vq-kph" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1329" y="328"/>
+            <point key="canvasLocation" x="1329" y="-1490"/>
         </scene>
     </scenes>
     <resources>
-        <image name="logoCircle" width="28" height="28"/>
+        <image name="icon_bar" width="30" height="30"/>
+        <image name="icon_button" width="30" height="30"/>
+        <image name="icon_segmented" width="30" height="30"/>
+        <image name="icon_twitter" width="30" height="30"/>
     </resources>
 </document>
