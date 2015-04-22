@@ -50,12 +50,6 @@ NSString *const kCellIdentifier = @"PostCell";
     [self.tableView registerClass:[PostCell class] forCellReuseIdentifier:kCellIdentifier];
 }
 
-
--(void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-}
-
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
