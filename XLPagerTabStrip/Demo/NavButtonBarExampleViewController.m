@@ -39,7 +39,7 @@
     
     [self.buttonBarView setBackgroundColor:[UIColor clearColor]];
     [self.buttonBarView.selectedBar setBackgroundColor:[UIColor orangeColor]];
-    [self.navigationItem setTitleView:self.buttonBarView];
+    [self.navigationController.navigationBar addSubview:self.buttonBarView];
     
     [self.buttonBarView registerNib:[UINib nibWithNibName:@"ButtonCell" bundle:nil]  forCellWithReuseIdentifier:@"Cell"];
 }
