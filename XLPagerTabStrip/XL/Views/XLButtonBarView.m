@@ -45,8 +45,7 @@
     return self;
 }
 
-
-- (id)initWithFrame:(CGRect)frame
+- (instancetype)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
@@ -54,6 +53,16 @@
     }
     return self;
 }
+
+- (instancetype)initWithFrame:(CGRect)frame collectionViewLayout:(UICollectionViewLayout *)layout
+{
+    self = [super initWithFrame:frame collectionViewLayout:layout];
+    if (self) {
+        [self initializeXLButtonBarView];
+    }
+    return self;
+}
+
 
 -(void)initializeXLButtonBarView
 {
