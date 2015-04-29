@@ -78,6 +78,7 @@ Release Notes
 Version 1.1.0
 
 * Twitter pager added
+* Nav Button example added
 * Bug fixes and stability improvements
 
 Version 1.0.0
