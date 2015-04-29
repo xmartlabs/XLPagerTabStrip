@@ -69,16 +69,20 @@ Requirements
 -----------------------------
 
 * ARC
-* iOS 7.1 and above
+* iOS 7.0 and above
 
 
 Release Notes
 --------------
 
+Version 1.1.1
+
+* Nav Button example added
+* Support for iOS 7.0 and above
+
 Version 1.1.0
 
 * Twitter pager added
-* Nav Button example added
 * Bug fixes and stability improvements
 
 Version 1.0.0

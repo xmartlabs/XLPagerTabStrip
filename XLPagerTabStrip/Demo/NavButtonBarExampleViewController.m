@@ -34,7 +34,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.isProgressiveIndicator = NO;
+    self.isProgressiveIndicator = YES;
     // Do any additional setup after loading the view.
     
     [self.buttonBarView setBackgroundColor:[UIColor clearColor]];

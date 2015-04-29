@@ -69,7 +69,7 @@
     if (!self.buttonBarView.dataSource){
         self.buttonBarView.dataSource = self;
     }
-    self.buttonBarView.labelFont = [UIFont fontWithName:@"Helvetica-Bold" size:18.0f];
+    self.buttonBarView.labelFont = [UIFont boldSystemFontOfSize:18.0f];
     self.buttonBarView.leftRightMargin = 8;
     [self.buttonBarView setScrollsToTop:NO];
     UICollectionViewFlowLayout * flowLayout = (id)self.buttonBarView.collectionViewLayout;
@@ -104,7 +104,7 @@
     UICollectionViewFlowLayout * flowLayout = [[UICollectionViewFlowLayout alloc] init];
     [flowLayout setScrollDirection:UICollectionViewScrollDirectionHorizontal];
     [flowLayout setSectionInset:UIEdgeInsetsMake(0, 35, 0, 35)];
-    _buttonBarView = [[XLButtonBarView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 45.0f) collectionViewLayout:flowLayout];
+    _buttonBarView = [[XLButtonBarView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 44.0f) collectionViewLayout:flowLayout];
     _buttonBarView.backgroundColor = [UIColor orangeColor];
     _buttonBarView.selectedBar.backgroundColor = [UIColor blackColor];
     _buttonBarView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
