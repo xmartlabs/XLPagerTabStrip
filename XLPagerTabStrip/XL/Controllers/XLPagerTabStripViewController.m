@@ -354,7 +354,7 @@
     else{
         if ([self.delegate respondsToSelector:@selector(pagerTabStripViewController:updateIndicatorFromIndex:toIndex:)] && oldCurrentIndex != newCurrentIndex){
             [self.delegate pagerTabStripViewController:self
-                              updateIndicatorFromIndex:MAX(oldCurrentIndex, self.pagerTabStripChildViewControllers.count - 1)
+                              updateIndicatorFromIndex:MIN(oldCurrentIndex, self.pagerTabStripChildViewControllers.count - 1)
                                                toIndex:newCurrentIndex];
         }
     }
