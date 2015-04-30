@@ -32,4 +32,6 @@
 @property (nonatomic) UIFont * landscapeTitleFont;
 @property (nonatomic) UIFont * portraitTitleFont;
 
+-(void)reloadNavigationViewItems;
+
 @end
