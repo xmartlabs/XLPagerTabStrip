@@ -166,6 +166,9 @@
     [self moveToViewControllerAtIndex:[self.pagerTabStripChildViewControllers indexOfObject:viewController]];
 }
 
+-(void)moveToViewController:(UIViewController *)viewController animated:(bool)animated {
+    [self moveToViewControllerAtIndex:[self.pagerTabStripChildViewControllers indexOfObject:viewController] animated:animated];
+}
 
 #pragma mark - XLPagerTabStripViewControllerDelegate
 
