@@ -2,12 +2,13 @@
   "images" : [
     {
       "idiom" : "universal",
-      "scale" : "1x"
+      "scale" : "1x",
+      "filename" : "a_bar.png"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "xl_splash@2x.png"
+      "filename" : "a_bar@2x.png"
     },
     {
       "idiom" : "universal",

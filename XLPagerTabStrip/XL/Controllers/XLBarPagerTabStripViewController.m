@@ -2,7 +2,7 @@
 //  XLBarPagerTabStripViewController.m
 //  XLPagerTabStrip ( https://github.com/xmartlabs/XLPagerTabStrip )
 //
-//  Copyright (c) 2014 Xmartlabs ( http://xmartlabs.com )
+//  Copyright (c) 2015 Xmartlabs ( http://xmartlabs.com )
 //
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -30,16 +30,12 @@
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-    }
     return self;
 }
 
 - (instancetype)initWithCoder:(NSCoder *)coder
 {
     self = [super initWithCoder:coder];
-    if (self) {
-    }
     return self;
 }
 
@@ -82,9 +78,22 @@
 
 #pragma mark - XLPagerTabStripViewControllerDelegate
 
--(void)pagerTabStripViewController:(XLPagerTabStripViewController *)pagerTabStripViewController updateIndicatorToViewController:(UIViewController *)toViewController fromViewController:(UIViewController *)fromViewController
+-(void)pagerTabStripViewController:(XLPagerTabStripViewController *)pagerTabStripViewController
+          updateIndicatorFromIndex:(NSInteger)fromIndex
+                           toIndex:(NSInteger)toIndex
 {
-    [self.barView moveToIndex:[self.pagerTabStripChildViewControllers indexOfObject:toViewController] animated:YES];
+    [self.barView moveToIndex:toIndex
+                     animated:YES];
+}
+
+-(void)pagerTabStripViewController:(XLPagerTabStripViewController *)pagerTabStripViewController
+          updateIndicatorFromIndex:(NSInteger)fromIndex
+                           toIndex:(NSInteger)toIndex
+            withProgressPercentage:(CGFloat)progressPercentage
+{
+    [self.barView moveFromIndex:fromIndex
+                        toIndex:toIndex
+         withProgressPercentage:progressPercentage];
 }
 
 

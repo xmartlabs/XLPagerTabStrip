@@ -2,7 +2,7 @@
 //  XLButtonBarPagerTabStripViewController.m
 //  XLPagerTabStrip ( https://github.com/xmartlabs/XLPagerTabStrip )
 //
-//  Copyright (c) 2014 Xmartlabs ( http://xmartlabs.com )
+//  Copyright (c) 2015 Xmartlabs ( http://xmartlabs.com )
 //
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -69,7 +69,7 @@
     if (!self.buttonBarView.dataSource){
         self.buttonBarView.dataSource = self;
     }
-    self.buttonBarView.labelFont = [UIFont fontWithName:@"Helvetica-Bold" size:18.0f];
+    self.buttonBarView.labelFont = [UIFont boldSystemFontOfSize:18.0f];
     self.buttonBarView.leftRightMargin = 8;
     [self.buttonBarView setScrollsToTop:NO];
     UICollectionViewFlowLayout * flowLayout = (id)self.buttonBarView.collectionViewLayout;
@@ -104,7 +104,7 @@
     UICollectionViewFlowLayout * flowLayout = [[UICollectionViewFlowLayout alloc] init];
     [flowLayout setScrollDirection:UICollectionViewScrollDirectionHorizontal];
     [flowLayout setSectionInset:UIEdgeInsetsMake(0, 35, 0, 35)];
-    _buttonBarView = [[XLButtonBarView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 50.0f) collectionViewLayout:flowLayout];
+    _buttonBarView = [[XLButtonBarView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 44.0f) collectionViewLayout:flowLayout];
     _buttonBarView.backgroundColor = [UIColor orangeColor];
     _buttonBarView.selectedBar.backgroundColor = [UIColor blackColor];
     _buttonBarView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
@@ -113,19 +113,30 @@
 
 #pragma mark - XLPagerTabStripViewControllerDelegate
 
--(void)pagerTabStripViewController:(XLPagerTabStripViewController *)pagerTabStripViewController updateIndicatorToViewController:(UIViewController *)toViewController fromViewController:(UIViewController *)fromViewController
+-(void)pagerTabStripViewController:(XLPagerTabStripViewController *)pagerTabStripViewController
+          updateIndicatorFromIndex:(NSInteger)fromIndex
+                           toIndex:(NSInteger)toIndex
 {
     if (self.shouldUpdateButtonBarView){
-        NSUInteger newIndex = [self.pagerTabStripChildViewControllers indexOfObject:toViewController];
         XLPagerTabStripDirection direction = XLPagerTabStripDirectionLeft;
-        if (newIndex < [self.pagerTabStripChildViewControllers indexOfObject:fromViewController]){
+        if (toIndex < fromIndex){
             direction = XLPagerTabStripDirectionRight;
         }
-        [self.buttonBarView moveToIndex:newIndex animated:YES swipeDirection:direction];
+        [self.buttonBarView moveToIndex:toIndex animated:YES swipeDirection:direction];
     }
 }
 
-
+-(void)pagerTabStripViewController:(XLPagerTabStripViewController *)pagerTabStripViewController
+          updateIndicatorFromIndex:(NSInteger)fromIndex
+                           toIndex:(NSInteger)toIndex
+            withProgressPercentage:(CGFloat)progressPercentage
+{
+    if (self.shouldUpdateButtonBarView){
+        [self.buttonBarView moveFromIndex:fromIndex
+                                  toIndex:toIndex
+                   withProgressPercentage:progressPercentage];
+    }
+}
 
 #pragma merk - UICollectionViewDelegateFlowLayout
 

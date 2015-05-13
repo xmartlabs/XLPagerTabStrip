@@ -2,7 +2,7 @@
 //  XLSegmentedPagerTabStripViewController.m
 //  XLPagerTabStrip ( https://github.com/xmartlabs/XLPagerTabStrip )
 //
-//  Copyright (c) 2014 Xmartlabs ( http://xmartlabs.com )
+//  Copyright (c) 2015 Xmartlabs ( http://xmartlabs.com )
 //
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -73,7 +73,6 @@
     if ([self isViewLoaded]){
         [self reloadSegmentedControl];
     }
-    
 }
 
 
@@ -103,6 +102,7 @@
         
     }];
     [self.segmentedControl setSelectedSegmentIndex:self.currentIndex];
+    [self.segmentedControl setTintColor:[[self.pagerTabStripChildViewControllers objectAtIndex:self.currentIndex]colorForPagerTabStripViewController:self]];
 }
 
 #pragma mark - Events
@@ -111,22 +111,40 @@
 -(void)segmentedControlChanged:(UISegmentedControl *)sender
 {
     NSInteger index = [sender selectedSegmentIndex];
-    [self pagerTabStripViewController:self updateIndicatorToViewController:[self.pagerTabStripChildViewControllers objectAtIndex:index] fromViewController:nil];
+    [self pagerTabStripViewController:self updateIndicatorFromIndex:0 toIndex:index];
     self.shouldUpdateSegmentedControl = NO;
     [self moveToViewControllerAtIndex:index];
 }
 
 #pragma mark - XLPagerTabStripViewControllerDelegate
 
--(void)pagerTabStripViewController:(XLPagerTabStripViewController *)pagerTabStripViewController updateIndicatorToViewController:(UIViewController *)toViewController fromViewController:(UIViewController *)fromViewController
+-(void)pagerTabStripViewController:(XLPagerTabStripViewController *)pagerTabStripViewController
+          updateIndicatorFromIndex:(NSInteger)fromIndex
+                           toIndex:(NSInteger)toIndex
 {
     if (self.shouldUpdateSegmentedControl){
-        UIViewController<XLPagerTabStripChildItem> * childViewController = (UIViewController<XLPagerTabStripChildItem> *)toViewController;
+        UIViewController<XLPagerTabStripChildItem> * childViewController = (UIViewController<XLPagerTabStripChildItem> *)[self.pagerTabStripChildViewControllers objectAtIndex:toIndex];
         if ([childViewController respondsToSelector:@selector(colorForPagerTabStripViewController:)]){
             [self.segmentedControl setTintColor:[childViewController colorForPagerTabStripViewController:self]];
         }
         [self.segmentedControl setSelectedSegmentIndex:[self.pagerTabStripChildViewControllers indexOfObject:childViewController]];
     }
+}
+
+-(void)pagerTabStripViewController:(XLPagerTabStripViewController *)pagerTabStripViewController
+          updateIndicatorFromIndex:(NSInteger)fromIndex
+                           toIndex:(NSInteger)toIndex
+            withProgressPercentage:(CGFloat)progressPercentage
+{
+    if (self.shouldUpdateSegmentedControl){
+        NSInteger currentIndex = (progressPercentage > 0.5) ? toIndex : fromIndex;
+        UIViewController<XLPagerTabStripChildItem> * childViewController = (UIViewController<XLPagerTabStripChildItem> *)[self.pagerTabStripChildViewControllers objectAtIndex:currentIndex];
+        if ([childViewController respondsToSelector:@selector(colorForPagerTabStripViewController:)]){
+            [self.segmentedControl setTintColor:[childViewController colorForPagerTabStripViewController:self]];
+        }
+        [self.segmentedControl setSelectedSegmentIndex:MIN(MAX(0, currentIndex), self.pagerTabStripChildViewControllers.count -1)];
+    }
+
 }
 
 

@@ -2,7 +2,7 @@
 //  XLPagerTabStripViewController.h
 //  XLPagerTabStrip ( https://github.com/xmartlabs/XLPagerTabStrip )
 //
-//  Copyright (c) 2014 Xmartlabs ( http://xmartlabs.com )
+//  Copyright (c) 2015 Xmartlabs ( http://xmartlabs.com )
 //
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -58,7 +58,14 @@ typedef NS_ENUM(NSUInteger, XLPagerTabStripDirection) {
 
 @optional
 
--(void)pagerTabStripViewController:(XLPagerTabStripViewController *)pagerTabStripViewController updateIndicatorToViewController:(UIViewController *)toViewController fromViewController:(UIViewController *)fromViewController;
+-(void)pagerTabStripViewController:(XLPagerTabStripViewController *)pagerTabStripViewController
+          updateIndicatorFromIndex:(NSInteger)fromIndex
+                           toIndex:(NSInteger)toIndex;
+
+-(void)pagerTabStripViewController:(XLPagerTabStripViewController *)pagerTabStripViewController
+          updateIndicatorFromIndex:(NSInteger)fromIndex
+                           toIndex:(NSInteger)toIndex
+            withProgressPercentage:(CGFloat)progressPercentage;
 
 @end
 
@@ -82,8 +89,8 @@ typedef NS_ENUM(NSUInteger, XLPagerTabStripDirection) {
 
 @property (readonly) NSUInteger currentIndex;
 @property BOOL skipIntermediateViewControllers;
-// When user scroll the pager, waiting did end decelerating update page index, Default is NO.
-@property BOOL shouldDidEndDeceleratingUpdatePage;
+@property BOOL isProgressiveIndicator;
+@property BOOL isElasticIndicatorLimit;
 
 -(void)moveToViewControllerAtIndex:(NSUInteger)index;
 -(void)moveToViewController:(UIViewController *)viewController;

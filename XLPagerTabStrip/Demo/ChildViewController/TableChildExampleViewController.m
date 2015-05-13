@@ -2,7 +2,7 @@
 //  TableChildExampleViewController.m
 //  XLPagerTabStrip ( https://github.com/xmartlabs/XLPagerTabStrip )
 //
-//  Copyright (c) 2014 Xmartlabs ( http://xmartlabs.com )
+//  Copyright (c) 2015 Xmartlabs ( http://xmartlabs.com )
 //
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -48,12 +48,6 @@ NSString *const kCellIdentifier = @"PostCell";
 {
     [super viewDidLoad];
     [self.tableView registerClass:[PostCell class] forCellReuseIdentifier:kCellIdentifier];
-}
-
-
--(void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
 }
 
 #pragma mark - Table view data source

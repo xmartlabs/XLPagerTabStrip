@@ -2,7 +2,7 @@
 //  AppDelegate.m
 //  XLPagerTabStrip ( https://github.com/xmartlabs/XLPagerTabStrip )
 //
-//  Copyright (c) 2014 Xmartlabs ( http://xmartlabs.com )
+//  Copyright (c) 2015 Xmartlabs ( http://xmartlabs.com )
 //
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -35,6 +35,8 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     [[XLJSONSerialization sharedInstance] postsData];
+    [[UITabBar appearance] setTintColor:[UIColor colorWithRed:0.027 green:0.725 blue:0.608 alpha:1]];
+    [application setStatusBarStyle:UIStatusBarStyleLightContent];
     return YES;
     
 }
