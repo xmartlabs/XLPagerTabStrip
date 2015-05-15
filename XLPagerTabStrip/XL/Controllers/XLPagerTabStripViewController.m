@@ -283,26 +283,30 @@
     [childViewControllers enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         UIViewController * childController = (UIViewController *)obj;
         CGFloat pageOffsetForChild = [self pageOffsetForChildIndex:idx];
-        if (fabs(self.containerView.contentOffset.x - pageOffsetForChild) < CGRectGetWidth(self.containerView.bounds)){
-            if (![childController parentViewController]){
+        if (fabs(self.containerView.contentOffset.x - pageOffsetForChild) < CGRectGetWidth(self.containerView.bounds)) {
+            if (![childController parentViewController]) { // Add child
+                [childController beginAppearanceTransition:YES animated:NO];
                 [self addChildViewController:childController];
-                [childController didMoveToParentViewController:self];
+                
                 CGFloat childPosition = [self offsetForChildIndex:idx];
                 [childController.view setFrame:CGRectMake(childPosition, 0, CGRectGetWidth(self.view.bounds), CGRectGetHeight(self.containerView.bounds))];
                 childController.view.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+                
                 [self.containerView addSubview:childController.view];
-            }
-            else{
+                [childController didMoveToParentViewController:self];
+                [childController endAppearanceTransition];
+            } else {
                 CGFloat childPosition = [self offsetForChildIndex:idx];
                 [childController.view setFrame:CGRectMake(childPosition, 0, CGRectGetWidth(self.view.bounds), CGRectGetHeight(self.containerView.bounds))];
                 childController.view.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
             }
-        }
-        else{
-            if ([childController parentViewController]){
-                [childController.view removeFromSuperview];
+        } else {
+            if ([childController parentViewController]) { // Remove child
                 [childController willMoveToParentViewController:nil];
+                [childController beginAppearanceTransition:NO animated:NO];
+                [childController.view removeFromSuperview];
                 [childController removeFromParentViewController];
+                [childController endAppearanceTransition];
             }
         }
     }];
