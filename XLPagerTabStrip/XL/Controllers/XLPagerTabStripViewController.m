@@ -98,13 +98,6 @@
     }
 }
 
--(void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    _lastSize = self.containerView.bounds.size;
-}
-
-
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
