@@ -32,6 +32,7 @@
 @property (nonatomic) UIScrollView * navigationScrollView;
 @property (nonatomic) FXPageControl * navigationPageControl;
 @property (nonatomic, strong) NSMutableArray * navigationItemsViews;
+@property (assign, nonatomic) BOOL observerAdded;
 
 @end
 
@@ -46,6 +47,7 @@
     }
     
     [self.navigationView addObserver:self forKeyPath:@"frame" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:0];
+    self.observerAdded = YES;
     [self.navigationView setFrame:CGRectMake(0, 0, CGRectGetWidth(self.navigationController.navigationBar.frame) , CGRectGetHeight(self.navigationController.navigationBar.frame))];
     
     if (!self.navigationScrollView.superview) {
@@ -65,6 +67,14 @@
     [self setNavigationViewItemsPosition];
 }
 
+-(void)viewWillDisappear:(BOOL)animated
+{
+	[super viewWillDisappear:animated];
+	if (self.observerAdded) {
+		[self.navigationView removeObserver:self forKeyPath:@"frame"];
+		self.observerAdded = NO;
+	}
+}
 
 -(void)reloadPagerTabStripView
 {
@@ -165,11 +175,6 @@
             }
         }
     }
-}
-
--(void)dealloc
-{
-    [self.navigationView removeObserver:self forKeyPath:@"frame"];
 }
 
 
