@@ -266,6 +266,9 @@
 -(CGFloat)scrollPercentage
 {
     if ([self scrollDirection] == XLPagerTabStripDirectionLeft || [self scrollDirection] == XLPagerTabStripDirectionNone){
+        if (fmodf(self.containerView.contentOffset.x, [self pageWidth]) == 0.0) {
+            return 1.0;
+        }
         return fmodf(self.containerView.contentOffset.x, [self pageWidth]) / [self pageWidth];
     }
     return 1 - fmodf(self.containerView.contentOffset.x >= 0 ? self.containerView.contentOffset.x : [self pageWidth] + self.containerView.contentOffset.x, [self pageWidth]) / [self pageWidth];
