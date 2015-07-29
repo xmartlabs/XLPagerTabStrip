@@ -41,7 +41,7 @@
     [self.buttonBarView.selectedBar setBackgroundColor:[UIColor orangeColor]];
     [self.navigationController.navigationBar addSubview:self.buttonBarView];
     
-    [self.buttonBarView registerNib:[UINib nibWithNibName:@"ButtonCell" bundle:nil]  forCellWithReuseIdentifier:@"Cell"];
+    [self.buttonBarView registerNib:[UINib nibWithNibName:@"ButtonCell" bundle:[NSBundle bundleForClass:[self class]]]  forCellWithReuseIdentifier:@"Cell"];
 }
 
 #pragma mark - XLPagerTabStripViewControllerDataSource
