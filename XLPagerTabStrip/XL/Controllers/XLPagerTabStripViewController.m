@@ -63,6 +63,11 @@
     return self;
 }
 
+-(void)dealloc
+{
+    self.containerView.delegate = nil;
+}
+
 
 -(void)pagerTabStripViewControllerInit
 {
