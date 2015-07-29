@@ -98,13 +98,6 @@
     }
 }
 
--(void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    _lastSize = self.containerView.bounds.size;
-}
-
-
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
@@ -166,6 +159,9 @@
     [self moveToViewControllerAtIndex:[self.pagerTabStripChildViewControllers indexOfObject:viewController]];
 }
 
+-(void)moveToViewController:(UIViewController *)viewController animated:(bool)animated {
+    [self moveToViewControllerAtIndex:[self.pagerTabStripChildViewControllers indexOfObject:viewController] animated:animated];
+}
 
 #pragma mark - XLPagerTabStripViewControllerDelegate
 
@@ -279,7 +275,7 @@
     }
     NSArray * childViewControllers = self.pagerTabStripChildViewControllers;
     self.containerView.contentSize = CGSizeMake(CGRectGetWidth(self.containerView.bounds) * childViewControllers.count, self.containerView.contentSize.height);
-
+    
     [childViewControllers enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         UIViewController * childController = (UIViewController *)obj;
         CGFloat pageOffsetForChild = [self pageOffsetForChildIndex:idx];
@@ -315,7 +311,7 @@
     NSInteger virtualPage = [self virtualPageForContentOffset:self.containerView.contentOffset.x];
     NSUInteger newCurrentIndex = [self pageForVirtualPage:virtualPage];
     self.currentIndex = newCurrentIndex;
-
+    
     if (self.isProgressiveIndicator){
         if ([self.delegate respondsToSelector:@selector(pagerTabStripViewController:updateIndicatorFromIndex:toIndex:withProgressPercentage:)]){
             CGFloat scrollPercentage = [self scrollPercentage];
