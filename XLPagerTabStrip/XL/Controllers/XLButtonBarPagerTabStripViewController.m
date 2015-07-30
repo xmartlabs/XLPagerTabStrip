@@ -124,6 +124,7 @@
         }
         [self.buttonBarView moveToIndex:toIndex animated:YES swipeDirection:direction];
     }
+    [self.buttonBarView reloadData];
 }
 
 -(void)pagerTabStripViewController:(XLPagerTabStripViewController *)pagerTabStripViewController
@@ -136,6 +137,7 @@
                                   toIndex:toIndex
                    withProgressPercentage:progressPercentage];
     }
+    [self.buttonBarView reloadData];
 }
 
 #pragma merk - UICollectionViewDelegateFlowLayout
@@ -181,6 +183,10 @@
     UIViewController<XLPagerTabStripChildItem> * childController =   [self.pagerTabStripChildViewControllers objectAtIndex:indexPath.item];
     
     [buttonBarCell.label setText:[childController titleForPagerTabStripViewController:self]];
+    
+    if (self.selectedTabTextColor && self.defaultTabTextColor) {
+        [buttonBarCell.label setTextColor:self.buttonBarView.selectedOptionIndex == indexPath.item ? self.selectedTabTextColor : self.defaultTabTextColor];
+    }
     
     return buttonBarCell;
 }

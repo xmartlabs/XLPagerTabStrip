@@ -28,6 +28,9 @@
 
 @interface XLButtonBarPagerTabStripViewController : XLPagerTabStripViewController
 
+@property (nonatomic) UIColor *selectedTabTextColor;
+@property (nonatomic) UIColor *defaultTabTextColor;
+
 @property (readonly, nonatomic) XLButtonBarView * buttonBarView;
 
 @end

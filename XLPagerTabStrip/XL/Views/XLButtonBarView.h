@@ -31,6 +31,7 @@
 @interface XLButtonBarView : UICollectionView
 
 @property (readonly, nonatomic) UIView * selectedBar;
+@property (readonly, nonatomic) NSUInteger selectedOptionIndex;
 @property UIFont * labelFont;
 @property NSUInteger leftRightMargin;
 
