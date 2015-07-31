@@ -32,7 +32,8 @@
     BOOL _isReload;
 }
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     self.isProgressiveIndicator = YES;
     // Do any additional setup after loading the view.
@@ -42,6 +43,10 @@
     [self.navigationController.navigationBar addSubview:self.buttonBarView];
     
     [self.buttonBarView registerNib:[UINib nibWithNibName:@"ButtonCell" bundle:[NSBundle bundleForClass:[self class]]]  forCellWithReuseIdentifier:@"Cell"];
+    
+    // Select Tab text color
+    self.selectedTabTextColor = [UIColor orangeColor];
+    self.defaultTabTextColor = [UIColor whiteColor];
 }
 
 #pragma mark - XLPagerTabStripViewControllerDataSource

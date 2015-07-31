@@ -75,6 +75,8 @@
     UICollectionViewFlowLayout * flowLayout = (id)self.buttonBarView.collectionViewLayout;
     [flowLayout setScrollDirection:UICollectionViewScrollDirectionHorizontal];
     [self.buttonBarView setShowsHorizontalScrollIndicator:NO];
+    
+    [self addObserver:self forKeyPath:@"currentIndex" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:0];
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -93,6 +95,11 @@
         [self.buttonBarView reloadData];
         [self.buttonBarView moveToIndex:self.currentIndex animated:NO swipeDirection:XLPagerTabStripDirectionNone];
     }
+}
+
+-(void)dealloc
+{
+    [self removeObserver:self forKeyPath:@"currentIndex"];
 }
 
 
@@ -182,6 +189,10 @@
     
     [buttonBarCell.label setText:[childController titleForPagerTabStripViewController:self]];
     
+    if (self.selectedTabTextColor && self.defaultTabTextColor) {
+        [buttonBarCell.label setTextColor:self.currentIndex == indexPath.item ? self.selectedTabTextColor : self.defaultTabTextColor];
+    }
+    
     return buttonBarCell;
 }
 
@@ -196,5 +207,21 @@
     }
 }
 
+
+#pragma mark - KVO
+
+-(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+    if ((object == self && [keyPath isEqualToString:@"currentIndex"])){
+        if ([[change objectForKey:NSKeyValueChangeKindKey] isEqualToNumber:@(NSKeyValueChangeSetting)] &&
+            self.selectedTabTextColor && self.defaultTabTextColor &&
+            ![[change objectForKey:NSKeyValueChangeNewKey] isEqualToNumber:[change objectForKey:NSKeyValueChangeOldKey]]){
+            XLButtonBarViewCell  *cell = (XLButtonBarViewCell *)[self.buttonBarView cellForItemAtIndexPath:[NSIndexPath indexPathForItem:[change[NSKeyValueChangeOldKey] integerValue] inSection:0]];
+            cell.label.textColor = self.defaultTabTextColor;
+            cell = (XLButtonBarViewCell *)[self.buttonBarView cellForItemAtIndexPath:[NSIndexPath indexPathForItem:[change[NSKeyValueChangeNewKey] integerValue] inSection:0]];
+            cell.label.textColor = self.selectedTabTextColor;
+        }
+    }
+}
 
 @end
