@@ -26,6 +26,7 @@
 #import "TableChildExampleViewController.h"
 #import "ChildExampleViewController.h"
 #import "NavButtonBarExampleViewController.h"
+#import "XLButtonBarViewCell.h"
 
 @implementation NavButtonBarExampleViewController
 {
@@ -42,6 +43,26 @@
     [self.navigationController.navigationBar addSubview:self.buttonBarView];
     
     [self.buttonBarView registerNib:[UINib nibWithNibName:@"ButtonCell" bundle:[NSBundle bundleForClass:[self class]]]  forCellWithReuseIdentifier:@"Cell"];
+    
+    self.changeCurrentIndexProgressiveBlock = ^void(XLButtonBarViewCell *oldCell, XLButtonBarViewCell *newCell, CGFloat progressPercentage, BOOL changeCurrentIndex, BOOL animated){
+        if (changeCurrentIndex) {
+            [oldCell.label setTextColor:[UIColor colorWithWhite:1 alpha:0.6]];
+            [newCell.label setTextColor:[UIColor whiteColor]];
+            
+            if (animated) {
+                [UIView animateWithDuration:0.1
+                                 animations:^(){
+                                     newCell.transform = CGAffineTransformMakeScale(1.0, 1.0);
+                                     oldCell.transform = CGAffineTransformMakeScale(0.8, 0.8);
+                                 }
+                                 completion:nil];
+            }
+            else{
+                newCell.transform = CGAffineTransformMakeScale(1.0, 1.0);
+                oldCell.transform = CGAffineTransformMakeScale(0.8, 0.8);
+            }
+        }
+    };
 }
 
 #pragma mark - XLPagerTabStripViewControllerDataSource

@@ -186,6 +186,7 @@
           updateIndicatorFromIndex:(NSInteger)fromIndex
                            toIndex:(NSInteger)toIndex
             withProgressPercentage:(CGFloat)progressPercentage
+             andChangeCurrentIndex:(BOOL)changeCurrentIndex
 {
 }
 
@@ -325,9 +326,10 @@
     NSInteger virtualPage = [self virtualPageForContentOffset:self.containerView.contentOffset.x];
     NSUInteger newCurrentIndex = [self pageForVirtualPage:virtualPage];
     self.currentIndex = newCurrentIndex;
+    BOOL changeCurrentIndex = newCurrentIndex != oldCurrentIndex;
     
     if (self.isProgressiveIndicator){
-        if ([self.delegate respondsToSelector:@selector(pagerTabStripViewController:updateIndicatorFromIndex:toIndex:withProgressPercentage:)]){
+        if ([self.delegate respondsToSelector:@selector(pagerTabStripViewController:updateIndicatorFromIndex:toIndex:withProgressPercentage:andChangeCurrentIndex:)]){
             CGFloat scrollPercentage = [self scrollPercentage];
             if (scrollPercentage > 0) {
                 NSInteger fromIndex = self.currentIndex;
@@ -361,7 +363,7 @@
                         }
                     }
                 }
-                [self.delegate pagerTabStripViewController:self updateIndicatorFromIndex:fromIndex toIndex:toIndex withProgressPercentage:(self.isElasticIndicatorLimit ? scrollPercentage : ( toIndex < 0 || toIndex >= self.pagerTabStripChildViewControllers.count ? 0 : scrollPercentage ))];
+                [self.delegate pagerTabStripViewController:self updateIndicatorFromIndex:fromIndex toIndex:toIndex withProgressPercentage:(self.isElasticIndicatorLimit ? scrollPercentage : ( toIndex < 0 || toIndex >= self.pagerTabStripChildViewControllers.count ? 0 : scrollPercentage )) andChangeCurrentIndex:changeCurrentIndex];
             }
         }
     }

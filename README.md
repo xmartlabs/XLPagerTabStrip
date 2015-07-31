@@ -43,6 +43,17 @@ FAQ
 -(void)moveToViewController:(UIViewController *)viewController;
 ```
 
+#####How to change the look and feel of a XLButtonBarViewCell based on the selected state
+
+`XLButtonBarPagerTabStripViewController` provides a flexible way to customize the look and feel of a `XLButtonBarViewCell` based on the selected state by using blocks. These blocks will be called each time the current cell index changes its value. 
+Not only can you change the text color, but also the font, size, background color and so on. 
+
+```objc
+@property (copy) void (^changeCurrentIndexProgressiveBlock)(XLButtonBarViewCell* oldCell, XLButtonBarViewCell *newCell, CGFloat progressPercentage, BOOL changeCurrentIndex, BOOL fromCellRowAtIndex);
+@property (copy) void (^changeCurrentIndexBlock)(XLButtonBarViewCell* oldCell, XLButtonBarViewCell *newCell, BOOL animated);
+```
+
+
 Installation
 --------------------------
 

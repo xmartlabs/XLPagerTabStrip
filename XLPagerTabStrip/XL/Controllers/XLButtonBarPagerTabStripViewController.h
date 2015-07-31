@@ -24,9 +24,13 @@
 // THE SOFTWARE.
 
 #import "XLButtonBarView.h"
+#import "XLButtonBarViewCell.h"
 #import "XLPagerTabStripViewController.h"
 
 @interface XLButtonBarPagerTabStripViewController : XLPagerTabStripViewController
+
+@property (copy) void (^changeCurrentIndexProgressiveBlock)(XLButtonBarViewCell* oldCell, XLButtonBarViewCell *newCell, CGFloat progressPercentage, BOOL changeCurrentIndex, BOOL fromCellRowAtIndex);
+@property (copy) void (^changeCurrentIndexBlock)(XLButtonBarViewCell* oldCell, XLButtonBarViewCell *newCell, BOOL animated);
 
 @property (readonly, nonatomic) XLButtonBarView * buttonBarView;
 

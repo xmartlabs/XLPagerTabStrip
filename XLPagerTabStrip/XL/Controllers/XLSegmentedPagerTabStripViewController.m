@@ -135,6 +135,7 @@
           updateIndicatorFromIndex:(NSInteger)fromIndex
                            toIndex:(NSInteger)toIndex
             withProgressPercentage:(CGFloat)progressPercentage
+             andChangeCurrentIndex:(BOOL)changeCurrentIndex
 {
     if (self.shouldUpdateSegmentedControl){
         NSInteger currentIndex = (progressPercentage > 0.5) ? toIndex : fromIndex;

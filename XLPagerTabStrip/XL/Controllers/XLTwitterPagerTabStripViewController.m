@@ -142,6 +142,7 @@
           updateIndicatorFromIndex:(NSInteger)fromIndex
                            toIndex:(NSInteger)toIndex
             withProgressPercentage:(CGFloat)progressPercentage
+             andChangeCurrentIndex:(BOOL)changeCurrentIndex
 {
     CGFloat distance = [self getDistanceValue];
     UIAccelerationValue xOffset = fromIndex < toIndex ? distance * fromIndex + distance * progressPercentage : distance * fromIndex - distance * progressPercentage;
