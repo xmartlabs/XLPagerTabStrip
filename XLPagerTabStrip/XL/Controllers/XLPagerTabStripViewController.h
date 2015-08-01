@@ -66,7 +66,7 @@ typedef NS_ENUM(NSUInteger, XLPagerTabStripDirection) {
           updateIndicatorFromIndex:(NSInteger)fromIndex
                            toIndex:(NSInteger)toIndex
             withProgressPercentage:(CGFloat)progressPercentage
-             andChangeCurrentIndex:(BOOL)changeCurrentIndex;
+                   indexWasChanged:(BOOL)indexWasChanged;
 
 @end
 

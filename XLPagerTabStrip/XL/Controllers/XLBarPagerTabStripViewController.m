@@ -90,7 +90,7 @@
           updateIndicatorFromIndex:(NSInteger)fromIndex
                            toIndex:(NSInteger)toIndex
             withProgressPercentage:(CGFloat)progressPercentage
-             andChangeCurrentIndex:(BOOL)changeCurrentIndex
+                   indexWasChanged:(BOOL)indexWasChanged
 {
     [self.barView moveFromIndex:fromIndex
                         toIndex:toIndex

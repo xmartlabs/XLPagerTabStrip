@@ -88,8 +88,7 @@
 -(void)reloadPagerTabStripView
 {
     [super reloadPagerTabStripView];
-    if ([self isViewLoaded])
-    {
+    if ([self isViewLoaded]){
         [self.buttonBarView reloadData];
         [self.buttonBarView moveToIndex:self.currentIndex animated:NO swipeDirection:XLPagerTabStripDirectionNone];
     }
@@ -135,7 +134,7 @@
           updateIndicatorFromIndex:(NSInteger)fromIndex
                            toIndex:(NSInteger)toIndex
             withProgressPercentage:(CGFloat)progressPercentage
-             andChangeCurrentIndex:(BOOL)changeCurrentIndex
+                   indexWasChanged:(BOOL)indexWasChanged
 {
     if (self.shouldUpdateButtonBarView){
         [self.buttonBarView moveFromIndex:fromIndex
@@ -145,7 +144,7 @@
         if (self.changeCurrentIndexProgressiveBlock) {
             XLButtonBarViewCell *oldCell = (XLButtonBarViewCell*)[self.buttonBarView cellForItemAtIndexPath:[NSIndexPath indexPathForItem:self.currentIndex != fromIndex ? fromIndex : toIndex inSection:0]];
             XLButtonBarViewCell *newCell = (XLButtonBarViewCell*)[self.buttonBarView cellForItemAtIndexPath:[NSIndexPath indexPathForItem:self.currentIndex inSection:0]];
-            self.changeCurrentIndexProgressiveBlock(oldCell, newCell, progressPercentage, changeCurrentIndex, YES);
+            self.changeCurrentIndexProgressiveBlock(oldCell, newCell, progressPercentage, indexWasChanged, YES);
         }
     }
 }
@@ -195,10 +194,10 @@
     return self.pagerTabStripChildViewControllers.count;
 }
 
-// The cell that is returned must be retrieved from a call to -dequeueReusableCellWithReuseIdentifier:forIndexPath:
+
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    UICollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"Cell" forIndexPath:indexPath];
+    XLButtonBarViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"Cell" forIndexPath:indexPath];
     if (!cell){
         cell = [[XLButtonBarViewCell alloc] initWithFrame:CGRectMake(0, 0, 50, self.buttonBarView.frame.size.height)];
     }
