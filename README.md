@@ -43,6 +43,16 @@ FAQ
 -(void)moveToViewController:(UIViewController *)viewController;
 ```
 
+#####How to change the selected tab (XLButtonBarViewCell) look and feel based on the selected state
+
+`XLButtonBarPagerTabStripViewController` provides a flexible way to customize the look and feel of a `XLButtonBarViewCell` based on the selected state by using blocks. These blocks will be called each time the current cell index changes its value.
+
+```objc
+@property (copy) void (^changeCurrentIndexProgressiveBlock)(XLButtonBarViewCell* oldCell, XLButtonBarViewCell *newCell, CGFloat progressPercentage, BOOL indexWasChanged, BOOL animated);
+@property (copy) void (^changeCurrentIndexBlock)(XLButtonBarViewCell* oldCell, XLButtonBarViewCell *newCell, BOOL animated);
+```
+Since the collection cell (tab) is passed as a parameter you have full control on the look and fell change and animation.
+
 Installation
 --------------------------
 
@@ -74,6 +84,13 @@ Requirements
 
 Release Notes
 --------------
+
+Version 2.0.0 (master)
+
+* Added ability to change look and feel of selected tab.
+* `changeCurrentIndexProgressiveBlock` added to `XLButtonBarPagerTabStripViewController`.
+* `changeCurrentIndexBlock` added to `XLButtonBarPagerTabStripViewController`.
+* indxWasChanged parameter was added to `-(void)pagerTabStripViewController:(XLPagerTabStripViewController *)pagerTabStripViewController updateIndicatorFromIndex:(NSInteger)fromIndex toIndex:(NSInteger)toIndex withProgressPercentage:(CGFloat)progressPercentage indexWasChanged:(BOOL)indexWasChanged;`
 
 Version 1.1.1
 

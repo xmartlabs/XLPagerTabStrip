@@ -88,8 +88,7 @@
 -(void)reloadPagerTabStripView
 {
     [super reloadPagerTabStripView];
-    if ([self isViewLoaded])
-    {
+    if ([self isViewLoaded]){
         [self.buttonBarView reloadData];
         [self.buttonBarView moveToIndex:self.currentIndex animated:NO swipeDirection:XLPagerTabStripDirectionNone];
     }
@@ -123,6 +122,11 @@
             direction = XLPagerTabStripDirectionRight;
         }
         [self.buttonBarView moveToIndex:toIndex animated:YES swipeDirection:direction];
+        if (self.changeCurrentIndexBlock) {
+            XLButtonBarViewCell *oldCell = (XLButtonBarViewCell*)[self.buttonBarView cellForItemAtIndexPath:[NSIndexPath indexPathForItem:self.currentIndex != fromIndex ? fromIndex : toIndex inSection:0]];
+            XLButtonBarViewCell *newCell = (XLButtonBarViewCell*)[self.buttonBarView cellForItemAtIndexPath:[NSIndexPath indexPathForItem:self.currentIndex inSection:0]];
+            self.changeCurrentIndexBlock(oldCell, newCell, YES);
+        }
     }
 }
 
@@ -130,11 +134,18 @@
           updateIndicatorFromIndex:(NSInteger)fromIndex
                            toIndex:(NSInteger)toIndex
             withProgressPercentage:(CGFloat)progressPercentage
+                   indexWasChanged:(BOOL)indexWasChanged
 {
     if (self.shouldUpdateButtonBarView){
         [self.buttonBarView moveFromIndex:fromIndex
                                   toIndex:toIndex
                    withProgressPercentage:progressPercentage];
+        
+        if (self.changeCurrentIndexProgressiveBlock) {
+            XLButtonBarViewCell *oldCell = (XLButtonBarViewCell*)[self.buttonBarView cellForItemAtIndexPath:[NSIndexPath indexPathForItem:self.currentIndex != fromIndex ? fromIndex : toIndex inSection:0]];
+            XLButtonBarViewCell *newCell = (XLButtonBarViewCell*)[self.buttonBarView cellForItemAtIndexPath:[NSIndexPath indexPathForItem:self.currentIndex inSection:0]];
+            self.changeCurrentIndexProgressiveBlock(oldCell, newCell, progressPercentage, indexWasChanged, YES);
+        }
     }
 }
 
@@ -159,7 +170,21 @@
 {
     [self.buttonBarView moveToIndex:indexPath.item animated:YES swipeDirection:XLPagerTabStripDirectionNone];
     self.shouldUpdateButtonBarView = NO;
-    [self moveToViewControllerAtIndex:indexPath.item];  
+    
+    XLButtonBarViewCell *oldCell = (XLButtonBarViewCell*)[self.buttonBarView cellForItemAtIndexPath:[NSIndexPath indexPathForItem:self.currentIndex inSection:0]];
+    XLButtonBarViewCell *newCell = (XLButtonBarViewCell*)[self.buttonBarView cellForItemAtIndexPath:[NSIndexPath indexPathForItem:indexPath.item inSection:0]];
+    if (self.isProgressiveIndicator) {
+        if (self.changeCurrentIndexProgressiveBlock) {
+            self.changeCurrentIndexProgressiveBlock(oldCell, newCell, 1, YES, YES);
+        }
+    }
+    else{
+        if (self.changeCurrentIndexBlock) {
+            self.changeCurrentIndexBlock(oldCell, newCell, YES);
+        }
+    }
+    
+    [self moveToViewControllerAtIndex:indexPath.item];
 }
 
 #pragma merk - UICollectionViewDataSource
@@ -169,10 +194,10 @@
     return self.pagerTabStripChildViewControllers.count;
 }
 
-// The cell that is returned must be retrieved from a call to -dequeueReusableCellWithReuseIdentifier:forIndexPath:
+
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    UICollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"Cell" forIndexPath:indexPath];
+    XLButtonBarViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"Cell" forIndexPath:indexPath];
     if (!cell){
         cell = [[XLButtonBarViewCell alloc] initWithFrame:CGRectMake(0, 0, 50, self.buttonBarView.frame.size.height)];
     }
@@ -181,6 +206,18 @@
     UIViewController<XLPagerTabStripChildItem> * childController =   [self.pagerTabStripChildViewControllers objectAtIndex:indexPath.item];
     
     [buttonBarCell.label setText:[childController titleForPagerTabStripViewController:self]];
+    
+    
+    if (self.isProgressiveIndicator) {
+        if (self.changeCurrentIndexProgressiveBlock) {
+            self.changeCurrentIndexProgressiveBlock(self.currentIndex == indexPath.item ? nil : cell , self.currentIndex == indexPath.item ? cell : nil, 1, YES, NO);
+        }
+    }
+    else{
+        if (self.changeCurrentIndexBlock) {
+            self.changeCurrentIndexBlock(self.currentIndex == indexPath.item ? nil : cell , self.currentIndex == indexPath.item ? cell : nil, NO);
+        }
+    }
     
     return buttonBarCell;
 }
