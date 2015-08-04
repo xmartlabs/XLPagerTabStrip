@@ -27,7 +27,10 @@
 #import "XLButtonBarViewCell.h"
 #import "XLPagerTabStripViewController.h"
 
-@interface XLButtonBarPagerTabStripViewController : XLPagerTabStripViewController
+@interface XLButtonBarPagerTabStripViewController : XLPagerTabStripViewController{
+    @protected
+    XLButtonBarView* _buttonBarView;
+}
 
 @property (copy) void (^changeCurrentIndexProgressiveBlock)(XLButtonBarViewCell* oldCell, XLButtonBarViewCell *newCell, CGFloat progressPercentage, BOOL indexWasChanged, BOOL fromCellRowAtIndex);
 @property (copy) void (^changeCurrentIndexBlock)(XLButtonBarViewCell* oldCell, XLButtonBarViewCell *newCell, BOOL animated);
