@@ -38,6 +38,10 @@
     XLButtonBarViewCell * _sizeCell;
 }
 
+- (void)dealloc{
+    [_buttonBarView removeObserver:self forKeyPath:@"contentSize"];
+}
+
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -75,14 +79,15 @@
     UICollectionViewFlowLayout * flowLayout = (id)self.buttonBarView.collectionViewLayout;
     [flowLayout setScrollDirection:UICollectionViewScrollDirectionHorizontal];
     [self.buttonBarView setShowsHorizontalScrollIndicator:NO];
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wassign-enum"
+    [self.buttonBarView addObserver:self forKeyPath:@"contentSize" options:0 context:NULL];
+#pragma clang diagnostic pop
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    UICollectionViewLayoutAttributes *attributes = [self.buttonBarView layoutAttributesForItemAtIndexPath:[NSIndexPath indexPathForItem:self.currentIndex inSection:0]];
-    CGRect cellRect = attributes.frame;
-    [self.buttonBarView.selectedBar setFrame:CGRectMake(cellRect.origin.x, self.buttonBarView.frame.size.height - 5, cellRect.size.width, 5)];
 }
 
 -(void)reloadPagerTabStripView
@@ -92,6 +97,14 @@
         [self.buttonBarView reloadData];
         [self.buttonBarView moveToIndex:self.currentIndex animated:NO swipeDirection:XLPagerTabStripDirectionNone];
     }
+}
+
+#pragma mark - CollectionView Size observer
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
+    UICollectionViewLayoutAttributes *attributes = [self.buttonBarView layoutAttributesForItemAtIndexPath:[NSIndexPath indexPathForItem:self.currentIndex inSection:0]];
+    CGRect cellRect = attributes.frame;
+    [self.buttonBarView.selectedBar setFrame:CGRectMake(cellRect.origin.x, self.buttonBarView.frame.size.height - 5, cellRect.size.width, 5)];
 }
 
 
