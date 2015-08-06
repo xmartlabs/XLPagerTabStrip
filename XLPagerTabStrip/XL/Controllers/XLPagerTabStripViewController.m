@@ -251,8 +251,14 @@
 
 -(NSInteger)virtualPageForContentOffset:(CGFloat)contentOffset
 {
-    NSInteger result = (contentOffset + (1.5f * [self pageWidth])) / [self pageWidth];
-    return result - 1;
+    float pageWidth = [self pageWidth];
+    if(pageWidth != 0.0f){
+        NSInteger result = (contentOffset + (1.5f * pageWidth)) / pageWidth;
+        if(result != NSIntegerMax && result != NSIntegerMin){
+            return result - 1;
+        }
+    }
+    return -1;
 }
 
 -(NSUInteger)pageForVirtualPage:(NSInteger)virtualPage
