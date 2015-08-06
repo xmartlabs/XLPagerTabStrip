@@ -39,7 +39,9 @@
 }
 
 - (void)dealloc{
-    [_buttonBarView removeObserver:self forKeyPath:@"contentSize"];
+    @try {
+        [_buttonBarView removeObserver:self forKeyPath:@"contentSize"];
+    }@catch (NSException *exception){}
 }
 
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -81,7 +83,7 @@
     [self.buttonBarView setShowsHorizontalScrollIndicator:NO];
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wassign-enum"
-    [self.buttonBarView addObserver:self forKeyPath:@"contentSize" options:0 context:NULL];
+    [self.buttonBarView addObserver:self forKeyPath:@"contentSize" options:NSKeyValueObservingOptionNew context:NULL];
 #pragma clang diagnostic pop
 }
 
@@ -105,6 +107,7 @@
     UICollectionViewLayoutAttributes *attributes = [self.buttonBarView layoutAttributesForItemAtIndexPath:[NSIndexPath indexPathForItem:self.currentIndex inSection:0]];
     CGRect cellRect = attributes.frame;
     [self.buttonBarView.selectedBar setFrame:CGRectMake(cellRect.origin.x, self.buttonBarView.frame.size.height - 5, cellRect.size.width, 5)];
+    [self.buttonBarView removeObserver:self forKeyPath:@"contentSize"];
 }
 
 
