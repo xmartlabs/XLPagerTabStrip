@@ -31,6 +31,8 @@
 @property (nonatomic) IBOutlet XLButtonBarView * buttonBarView;
 @property (nonatomic) BOOL shouldUpdateButtonBarView;
 
+@property (nonatomic) BOOL isObserverAdded;
+
 @end
 
 @implementation XLButtonBarPagerTabStripViewController
@@ -39,9 +41,9 @@
 }
 
 - (void)dealloc{
-    @try {
+    if (_isObserverAdded) {
         [_buttonBarView removeObserver:self forKeyPath:@"contentSize"];
-    }@catch (NSException *exception){}
+    }
 }
 
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -49,6 +51,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         self.shouldUpdateButtonBarView = YES;
+        self.isObserverAdded = NO;
     }
     return self;
 }
@@ -58,6 +61,7 @@
     self = [super initWithCoder:coder];
     if (self) {
         self.shouldUpdateButtonBarView = YES;
+        self.isObserverAdded = NO;
     }
     return self;
 }
@@ -85,6 +89,7 @@
 #pragma clang diagnostic ignored "-Wassign-enum"
     [self.buttonBarView addObserver:self forKeyPath:@"contentSize" options:NSKeyValueObservingOptionNew context:NULL];
 #pragma clang diagnostic pop
+    self.isObserverAdded = YES;
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -107,7 +112,10 @@
     UICollectionViewLayoutAttributes *attributes = [self.buttonBarView layoutAttributesForItemAtIndexPath:[NSIndexPath indexPathForItem:self.currentIndex inSection:0]];
     CGRect cellRect = attributes.frame;
     [self.buttonBarView.selectedBar setFrame:CGRectMake(cellRect.origin.x, self.buttonBarView.frame.size.height - 5, cellRect.size.width, 5)];
-    [self.buttonBarView removeObserver:self forKeyPath:@"contentSize"];
+    if(self.isObserverAdded){
+        [self.buttonBarView removeObserver:self forKeyPath:@"contentSize"];
+    }
+    self.isObserverAdded = NO;
 }
 
 
