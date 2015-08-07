@@ -68,6 +68,10 @@
 
 - (void)viewDidLoad
 {
+    // Fix : Avoid the possible automatic scrollview y offset when adding next views
+    UIView* viewTmp = [[UIView alloc] initWithFrame:CGRectZero];
+    [self.view addSubview:viewTmp];
+    
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     if (!self.buttonBarView.superview){
