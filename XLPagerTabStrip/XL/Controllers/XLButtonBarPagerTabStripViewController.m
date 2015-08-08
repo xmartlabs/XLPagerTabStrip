@@ -207,6 +207,15 @@
     
     [buttonBarCell.label setText:[childController titleForPagerTabStripViewController:self]];
     
+    if ([childController respondsToSelector:@selector(imageForPagerTabStripViewController:)]) {
+        UIImage *image = [childController imageForPagerTabStripViewController:self];
+        buttonBarCell.imageView.image = image;
+    }
+    
+    if ([childController respondsToSelector:@selector(highlightedImageForPagerTabStripViewController:)]) {
+        UIImage *image = [childController highlightedImageForPagerTabStripViewController:self];
+        buttonBarCell.imageView.highlightedImage = image;
+    }
     
     if (self.isProgressiveIndicator) {
         if (self.changeCurrentIndexProgressiveBlock) {
