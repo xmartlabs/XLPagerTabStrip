@@ -113,13 +113,21 @@
 #pragma mark - CollectionView Size observer
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
-    UICollectionViewLayoutAttributes *attributes = [self.buttonBarView layoutAttributesForItemAtIndexPath:[NSIndexPath indexPathForItem:self.currentIndex inSection:0]];
-    CGRect cellRect = attributes.frame;
-    [self.buttonBarView.selectedBar setFrame:CGRectMake(cellRect.origin.x, self.buttonBarView.frame.size.height - 5, cellRect.size.width, 5)];
-    if(self.isObserverAdded){
-        [self.buttonBarView removeObserver:self forKeyPath:@"contentSize"];
+    NSInteger numberOfItemsInSection = [self.buttonBarView numberOfItemsInSection:0];
+    if(numberOfItemsInSection>0){
+        NSIndexPath* indexPath = [NSIndexPath indexPathForItem:self.currentIndex inSection:0];
+        if(indexPath){
+            UICollectionViewLayoutAttributes *attributes = [self.buttonBarView layoutAttributesForItemAtIndexPath:indexPath];
+            if(attributes){
+                CGRect cellRect = attributes.frame;
+                [self.buttonBarView.selectedBar setFrame:CGRectMake(cellRect.origin.x, self.buttonBarView.frame.size.height - 5, cellRect.size.width, 5)];
+                if(self.isObserverAdded){
+                    [self.buttonBarView removeObserver:self forKeyPath:@"contentSize"];
+                }
+                self.isObserverAdded = NO;
+            }
+        }
     }
-    self.isObserverAdded = NO;
 }
 
 
