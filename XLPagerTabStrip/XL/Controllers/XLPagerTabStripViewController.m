@@ -341,7 +341,7 @@
                         toIndex = self.pagerTabStripChildViewControllers.count;
                     }
                     else{
-                        if (scrollPercentage > 0.5f){
+                        if (scrollPercentage >= 0.5f){
                             fromIndex = MAX(toIndex - 1, 0);
                         }
                         else{
