@@ -31,6 +31,7 @@
 @interface XLButtonBarView : UICollectionView
 
 @property (readonly, nonatomic) UIView * selectedBar;
+@property (nonatomic) CGFloat selectedBarHeight;
 @property UIFont * labelFont;
 @property NSUInteger leftRightMargin;
 

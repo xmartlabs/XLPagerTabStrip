@@ -67,6 +67,7 @@
 -(void)initializeXLButtonBarView
 {
     _selectedOptionIndex = 0;
+    _selectedBarHeight = 5;
     if ([self.selectedBar superview] == nil){
         [self addSubview:self.selectedBar];
     }
@@ -157,14 +158,19 @@
 
 #pragma mark - Properties
 
+-(void)setSelectedBarHeight:(CGFloat)selectedBarHeight
+{
+    _selectedBarHeight = selectedBarHeight;
+    _selectedBar.frame = CGRectMake(_selectedBar.frame.origin.x, self.frame.size.height - _selectedBarHeight, _selectedBar.frame.size.width, _selectedBarHeight);
+}
+
 -(UIView *)selectedBar
 {
     if (_selectedBar) return _selectedBar;
-    _selectedBar = [[UIView alloc] initWithFrame:CGRectMake(0, self.frame.size.height - 5, self.frame.size.width, 5)];
+    _selectedBar = [[UIView alloc] initWithFrame:CGRectMake(0, self.frame.size.height - _selectedBarHeight, 0, _selectedBarHeight)];
     _selectedBar.layer.zPosition = 9999;
     _selectedBar.backgroundColor = [UIColor blackColor];
     return _selectedBar;
 }
-
 
 @end
