@@ -168,6 +168,7 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
+    //There's nothing to do if we select the current selected tab
 	if (indexPath.item == self.currentIndex)
 		return;
 	

@@ -91,6 +91,7 @@ Version 2.0.0 (master)
 * `changeCurrentIndexProgressiveBlock` added to `XLButtonBarPagerTabStripViewController`.
 * `changeCurrentIndexBlock` added to `XLButtonBarPagerTabStripViewController`.
 * indxWasChanged parameter was added to `-(void)pagerTabStripViewController:(XLPagerTabStripViewController *)pagerTabStripViewController updateIndicatorFromIndex:(NSInteger)fromIndex toIndex:(NSInteger)toIndex withProgressPercentage:(CGFloat)progressPercentage indexWasChanged:(BOOL)indexWasChanged;`
+* Bug fix Issue #45: When the current tab is tapped by the user, swiping between tabs is now working as expected.
 
 Version 1.1.1
 
