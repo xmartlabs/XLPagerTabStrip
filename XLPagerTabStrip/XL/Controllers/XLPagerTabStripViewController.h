@@ -68,6 +68,15 @@ typedef NS_ENUM(NSUInteger, XLPagerTabStripDirection) {
             withProgressPercentage:(CGFloat)progressPercentage
                    indexWasChanged:(BOOL)indexWasChanged;
 
+/**
+ *  This delegate method is called when the `XLPagerTabStripViewController` has moved to a new page. This method will be called after all animations for the page change have completed.
+ *
+ *  @param pagerTabStripViewController The `XLPagerTabStripViewController` that moved to a new page
+ *  @param toIndex                     The index that the `XLPagerTabStripViewController` moved to
+ */
+-(void)pagerTabStripViewController:(XLPagerTabStripViewController *)pagerTabStripViewController
+                  didMoveToIndex:(NSInteger)toIndex;
+
 @end
 
 
