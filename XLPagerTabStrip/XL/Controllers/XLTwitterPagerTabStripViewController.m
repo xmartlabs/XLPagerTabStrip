@@ -145,7 +145,16 @@
              indexWasChanged:(BOOL)indexWasChanged
 {
     CGFloat distance = [self getDistanceValue];
-    UIAccelerationValue xOffset = fromIndex < toIndex ? distance * fromIndex + distance * progressPercentage : distance * fromIndex - distance * progressPercentage;
+    UIAccelerationValue xOffset = 0;
+    if (fromIndex < toIndex ){
+        xOffset = distance * fromIndex + distance * progressPercentage;
+    }
+    else if (fromIndex > toIndex){
+        xOffset = distance * fromIndex - distance * progressPercentage;
+    }
+    else{
+        xOffset = distance * fromIndex;
+    }
     [self.navigationScrollView setContentOffset:CGPointMake(xOffset, 0)];
     [self setAlphaWithOffset:xOffset];
     [_navigationPageControl setCurrentPage:self.currentIndex];
