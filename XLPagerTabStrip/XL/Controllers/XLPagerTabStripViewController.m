@@ -135,6 +135,9 @@
 
 -(void)moveToViewControllerAtIndex:(NSUInteger)index animated:(bool)animated
 {
+    _lastPageNumber = [self pageForContentOffset:self.containerView.contentOffset.x];
+    _lastContentOffset = self.containerView.contentOffset.x;
+  
     if (![self isViewLoaded]){
         self.currentIndex = index;
     }
