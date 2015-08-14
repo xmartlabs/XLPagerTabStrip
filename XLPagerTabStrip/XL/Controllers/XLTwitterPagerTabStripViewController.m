@@ -45,6 +45,7 @@
         self.navigationItem.titleView = self.navigationView;
     }
     
+    
     [self.navigationView addObserver:self forKeyPath:@"frame" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:0];
     [self.navigationView setFrame:CGRectMake(0, 0, CGRectGetWidth(self.navigationController.navigationBar.frame) , CGRectGetHeight(self.navigationController.navigationBar.frame))];
     
@@ -125,6 +126,7 @@
     [_navigationPageControl setDotSpacing:4.0f];
     [_navigationPageControl setDotColor:[UIColor colorWithWhite:1 alpha:0.4]];
     [_navigationPageControl setSelectedDotColor:[UIColor whiteColor]];
+    [_navigationPageControl setUserInteractionEnabled:false];
     return _navigationPageControl;
 }
 

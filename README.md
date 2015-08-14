@@ -94,7 +94,8 @@ Version 2.0.0 (master)
 * Bug Fix Issue #45: When the current tab is tapped by the user, and later swiping to another tab, the indicator now changes as expected.
 * Bug Fix: When scrolling between tabs with progressive indicator, the indicator now scrolls swiftly. It used to jump for an instant.
 * Bug Fix Issue #54: Twitter PagerTabStrip wasn't loading the navigation title correctly.
-* Bug Fix Issue ##32: Demo for Nav Button Bar Example fix.
+* Bug Fix Issue #32: Demo for Nav Button Bar Example fix.
+* Bug Fix Issue #32: Twitter Pager white dots that mark which tab is currently selected is non selectable now.
 
 Version 1.1.1
 
