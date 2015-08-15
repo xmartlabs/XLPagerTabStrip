@@ -82,6 +82,8 @@
 
 -(void)moveFromIndex:(NSInteger)fromIndex toIndex:(NSInteger)toIndex withProgressPercentage:(CGFloat)progressPercentage
 {
+    if ([self numberOfItemsInSection:0] <= 0) { return; }
+    
     self.selectedOptionIndex = (progressPercentage > 0.5 ) ? toIndex : fromIndex;
     
     UICollectionViewLayoutAttributes *attributes = [self layoutAttributesForItemAtIndexPath:[NSIndexPath indexPathForItem:fromIndex inSection:0]];

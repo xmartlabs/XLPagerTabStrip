@@ -80,6 +80,9 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
+    if ([self.buttonBarView numberOfItemsInSection:0] <= 0) { return; }
+    
     UICollectionViewLayoutAttributes *attributes = [self.buttonBarView layoutAttributesForItemAtIndexPath:[NSIndexPath indexPathForItem:self.currentIndex inSection:0]];
     CGRect cellRect = attributes.frame;
     [self.buttonBarView.selectedBar setFrame:CGRectMake(cellRect.origin.x, self.buttonBarView.frame.size.height - self.buttonBarView.selectedBarHeight, cellRect.size.width, self.buttonBarView.selectedBarHeight)];
