@@ -133,9 +133,9 @@
 }
 
 
--(void)moveToViewControllerAtIndex:(NSUInteger)index animated:(bool)animated
+-(void)moveToViewControllerAtIndex:(NSUInteger)index animated:(BOOL)animated
 {
-    if (![self isViewLoaded]){
+    if (!self.isViewLoaded || !self.view.window){
         self.currentIndex = index;
     }
     else{
@@ -170,7 +170,7 @@
     [self moveToViewControllerAtIndex:[self.pagerTabStripChildViewControllers indexOfObject:viewController]];
 }
 
--(void)moveToViewController:(UIViewController *)viewController animated:(bool)animated {
+-(void)moveToViewController:(UIViewController *)viewController animated:(BOOL)animated {
     [self moveToViewControllerAtIndex:[self.pagerTabStripChildViewControllers indexOfObject:viewController] animated:animated];
 }
 

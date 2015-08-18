@@ -94,9 +94,9 @@ typedef NS_ENUM(NSUInteger, XLPagerTabStripDirection) {
 @property BOOL isElasticIndicatorLimit;
 
 -(void)moveToViewControllerAtIndex:(NSUInteger)index;
--(void)moveToViewControllerAtIndex:(NSUInteger)index animated:(bool)animated;
+-(void)moveToViewControllerAtIndex:(NSUInteger)index animated:(BOOL)animated;
 -(void)moveToViewController:(UIViewController *)viewController;
--(void)moveToViewController:(UIViewController *)viewController animated:(bool)animated;
+-(void)moveToViewController:(UIViewController *)viewController animated:(BOOL)animated;
 -(void)reloadPagerTabStripView;
 
 @end

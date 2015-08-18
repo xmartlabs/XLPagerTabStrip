@@ -3,6 +3,9 @@ XLPagerTabStrip
 
 By [XMARTLABS](http://xmartlabs.com).
 
+[![license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/xmartlabs/XLPagerTabStrip/blob/master/LICENSE)
+[![version](https://img.shields.io/badge/pod-2.0.0-blue.svg)](https://github.com/xmartlabs/XLPagerTabStrip/releases)
+
 Android [PagerTabStrip](http://developer.android.com/reference/android/support/v4/view/PagerTabStrip.html) for iOS!
 
 **XLPagerTabStrip** is a *Container View Controller* that allows us to switch easily among a collection of view controllers. Pan gesture can be used to move on to next or previous view controller. It shows a interactive indicator of the current, previous, next child view controllers.  
@@ -40,7 +43,9 @@ FAQ
 
 ```objc
 -(void)moveToViewControllerAtIndex:(NSUInteger)index;
+-(void)moveToViewControllerAtIndex:(NSUInteger)index animated:(BOOL)animated;
 -(void)moveToViewController:(UIViewController *)viewController;
+-(void)moveToViewController:(UIViewController *)viewController animated:(BOOL)animated;
 ```
 
 #####How to change the selected tab (XLButtonBarViewCell) look and feel based on the selected state
@@ -59,7 +64,7 @@ Installation
 The easiest way to use `XLPagerTabStrip` in your app is via [CocoaPods](http://cocoapods.org/ "CocoaPods").
 
 1. Add the following line in the project's Podfile file:
-`pod 'XLPagerTabStrip', '~> 1.0'`.
+`pod 'XLPagerTabStrip', '~> 2.0'`.
 2. Run the command `pod install` from the Podfile folder directory.
 
 
@@ -85,7 +90,7 @@ Requirements
 Release Notes
 --------------
 
-Version 2.0.0 (master)
+Version 2.0.0
 
 * Added ability to change look and feel of selected tab.
 * `changeCurrentIndexProgressiveBlock` added to `XLButtonBarPagerTabStripViewController`.
@@ -96,6 +101,7 @@ Version 2.0.0 (master)
 * Bug Fix Issue #54: Twitter PagerTabStrip wasn't loading the navigation title correctly.
 * Bug Fix Issue #32: Demo for Nav Button Bar Example fix.
 * Bug Fix Issue #32: Twitter Pager white dots that mark which tab is currently selected is non selectable now.
+* Bug Fix Issue #22: moveToViewControllerAtIndex: in viewDidLoad or viewWillAppear is not reflected in buttonBarView.
 
 Version 1.1.1
 

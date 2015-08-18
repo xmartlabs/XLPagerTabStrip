@@ -27,6 +27,11 @@
 
 #import "XLPagerTabStripViewController.h"
 
+typedef NS_ENUM(NSUInteger, XLPagerScroll) {
+    XLPagerScrollNO,
+    XLPagerScrollYES,
+    XLPagerScrollOnlyIfOutOfScreen
+};
 
 @interface XLButtonBarView : UICollectionView
 
@@ -35,9 +40,9 @@
 @property UIFont * labelFont;
 @property NSUInteger leftRightMargin;
 
--(void)moveToIndex:(NSUInteger)index animated:(BOOL)animated swipeDirection:(XLPagerTabStripDirection)swipeDirection;
+-(void)moveToIndex:(NSUInteger)index animated:(BOOL)animated swipeDirection:(XLPagerTabStripDirection)swipeDirection pagerScroll:(XLPagerScroll)pagerScroll;
 
--(void)moveFromIndex:(NSInteger)fromIndex toIndex:(NSInteger)toIndex withProgressPercentage:(CGFloat)progressPercentage;
+-(void)moveFromIndex:(NSInteger)fromIndex toIndex:(NSInteger)toIndex withProgressPercentage:(CGFloat)progressPercentage pagerScroll:(XLPagerScroll)pagerScroll;
 
 
 
