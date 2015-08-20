@@ -106,12 +106,12 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    _lastSize = self.containerView.bounds.size;
 }
 
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+    _lastSize = self.containerView.bounds.size;
     [self updateIfNeeded];
 }
 
@@ -133,12 +133,12 @@
 }
 
 
--(void)moveToViewControllerAtIndex:(NSUInteger)index animated:(bool)animated
+-(void)moveToViewControllerAtIndex:(NSUInteger)index animated:(BOOL)animated
 {
     _lastPageNumber = [self pageForContentOffset:self.containerView.contentOffset.x];
     _lastContentOffset = self.containerView.contentOffset.x;
   
-    if (![self isViewLoaded]){
+    if (!self.isViewLoaded || !self.view.window){
         self.currentIndex = index;
     }
     else{
@@ -173,7 +173,7 @@
     [self moveToViewControllerAtIndex:[self.pagerTabStripChildViewControllers indexOfObject:viewController]];
 }
 
--(void)moveToViewController:(UIViewController *)viewController animated:(bool)animated {
+-(void)moveToViewController:(UIViewController *)viewController animated:(BOOL)animated {
     [self moveToViewControllerAtIndex:[self.pagerTabStripChildViewControllers indexOfObject:viewController] animated:animated];
 }
 
@@ -288,8 +288,13 @@
 -(void)updateContent
 {
     if (!CGSizeEqualToSize(_lastSize, self.containerView.bounds.size)){
-        _lastSize = self.containerView.bounds.size;
-        [self.containerView setContentOffset:CGPointMake([self pageOffsetForChildIndex:self.currentIndex], 0) animated:NO];
+        if (_lastSize.width != self.containerView.bounds.size.width){
+            _lastSize = self.containerView.bounds.size;
+            [self.containerView setContentOffset:CGPointMake([self pageOffsetForChildIndex:self.currentIndex], 0) animated:NO];
+        }
+        else{
+            _lastSize = self.containerView.bounds.size;
+        }
     }
     NSArray * childViewControllers = self.pagerTabStripChildViewControllers;
     self.containerView.contentSize = CGSizeMake(CGRectGetWidth(self.containerView.bounds) * childViewControllers.count, self.containerView.contentSize.height);

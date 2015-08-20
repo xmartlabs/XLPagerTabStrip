@@ -464,29 +464,23 @@
                         <viewControllerLayoutGuide type="bottom" id="blo-XS-xG2"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Z8p-ri-ydp">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="487"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QoM-XF-R9X">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="487"/>
                                 <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                             </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="QoM-XF-R9X" firstAttribute="top" secondItem="SCP-tk-3Q4" secondAttribute="bottom" id="FRY-Sm-coT"/>
-                            <constraint firstAttribute="trailing" secondItem="QoM-XF-R9X" secondAttribute="trailing" id="OOB-gS-SKC"/>
-                            <constraint firstItem="blo-XS-xG2" firstAttribute="top" secondItem="QoM-XF-R9X" secondAttribute="bottom" id="PZD-ED-JGW"/>
-                            <constraint firstItem="QoM-XF-R9X" firstAttribute="top" secondItem="SCP-tk-3Q4" secondAttribute="bottom" constant="-64" id="VGy-aA-JFo"/>
-                            <constraint firstItem="QoM-XF-R9X" firstAttribute="leading" secondItem="Z8p-ri-ydp" secondAttribute="leading" id="fWX-DT-yyK"/>
+                            <constraint firstItem="QoM-XF-R9X" firstAttribute="leading" secondItem="Z8p-ri-ydp" secondAttribute="leading" id="BKv-K4-OD3"/>
+                            <constraint firstItem="blo-XS-xG2" firstAttribute="top" secondItem="QoM-XF-R9X" secondAttribute="bottom" id="EQI-ir-zAd"/>
+                            <constraint firstItem="QoM-XF-R9X" firstAttribute="top" secondItem="SCP-tk-3Q4" secondAttribute="bottom" id="YXa-W1-wcf"/>
+                            <constraint firstAttribute="trailing" secondItem="QoM-XF-R9X" secondAttribute="trailing" id="Z2y-Av-PGp"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="FRY-Sm-coT"/>
-                            </mask>
-                        </variation>
                     </view>
-                    <extendedEdge key="edgesForExtendedLayout" top="YES"/>
+                    <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationItem key="navigationItem" id="0ef-Sm-22o">
                         <nil key="title"/>
                     </navigationItem>
