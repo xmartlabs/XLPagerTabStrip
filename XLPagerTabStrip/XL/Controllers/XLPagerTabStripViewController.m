@@ -138,6 +138,10 @@
     _lastPageNumber = [self pageForContentOffset:self.containerView.contentOffset.x];
     _lastContentOffset = self.containerView.contentOffset.x;
   
+    if ([self.delegate respondsToSelector:@selector(pagerTabStripViewController:willMoveToIndex:)]) {
+      [self.delegate pagerTabStripViewController:self willMoveToIndex:index];
+    }
+  
     if (!self.isViewLoaded || !self.view.window){
         self.currentIndex = index;
     }
@@ -422,6 +426,16 @@
         _lastPageNumber = [self pageForContentOffset:scrollView.contentOffset.x];
         _lastContentOffset = scrollView.contentOffset.x;
     }
+}
+
+-(void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset {
+  if (self.containerView == scrollView && [self.delegate respondsToSelector:@selector(pagerTabStripViewController:willMoveToIndex:)]) {
+    NSInteger toIndex = [self pageForContentOffset:targetContentOffset -> x];
+    
+    if (toIndex != _lastPageNumber) {
+      [self.delegate pagerTabStripViewController:self willMoveToIndex:toIndex];
+    }
+  }
 }
 
 -(void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView
