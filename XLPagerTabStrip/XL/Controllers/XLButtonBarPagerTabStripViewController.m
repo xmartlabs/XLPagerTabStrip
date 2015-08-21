@@ -80,7 +80,6 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self.buttonBarView layoutIfNeeded];
     [self.buttonBarView moveToIndex:self.currentIndex animated:NO swipeDirection:XLPagerTabStripDirectionNone pagerScroll:(self.isProgressiveIndicator ? XLPagerScrollYES  :XLPagerScrollOnlyIfOutOfScreen)];
 }
 
