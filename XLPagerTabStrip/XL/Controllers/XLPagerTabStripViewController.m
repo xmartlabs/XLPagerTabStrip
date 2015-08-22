@@ -421,6 +421,15 @@
     }
 }
 
+-(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
+{
+    if (self.containerView == scrollView){
+        if ([self.delegate respondsToSelector:@selector(pagerTabStripViewController:didChangeCurrentPage:)]) {
+            [self.delegate pagerTabStripViewController:self didChangeCurrentPage:self.currentIndex];
+        }
+    }
+}
+
 -(void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView
 {
     if (self.containerView == scrollView && _originalPagerTabStripChildViewControllers){
@@ -433,6 +442,10 @@
             self.view.userInteractionEnabled = YES;
         }
         [self updateContent];
+        
+        if ([self.delegate respondsToSelector:@selector(pagerTabStripViewController:didChangeCurrentPage:)]) {
+            [self.delegate pagerTabStripViewController:self didChangeCurrentPage:self.currentIndex];
+        }
     }
 }
 
