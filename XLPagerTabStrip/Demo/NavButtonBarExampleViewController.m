@@ -71,12 +71,16 @@
 {
     // create child view controllers that will be managed by XLPagerTabStripViewController
     TableChildExampleViewController * child_1 = [[TableChildExampleViewController alloc] initWithStyle:UITableViewStylePlain];
+    child_1.shouldNeedChangeContentInset = YES;
     ChildExampleViewController * child_2 = [[ChildExampleViewController alloc] init];
     TableChildExampleViewController * child_3 = [[TableChildExampleViewController alloc] initWithStyle:UITableViewStyleGrouped];
+    child_3.shouldNeedChangeContentInset = YES;
     ChildExampleViewController * child_4 = [[ChildExampleViewController alloc] init];
     TableChildExampleViewController * child_5 = [[TableChildExampleViewController alloc] initWithStyle:UITableViewStylePlain];
+    child_5.shouldNeedChangeContentInset = YES;
     ChildExampleViewController * child_6 = [[ChildExampleViewController alloc] init];
     TableChildExampleViewController * child_7 = [[TableChildExampleViewController alloc] initWithStyle:UITableViewStyleGrouped];
+    child_7.shouldNeedChangeContentInset = YES;
     ChildExampleViewController * child_8 = [[ChildExampleViewController alloc] init];
     if (!_isReload){
         return @[child_1, child_2, child_3, child_4, child_5, child_6, child_7, child_8];

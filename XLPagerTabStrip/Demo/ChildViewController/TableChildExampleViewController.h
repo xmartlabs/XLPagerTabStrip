@@ -28,5 +28,7 @@
 
 @interface TableChildExampleViewController : UITableViewController <XLPagerTabStripChildItem>
 
+@property (nonatomic, assign) BOOL shouldNeedChangeContentInset;
+
 
 @end
