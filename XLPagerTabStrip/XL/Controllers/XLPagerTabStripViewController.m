@@ -27,6 +27,7 @@
 
 @interface XLPagerTabStripViewController ()
 
+@property (readonly) NSArray *pagerTabStripChildViewControllersForScrolling;
 @property (nonatomic) NSUInteger currentIndex;
 
 @end
@@ -36,11 +37,11 @@
     NSUInteger _lastPageNumber;
     CGFloat _lastContentOffset;
     NSUInteger _pageBeforeRotate;
-    NSArray * _originalPagerTabStripChildViewControllers;
     CGSize _lastSize;
 }
 
 @synthesize currentIndex = _currentIndex;
+@synthesize pagerTabStripChildViewControllersForScrolling = _pagerTabStripChildViewControllersForScrolling;
 
 #pragma maek - initializers
 
@@ -125,6 +126,17 @@
     }
 }
 
+#pragma mark - Properties
+
+- (NSArray *)pagerTabStripChildViewControllersForScrolling
+{
+    // If a temporary re-ordered version of the view controllers is available return that
+    // (i.e. skipIntermediateViewControllers==YES, the user has tapped a tab/cell and
+    // we're animating using the re-ordered version)
+    // Otherwise just return the normally ordered pagerTabStripChildViewControllers
+    return _pagerTabStripChildViewControllersForScrolling ?: self.pagerTabStripChildViewControllers;
+}
+
 #pragma mark - move to another view controller
 
 -(void)moveToViewControllerAtIndex:(NSUInteger)index
@@ -140,13 +152,13 @@
     }
     else{
         if (animated && self.skipIntermediateViewControllers && ABS(self.currentIndex - index) > 1){
-            NSArray * originalPagerTabStripChildViewControllers = self.pagerTabStripChildViewControllers;
-            NSMutableArray * tempChildViewControllers = [NSMutableArray arrayWithArray:originalPagerTabStripChildViewControllers];
-            UIViewController * currentChildVC = [originalPagerTabStripChildViewControllers objectAtIndex:self.currentIndex];
+            NSMutableArray * tempChildViewControllers = [NSMutableArray arrayWithArray:self.pagerTabStripChildViewControllers];
+            UIViewController *currentChildVC = [self.pagerTabStripChildViewControllers objectAtIndex:self.currentIndex];
             NSUInteger fromIndex = (self.currentIndex < index) ? index - 1 : index + 1;
-            [tempChildViewControllers setObject:[originalPagerTabStripChildViewControllers objectAtIndex:fromIndex] atIndexedSubscript:self.currentIndex];
+            UIViewController *fromChildVC = [self.pagerTabStripChildViewControllers objectAtIndex:fromIndex];
+            [tempChildViewControllers setObject:fromChildVC atIndexedSubscript:self.currentIndex];
             [tempChildViewControllers setObject:currentChildVC atIndexedSubscript:fromIndex];
-            _pagerTabStripChildViewControllers = tempChildViewControllers;
+            _pagerTabStripChildViewControllersForScrolling = tempChildViewControllers;
             [self.containerView setContentOffset:CGPointMake([self pageOffsetForChildIndex:fromIndex], 0) animated:NO];
             if (self.navigationController){
                 self.navigationController.view.userInteractionEnabled = NO;
@@ -154,7 +166,6 @@
             else{
                 self.view.userInteractionEnabled = NO;
             }
-            _originalPagerTabStripChildViewControllers = originalPagerTabStripChildViewControllers;
             [self.containerView setContentOffset:CGPointMake([self pageOffsetForChildIndex:index], 0) animated:YES];
         }
         else{
@@ -163,7 +174,6 @@
         
     }
 }
-
 
 -(void)moveToViewController:(UIViewController *)viewController
 {
@@ -195,7 +205,8 @@
 
 -(NSArray *)childViewControllersForPagerTabStripViewController:(XLPagerTabStripViewController *)pagerTabStripViewController
 {
-    return self.pagerTabStripChildViewControllers;
+    NSAssert(NO, @"Sub-class must implement the XLPagerTabStripViewControllerDataSource childViewControllersForPagerTabStripViewController: method");
+    return nil;
 }
 
 
@@ -293,7 +304,8 @@
             _lastSize = self.containerView.bounds.size;
         }
     }
-    NSArray * childViewControllers = self.pagerTabStripChildViewControllers;
+    
+    NSArray * childViewControllers = self.pagerTabStripChildViewControllersForScrolling;
     self.containerView.contentSize = CGSizeMake(CGRectGetWidth(self.containerView.bounds) * childViewControllers.count, self.containerView.contentSize.height);
     
     [childViewControllers enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
@@ -341,9 +353,9 @@
                 NSInteger toIndex = self.currentIndex;
                 XLPagerTabStripDirection scrollDirection = [self scrollDirection];
                 if (scrollDirection == XLPagerTabStripDirectionLeft){
-                    if (virtualPage > self.pagerTabStripChildViewControllers.count - 1){
-                        fromIndex = self.pagerTabStripChildViewControllers.count - 1;
-                        toIndex = self.pagerTabStripChildViewControllers.count;
+                    if (virtualPage > self.pagerTabStripChildViewControllersForScrolling.count - 1){
+                        fromIndex = self.pagerTabStripChildViewControllersForScrolling.count - 1;
+                        toIndex = self.pagerTabStripChildViewControllersForScrolling.count;
                     }
                     else{
                         if (scrollPercentage >= 0.5f){
@@ -361,21 +373,21 @@
                     }
                     else{
                         if (scrollPercentage > 0.5f){
-                            fromIndex = MIN(toIndex + 1, self.pagerTabStripChildViewControllers.count - 1);
+                            fromIndex = MIN(toIndex + 1, self.pagerTabStripChildViewControllersForScrolling.count - 1);
                         }
                         else{
                             toIndex = fromIndex - 1;
                         }
                     }
                 }
-                [self.delegate pagerTabStripViewController:self updateIndicatorFromIndex:fromIndex toIndex:toIndex withProgressPercentage:(self.isElasticIndicatorLimit ? scrollPercentage : ( toIndex < 0 || toIndex >= self.pagerTabStripChildViewControllers.count ? 0 : scrollPercentage )) indexWasChanged:changeCurrentIndex];
+                [self.delegate pagerTabStripViewController:self updateIndicatorFromIndex:fromIndex toIndex:toIndex withProgressPercentage:(self.isElasticIndicatorLimit ? scrollPercentage : ( toIndex < 0 || toIndex >= self.pagerTabStripChildViewControllersForScrolling.count ? 0 : scrollPercentage )) indexWasChanged:changeCurrentIndex];
             }
         }
     }
     else{
         if ([self.delegate respondsToSelector:@selector(pagerTabStripViewController:updateIndicatorFromIndex:toIndex:)] && oldCurrentIndex != newCurrentIndex){
             [self.delegate pagerTabStripViewController:self
-                              updateIndicatorFromIndex:MIN(oldCurrentIndex, self.pagerTabStripChildViewControllers.count - 1)
+                              updateIndicatorFromIndex:MIN(oldCurrentIndex, self.pagerTabStripChildViewControllersForScrolling.count - 1)
                                                toIndex:newCurrentIndex];
         }
     }
@@ -394,9 +406,9 @@
             }
         }];
         _pagerTabStripChildViewControllers = self.dataSource ? [self.dataSource childViewControllersForPagerTabStripViewController:self] : @[];
-        self.containerView.contentSize = CGSizeMake(CGRectGetWidth(self.containerView.bounds) * _pagerTabStripChildViewControllers.count, self.containerView.contentSize.height);
-        if (self.currentIndex >= _pagerTabStripChildViewControllers.count){
-            self.currentIndex = _pagerTabStripChildViewControllers.count - 1;
+        self.containerView.contentSize = CGSizeMake(CGRectGetWidth(self.containerView.bounds) * self.pagerTabStripChildViewControllers.count, self.containerView.contentSize.height);
+        if (self.currentIndex >= self.pagerTabStripChildViewControllers.count){
+            self.currentIndex = self.pagerTabStripChildViewControllers.count - 1;
         }
         [self.containerView setContentOffset:CGPointMake([self pageOffsetForChildIndex:self.currentIndex], 0)  animated:NO];
         [self updateContent];
@@ -423,9 +435,8 @@
 
 -(void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView
 {
-    if (self.containerView == scrollView && _originalPagerTabStripChildViewControllers){
-        _pagerTabStripChildViewControllers = _originalPagerTabStripChildViewControllers;
-        _originalPagerTabStripChildViewControllers = nil;
+    if (self.containerView == scrollView && _pagerTabStripChildViewControllersForScrolling){
+        _pagerTabStripChildViewControllersForScrolling = nil;
         if (self.navigationController){
             self.navigationController.view.userInteractionEnabled = YES;
         }
