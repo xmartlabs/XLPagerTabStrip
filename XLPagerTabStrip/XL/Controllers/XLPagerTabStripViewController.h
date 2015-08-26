@@ -71,7 +71,7 @@ typedef NS_ENUM(NSUInteger, XLPagerTabStripDirection) {
 /*
  XLPagerTabStripViewController did change to current page for scrollViewDidEndDecelerating and scrollViewDidEndScrollingAnimation
  */
--(void)pagerTabStripViewController:(XLPagerTabStripViewController *)pagerTabStripViewController didChangeCurrentPage:(NSInteger)currentPage;
+-(void)pagerTabStripViewController:(XLPagerTabStripViewController *)pagerTabStripViewController didScrollEndAtCurrentPage:(NSInteger)currentPage;
 
 @end
 

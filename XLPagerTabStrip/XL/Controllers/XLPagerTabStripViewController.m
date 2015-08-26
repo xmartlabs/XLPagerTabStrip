@@ -424,8 +424,8 @@
 -(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
     if (self.containerView == scrollView){
-        if ([self.delegate respondsToSelector:@selector(pagerTabStripViewController:didChangeCurrentPage:)]) {
-            [self.delegate pagerTabStripViewController:self didChangeCurrentPage:self.currentIndex];
+        if ([self.delegate respondsToSelector:@selector(pagerTabStripViewController:didScrollEndAtCurrentPage:)]) {
+            [self.delegate pagerTabStripViewController:self didScrollEndAtCurrentPage:self.currentIndex];
         }
     }
 }
@@ -443,8 +443,8 @@
         }
         [self updateContent];
         
-        if ([self.delegate respondsToSelector:@selector(pagerTabStripViewController:didChangeCurrentPage:)]) {
-            [self.delegate pagerTabStripViewController:self didChangeCurrentPage:self.currentIndex];
+        if ([self.delegate respondsToSelector:@selector(pagerTabStripViewController:didScrollEndAtCurrentPage:)]) {
+            [self.delegate pagerTabStripViewController:self didScrollEndAtCurrentPage:self.currentIndex];
         }
     }
 }
