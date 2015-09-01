@@ -34,7 +34,31 @@
 
 @implementation XLButtonBarViewCell
 
+- (void)willMoveToSuperview:(UIView *)newSuperview
+{
+    [super willMoveToSuperview:newSuperview];
+    
+    if (!self.label.superview){
+        // If label wasn't configured in a XIB or storyboard then it won't have
+        // been added to the view so we need to do it programmatically.
+        [self addSubview:self.label];
+    }
+}
 
-
+- (UILabel *)label
+{
+    if (!_label)
+    {
+        // If _label is nil then it wasn't configured in a XIB or storyboard so this
+        // class is being used programmatically. We need to initialise the label,
+        // setup some sensible defaults and set an appropriate frame.
+        // The label gets added to to the view in willMoveToSuperview:
+        _label = [[UILabel alloc] initWithFrame:self.bounds];
+        _label.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+        _label.textAlignment = NSTextAlignmentCenter;
+        _label.font = [UIFont systemFontOfSize:14.0f weight:UIFontWeightMedium];
+    }
+    return _label;;
+}
 
 @end
