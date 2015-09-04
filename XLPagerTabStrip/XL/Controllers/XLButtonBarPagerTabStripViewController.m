@@ -121,7 +121,7 @@
             if(attributes){
                 CGRect cellRect = attributes.frame;
                 if(CGRectGetWidth(self.buttonBarView.frame)!=0 && CGRectGetHeight(self.buttonBarView.frame)!=0){
-                    [self.buttonBarView.selectedBar setFrame:CGRectMake(cellRect.origin.x, self.buttonBarView.frame.size.height - 5, cellRect.size.width, 5)];
+                    [self.buttonBarView.selectedBar setFrame:CGRectMake(cellRect.origin.x, self.buttonBarView.frame.size.height - CGRectGetHeight(self.buttonBarView.selectedBar.frame), cellRect.size.width, CGRectGetHeight(self.buttonBarView.selectedBar.frame))];
                     if(self.isObserverAdded){
                         [self.buttonBarView removeObserver:self forKeyPath:@"contentSize"];
                     }
