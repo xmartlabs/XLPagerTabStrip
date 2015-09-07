@@ -68,6 +68,7 @@
 {
     _selectedOptionIndex = 0;
     _selectedBarHeight = 5;
+    self.delaysContentTouches = NO;
     if ([self.selectedBar superview] == nil){
         [self addSubview:self.selectedBar];
     }
