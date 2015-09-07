@@ -105,6 +105,11 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+<<<<<<< HEAD
+=======
+    [self.buttonBarView layoutIfNeeded];
+    [self.buttonBarView moveToIndex:self.currentIndex animated:NO swipeDirection:XLPagerTabStripDirectionNone pagerScroll:(self.isProgressiveIndicator ? XLPagerScrollYES  :XLPagerScrollOnlyIfOutOfScreen)];
+>>>>>>> xmartlabs/master
 }
 
 -(void)reloadPagerTabStripView
@@ -112,7 +117,7 @@
     [super reloadPagerTabStripView];
     if ([self isViewLoaded]){
         [self.buttonBarView reloadData];
-        [self.buttonBarView moveToIndex:self.currentIndex animated:NO swipeDirection:XLPagerTabStripDirectionNone];
+        [self.buttonBarView moveToIndex:self.currentIndex animated:NO swipeDirection:XLPagerTabStripDirectionNone pagerScroll:XLPagerScrollYES];
     }
 }
 
@@ -177,7 +182,7 @@
         if (toIndex < fromIndex){
             direction = XLPagerTabStripDirectionRight;
         }
-        [self.buttonBarView moveToIndex:toIndex animated:YES swipeDirection:direction];
+        [self.buttonBarView moveToIndex:toIndex animated:YES swipeDirection:direction pagerScroll:XLPagerScrollYES];
         if (self.changeCurrentIndexBlock) {
             XLButtonBarViewCell *oldCell = (XLButtonBarViewCell*)[self.buttonBarView cellForItemAtIndexPath:[NSIndexPath indexPathForItem:self.currentIndex != fromIndex ? fromIndex : toIndex inSection:0]];
             XLButtonBarViewCell *newCell = (XLButtonBarViewCell*)[self.buttonBarView cellForItemAtIndexPath:[NSIndexPath indexPathForItem:self.currentIndex inSection:0]];
@@ -195,7 +200,7 @@
     if (self.shouldUpdateButtonBarView){
         [self.buttonBarView moveFromIndex:fromIndex
                                   toIndex:toIndex
-                   withProgressPercentage:progressPercentage];
+                   withProgressPercentage:progressPercentage pagerScroll:XLPagerScrollYES];
         
         if (self.changeCurrentIndexProgressiveBlock) {
             XLButtonBarViewCell *oldCell = (XLButtonBarViewCell*)[self.buttonBarView cellForItemAtIndexPath:[NSIndexPath indexPathForItem:self.currentIndex != fromIndex ? fromIndex : toIndex inSection:0]];
@@ -224,7 +229,11 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    [self.buttonBarView moveToIndex:indexPath.item animated:YES swipeDirection:XLPagerTabStripDirectionNone];
+    //There's nothing to do if we select the current selected tab
+	if (indexPath.item == self.currentIndex)
+		return;
+	
+    [self.buttonBarView moveToIndex:indexPath.item animated:YES swipeDirection:XLPagerTabStripDirectionNone pagerScroll:XLPagerScrollYES];
     self.shouldUpdateButtonBarView = NO;
     
     XLButtonBarViewCell *oldCell = (XLButtonBarViewCell*)[self.buttonBarView cellForItemAtIndexPath:[NSIndexPath indexPathForItem:self.currentIndex inSection:0]];
