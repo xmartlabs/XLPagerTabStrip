@@ -105,11 +105,8 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-<<<<<<< HEAD
-=======
     [self.buttonBarView layoutIfNeeded];
     [self.buttonBarView moveToIndex:self.currentIndex animated:NO swipeDirection:XLPagerTabStripDirectionNone pagerScroll:(self.isProgressiveIndicator ? XLPagerScrollYES  :XLPagerScrollOnlyIfOutOfScreen)];
->>>>>>> xmartlabs/master
 }
 
 -(void)reloadPagerTabStripView
