@@ -120,7 +120,7 @@
 -(void)viewDidLayoutSubviews
 {
     [super viewDidLayoutSubviews];
-    _originContentInsetTop = self.containerView.contentInset.top;
+    _originContentInsetTop = -self.containerView.contentInset.top;
     [self updateIfNeeded];
     if  ([[[UIDevice currentDevice] systemVersion] compare:@"8.0" options:NSNumericSearch] == NSOrderedAscending){
         // SYSTEM_VERSION_LESS_THAN 8.0
