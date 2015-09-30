@@ -60,13 +60,6 @@
     [self reloadNavigationViewItems];
 }
 
--(void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    [self setNavigationViewItemsPosition];
-}
-
-
 -(void)reloadPagerTabStripView
 {
     [super reloadPagerTabStripView];
@@ -210,13 +203,20 @@
 
 -(void)setNavigationViewItemsPosition
 {
+    [self setNavigationViewItemsPosition:YES];
+}
+
+-(void)setNavigationViewItemsPosition:(BOOL)updateAlpha
+{
     CGFloat distance = [self getDistanceValue];
     BOOL isPortrait = UIDeviceOrientationIsPortrait([UIDevice currentDevice].orientation);
     CGFloat labelHeighSpace = isPortrait ? 34: 25;
     [self.navigationItemsViews enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         int index = (int)idx;
         UILabel *label = (UILabel *)obj;
-        [label setAlpha:self.currentIndex == idx ? 1 : 0];
+        if (updateAlpha){
+            [label setAlpha:self.currentIndex == idx ? 1 : 0];
+        }
         label.font = isPortrait ? self.portraitTitleFont : self.landscapeTitleFont;
         CGSize viewSize = [self getLabelSize:label];
         CGFloat originX = (distance - viewSize.width/2) + index * distance;
@@ -280,6 +280,12 @@
     if (_portraitTitleFont) return _portraitTitleFont;
     _portraitTitleFont = [UIFont systemFontOfSize:18];
     return _portraitTitleFont;
+}
+
+-(void)viewDidLayoutSubviews
+{
+    [super viewDidLayoutSubviews];
+    [self setNavigationViewItemsPosition:NO];
 }
 
 @end
