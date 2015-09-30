@@ -45,12 +45,13 @@
                                                       toItem:self attribute:NSLayoutAttributeCenterX
                                                   multiplier:1.0
                                                     constant:0]];
-  NSDictionary *viewDictionary = @{@"barImageView": self.imageView};
-  [self addConstraints:[NSLayoutConstraint
-                        constraintsWithVisualFormat:@"V:|-0-[barImageView]-0-|"
-                        options:NSLayoutFormatDirectionLeadingToTrailing
-                        metrics:nil
-                        views:viewDictionary]];
+  [self addConstraint:[NSLayoutConstraint constraintWithItem:self.imageView
+                                                   attribute:NSLayoutAttributeBottom
+                                                   relatedBy:NSLayoutRelationEqual
+                                                      toItem:self
+                                                   attribute:NSLayoutAttributeBottom
+                                                  multiplier:1.0
+                                                    constant:0]];
 }
 
 @end
