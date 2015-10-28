@@ -301,8 +301,8 @@
         CGFloat pageOffsetForChild = [self pageOffsetForChildIndex:idx];
         if (fabs(self.containerView.contentOffset.x - pageOffsetForChild) < CGRectGetWidth(self.containerView.bounds)) {
             if (![childController parentViewController]) { // Add child
-                [childController beginAppearanceTransition:YES animated:NO];
                 [self addChildViewController:childController];
+                [childController beginAppearanceTransition:YES animated:NO];
                 
                 CGFloat childPosition = [self offsetForChildIndex:idx];
                 [childController.view setFrame:CGRectMake(childPosition, 0, CGRectGetWidth(self.view.bounds), CGRectGetHeight(self.containerView.bounds))];
