@@ -33,7 +33,11 @@ typedef NS_ENUM(NSUInteger, XLPagerScroll) {
     XLPagerScrollOnlyIfOutOfScreen
 };
 
-@interface XLButtonBarView : UICollectionView
+@interface XLButtonBarView : UICollectionView {
+    
+@protected
+    UIView * _selectedBar;
+}
 
 @property (readonly, nonatomic) UIView * selectedBar;
 @property (nonatomic) CGFloat selectedBarHeight;

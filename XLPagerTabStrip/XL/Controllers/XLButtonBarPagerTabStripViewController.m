@@ -31,6 +31,8 @@
 @property (nonatomic) IBOutlet XLButtonBarView * buttonBarView;
 @property (nonatomic) BOOL shouldUpdateButtonBarView;
 
+@property (nonatomic) BOOL isObserverAdded;
+
 @end
 
 @implementation XLButtonBarPagerTabStripViewController
@@ -38,11 +40,21 @@
     XLButtonBarViewCell * _sizeCell;
 }
 
+- (void)dealloc{
+    if (_isObserverAdded) {
+        [_buttonBarView removeObserver:self forKeyPath:@"contentSize"];
+        if(_buttonBarView.selectedBar){
+            [_buttonBarView.selectedBar removeObserver:self forKeyPath:@"frame"];
+        }
+    }
+}
+
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         self.shouldUpdateButtonBarView = YES;
+        self.isObserverAdded = NO;
     }
     return self;
 }
@@ -52,12 +64,17 @@
     self = [super initWithCoder:coder];
     if (self) {
         self.shouldUpdateButtonBarView = YES;
+        self.isObserverAdded = NO;
     }
     return self;
 }
 
 - (void)viewDidLoad
 {
+    // Fix : Avoid the possible automatic scrollview y offset when adding next views
+    UIView* viewTmp = [[UIView alloc] initWithFrame:CGRectZero];
+    [self.view addSubview:viewTmp];
+    
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     if (!self.buttonBarView.superview){
@@ -75,6 +92,14 @@
     UICollectionViewFlowLayout * flowLayout = (id)self.buttonBarView.collectionViewLayout;
     [flowLayout setScrollDirection:UICollectionViewScrollDirectionHorizontal];
     [self.buttonBarView setShowsHorizontalScrollIndicator:NO];
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wassign-enum"
+    [self.buttonBarView addObserver:self forKeyPath:@"contentSize" options:NSKeyValueObservingOptionNew context:NULL];
+    if(self.buttonBarView.selectedBar){
+        [self.buttonBarView.selectedBar addObserver:self forKeyPath:@"frame" options:NSKeyValueObservingOptionNew context:NULL];
+    }
+#pragma clang diagnostic pop
+    self.isObserverAdded = YES;
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -93,6 +118,39 @@
     }
 }
 
+#pragma mark - CollectionView Size observer
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
+    NSInteger numberOfItemsInSection = [self.buttonBarView numberOfItemsInSection:0];
+    if(numberOfItemsInSection>0){
+        NSIndexPath* indexPath = [NSIndexPath indexPathForItem:self.currentIndex inSection:0];
+        if(indexPath){
+            UICollectionViewLayoutAttributes *attributes = [self.buttonBarView layoutAttributesForItemAtIndexPath:indexPath];
+            if(attributes){
+                CGRect cellRect = attributes.frame;
+                if(CGRectGetWidth(self.buttonBarView.frame)!=0
+                   && CGRectGetHeight(self.buttonBarView.frame)!=0
+                   && CGRectGetWidth(cellRect)!=0
+                   && CGRectGetHeight(cellRect)!=0
+                   && CGRectGetHeight(self.buttonBarView.selectedBar.frame)!=0){
+                    [self removeObservers];
+                    CGRect newSelectedBarFrame = CGRectMake(cellRect.origin.x, self.buttonBarView.frame.size.height - CGRectGetHeight(self.buttonBarView.selectedBar.frame), cellRect.size.width, CGRectGetHeight(self.buttonBarView.selectedBar.frame));
+                    self.buttonBarView.selectedBar.frame = newSelectedBarFrame;
+                }
+            }
+        }
+    }
+}
+
+- (void)removeObservers{
+    if(self.isObserverAdded){
+        [self.buttonBarView removeObserver:self forKeyPath:@"contentSize"];
+        if(self.buttonBarView.selectedBar){
+            [self.buttonBarView.selectedBar removeObserver:self forKeyPath:@"frame"];
+        }
+        self.isObserverAdded = NO;
+    }
+}
 
 #pragma mark - Properties
 
@@ -102,7 +160,8 @@
     UICollectionViewFlowLayout * flowLayout = [[UICollectionViewFlowLayout alloc] init];
     [flowLayout setScrollDirection:UICollectionViewScrollDirectionHorizontal];
     [flowLayout setSectionInset:UIEdgeInsetsMake(0, 35, 0, 35)];
-    _buttonBarView = [[XLButtonBarView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 44.0f) collectionViewLayout:flowLayout];
+//    _buttonBarView = [[XLButtonBarView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 44.0f) collectionViewLayout:flowLayout];
+    _buttonBarView = [[XLButtonBarView alloc] initWithFrame:CGRectZero collectionViewLayout:flowLayout];
     _buttonBarView.backgroundColor = [UIColor orangeColor];
     _buttonBarView.selectedBar.backgroundColor = [UIColor blackColor];
     _buttonBarView.autoresizingMask = UIViewAutoresizingFlexibleWidth;

@@ -68,6 +68,7 @@
 {
     _selectedOptionIndex = 0;
     _selectedBarHeight = 5;
+    self.delaysContentTouches = NO;
     if ([self.selectedBar superview] == nil){
         [self addSubview:self.selectedBar];
     }
@@ -115,27 +116,30 @@
 }
 
 
--(void)updateSelectedBarPositionWithAnimation:(BOOL)animation swipeDirection:(XLPagerTabStripDirection __unused)swipeDirection pagerScroll:(XLPagerScroll)pagerScroll
-{
+-(void)updateSelectedBarPositionWithAnimation:(BOOL)animation swipeDirection:(XLPagerTabStripDirection __unused)swipeDirection pagerScroll:(XLPagerScroll)pagerScroll{
     CGRect frame = self.selectedBar.frame;
     
-    UICollectionViewLayoutAttributes *attributes = [self layoutAttributesForItemAtIndexPath:[NSIndexPath indexPathForItem:self.selectedOptionIndex inSection:0]];
-    CGRect cellFrame = attributes.frame;
-    
-    [self updateContentOffsetAnimated:animation pagerScroll:pagerScroll toFrame:cellFrame];
-    
-    frame.size.width = cellFrame.size.width;
-    frame.origin.x = cellFrame.origin.x;
-    if (animation){
-        [UIView animateWithDuration:0.3 animations:^{
-            [self.selectedBar setFrame:frame];
-        }];
-    }
-    else{
-        self.selectedBar.frame = frame;
+    if(self.selectedOptionIndex < [self numberOfItemsInSection:0]){
+        NSIndexPath* indexPath = [NSIndexPath indexPathForItem:self.selectedOptionIndex inSection:0];
+        UICollectionViewLayoutAttributes* attributes = [self layoutAttributesForItemAtIndexPath:indexPath];
+        if(attributes){
+            CGRect cellFrame = attributes.frame;
+            
+            [self updateContentOffsetAnimated:animation pagerScroll:pagerScroll toFrame:cellFrame];
+            
+            frame.size.width = cellFrame.size.width;
+            frame.origin.x = cellFrame.origin.x;
+            if (animation){
+                [UIView animateWithDuration:0.3 animations:^{
+                    [self.selectedBar setFrame:frame];
+                }];
+            }
+            else{
+                self.selectedBar.frame = frame;
+            }
+        }
     }
 }
-
 
 
 #pragma mark - Helpers

@@ -28,7 +28,7 @@
 		28B63AF11A45B26600225C66 /* XLPagerTabStripViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B63AEC1A45B26600225C66 /* XLPagerTabStripViewController.m */; };
 		28B63AF21A45B26600225C66 /* XLSegmentedPagerTabStripViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B63AEE1A45B26600225C66 /* XLSegmentedPagerTabStripViewController.m */; };
 		28B63AF51A465E5E00225C66 /* ReloadExampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B63AF41A465E5E00225C66 /* ReloadExampleViewController.m */; };
-		28E89E3C1AD74D99004BD9CD /* FXPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 28E89E3B1AD74D99004BD9CD /* FXPageControl.m */; };
+		553ABDB41B84861C009D07A7 /* FXPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 553ABDB31B84861C009D07A7 /* FXPageControl.m */; };
 		6624E4591AEEDB600076274D /* ButtonCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6624E4581AEEDB600076274D /* ButtonCell.xib */; };
 		6624E45C1AEEF9A50076274D /* NavButtonBarExampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6624E45B1AEEF9A50076274D /* NavButtonBarExampleViewController.m */; };
 		66CA35B41A8D174900564221 /* XLTwitterPagerTabStripViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 66CA35B31A8D174900564221 /* XLTwitterPagerTabStripViewController.m */; };
@@ -87,8 +87,8 @@
 		28B63AEE1A45B26600225C66 /* XLSegmentedPagerTabStripViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = XLSegmentedPagerTabStripViewController.m; path = Controllers/XLSegmentedPagerTabStripViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		28B63AF31A465E5E00225C66 /* ReloadExampleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReloadExampleViewController.h; sourceTree = "<group>"; };
 		28B63AF41A465E5E00225C66 /* ReloadExampleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReloadExampleViewController.m; sourceTree = "<group>"; };
-		28E89E3A1AD74D99004BD9CD /* FXPageControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FXPageControl.h; path = XLPagerTabStrip/XL/Views/FXPageControl/FXPageControl.h; sourceTree = SOURCE_ROOT; };
-		28E89E3B1AD74D99004BD9CD /* FXPageControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FXPageControl.m; path = XLPagerTabStrip/XL/Views/FXPageControl/FXPageControl.m; sourceTree = SOURCE_ROOT; };
+		553ABDB21B84861C009D07A7 /* FXPageControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FXPageControl.h; sourceTree = "<group>"; };
+		553ABDB31B84861C009D07A7 /* FXPageControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FXPageControl.m; sourceTree = "<group>"; };
 		6624E4581AEEDB600076274D /* ButtonCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ButtonCell.xib; sourceTree = "<group>"; };
 		6624E45A1AEEF9A50076274D /* NavButtonBarExampleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavButtonBarExampleViewController.h; sourceTree = "<group>"; };
 		6624E45B1AEEF9A50076274D /* NavButtonBarExampleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavButtonBarExampleViewController.m; sourceTree = "<group>"; };
@@ -137,6 +137,7 @@
 		28B63A881A459F5900225C66 /* XLPagerTabStrip */ = {
 			isa = PBXGroup;
 			children = (
+				553ABDB01B84861C009D07A7 /* External */,
 				28B63ACC1A45A4CD00225C66 /* XL */,
 				28B63AAF1A45A4C500225C66 /* Demo */,
 				28B63A8D1A459F5900225C66 /* AppDelegate.h */,
@@ -239,7 +240,6 @@
 		28B63ACD1A45A4CD00225C66 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				66C6E4AF1AB9D538005361FB /* FXPageControl */,
 				28B63ACE1A45A4CD00225C66 /* XLBarView.h */,
 				28B63ACF1A45A4CD00225C66 /* XLBarView.m */,
 				28B63AD01A45A4CD00225C66 /* XLButtonBarView.h */,
@@ -267,14 +267,21 @@
 			name = Controllers;
 			sourceTree = "<group>";
 		};
-		66C6E4AF1AB9D538005361FB /* FXPageControl */ = {
+		553ABDB01B84861C009D07A7 /* External */ = {
 			isa = PBXGroup;
 			children = (
-				28E89E3A1AD74D99004BD9CD /* FXPageControl.h */,
-				28E89E3B1AD74D99004BD9CD /* FXPageControl.m */,
+				553ABDB11B84861C009D07A7 /* FXPageControl */,
 			);
-			name = FXPageControl;
-			path = ../../FXPageControl;
+			path = External;
+			sourceTree = "<group>";
+		};
+		553ABDB11B84861C009D07A7 /* FXPageControl */ = {
+			isa = PBXGroup;
+			children = (
+				553ABDB21B84861C009D07A7 /* FXPageControl.h */,
+				553ABDB31B84861C009D07A7 /* FXPageControl.m */,
+			);
+			path = FXPageControl;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -386,9 +393,9 @@
 				28B63ADC1A45A4CD00225C66 /* XLBarView.m in Sources */,
 				28B63AC81A45A4C500225C66 /* XLJSONSerialization.m in Sources */,
 				28B63ADD1A45A4CD00225C66 /* XLButtonBarView.m in Sources */,
+				553ABDB41B84861C009D07A7 /* FXPageControl.m in Sources */,
 				28B63AC71A45A4C500225C66 /* PostCell.m in Sources */,
 				28B63ACA1A45A4C500225C66 /* SegmentedExampleViewController.m in Sources */,
-				28E89E3C1AD74D99004BD9CD /* FXPageControl.m in Sources */,
 				28B63ADE1A45A4CD00225C66 /* XLButtonBarViewCell.m in Sources */,
 				28B63A8F1A459F5900225C66 /* AppDelegate.m in Sources */,
 				28B63AF21A45B26600225C66 /* XLSegmentedPagerTabStripViewController.m in Sources */,

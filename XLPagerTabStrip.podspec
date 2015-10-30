@@ -13,4 +13,5 @@ Pod::Spec.new do |s|
   s.requires_arc = true
   s.ios.deployment_target = '7.0'
   s.ios.frameworks = 'UIKit', 'Foundation'
+  s.ios.dependency 'FXPageControl', '~> 1.4'
 end
