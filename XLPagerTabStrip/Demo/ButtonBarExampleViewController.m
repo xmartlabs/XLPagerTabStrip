@@ -76,4 +76,9 @@
     [super reloadPagerTabStripView];
 }
 
+- (void)pagerTabStripViewController:(XLPagerTabStripViewController *)pagerTabStripViewController didMoveToIndex:(NSInteger)toIndex
+{
+  
+}
+
 @end
