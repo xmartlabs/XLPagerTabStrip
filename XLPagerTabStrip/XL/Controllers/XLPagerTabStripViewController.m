@@ -38,6 +38,8 @@
     NSUInteger _pageBeforeRotate;
     NSArray * _originalPagerTabStripChildViewControllers;
     CGSize _lastSize;
+    
+    CGFloat _originContentInsetTop;
 }
 
 @synthesize currentIndex = _currentIndex;
@@ -118,6 +120,7 @@
 -(void)viewDidLayoutSubviews
 {
     [super viewDidLayoutSubviews];
+    _originContentInsetTop = -self.containerView.contentInset.top;
     [self updateIfNeeded];
     if  ([[[UIDevice currentDevice] systemVersion] compare:@"8.0" options:NSNumericSearch] == NSOrderedAscending){
         // SYSTEM_VERSION_LESS_THAN 8.0
@@ -147,7 +150,7 @@
             [tempChildViewControllers setObject:[originalPagerTabStripChildViewControllers objectAtIndex:fromIndex] atIndexedSubscript:self.currentIndex];
             [tempChildViewControllers setObject:currentChildVC atIndexedSubscript:fromIndex];
             _pagerTabStripChildViewControllers = tempChildViewControllers;
-            [self.containerView setContentOffset:CGPointMake([self pageOffsetForChildIndex:fromIndex], 0) animated:NO];
+            [self.containerView setContentOffset:CGPointMake([self pageOffsetForChildIndex:fromIndex], _originContentInsetTop) animated:NO];
             if (self.navigationController){
                 self.navigationController.view.userInteractionEnabled = NO;
             }
@@ -155,10 +158,10 @@
                 self.view.userInteractionEnabled = NO;
             }
             _originalPagerTabStripChildViewControllers = originalPagerTabStripChildViewControllers;
-            [self.containerView setContentOffset:CGPointMake([self pageOffsetForChildIndex:index], 0) animated:YES];
+            [self.containerView setContentOffset:CGPointMake([self pageOffsetForChildIndex:index], _originContentInsetTop) animated:YES];
         }
         else{
-            [self.containerView setContentOffset:CGPointMake([self pageOffsetForChildIndex:index], 0) animated:animated];
+            [self.containerView setContentOffset:CGPointMake([self pageOffsetForChildIndex:index], _originContentInsetTop) animated:animated];
         }
         
     }
@@ -421,6 +424,15 @@
     }
 }
 
+-(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
+{
+    if (self.containerView == scrollView){
+        if ([self.delegate respondsToSelector:@selector(pagerTabStripViewController:didScrollEndAtCurrentPage:)]) {
+            [self.delegate pagerTabStripViewController:self didScrollEndAtCurrentPage:self.currentIndex];
+        }
+    }
+}
+
 -(void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView
 {
     if (self.containerView == scrollView && _originalPagerTabStripChildViewControllers){
@@ -433,6 +445,10 @@
             self.view.userInteractionEnabled = YES;
         }
         [self updateContent];
+        
+        if ([self.delegate respondsToSelector:@selector(pagerTabStripViewController:didScrollEndAtCurrentPage:)]) {
+            [self.delegate pagerTabStripViewController:self didScrollEndAtCurrentPage:self.currentIndex];
+        }
     }
 }
 

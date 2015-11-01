@@ -47,6 +47,13 @@ NSString *const kCellIdentifier = @"PostCell";
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    if (self.shouldNeedChangeContentInset) {
+        UIEdgeInsets contentInset = self.tableView.contentInset;
+        contentInset.top = 64;
+        self.tableView.contentInset = contentInset;
+        self.tableView.scrollIndicatorInsets = contentInset;
+    }
+    
     [self.tableView registerClass:[PostCell class] forCellReuseIdentifier:kCellIdentifier];
 }
 
