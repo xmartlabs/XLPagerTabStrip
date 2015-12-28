@@ -135,6 +135,13 @@
 
 -(void)moveToViewControllerAtIndex:(NSUInteger)index animated:(BOOL)animated
 {
+    _lastPageNumber = [self pageForContentOffset:self.containerView.contentOffset.x];
+    _lastContentOffset = self.containerView.contentOffset.x;
+  
+    if ([self.delegate respondsToSelector:@selector(pagerTabStripViewController:willMoveToIndex:)]) {
+      [self.delegate pagerTabStripViewController:self willMoveToIndex:index];
+    }
+  
     if (!self.isViewLoaded || !self.view.window){
         self.currentIndex = index;
     }
@@ -403,7 +410,7 @@
     }
 }
 
-#pragma mark - UIScrollViewDelegte
+#pragma mark - UIScrollViewDelegate
 
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
@@ -421,22 +428,48 @@
     }
 }
 
--(void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView
-{
-    if (self.containerView == scrollView && _originalPagerTabStripChildViewControllers){
-        _pagerTabStripChildViewControllers = _originalPagerTabStripChildViewControllers;
-        _originalPagerTabStripChildViewControllers = nil;
-        if (self.navigationController){
-            self.navigationController.view.userInteractionEnabled = YES;
-        }
-        else{
-            self.view.userInteractionEnabled = YES;
-        }
-        [self updateContent];
+-(void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset {
+  if (self.containerView == scrollView && [self.delegate respondsToSelector:@selector(pagerTabStripViewController:willMoveToIndex:)]) {
+    NSInteger toIndex = [self pageForContentOffset:targetContentOffset -> x];
+    
+    if (toIndex != _lastPageNumber) {
+      [self.delegate pagerTabStripViewController:self willMoveToIndex:toIndex];
     }
+  }
 }
 
+-(void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView
+{
+  [self notifyDelegateIfMovedToNewPage:scrollView];
+  
+  if (self.containerView == scrollView && _originalPagerTabStripChildViewControllers) {
+    _pagerTabStripChildViewControllers = _originalPagerTabStripChildViewControllers;
+    _originalPagerTabStripChildViewControllers = nil;
+    if (self.navigationController){
+      self.navigationController.view.userInteractionEnabled = YES;
+    }
+    else{
+      self.view.userInteractionEnabled = YES;
+    }
+    [self updateContent];
+  }
+}
 
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
+{
+  [self notifyDelegateIfMovedToNewPage:scrollView];
+}
+
+- (void)notifyDelegateIfMovedToNewPage:(UIScrollView *)scrollView
+{
+  if (self.containerView == scrollView && [self.delegate respondsToSelector:@selector(pagerTabStripViewController:didMoveToIndex:)]) {
+    NSInteger toIndex = [self pageForContentOffset:scrollView.contentOffset.x];
+    
+    if (toIndex != _lastPageNumber) {
+      [self.delegate pagerTabStripViewController:self didMoveToIndex:toIndex];
+    }
+  }
+}
 
 #pragma mark - Orientation
 

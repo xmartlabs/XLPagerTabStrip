@@ -28,7 +28,7 @@
 
 @interface XLButtonBarView ()
 
-@property UIView * selectedBar;
+@property XLSelectedBarView * selectedBar;
 @property NSUInteger selectedOptionIndex;
 
 @end
@@ -127,8 +127,10 @@
     frame.size.width = cellFrame.size.width;
     frame.origin.x = cellFrame.origin.x;
     if (animation){
+      [self.selectedBar layoutIfNeeded];
         [UIView animateWithDuration:0.3 animations:^{
-            [self.selectedBar setFrame:frame];
+          [self.selectedBar setFrame:frame];
+          [self.selectedBar layoutIfNeeded];
         }];
     }
     else{
@@ -168,10 +170,15 @@
     _selectedBar.frame = CGRectMake(_selectedBar.frame.origin.x, self.frame.size.height - _selectedBarHeight, _selectedBar.frame.size.width, _selectedBarHeight);
 }
 
+- (void)setSelectedBarImage:(UIImage *)image
+{
+    _selectedBar.imageView.image = image;
+}
+
 -(UIView *)selectedBar
 {
     if (_selectedBar) return _selectedBar;
-    _selectedBar = [[UIView alloc] initWithFrame:CGRectMake(0, self.frame.size.height - _selectedBarHeight, 0, _selectedBarHeight)];
+    _selectedBar = [[XLSelectedBarView alloc] initWithFrame:CGRectMake(0, self.frame.size.height - _selectedBarHeight, 0, _selectedBarHeight)];
     _selectedBar.layer.zPosition = 9999;
     _selectedBar.backgroundColor = [UIColor blackColor];
     return _selectedBar;
