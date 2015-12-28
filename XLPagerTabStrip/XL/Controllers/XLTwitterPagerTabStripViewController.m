@@ -174,7 +174,11 @@
 
 -(void)dealloc
 {
-    [self.navigationView removeObserver:self forKeyPath:@"frame"];
+    // Perform a try catch when removing a observer in case it was never registered
+    @try {
+        [self.navigationView removeObserver:self forKeyPath:@"frame"];
+    }
+    @catch (NSException * __unused exception) {}
 }
 
 

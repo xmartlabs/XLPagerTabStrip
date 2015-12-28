@@ -59,10 +59,13 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
     if (!self.buttonBarView.superview){
+        // If buttonBarView wasn't configured in a XIB or storyboard then it won't have
+        // been added to the view so we need to do it programmatically.
         [self.view addSubview:self.buttonBarView];
     }
+    
     if (!self.buttonBarView.delegate){
         self.buttonBarView.delegate = self;
     }
@@ -80,7 +83,6 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self.buttonBarView layoutIfNeeded];
     [self.buttonBarView moveToIndex:self.currentIndex animated:NO swipeDirection:XLPagerTabStripDirectionNone pagerScroll:(self.isProgressiveIndicator ? XLPagerScrollYES  :XLPagerScrollOnlyIfOutOfScreen)];
 }
 
@@ -98,14 +100,30 @@
 
 -(XLButtonBarView *)buttonBarView
 {
-    if (_buttonBarView) return _buttonBarView;
-    UICollectionViewFlowLayout * flowLayout = [[UICollectionViewFlowLayout alloc] init];
-    [flowLayout setScrollDirection:UICollectionViewScrollDirectionHorizontal];
-    [flowLayout setSectionInset:UIEdgeInsetsMake(0, 35, 0, 35)];
-    _buttonBarView = [[XLButtonBarView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 44.0f) collectionViewLayout:flowLayout];
-    _buttonBarView.backgroundColor = [UIColor orangeColor];
-    _buttonBarView.selectedBar.backgroundColor = [UIColor blackColor];
-    _buttonBarView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+    if (!_buttonBarView)
+    {
+        // If _buttonBarView is nil then it wasn't configured in a XIB or storyboard so
+        // this class is being used programmatically. We need to initialise the buttonBarView,
+        // setup some sensible defaults (which can of course always be re-set in the sub-class),
+        // and set an appropriate frame. The buttonBarView gets added to to the view in viewDidLoad:
+        UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
+        flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
+        flowLayout.sectionInset = UIEdgeInsetsMake(0, 35, 0, 35);
+        _buttonBarView = [[XLButtonBarView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 44.0f) collectionViewLayout:flowLayout];
+        _buttonBarView.backgroundColor = [UIColor orangeColor];
+        _buttonBarView.selectedBar.backgroundColor = [UIColor blackColor];
+        _buttonBarView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+        // If a XIB or storyboard hasn't been used we also need to register the cell reuseIdentifier
+        // as well otherwise we'll get a crash when the code attempts to dequeue any cell's
+        [_buttonBarView registerClass:[XLButtonBarViewCell class] forCellWithReuseIdentifier:@"Cell"];
+        // If a XIB or storyboard hasn't been used then the containView frame that was setup in the
+        // XLPagerTabStripViewController won't have accounted for the buttonBarView. So we need to adjust
+        // its y position (and also its height) so that childVC's don't appear under the buttonBarView.
+        CGRect newContainerViewFrame = self.containerView.frame;
+        newContainerViewFrame.origin.y = 44.0f;
+        newContainerViewFrame.size.height = self.containerView.frame.size.height - (44.0f - self.containerView.frame.origin.y);
+        self.containerView.frame = newContainerViewFrame;
+    }
     return _buttonBarView;
 }
 
@@ -209,7 +227,6 @@
     UIViewController<XLPagerTabStripChildItem> * childController =   [self.pagerTabStripChildViewControllers objectAtIndex:indexPath.item];
     
     [buttonBarCell.label setText:[childController titleForPagerTabStripViewController:self]];
-    
     
     if (self.isProgressiveIndicator) {
         if (self.changeCurrentIndexProgressiveBlock) {

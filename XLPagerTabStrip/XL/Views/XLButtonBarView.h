@@ -34,11 +34,19 @@ typedef NS_ENUM(NSUInteger, XLPagerScroll) {
     XLPagerScrollOnlyIfOutOfScreen
 };
 
+typedef NS_ENUM(NSUInteger, XLSelectedBarAlignment) {
+    XLSelectedBarAlignmentLeft,
+    XLSelectedBarAlignmentCenter,
+    XLSelectedBarAlignmentRight,
+    XLSelectedBarAlignmentProgressive
+};
+
 @interface XLButtonBarView : UICollectionView
 
 @property (readonly, nonatomic) XLSelectedBarView * selectedBar;
 @property (nonatomic) CGFloat selectedBarHeight;
 @property (nonatomic) UIImage *selectedBarImage;
+@property (nonatomic) XLSelectedBarAlignment selectedBarAlignment;
 @property UIFont * labelFont;
 @property NSUInteger leftRightMargin;
 
