@@ -26,6 +26,7 @@
 #import <UIKit/UIKit.h>
 
 #import "XLPagerTabStripViewController.h"
+#import "XLSelectedBarView.h"
 
 typedef NS_ENUM(NSUInteger, XLPagerScroll) {
     XLPagerScrollNO,
@@ -35,8 +36,9 @@ typedef NS_ENUM(NSUInteger, XLPagerScroll) {
 
 @interface XLButtonBarView : UICollectionView
 
-@property (readonly, nonatomic) UIView * selectedBar;
+@property (readonly, nonatomic) XLSelectedBarView * selectedBar;
 @property (nonatomic) CGFloat selectedBarHeight;
+@property (nonatomic) UIImage *selectedBarImage;
 @property UIFont * labelFont;
 @property NSUInteger leftRightMargin;
 

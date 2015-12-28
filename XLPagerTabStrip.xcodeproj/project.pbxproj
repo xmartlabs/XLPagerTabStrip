@@ -32,6 +32,7 @@
 		6624E45C1AEEF9A50076274D /* NavButtonBarExampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6624E45B1AEEF9A50076274D /* NavButtonBarExampleViewController.m */; };
 		66CA35B41A8D174900564221 /* XLTwitterPagerTabStripViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 66CA35B31A8D174900564221 /* XLTwitterPagerTabStripViewController.m */; };
 		927036DB1B87C9A200313507 /* XLBarPagerTabStripViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 927036DA1B87C9A200313507 /* XLBarPagerTabStripViewController.m */; };
+		92B3716B1BBC6FB2009FD3EB /* XLSelectedBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 92B3716A1BBC6FB2009FD3EB /* XLSelectedBarView.m */; settings = {ASSET_TAGS = (); }; };
 		C262204E1AD44A4D002E5226 /* TwitterExampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C262204D1AD44A4D002E5226 /* TwitterExampleViewController.m */; };
 /* End PBXBuildFile section */
 
@@ -94,6 +95,8 @@
 		66CA35B21A8D174900564221 /* XLTwitterPagerTabStripViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XLTwitterPagerTabStripViewController.h; path = Controllers/XLTwitterPagerTabStripViewController.h; sourceTree = "<group>"; };
 		66CA35B31A8D174900564221 /* XLTwitterPagerTabStripViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = XLTwitterPagerTabStripViewController.m; path = Controllers/XLTwitterPagerTabStripViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		927036DA1B87C9A200313507 /* XLBarPagerTabStripViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XLBarPagerTabStripViewController.m; path = Controllers/XLBarPagerTabStripViewController.m; sourceTree = "<group>"; };
+		92B371691BBC6FB2009FD3EB /* XLSelectedBarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLSelectedBarView.h; sourceTree = "<group>"; };
+		92B3716A1BBC6FB2009FD3EB /* XLSelectedBarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLSelectedBarView.m; sourceTree = "<group>"; };
 		C262204C1AD44A4D002E5226 /* TwitterExampleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwitterExampleViewController.h; sourceTree = "<group>"; };
 		C262204D1AD44A4D002E5226 /* TwitterExampleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwitterExampleViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -246,6 +249,8 @@
 				28B63AD11A45A4CD00225C66 /* XLButtonBarView.m */,
 				28B63AD21A45A4CD00225C66 /* XLButtonBarViewCell.h */,
 				28B63AD31A45A4CD00225C66 /* XLButtonBarViewCell.m */,
+				92B371691BBC6FB2009FD3EB /* XLSelectedBarView.h */,
+				92B3716A1BBC6FB2009FD3EB /* XLSelectedBarView.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -326,6 +331,7 @@
 				TargetAttributes = {
 					28B63A851A459F5900225C66 = {
 						CreatedOnToolsVersion = 6.1.1;
+						DevelopmentTeam = 773U8S8CN7;
 					};
 					28B63A9E1A459F5900225C66 = {
 						CreatedOnToolsVersion = 6.1.1;
@@ -379,6 +385,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				28B63AC51A45A4C500225C66 /* ChildExampleViewController.m in Sources */,
+				92B3716B1BBC6FB2009FD3EB /* XLSelectedBarView.m in Sources */,
 				28B63AF11A45B26600225C66 /* XLPagerTabStripViewController.m in Sources */,
 				28B63AC41A45A4C500225C66 /* ButtonBarExampleViewController.m in Sources */,
 				927036DB1B87C9A200313507 /* XLBarPagerTabStripViewController.m in Sources */,
@@ -503,10 +510,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = XLPagerTabStrip/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -516,10 +525,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = XLPagerTabStrip/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};

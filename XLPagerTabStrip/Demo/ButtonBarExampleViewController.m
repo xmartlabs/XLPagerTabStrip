@@ -36,7 +36,10 @@
     [super viewDidLoad];
     self.isProgressiveIndicator = NO;
     // Do any additional setup after loading the view.
-    [self.buttonBarView.selectedBar setBackgroundColor:[UIColor orangeColor]];
+  UIImage *barImage = [UIImage imageNamed:@"selected_bar_arrow"];
+  [self.buttonBarView setSelectedBarImage:barImage];
+  [self.buttonBarView setSelectedBarHeight:20.0f];
+  self.buttonBarView.selectedBar.backgroundColor = [UIColor orangeColor];
 }
 
 #pragma mark - XLPagerTabStripViewControllerDataSource
