@@ -34,6 +34,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.buttonBarView.shouldCellsFillAvailableWidth = YES;
     self.isProgressiveIndicator = NO;
     // Do any additional setup after loading the view.
     [self.buttonBarView.selectedBar setBackgroundColor:[UIColor orangeColor]];
