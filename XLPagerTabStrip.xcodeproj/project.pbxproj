@@ -17,7 +17,6 @@
 		28B63AC61A45A4C500225C66 /* TableChildExampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B63AB81A45A4C500225C66 /* TableChildExampleViewController.m */; };
 		28B63AC71A45A4C500225C66 /* PostCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B63ABB1A45A4C500225C66 /* PostCell.m */; };
 		28B63AC81A45A4C500225C66 /* XLJSONSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B63ABE1A45A4C500225C66 /* XLJSONSerialization.m */; };
-		28B63AC91A45A4C500225C66 /* PagerSlidingTabStrip.gif in Resources */ = {isa = PBXBuildFile; fileRef = 28B63ABF1A45A4C500225C66 /* PagerSlidingTabStrip.gif */; };
 		28B63ACA1A45A4C500225C66 /* SegmentedExampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B63AC11A45A4C500225C66 /* SegmentedExampleViewController.m */; };
 		28B63ACB1A45A4C500225C66 /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 28B63AC21A45A4C500225C66 /* Storyboard.storyboard */; };
 		28B63ADC1A45A4CD00225C66 /* XLBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B63ACF1A45A4CD00225C66 /* XLBarView.m */; };
@@ -67,7 +66,6 @@
 		28B63ABB1A45A4C500225C66 /* PostCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostCell.m; sourceTree = "<group>"; };
 		28B63ABD1A45A4C500225C66 /* XLJSONSerialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLJSONSerialization.h; sourceTree = "<group>"; };
 		28B63ABE1A45A4C500225C66 /* XLJSONSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLJSONSerialization.m; sourceTree = "<group>"; };
-		28B63ABF1A45A4C500225C66 /* PagerSlidingTabStrip.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = PagerSlidingTabStrip.gif; sourceTree = "<group>"; };
 		28B63AC01A45A4C500225C66 /* SegmentedExampleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SegmentedExampleViewController.h; sourceTree = "<group>"; };
 		28B63AC11A45A4C500225C66 /* SegmentedExampleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SegmentedExampleViewController.m; sourceTree = "<group>"; };
 		28B63AC21A45A4C500225C66 /* Storyboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Storyboard.storyboard; sourceTree = "<group>"; };
@@ -188,7 +186,6 @@
 				28B63AC11A45A4C500225C66 /* SegmentedExampleViewController.m */,
 				C262204C1AD44A4D002E5226 /* TwitterExampleViewController.h */,
 				C262204D1AD44A4D002E5226 /* TwitterExampleViewController.m */,
-				28B63ABF1A45A4C500225C66 /* PagerSlidingTabStrip.gif */,
 				28B63AC21A45A4C500225C66 /* Storyboard.storyboard */,
 				6624E4581AEEDB600076274D /* ButtonCell.xib */,
 			);
@@ -357,7 +354,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				28B63AC91A45A4C500225C66 /* PagerSlidingTabStrip.gif in Resources */,
 				6624E4591AEEDB600076274D /* ButtonCell.xib in Resources */,
 				28B63A971A459F5900225C66 /* Images.xcassets in Resources */,
 				28B63ACB1A45A4C500225C66 /* Storyboard.storyboard in Resources */,

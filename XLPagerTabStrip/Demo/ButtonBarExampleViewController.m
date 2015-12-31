@@ -37,7 +37,8 @@
     self.buttonBarView.shouldCellsFillAvailableWidth = YES;
     self.isProgressiveIndicator = NO;
     // Do any additional setup after loading the view.
-    [self.buttonBarView.selectedBar setBackgroundColor:[UIColor orangeColor]];
+    self.buttonBarView.selectedBar.backgroundColor = [UIColor orangeColor];
+    self.buttonBarView.backgroundColor = [UIColor colorWithRed:7/255.0 green:185/255.0 blue:155/255.0 alpha:1.0];
 }
 
 #pragma mark - XLPagerTabStripViewControllerDataSource
