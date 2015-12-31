@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9058" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="ptL-BW-nEP">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="ptL-BW-nEP">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9048"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -20,11 +20,9 @@
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="D5t-1q-KDh">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="487"/>
-                                <animations/>
                                 <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
                             </scrollView>
                         </subviews>
-                        <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="D5t-1q-KDh" firstAttribute="top" secondItem="lwA-FU-jT1" secondAttribute="bottom" id="57b-HV-bZv"/>
@@ -39,7 +37,6 @@
                         <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="31B-gy-WIH">
                             <rect key="frame" x="148" y="7" width="304" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <animations/>
                             <segments>
                                 <segment title="First"/>
                                 <segment title="Second"/>
@@ -76,7 +73,6 @@
                         <subviews>
                             <containerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qkQ-UG-MKG">
                                 <rect key="frame" x="0.0" y="121" width="600" height="430"/>
-                                <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 <connections>
                                     <segue destination="MOL-Zx-vbf" kind="embed" id="i47-4L-xIB"/>
@@ -84,7 +80,6 @@
                             </containerView>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jSE-G2-qe6">
                                 <rect key="frame" x="527" y="83" width="57" height="34"/>
-                                <animations/>
                                 <state key="normal" title="Reload">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -94,13 +89,11 @@
                             </button>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Storyboard Demo" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="cZN-qT-VUq">
                                 <rect key="frame" x="230" y="52" width="140" height="21"/>
-                                <animations/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <animations/>
                         <color key="backgroundColor" red="0.027450980390000001" green="0.72549019609999998" blue="0.60784313729999995" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="cZN-qT-VUq" firstAttribute="leading" secondItem="Mqm-sG-Qyv" secondAttribute="leadingMargin" id="9eC-5j-2zk"/>
@@ -153,19 +146,17 @@
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9rp-Lg-ckk">
                                 <rect key="frame" x="0.0" y="64" width="600" height="487"/>
-                                <animations/>
                                 <connections>
                                     <segue destination="KF9-Il-rUn" kind="embed" id="PEH-Jc-gva"/>
                                 </connections>
                             </containerView>
                         </subviews>
-                        <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="9rp-Lg-ckk" firstAttribute="top" secondItem="sYC-OQ-Mga" secondAttribute="bottom" id="Bkl-Sr-KoE"/>
                             <constraint firstItem="LUh-C3-i05" firstAttribute="top" secondItem="9rp-Lg-ckk" secondAttribute="bottom" id="Mel-a7-tS5"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="9rp-Lg-ckk" secondAttribute="trailing" constant="-16" id="UY1-sK-nWK"/>
-                            <constraint firstItem="9rp-Lg-ckk" firstAttribute="leading" secondItem="TXd-Bq-amB" secondAttribute="leadingMargin" constant="-16" id="vBT-dV-v2T"/>
+                            <constraint firstAttribute="trailing" secondItem="9rp-Lg-ckk" secondAttribute="trailing" id="UY1-sK-nWK"/>
+                            <constraint firstItem="9rp-Lg-ckk" firstAttribute="leading" secondItem="TXd-Bq-amB" secondAttribute="leading" id="vBT-dV-v2T"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Buttons Example" id="anf-yu-jjb">
@@ -195,7 +186,6 @@
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="srh-qY-UAa" customClass="XLBarView">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="5"/>
-                                <animations/>
                                 <color key="backgroundColor" red="0.029917803763441025" green="0.92659837372448983" blue="0.78518703254703159" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="5" id="EuL-ap-Nyh"/>
@@ -203,11 +193,9 @@
                             </view>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" alwaysBounceHorizontal="YES" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gaM-gk-dVJ">
                                 <rect key="frame" x="0.0" y="5" width="600" height="425"/>
-                                <animations/>
                                 <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
                             </scrollView>
                         </subviews>
-                        <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="srh-qY-UAa" secondAttribute="trailing" id="NOC-hJ-B3n"/>
@@ -237,7 +225,6 @@
                     <nil key="simulatedBottomBarMetrics"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" translucent="NO" id="Ki8-MR-faU">
                         <autoresizingMask key="autoresizingMask"/>
-                        <animations/>
                         <color key="tintColor" red="0.027450980390000001" green="0.72549019609999998" blue="0.60784313729999995" alpha="1" colorSpace="calibratedRGB"/>
                     </tabBar>
                     <connections>
@@ -263,7 +250,6 @@
                     <navigationBar key="navigationBar" opaque="NO" contentMode="scaleToFill" translucent="NO" id="TRx-vY-PeE">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <animations/>
                         <color key="barTintColor" red="0.027450980390000001" green="0.72549019609999998" blue="0.60784313729999995" alpha="1" colorSpace="calibratedRGB"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -286,7 +272,6 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="2I8-g6-D4S">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <animations/>
                         <color key="barTintColor" red="0.027450980390000001" green="0.72549019609999998" blue="0.60784313729999995" alpha="1" colorSpace="calibratedRGB"/>
                         <textAttributes key="titleTextAttributes">
                             <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
@@ -316,7 +301,6 @@
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="FH0-FX-IMd" customClass="XLButtonBarView">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
-                                <animations/>
                                 <color key="backgroundColor" red="0.027450980390000001" green="0.72549019609999998" blue="0.60784313729999995" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="43" id="5Gm-jk-c1U"/>
@@ -329,24 +313,21 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell" id="aWZ-BZ-wgL" customClass="XLButtonBarViewCell">
-                                        <rect key="frame" x="35" y="1" width="79" height="42"/>
+                                        <rect key="frame" x="35" y="0.5" width="79" height="42"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="79" height="42"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Idp-Ip-IhM">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Idp-Ip-IhM">
                                                     <rect key="frame" x="17" y="10" width="44" height="21"/>
-                                                    <animations/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
-                                            <animations/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
-                                        <animations/>
                                         <constraints>
                                             <constraint firstAttribute="centerX" secondItem="Idp-Ip-IhM" secondAttribute="centerX" constant="0.5" id="pih-0U-0bL"/>
                                             <constraint firstAttribute="centerY" secondItem="Idp-Ip-IhM" secondAttribute="centerY" constant="0.5" id="zfA-qf-esp"/>
@@ -359,20 +340,18 @@
                             </collectionView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mcV-6K-P6b" customClass="UIScrollView">
                                 <rect key="frame" x="-5" y="43" width="610" height="444"/>
-                                <animations/>
                                 <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
                         </subviews>
-                        <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="FH0-FX-IMd" firstAttribute="leading" secondItem="nbo-eG-9Of" secondAttribute="leadingMargin" constant="-16" id="9Vk-yi-Pua"/>
+                            <constraint firstItem="FH0-FX-IMd" firstAttribute="leading" secondItem="nbo-eG-9Of" secondAttribute="leading" id="9Vk-yi-Pua"/>
                             <constraint firstAttribute="trailing" secondItem="mcV-6K-P6b" secondAttribute="trailing" constant="-5" id="Ext-Th-Ehh"/>
                             <constraint firstItem="mcV-6K-P6b" firstAttribute="leading" secondItem="nbo-eG-9Of" secondAttribute="leading" constant="-5" id="MLz-uv-OaE"/>
                             <constraint firstItem="DoJ-0a-eFQ" firstAttribute="top" secondItem="mcV-6K-P6b" secondAttribute="bottom" id="nPm-AC-pyc"/>
                             <constraint firstItem="FH0-FX-IMd" firstAttribute="top" secondItem="PhK-DQ-FzX" secondAttribute="bottom" id="s00-0U-AXh"/>
                             <constraint firstItem="mcV-6K-P6b" firstAttribute="top" secondItem="FH0-FX-IMd" secondAttribute="bottom" id="stn-uq-Zft"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="FH0-FX-IMd" secondAttribute="trailing" constant="-16" id="z4H-9f-Vyy"/>
+                            <constraint firstAttribute="trailing" secondItem="FH0-FX-IMd" secondAttribute="trailing" id="z4H-9f-Vyy"/>
                         </constraints>
                     </view>
                     <toolbarItems/>
@@ -399,11 +378,9 @@
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="A96-PT-Aon">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="487"/>
-                                <animations/>
                                 <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
                             </scrollView>
                         </subviews>
-                        <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="A96-PT-Aon" firstAttribute="top" secondItem="OfJ-gb-drI" secondAttribute="bottom" id="Hq8-hS-mpA"/>
@@ -441,7 +418,6 @@
                     <navigationBar key="navigationBar" opaque="NO" contentMode="scaleToFill" translucent="NO" id="iMm-hr-oOU">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <animations/>
                         <color key="barTintColor" red="0.027450980390000001" green="0.72549019609999998" blue="0.60784313729999995" alpha="1" colorSpace="calibratedRGB"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -464,7 +440,6 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="PUj-LI-AQ6">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <animations/>
                         <color key="barTintColor" red="0.027450980390000001" green="0.72549019609999998" blue="0.60784313729999995" alpha="1" colorSpace="calibratedRGB"/>
                         <textAttributes key="titleTextAttributes">
                             <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
@@ -494,11 +469,9 @@
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QoM-XF-R9X">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="487"/>
-                                <animations/>
                                 <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                             </scrollView>
                         </subviews>
-                        <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="QoM-XF-R9X" firstAttribute="leading" secondItem="Z8p-ri-ydp" secondAttribute="leading" id="BKv-K4-OD3"/>
