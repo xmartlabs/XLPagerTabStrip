@@ -459,12 +459,11 @@
 {
     [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
     _pageBeforeRotate = self.currentIndex;
-        __typeof__(self) __weak weakSelf = self;
-    
-    UIInterfaceOrientation fromOrientation = [[UIApplication sharedApplication] statusBarOrientation];
+    __typeof__(self) __weak weakSelf = self;
     [coordinator animateAlongsideTransition:nil
                                  completion:^(id<UIViewControllerTransitionCoordinatorContext> context) {
-        [weakSelf didRotateFromInterfaceOrientation:fromOrientation];
+                                     weakSelf.currentIndex = _pageBeforeRotate;
+                                     [weakSelf updateIfNeeded];
     }];
 }
 
@@ -472,12 +471,5 @@
 {
     _pageBeforeRotate = self.currentIndex;
 }
-
--(void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
-{
-    self.currentIndex = _pageBeforeRotate;
-    [self updateIfNeeded];
-}
-
 
 @end

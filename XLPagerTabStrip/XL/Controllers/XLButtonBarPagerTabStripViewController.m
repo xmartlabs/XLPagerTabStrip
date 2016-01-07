@@ -135,6 +135,11 @@
 {
     [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
     self.isViewRotating = YES;
+    __typeof__(self) __weak weakSelf = self;
+    [coordinator animateAlongsideTransition:nil
+                                 completion:^(id<UIViewControllerTransitionCoordinatorContext> context) {
+                                     weakSelf.isViewRotating = NO;
+                                 }];
 }
 
 // Called on iOS 7 only
@@ -143,13 +148,6 @@
     [super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
     self.isViewRotating = YES;
 }
-
--(void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
-{
-    [super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
-    self.isViewRotating = NO;
-}
-
 
 #pragma mark - Public methods
 
