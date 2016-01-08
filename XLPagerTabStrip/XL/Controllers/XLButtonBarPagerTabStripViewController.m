@@ -182,7 +182,10 @@
     _buttonBarView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     // If a XIB or storyboard hasn't been used we also need to register the cell reuseIdentifier
     // as well otherwise we'll get a crash when the code attempts to dequeue any cell's
-    [_buttonBarView registerNib:[UINib nibWithNibName:@"ButtonCell" bundle:[NSBundle bundleForClass:[self class]]]  forCellWithReuseIdentifier:@"Cell"];
+    NSBundle * bundle = [NSBundle bundleForClass:[XLButtonBarView class]];
+    NSURL * url = [bundle URLForResource:@"XLPagerTabStrip" withExtension:@"bundle"];
+    bundle = [NSBundle bundleWithURL:url];
+    [_buttonBarView registerNib:[UINib nibWithNibName:@"ButtonCell" bundle:bundle]  forCellWithReuseIdentifier:@"Cell"];
     // If a XIB or storyboard hasn't been used then the containView frame that was setup in the
     // XLPagerTabStripViewController won't have accounted for the buttonBarView. So we need to adjust
     // its y position (and also its height) so that childVC's don't appear under the buttonBarView.

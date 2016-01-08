@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2886E3AA1C401F4000E631EC /* ButtonCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2886E3A91C401F4000E631EC /* ButtonCell.xib */; };
 		28B63A8C1A459F5900225C66 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B63A8B1A459F5900225C66 /* main.m */; };
 		28B63A8F1A459F5900225C66 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B63A8E1A459F5900225C66 /* AppDelegate.m */; };
 		28B63A971A459F5900225C66 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 28B63A961A459F5900225C66 /* Images.xcassets */; };
@@ -28,7 +29,6 @@
 		28B63AF21A45B26600225C66 /* XLSegmentedPagerTabStripViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B63AEE1A45B26600225C66 /* XLSegmentedPagerTabStripViewController.m */; };
 		28B63AF51A465E5E00225C66 /* ReloadExampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B63AF41A465E5E00225C66 /* ReloadExampleViewController.m */; };
 		28E89E3C1AD74D99004BD9CD /* FXPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 28E89E3B1AD74D99004BD9CD /* FXPageControl.m */; };
-		6624E4591AEEDB600076274D /* ButtonCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6624E4581AEEDB600076274D /* ButtonCell.xib */; };
 		6624E45C1AEEF9A50076274D /* NavButtonBarExampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6624E45B1AEEF9A50076274D /* NavButtonBarExampleViewController.m */; };
 		66CA35B41A8D174900564221 /* XLTwitterPagerTabStripViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 66CA35B31A8D174900564221 /* XLTwitterPagerTabStripViewController.m */; };
 		C262204E1AD44A4D002E5226 /* TwitterExampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C262204D1AD44A4D002E5226 /* TwitterExampleViewController.m */; };
@@ -45,6 +45,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2886E3A71C400DD000E631EC /* XLPagerTabStrip.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = XLPagerTabStrip.bundle; path = ../XLPagerTabStrip.bundle; sourceTree = "<group>"; };
+		2886E3A91C401F4000E631EC /* ButtonCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ButtonCell.xib; sourceTree = "<group>"; };
 		28B63A861A459F5900225C66 /* XLPagerTabStrip.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = XLPagerTabStrip.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		28B63A8A1A459F5900225C66 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		28B63A8B1A459F5900225C66 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -87,7 +89,6 @@
 		28B63AF41A465E5E00225C66 /* ReloadExampleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReloadExampleViewController.m; sourceTree = "<group>"; };
 		28E89E3A1AD74D99004BD9CD /* FXPageControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FXPageControl.h; path = XLPagerTabStrip/XL/Views/FXPageControl/FXPageControl.h; sourceTree = SOURCE_ROOT; };
 		28E89E3B1AD74D99004BD9CD /* FXPageControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FXPageControl.m; path = XLPagerTabStrip/XL/Views/FXPageControl/FXPageControl.m; sourceTree = SOURCE_ROOT; };
-		6624E4581AEEDB600076274D /* ButtonCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ButtonCell.xib; sourceTree = "<group>"; };
 		6624E45A1AEEF9A50076274D /* NavButtonBarExampleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavButtonBarExampleViewController.h; sourceTree = "<group>"; };
 		6624E45B1AEEF9A50076274D /* NavButtonBarExampleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavButtonBarExampleViewController.m; sourceTree = "<group>"; };
 		66CA35B21A8D174900564221 /* XLTwitterPagerTabStripViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XLTwitterPagerTabStripViewController.h; path = Controllers/XLTwitterPagerTabStripViewController.h; sourceTree = "<group>"; };
@@ -187,7 +188,7 @@
 				C262204C1AD44A4D002E5226 /* TwitterExampleViewController.h */,
 				C262204D1AD44A4D002E5226 /* TwitterExampleViewController.m */,
 				28B63AC21A45A4C500225C66 /* Storyboard.storyboard */,
-				6624E4581AEEDB600076274D /* ButtonCell.xib */,
+				2886E3A71C400DD000E631EC /* XLPagerTabStrip.bundle */,
 			);
 			path = Demo;
 			sourceTree = "<group>";
@@ -236,6 +237,7 @@
 		28B63ACD1A45A4CD00225C66 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				2886E3A91C401F4000E631EC /* ButtonCell.xib */,
 				66C6E4AF1AB9D538005361FB /* FXPageControl */,
 				28B63ACE1A45A4CD00225C66 /* XLBarView.h */,
 				28B63ACF1A45A4CD00225C66 /* XLBarView.m */,
@@ -354,9 +356,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6624E4591AEEDB600076274D /* ButtonCell.xib in Resources */,
 				28B63A971A459F5900225C66 /* Images.xcassets in Resources */,
 				28B63ACB1A45A4C500225C66 /* Storyboard.storyboard in Resources */,
+				2886E3AA1C401F4000E631EC /* ButtonCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
