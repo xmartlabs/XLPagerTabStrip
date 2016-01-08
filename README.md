@@ -91,9 +91,11 @@ Requirements
 Release Notes
 --------------
 
-Next Version
+Version 3.0.0
 
-* `selectedBarAlignment` added to `XLButtonBarView`
+* `selectedBarAlignment` added to `XLButtonBarView`.
+* `shouldCellsFillAvailableWidth` added to `XLButtonBarView`.
+* Bug fixes and Stability improvements.
 
 Version 2.0.0
 

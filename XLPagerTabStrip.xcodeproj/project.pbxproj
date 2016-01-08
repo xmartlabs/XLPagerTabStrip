@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2886E3AA1C401F4000E631EC /* ButtonCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2886E3A91C401F4000E631EC /* ButtonCell.xib */; };
+		2886E3B01C40668100E631EC /* ButtonCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2886E3A91C401F4000E631EC /* ButtonCell.xib */; };
 		28B63A8C1A459F5900225C66 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B63A8B1A459F5900225C66 /* main.m */; };
 		28B63A8F1A459F5900225C66 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B63A8E1A459F5900225C66 /* AppDelegate.m */; };
 		28B63A971A459F5900225C66 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 28B63A961A459F5900225C66 /* Images.xcassets */; };
@@ -44,8 +44,20 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		2886E3AF1C4065DC00E631EC /* Embed PlugIns */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+			);
+			name = "Embed PlugIns";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
-		2886E3A71C400DD000E631EC /* XLPagerTabStrip.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = XLPagerTabStrip.bundle; path = ../XLPagerTabStrip.bundle; sourceTree = "<group>"; };
 		2886E3A91C401F4000E631EC /* ButtonCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ButtonCell.xib; sourceTree = "<group>"; };
 		28B63A861A459F5900225C66 /* XLPagerTabStrip.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = XLPagerTabStrip.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		28B63A8A1A459F5900225C66 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -188,7 +200,6 @@
 				C262204C1AD44A4D002E5226 /* TwitterExampleViewController.h */,
 				C262204D1AD44A4D002E5226 /* TwitterExampleViewController.m */,
 				28B63AC21A45A4C500225C66 /* Storyboard.storyboard */,
-				2886E3A71C400DD000E631EC /* XLPagerTabStrip.bundle */,
 			);
 			path = Demo;
 			sourceTree = "<group>";
@@ -286,6 +297,7 @@
 				28B63A821A459F5900225C66 /* Sources */,
 				28B63A831A459F5900225C66 /* Frameworks */,
 				28B63A841A459F5900225C66 /* Resources */,
+				2886E3AF1C4065DC00E631EC /* Embed PlugIns */,
 			);
 			buildRules = (
 			);
@@ -356,9 +368,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2886E3B01C40668100E631EC /* ButtonCell.xib in Resources */,
 				28B63A971A459F5900225C66 /* Images.xcassets in Resources */,
 				28B63ACB1A45A4C500225C66 /* Storyboard.storyboard in Resources */,
-				2886E3AA1C401F4000E631EC /* ButtonCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
