@@ -102,11 +102,13 @@
         
     }];
     [self.segmentedControl setSelectedSegmentIndex:self.currentIndex];
-    [self.segmentedControl setTintColor:[[self.pagerTabStripChildViewControllers objectAtIndex:self.currentIndex]colorForPagerTabStripViewController:self]];
+    UIViewController<XLPagerTabStripChildItem> * selectedChildController = [self.pagerTabStripChildViewControllers objectAtIndex:self.currentIndex];
+    if ([selectedChildController respondsToSelector:@selector(colorForPagerTabStripViewController:)]) {
+        [self.segmentedControl setTintColor:[selectedChildController colorForPagerTabStripViewController:self]];
+    }
 }
 
 #pragma mark - Events
-
 
 -(void)segmentedControlChanged:(UISegmentedControl *)sender
 {
