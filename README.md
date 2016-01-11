@@ -4,7 +4,7 @@ XLPagerTabStrip
 By [XMARTLABS](http://xmartlabs.com).
 
 [![license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/xmartlabs/XLPagerTabStrip/blob/master/LICENSE)
-[![version](https://img.shields.io/badge/pod-2.0.0-blue.svg)](https://github.com/xmartlabs/XLPagerTabStrip/releases)
+[![version](https://img.shields.io/badge/pod-3.0.0-blue.svg)](https://github.com/xmartlabs/XLPagerTabStrip/releases)
 
 Android [PagerTabStrip](http://developer.android.com/reference/android/support/v4/view/PagerTabStrip.html) for iOS!
 
