@@ -7,297 +7,124 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2886E3B01C40668100E631EC /* ButtonCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2886E3A91C401F4000E631EC /* ButtonCell.xib */; };
-		28B63A8C1A459F5900225C66 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B63A8B1A459F5900225C66 /* main.m */; };
-		28B63A8F1A459F5900225C66 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B63A8E1A459F5900225C66 /* AppDelegate.m */; };
-		28B63A971A459F5900225C66 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 28B63A961A459F5900225C66 /* Images.xcassets */; };
-		28B63AA61A459F5900225C66 /* XLPagerTabStripTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B63AA51A459F5900225C66 /* XLPagerTabStripTests.m */; };
-		28B63AC31A45A4C500225C66 /* BarExampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B63AB11A45A4C500225C66 /* BarExampleViewController.m */; };
-		28B63AC41A45A4C500225C66 /* ButtonBarExampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B63AB31A45A4C500225C66 /* ButtonBarExampleViewController.m */; };
-		28B63AC51A45A4C500225C66 /* ChildExampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B63AB61A45A4C500225C66 /* ChildExampleViewController.m */; };
-		28B63AC61A45A4C500225C66 /* TableChildExampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B63AB81A45A4C500225C66 /* TableChildExampleViewController.m */; };
-		28B63AC71A45A4C500225C66 /* PostCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B63ABB1A45A4C500225C66 /* PostCell.m */; };
-		28B63AC81A45A4C500225C66 /* XLJSONSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B63ABE1A45A4C500225C66 /* XLJSONSerialization.m */; };
-		28B63ACA1A45A4C500225C66 /* SegmentedExampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B63AC11A45A4C500225C66 /* SegmentedExampleViewController.m */; };
-		28B63ACB1A45A4C500225C66 /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 28B63AC21A45A4C500225C66 /* Storyboard.storyboard */; };
-		28B63ADC1A45A4CD00225C66 /* XLBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B63ACF1A45A4CD00225C66 /* XLBarView.m */; };
-		28B63ADD1A45A4CD00225C66 /* XLButtonBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B63AD11A45A4CD00225C66 /* XLButtonBarView.m */; };
-		28B63ADE1A45A4CD00225C66 /* XLButtonBarViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B63AD31A45A4CD00225C66 /* XLButtonBarViewCell.m */; };
-		28B63AEF1A45B26600225C66 /* XLBarPagerTabStripViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B63AE81A45B26600225C66 /* XLBarPagerTabStripViewController.m */; };
-		28B63AF01A45B26600225C66 /* XLButtonBarPagerTabStripViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B63AEA1A45B26600225C66 /* XLButtonBarPagerTabStripViewController.m */; };
-		28B63AF11A45B26600225C66 /* XLPagerTabStripViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B63AEC1A45B26600225C66 /* XLPagerTabStripViewController.m */; };
-		28B63AF21A45B26600225C66 /* XLSegmentedPagerTabStripViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B63AEE1A45B26600225C66 /* XLSegmentedPagerTabStripViewController.m */; };
-		28B63AF51A465E5E00225C66 /* ReloadExampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B63AF41A465E5E00225C66 /* ReloadExampleViewController.m */; };
-		28E89E3C1AD74D99004BD9CD /* FXPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 28E89E3B1AD74D99004BD9CD /* FXPageControl.m */; };
-		6624E45C1AEEF9A50076274D /* NavButtonBarExampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6624E45B1AEEF9A50076274D /* NavButtonBarExampleViewController.m */; };
-		66CA35B41A8D174900564221 /* XLTwitterPagerTabStripViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 66CA35B31A8D174900564221 /* XLTwitterPagerTabStripViewController.m */; };
-		C262204E1AD44A4D002E5226 /* TwitterExampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C262204D1AD44A4D002E5226 /* TwitterExampleViewController.m */; };
+		287D0A6E1C4B73BD004566D6 /* XLPagerTabStripTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 287D0A6D1C4B73BD004566D6 /* XLPagerTabStripTests.swift */; };
+		28F828811C494B2C00330CF4 /* XLPagerTabStrip.h in Headers */ = {isa = PBXBuildFile; fileRef = 28F828801C494B2C00330CF4 /* XLPagerTabStrip.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		28F828881C494B2C00330CF4 /* XLPagerTabStrip.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28F8287D1C494B2C00330CF4 /* XLPagerTabStrip.framework */; };
+		CB71C6EE1C4EB988008EC806 /* XLSegmentedPagerTabStripViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB71C6ED1C4EB988008EC806 /* XLSegmentedPagerTabStripViewController.swift */; };
+		CB86ED6B1C4D6E6C00DA463B /* XLPagerTabStripViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB86ED6A1C4D6E6C00DA463B /* XLPagerTabStripViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		28B63AA01A459F5900225C66 /* PBXContainerItemProxy */ = {
+		28F828891C494B2C00330CF4 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 28B63A7E1A459F5900225C66 /* Project object */;
+			containerPortal = 28F828741C494B2C00330CF4 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 28B63A851A459F5900225C66;
+			remoteGlobalIDString = 28F8287C1C494B2C00330CF4;
 			remoteInfo = XLPagerTabStrip;
 		};
 /* End PBXContainerItemProxy section */
 
-/* Begin PBXCopyFilesBuildPhase section */
-		2886E3AF1C4065DC00E631EC /* Embed PlugIns */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 13;
-			files = (
-			);
-			name = "Embed PlugIns";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
-
 /* Begin PBXFileReference section */
-		2886E3A91C401F4000E631EC /* ButtonCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ButtonCell.xib; sourceTree = "<group>"; };
-		28B63A861A459F5900225C66 /* XLPagerTabStrip.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = XLPagerTabStrip.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		28B63A8A1A459F5900225C66 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		28B63A8B1A459F5900225C66 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		28B63A8D1A459F5900225C66 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		28B63A8E1A459F5900225C66 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		28B63A961A459F5900225C66 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		28B63A9F1A459F5900225C66 /* XLPagerTabStripTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = XLPagerTabStripTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		28B63AA41A459F5900225C66 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		28B63AA51A459F5900225C66 /* XLPagerTabStripTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XLPagerTabStripTests.m; sourceTree = "<group>"; };
-		28B63AB01A45A4C500225C66 /* BarExampleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BarExampleViewController.h; sourceTree = "<group>"; };
-		28B63AB11A45A4C500225C66 /* BarExampleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BarExampleViewController.m; sourceTree = "<group>"; };
-		28B63AB21A45A4C500225C66 /* ButtonBarExampleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ButtonBarExampleViewController.h; sourceTree = "<group>"; };
-		28B63AB31A45A4C500225C66 /* ButtonBarExampleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ButtonBarExampleViewController.m; sourceTree = "<group>"; };
-		28B63AB51A45A4C500225C66 /* ChildExampleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChildExampleViewController.h; sourceTree = "<group>"; };
-		28B63AB61A45A4C500225C66 /* ChildExampleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChildExampleViewController.m; sourceTree = "<group>"; };
-		28B63AB71A45A4C500225C66 /* TableChildExampleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableChildExampleViewController.h; sourceTree = "<group>"; };
-		28B63AB81A45A4C500225C66 /* TableChildExampleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableChildExampleViewController.m; sourceTree = "<group>"; };
-		28B63ABA1A45A4C500225C66 /* PostCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostCell.h; sourceTree = "<group>"; };
-		28B63ABB1A45A4C500225C66 /* PostCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostCell.m; sourceTree = "<group>"; };
-		28B63ABD1A45A4C500225C66 /* XLJSONSerialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLJSONSerialization.h; sourceTree = "<group>"; };
-		28B63ABE1A45A4C500225C66 /* XLJSONSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLJSONSerialization.m; sourceTree = "<group>"; };
-		28B63AC01A45A4C500225C66 /* SegmentedExampleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SegmentedExampleViewController.h; sourceTree = "<group>"; };
-		28B63AC11A45A4C500225C66 /* SegmentedExampleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SegmentedExampleViewController.m; sourceTree = "<group>"; };
-		28B63AC21A45A4C500225C66 /* Storyboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Storyboard.storyboard; sourceTree = "<group>"; };
-		28B63ACE1A45A4CD00225C66 /* XLBarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLBarView.h; sourceTree = "<group>"; };
-		28B63ACF1A45A4CD00225C66 /* XLBarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLBarView.m; sourceTree = "<group>"; };
-		28B63AD01A45A4CD00225C66 /* XLButtonBarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLButtonBarView.h; sourceTree = "<group>"; };
-		28B63AD11A45A4CD00225C66 /* XLButtonBarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLButtonBarView.m; sourceTree = "<group>"; };
-		28B63AD21A45A4CD00225C66 /* XLButtonBarViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLButtonBarViewCell.h; sourceTree = "<group>"; };
-		28B63AD31A45A4CD00225C66 /* XLButtonBarViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLButtonBarViewCell.m; sourceTree = "<group>"; };
-		28B63AE71A45B26600225C66 /* XLBarPagerTabStripViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XLBarPagerTabStripViewController.h; path = Controllers/XLBarPagerTabStripViewController.h; sourceTree = "<group>"; };
-		28B63AE81A45B26600225C66 /* XLBarPagerTabStripViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = XLBarPagerTabStripViewController.m; path = Controllers/XLBarPagerTabStripViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		28B63AE91A45B26600225C66 /* XLButtonBarPagerTabStripViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XLButtonBarPagerTabStripViewController.h; path = Controllers/XLButtonBarPagerTabStripViewController.h; sourceTree = "<group>"; };
-		28B63AEA1A45B26600225C66 /* XLButtonBarPagerTabStripViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = XLButtonBarPagerTabStripViewController.m; path = Controllers/XLButtonBarPagerTabStripViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		28B63AEB1A45B26600225C66 /* XLPagerTabStripViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XLPagerTabStripViewController.h; path = Controllers/XLPagerTabStripViewController.h; sourceTree = "<group>"; };
-		28B63AEC1A45B26600225C66 /* XLPagerTabStripViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = XLPagerTabStripViewController.m; path = Controllers/XLPagerTabStripViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		28B63AED1A45B26600225C66 /* XLSegmentedPagerTabStripViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XLSegmentedPagerTabStripViewController.h; path = Controllers/XLSegmentedPagerTabStripViewController.h; sourceTree = "<group>"; };
-		28B63AEE1A45B26600225C66 /* XLSegmentedPagerTabStripViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = XLSegmentedPagerTabStripViewController.m; path = Controllers/XLSegmentedPagerTabStripViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		28B63AF31A465E5E00225C66 /* ReloadExampleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReloadExampleViewController.h; sourceTree = "<group>"; };
-		28B63AF41A465E5E00225C66 /* ReloadExampleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReloadExampleViewController.m; sourceTree = "<group>"; };
-		28E89E3A1AD74D99004BD9CD /* FXPageControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FXPageControl.h; path = XLPagerTabStrip/XL/Views/FXPageControl/FXPageControl.h; sourceTree = SOURCE_ROOT; };
-		28E89E3B1AD74D99004BD9CD /* FXPageControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FXPageControl.m; path = XLPagerTabStrip/XL/Views/FXPageControl/FXPageControl.m; sourceTree = SOURCE_ROOT; };
-		6624E45A1AEEF9A50076274D /* NavButtonBarExampleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavButtonBarExampleViewController.h; sourceTree = "<group>"; };
-		6624E45B1AEEF9A50076274D /* NavButtonBarExampleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavButtonBarExampleViewController.m; sourceTree = "<group>"; };
-		66CA35B21A8D174900564221 /* XLTwitterPagerTabStripViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XLTwitterPagerTabStripViewController.h; path = Controllers/XLTwitterPagerTabStripViewController.h; sourceTree = "<group>"; };
-		66CA35B31A8D174900564221 /* XLTwitterPagerTabStripViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = XLTwitterPagerTabStripViewController.m; path = Controllers/XLTwitterPagerTabStripViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		C262204C1AD44A4D002E5226 /* TwitterExampleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwitterExampleViewController.h; sourceTree = "<group>"; };
-		C262204D1AD44A4D002E5226 /* TwitterExampleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwitterExampleViewController.m; sourceTree = "<group>"; };
+		287D0A6D1C4B73BD004566D6 /* XLPagerTabStripTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = XLPagerTabStripTests.swift; path = Tests/XLPagerTabStripTests.swift; sourceTree = SOURCE_ROOT; };
+		28F8287D1C494B2C00330CF4 /* XLPagerTabStrip.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = XLPagerTabStrip.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		28F828801C494B2C00330CF4 /* XLPagerTabStrip.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XLPagerTabStrip.h; sourceTree = "<group>"; };
+		28F828821C494B2C00330CF4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		28F828871C494B2C00330CF4 /* XLPagerTabStripTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = XLPagerTabStripTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		28F8288E1C494B2C00330CF4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; name = Info.plist; path = Tests/Info.plist; sourceTree = "<group>"; };
+		28F8289B1C494BF100330CF4 /* Playground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Playground.playground; sourceTree = "<group>"; };
+		CB71C6ED1C4EB988008EC806 /* XLSegmentedPagerTabStripViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XLSegmentedPagerTabStripViewController.swift; sourceTree = "<group>"; };
+		CB86ED6A1C4D6E6C00DA463B /* XLPagerTabStripViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XLPagerTabStripViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		28B63A831A459F5900225C66 /* Frameworks */ = {
+		28F828791C494B2C00330CF4 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		28B63A9C1A459F5900225C66 /* Frameworks */ = {
+		28F828841C494B2C00330CF4 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				28F828881C494B2C00330CF4 /* XLPagerTabStrip.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		28B63A7D1A459F5900225C66 = {
+		28F828731C494B2C00330CF4 = {
 			isa = PBXGroup;
 			children = (
-				28B63A881A459F5900225C66 /* XLPagerTabStrip */,
-				28B63AA21A459F5900225C66 /* XLPagerTabStripTests */,
-				28B63A871A459F5900225C66 /* Products */,
+				28F8289B1C494BF100330CF4 /* Playground.playground */,
+				28F828971C494B4200330CF4 /* Sources */,
+				28F8287F1C494B2C00330CF4 /* XLPagerTabStrip */,
+				28F8288B1C494B2C00330CF4 /* Tests */,
+				28F8287E1C494B2C00330CF4 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		28B63A871A459F5900225C66 /* Products */ = {
+		28F8287E1C494B2C00330CF4 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				28B63A861A459F5900225C66 /* XLPagerTabStrip.app */,
-				28B63A9F1A459F5900225C66 /* XLPagerTabStripTests.xctest */,
+				28F8287D1C494B2C00330CF4 /* XLPagerTabStrip.framework */,
+				28F828871C494B2C00330CF4 /* XLPagerTabStripTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		28B63A881A459F5900225C66 /* XLPagerTabStrip */ = {
+		28F8287F1C494B2C00330CF4 /* XLPagerTabStrip */ = {
 			isa = PBXGroup;
 			children = (
-				28B63ACC1A45A4CD00225C66 /* XL */,
-				28B63AAF1A45A4C500225C66 /* Demo */,
-				28B63A8D1A459F5900225C66 /* AppDelegate.h */,
-				28B63A8E1A459F5900225C66 /* AppDelegate.m */,
-				28B63A961A459F5900225C66 /* Images.xcassets */,
-				28B63A891A459F5900225C66 /* Supporting Files */,
+				28F828801C494B2C00330CF4 /* XLPagerTabStrip.h */,
+				28F828821C494B2C00330CF4 /* Info.plist */,
 			);
 			path = XLPagerTabStrip;
 			sourceTree = "<group>";
 		};
-		28B63A891A459F5900225C66 /* Supporting Files */ = {
+		28F8288B1C494B2C00330CF4 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				28B63A8A1A459F5900225C66 /* Info.plist */,
-				28B63A8B1A459F5900225C66 /* main.m */,
+				28F8288E1C494B2C00330CF4 /* Info.plist */,
+				287D0A6D1C4B73BD004566D6 /* XLPagerTabStripTests.swift */,
 			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		28B63AA21A459F5900225C66 /* XLPagerTabStripTests */ = {
-			isa = PBXGroup;
-			children = (
-				28B63AA51A459F5900225C66 /* XLPagerTabStripTests.m */,
-				28B63AA31A459F5900225C66 /* Supporting Files */,
-			);
+			name = Tests;
 			path = XLPagerTabStripTests;
 			sourceTree = "<group>";
 		};
-		28B63AA31A459F5900225C66 /* Supporting Files */ = {
+		28F828971C494B4200330CF4 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				28B63AA41A459F5900225C66 /* Info.plist */,
+				CB86ED6A1C4D6E6C00DA463B /* XLPagerTabStripViewController.swift */,
+				CB71C6ED1C4EB988008EC806 /* XLSegmentedPagerTabStripViewController.swift */,
 			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		28B63AAF1A45A4C500225C66 /* Demo */ = {
-			isa = PBXGroup;
-			children = (
-				28B63AB41A45A4C500225C66 /* ChildViewController */,
-				28B63ABC1A45A4C500225C66 /* Helpers */,
-				28B63AB01A45A4C500225C66 /* BarExampleViewController.h */,
-				28B63AB11A45A4C500225C66 /* BarExampleViewController.m */,
-				28B63AB21A45A4C500225C66 /* ButtonBarExampleViewController.h */,
-				28B63AB31A45A4C500225C66 /* ButtonBarExampleViewController.m */,
-				6624E45A1AEEF9A50076274D /* NavButtonBarExampleViewController.h */,
-				6624E45B1AEEF9A50076274D /* NavButtonBarExampleViewController.m */,
-				28B63AC01A45A4C500225C66 /* SegmentedExampleViewController.h */,
-				28B63AC11A45A4C500225C66 /* SegmentedExampleViewController.m */,
-				C262204C1AD44A4D002E5226 /* TwitterExampleViewController.h */,
-				C262204D1AD44A4D002E5226 /* TwitterExampleViewController.m */,
-				28B63AC21A45A4C500225C66 /* Storyboard.storyboard */,
-			);
-			path = Demo;
-			sourceTree = "<group>";
-		};
-		28B63AB41A45A4C500225C66 /* ChildViewController */ = {
-			isa = PBXGroup;
-			children = (
-				28B63AB51A45A4C500225C66 /* ChildExampleViewController.h */,
-				28B63AB61A45A4C500225C66 /* ChildExampleViewController.m */,
-				28B63AB71A45A4C500225C66 /* TableChildExampleViewController.h */,
-				28B63AB81A45A4C500225C66 /* TableChildExampleViewController.m */,
-				28B63AB91A45A4C500225C66 /* Views */,
-			);
-			path = ChildViewController;
-			sourceTree = "<group>";
-		};
-		28B63AB91A45A4C500225C66 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				28B63ABA1A45A4C500225C66 /* PostCell.h */,
-				28B63ABB1A45A4C500225C66 /* PostCell.m */,
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
-		28B63ABC1A45A4C500225C66 /* Helpers */ = {
-			isa = PBXGroup;
-			children = (
-				28B63ABD1A45A4C500225C66 /* XLJSONSerialization.h */,
-				28B63ABE1A45A4C500225C66 /* XLJSONSerialization.m */,
-				28B63AF31A465E5E00225C66 /* ReloadExampleViewController.h */,
-				28B63AF41A465E5E00225C66 /* ReloadExampleViewController.m */,
-			);
-			path = Helpers;
-			sourceTree = "<group>";
-		};
-		28B63ACC1A45A4CD00225C66 /* XL */ = {
-			isa = PBXGroup;
-			children = (
-				28B63AE61A45B24100225C66 /* Controllers */,
-				28B63ACD1A45A4CD00225C66 /* Views */,
-			);
-			path = XL;
-			sourceTree = "<group>";
-		};
-		28B63ACD1A45A4CD00225C66 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				2886E3A91C401F4000E631EC /* ButtonCell.xib */,
-				66C6E4AF1AB9D538005361FB /* FXPageControl */,
-				28B63ACE1A45A4CD00225C66 /* XLBarView.h */,
-				28B63ACF1A45A4CD00225C66 /* XLBarView.m */,
-				28B63AD01A45A4CD00225C66 /* XLButtonBarView.h */,
-				28B63AD11A45A4CD00225C66 /* XLButtonBarView.m */,
-				28B63AD21A45A4CD00225C66 /* XLButtonBarViewCell.h */,
-				28B63AD31A45A4CD00225C66 /* XLButtonBarViewCell.m */,
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
-		28B63AE61A45B24100225C66 /* Controllers */ = {
-			isa = PBXGroup;
-			children = (
-				28B63AE71A45B26600225C66 /* XLBarPagerTabStripViewController.h */,
-				28B63AE81A45B26600225C66 /* XLBarPagerTabStripViewController.m */,
-				28B63AE91A45B26600225C66 /* XLButtonBarPagerTabStripViewController.h */,
-				28B63AEA1A45B26600225C66 /* XLButtonBarPagerTabStripViewController.m */,
-				28B63AEB1A45B26600225C66 /* XLPagerTabStripViewController.h */,
-				28B63AEC1A45B26600225C66 /* XLPagerTabStripViewController.m */,
-				28B63AED1A45B26600225C66 /* XLSegmentedPagerTabStripViewController.h */,
-				28B63AEE1A45B26600225C66 /* XLSegmentedPagerTabStripViewController.m */,
-				66CA35B21A8D174900564221 /* XLTwitterPagerTabStripViewController.h */,
-				66CA35B31A8D174900564221 /* XLTwitterPagerTabStripViewController.m */,
-			);
-			name = Controllers;
-			sourceTree = "<group>";
-		};
-		66C6E4AF1AB9D538005361FB /* FXPageControl */ = {
-			isa = PBXGroup;
-			children = (
-				28E89E3A1AD74D99004BD9CD /* FXPageControl.h */,
-				28E89E3B1AD74D99004BD9CD /* FXPageControl.m */,
-			);
-			name = FXPageControl;
-			path = ../../FXPageControl;
+			path = Sources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
+/* Begin PBXHeadersBuildPhase section */
+		28F8287A1C494B2C00330CF4 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				28F828811C494B2C00330CF4 /* XLPagerTabStrip.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
 /* Begin PBXNativeTarget section */
-		28B63A851A459F5900225C66 /* XLPagerTabStrip */ = {
+		28F8287C1C494B2C00330CF4 /* XLPagerTabStrip */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 28B63AA91A459F5900225C66 /* Build configuration list for PBXNativeTarget "XLPagerTabStrip" */;
+			buildConfigurationList = 28F828911C494B2C00330CF4 /* Build configuration list for PBXNativeTarget "XLPagerTabStrip" */;
 			buildPhases = (
-				28B63A821A459F5900225C66 /* Sources */,
-				28B63A831A459F5900225C66 /* Frameworks */,
-				28B63A841A459F5900225C66 /* Resources */,
-				2886E3AF1C4065DC00E631EC /* Embed PlugIns */,
+				28F828781C494B2C00330CF4 /* Sources */,
+				28F828791C494B2C00330CF4 /* Frameworks */,
+				28F8287A1C494B2C00330CF4 /* Headers */,
+				28F8287B1C494B2C00330CF4 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -305,76 +132,71 @@
 			);
 			name = XLPagerTabStrip;
 			productName = XLPagerTabStrip;
-			productReference = 28B63A861A459F5900225C66 /* XLPagerTabStrip.app */;
-			productType = "com.apple.product-type.application";
+			productReference = 28F8287D1C494B2C00330CF4 /* XLPagerTabStrip.framework */;
+			productType = "com.apple.product-type.framework";
 		};
-		28B63A9E1A459F5900225C66 /* XLPagerTabStripTests */ = {
+		28F828861C494B2C00330CF4 /* XLPagerTabStripTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 28B63AAC1A459F5900225C66 /* Build configuration list for PBXNativeTarget "XLPagerTabStripTests" */;
+			buildConfigurationList = 28F828941C494B2C00330CF4 /* Build configuration list for PBXNativeTarget "XLPagerTabStripTests" */;
 			buildPhases = (
-				28B63A9B1A459F5900225C66 /* Sources */,
-				28B63A9C1A459F5900225C66 /* Frameworks */,
-				28B63A9D1A459F5900225C66 /* Resources */,
+				28F828831C494B2C00330CF4 /* Sources */,
+				28F828841C494B2C00330CF4 /* Frameworks */,
+				28F828851C494B2C00330CF4 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				28B63AA11A459F5900225C66 /* PBXTargetDependency */,
+				28F8288A1C494B2C00330CF4 /* PBXTargetDependency */,
 			);
 			name = XLPagerTabStripTests;
 			productName = XLPagerTabStripTests;
-			productReference = 28B63A9F1A459F5900225C66 /* XLPagerTabStripTests.xctest */;
+			productReference = 28F828871C494B2C00330CF4 /* XLPagerTabStripTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		28B63A7E1A459F5900225C66 /* Project object */ = {
+		28F828741C494B2C00330CF4 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0720;
 				LastUpgradeCheck = 0720;
-				ORGANIZATIONNAME = Xmartlabs;
 				TargetAttributes = {
-					28B63A851A459F5900225C66 = {
-						CreatedOnToolsVersion = 6.1.1;
+					28F8287C1C494B2C00330CF4 = {
+						CreatedOnToolsVersion = 7.2;
 					};
-					28B63A9E1A459F5900225C66 = {
-						CreatedOnToolsVersion = 6.1.1;
-						TestTargetID = 28B63A851A459F5900225C66;
+					28F828861C494B2C00330CF4 = {
+						CreatedOnToolsVersion = 7.2;
 					};
 				};
 			};
-			buildConfigurationList = 28B63A811A459F5900225C66 /* Build configuration list for PBXProject "XLPagerTabStrip" */;
+			buildConfigurationList = 28F828771C494B2C00330CF4 /* Build configuration list for PBXProject "XLPagerTabStrip" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
-				Base,
 			);
-			mainGroup = 28B63A7D1A459F5900225C66;
-			productRefGroup = 28B63A871A459F5900225C66 /* Products */;
+			mainGroup = 28F828731C494B2C00330CF4;
+			productRefGroup = 28F8287E1C494B2C00330CF4 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				28B63A851A459F5900225C66 /* XLPagerTabStrip */,
-				28B63A9E1A459F5900225C66 /* XLPagerTabStripTests */,
+				28F8287C1C494B2C00330CF4 /* XLPagerTabStrip */,
+				28F828861C494B2C00330CF4 /* XLPagerTabStripTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		28B63A841A459F5900225C66 /* Resources */ = {
+		28F8287B1C494B2C00330CF4 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2886E3B01C40668100E631EC /* ButtonCell.xib in Resources */,
-				28B63A971A459F5900225C66 /* Images.xcassets in Resources */,
-				28B63ACB1A45A4C500225C66 /* Storyboard.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		28B63A9D1A459F5900225C66 /* Resources */ = {
+		28F828851C494B2C00330CF4 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -384,54 +206,35 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		28B63A821A459F5900225C66 /* Sources */ = {
+		28F828781C494B2C00330CF4 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				28B63AC51A45A4C500225C66 /* ChildExampleViewController.m in Sources */,
-				28B63AF11A45B26600225C66 /* XLPagerTabStripViewController.m in Sources */,
-				28B63AC41A45A4C500225C66 /* ButtonBarExampleViewController.m in Sources */,
-				C262204E1AD44A4D002E5226 /* TwitterExampleViewController.m in Sources */,
-				66CA35B41A8D174900564221 /* XLTwitterPagerTabStripViewController.m in Sources */,
-				28B63ADC1A45A4CD00225C66 /* XLBarView.m in Sources */,
-				28B63AC81A45A4C500225C66 /* XLJSONSerialization.m in Sources */,
-				28B63ADD1A45A4CD00225C66 /* XLButtonBarView.m in Sources */,
-				28B63AC71A45A4C500225C66 /* PostCell.m in Sources */,
-				28B63ACA1A45A4C500225C66 /* SegmentedExampleViewController.m in Sources */,
-				28E89E3C1AD74D99004BD9CD /* FXPageControl.m in Sources */,
-				28B63ADE1A45A4CD00225C66 /* XLButtonBarViewCell.m in Sources */,
-				28B63A8F1A459F5900225C66 /* AppDelegate.m in Sources */,
-				28B63AF21A45B26600225C66 /* XLSegmentedPagerTabStripViewController.m in Sources */,
-				28B63AEF1A45B26600225C66 /* XLBarPagerTabStripViewController.m in Sources */,
-				28B63AF51A465E5E00225C66 /* ReloadExampleViewController.m in Sources */,
-				6624E45C1AEEF9A50076274D /* NavButtonBarExampleViewController.m in Sources */,
-				28B63AC31A45A4C500225C66 /* BarExampleViewController.m in Sources */,
-				28B63AF01A45B26600225C66 /* XLButtonBarPagerTabStripViewController.m in Sources */,
-				28B63A8C1A459F5900225C66 /* main.m in Sources */,
-				28B63AC61A45A4C500225C66 /* TableChildExampleViewController.m in Sources */,
+				CB71C6EE1C4EB988008EC806 /* XLSegmentedPagerTabStripViewController.swift in Sources */,
+				CB86ED6B1C4D6E6C00DA463B /* XLPagerTabStripViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		28B63A9B1A459F5900225C66 /* Sources */ = {
+		28F828831C494B2C00330CF4 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				28B63AA61A459F5900225C66 /* XLPagerTabStripTests.m in Sources */,
+				287D0A6E1C4B73BD004566D6 /* XLPagerTabStripTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		28B63AA11A459F5900225C66 /* PBXTargetDependency */ = {
+		28F8288A1C494B2C00330CF4 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 28B63A851A459F5900225C66 /* XLPagerTabStrip */;
-			targetProxy = 28B63AA01A459F5900225C66 /* PBXContainerItemProxy */;
+			target = 28F8287C1C494B2C00330CF4 /* XLPagerTabStrip */;
+			targetProxy = 28F828891C494B2C00330CF4 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		28B63AA71A459F5900225C66 /* Debug */ = {
+		28F8288F1C494B2C00330CF4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -450,30 +253,36 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
 			};
 			name = Debug;
 		};
-		28B63AA81A459F5900225C66 /* Release */ = {
+		28F828901C494B2C00330CF4 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -491,118 +300,115 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				COPY_PHASE_STRIP = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
 			};
 			name = Release;
 		};
-		28B63AAA1A459F5900225C66 /* Debug */ = {
+		28F828921C494B2C00330CF4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = XLPagerTabStrip/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.xmartlabs.$(PRODUCT_NAME:rfc1034identifier)";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.xmartlabs.XLPagerTabStrip;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
 			};
 			name = Debug;
 		};
-		28B63AAB1A459F5900225C66 /* Release */ = {
+		28F828931C494B2C00330CF4 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = XLPagerTabStrip/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.xmartlabs.$(PRODUCT_NAME:rfc1034identifier)";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.xmartlabs.XLPagerTabStrip;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
 			};
 			name = Release;
 		};
-		28B63AAD1A459F5900225C66 /* Debug */ = {
+		28F828951C494B2C00330CF4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = XLPagerTabStripTests/Info.plist;
+				CLANG_ENABLE_MODULES = YES;
+				INFOPLIST_FILE = Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.xmartlabs.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.xmartlabs.XLPagerTabStripTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/XLPagerTabStrip.app/XLPagerTabStrip";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
-		28B63AAE1A459F5900225C66 /* Release */ = {
+		28F828961C494B2C00330CF4 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = XLPagerTabStripTests/Info.plist;
+				CLANG_ENABLE_MODULES = YES;
+				INFOPLIST_FILE = Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.xmartlabs.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.xmartlabs.XLPagerTabStripTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/XLPagerTabStrip.app/XLPagerTabStrip";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		28B63A811A459F5900225C66 /* Build configuration list for PBXProject "XLPagerTabStrip" */ = {
+		28F828771C494B2C00330CF4 /* Build configuration list for PBXProject "XLPagerTabStrip" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				28B63AA71A459F5900225C66 /* Debug */,
-				28B63AA81A459F5900225C66 /* Release */,
+				28F8288F1C494B2C00330CF4 /* Debug */,
+				28F828901C494B2C00330CF4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		28B63AA91A459F5900225C66 /* Build configuration list for PBXNativeTarget "XLPagerTabStrip" */ = {
+		28F828911C494B2C00330CF4 /* Build configuration list for PBXNativeTarget "XLPagerTabStrip" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				28B63AAA1A459F5900225C66 /* Debug */,
-				28B63AAB1A459F5900225C66 /* Release */,
+				28F828921C494B2C00330CF4 /* Debug */,
+				28F828931C494B2C00330CF4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		28B63AAC1A459F5900225C66 /* Build configuration list for PBXNativeTarget "XLPagerTabStripTests" */ = {
+		28F828941C494B2C00330CF4 /* Build configuration list for PBXNativeTarget "XLPagerTabStripTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				28B63AAD1A459F5900225C66 /* Debug */,
-				28B63AAE1A459F5900225C66 /* Release */,
+				28F828951C494B2C00330CF4 /* Debug */,
+				28F828961C494B2C00330CF4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = 28B63A7E1A459F5900225C66 /* Project object */;
+	rootObject = 28F828741C494B2C00330CF4 /* Project object */;
 }
