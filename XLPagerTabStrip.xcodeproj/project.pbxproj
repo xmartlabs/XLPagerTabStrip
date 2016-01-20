@@ -8,10 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		287D0A6E1C4B73BD004566D6 /* XLPagerTabStripTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 287D0A6D1C4B73BD004566D6 /* XLPagerTabStripTests.swift */; };
+		28E098BE1C5002D90083B788 /* PagerTabStripError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E098BD1C5002D90083B788 /* PagerTabStripError.swift */; };
+		28E098C01C5003130083B788 /* PagerTabStripSwipeDirection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E098BF1C5003130083B788 /* PagerTabStripSwipeDirection.swift */; };
 		28F828811C494B2C00330CF4 /* XLPagerTabStrip.h in Headers */ = {isa = PBXBuildFile; fileRef = 28F828801C494B2C00330CF4 /* XLPagerTabStrip.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		28F828881C494B2C00330CF4 /* XLPagerTabStrip.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28F8287D1C494B2C00330CF4 /* XLPagerTabStrip.framework */; };
-		CB71C6EE1C4EB988008EC806 /* XLSegmentedPagerTabStripViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB71C6ED1C4EB988008EC806 /* XLSegmentedPagerTabStripViewController.swift */; };
-		CB86ED6B1C4D6E6C00DA463B /* XLPagerTabStripViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB86ED6A1C4D6E6C00DA463B /* XLPagerTabStripViewController.swift */; };
+		CB71C6EE1C4EB988008EC806 /* SegmentedPagerTabStripViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB71C6ED1C4EB988008EC806 /* SegmentedPagerTabStripViewController.swift */; };
+		CB86ED6B1C4D6E6C00DA463B /* PagerTabStripViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB86ED6A1C4D6E6C00DA463B /* PagerTabStripViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -26,14 +28,16 @@
 
 /* Begin PBXFileReference section */
 		287D0A6D1C4B73BD004566D6 /* XLPagerTabStripTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = XLPagerTabStripTests.swift; path = Tests/XLPagerTabStripTests.swift; sourceTree = SOURCE_ROOT; };
+		28E098BD1C5002D90083B788 /* PagerTabStripError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PagerTabStripError.swift; sourceTree = "<group>"; };
+		28E098BF1C5003130083B788 /* PagerTabStripSwipeDirection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PagerTabStripSwipeDirection.swift; sourceTree = "<group>"; };
 		28F8287D1C494B2C00330CF4 /* XLPagerTabStrip.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = XLPagerTabStrip.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		28F828801C494B2C00330CF4 /* XLPagerTabStrip.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XLPagerTabStrip.h; sourceTree = "<group>"; };
 		28F828821C494B2C00330CF4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		28F828871C494B2C00330CF4 /* XLPagerTabStripTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = XLPagerTabStripTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		28F8288E1C494B2C00330CF4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; name = Info.plist; path = Tests/Info.plist; sourceTree = "<group>"; };
 		28F8289B1C494BF100330CF4 /* Playground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Playground.playground; sourceTree = "<group>"; };
-		CB71C6ED1C4EB988008EC806 /* XLSegmentedPagerTabStripViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XLSegmentedPagerTabStripViewController.swift; sourceTree = "<group>"; };
-		CB86ED6A1C4D6E6C00DA463B /* XLPagerTabStripViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XLPagerTabStripViewController.swift; sourceTree = "<group>"; };
+		CB71C6ED1C4EB988008EC806 /* SegmentedPagerTabStripViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentedPagerTabStripViewController.swift; sourceTree = "<group>"; };
+		CB86ED6A1C4D6E6C00DA463B /* PagerTabStripViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PagerTabStripViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,8 +101,10 @@
 		28F828971C494B4200330CF4 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				CB86ED6A1C4D6E6C00DA463B /* XLPagerTabStripViewController.swift */,
-				CB71C6ED1C4EB988008EC806 /* XLSegmentedPagerTabStripViewController.swift */,
+				CB86ED6A1C4D6E6C00DA463B /* PagerTabStripViewController.swift */,
+				CB71C6ED1C4EB988008EC806 /* SegmentedPagerTabStripViewController.swift */,
+				28E098BD1C5002D90083B788 /* PagerTabStripError.swift */,
+				28E098BF1C5003130083B788 /* PagerTabStripSwipeDirection.swift */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -210,8 +216,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CB71C6EE1C4EB988008EC806 /* XLSegmentedPagerTabStripViewController.swift in Sources */,
-				CB86ED6B1C4D6E6C00DA463B /* XLPagerTabStripViewController.swift in Sources */,
+				CB71C6EE1C4EB988008EC806 /* SegmentedPagerTabStripViewController.swift in Sources */,
+				28E098BE1C5002D90083B788 /* PagerTabStripError.swift in Sources */,
+				CB86ED6B1C4D6E6C00DA463B /* PagerTabStripViewController.swift in Sources */,
+				28E098C01C5003130083B788 /* PagerTabStripSwipeDirection.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

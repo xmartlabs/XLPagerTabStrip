@@ -9,7 +9,7 @@
 import Foundation
 import XLPagerTabStrip
 
-class TableChildExampleViewController: UITableViewController, XLPagerTabStripChildItem {
+class TableChildExampleViewController: UITableViewController, PagerTabStripChildItem {
     let kCellIdentifier = "postCell"
     
     var posts : [AnyObject]
@@ -55,8 +55,8 @@ class TableChildExampleViewController: UITableViewController, XLPagerTabStripChi
     
     // MARK: - XLPagerTabStripChildItem
     
-    func childHeaderForPagerTabStripViewController(pagerTabStripController: XLPagerTabStripViewController) -> ChildHeader {
-        return ChildHeader(title: "Table View", image: nil, highlightedImage: nil, color: UIColor.whiteColor())
+    func childHeaderForPagerTabStripViewController(pagerTabStripController: PagerTabStripViewController) -> ChildHeaderData {
+        return ChildHeaderData(title: "Table View", image: nil, highlightedImage: nil, color: .whiteColor())
     }
     
     // MARK: Helpers

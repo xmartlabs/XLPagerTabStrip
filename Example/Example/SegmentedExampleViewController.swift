@@ -9,7 +9,7 @@
 import Foundation
 import XLPagerTabStrip
 
-public class SegmentedExampleViewController : XLSegmentedPagerTabStripViewController{
+public class SegmentedExampleViewController : SegmentedPagerTabStripViewController{
     var isReload: Bool
     
     public required init?(coder aDecoder: NSCoder) {
@@ -20,7 +20,7 @@ public class SegmentedExampleViewController : XLSegmentedPagerTabStripViewContro
     
     // MARK: - XLPagerTabStripViewControllerDataSource
     
-    override public func childViewControllersForPagerTabStripViewController(pagerTabStripController: XLPagerTabStripViewController) -> [UIViewController]? {
+    override public func childViewControllersForPagerTabStripViewController(pagerTabStripController: PagerTabStripViewController) -> [UIViewController]? {
         let child_1 = TableChildExampleViewController(style: .Plain)
         let child_2 = ChildExampleViewController()
         let child_3 = TableChildExampleViewController(style: .Grouped)

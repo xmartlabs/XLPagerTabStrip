@@ -9,25 +9,25 @@
 import Foundation
 import XLPagerTabStrip
 
-class ChildExampleViewController : UIViewController, XLPagerTabStripChildItem {
+class ChildExampleViewController : UIViewController, PagerTabStripChildItem {
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let label = UILabel.init()
+        let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "XLPagertabStrip"
+        label.text = "XLPagerTabStrip"
         
-        self.view.addSubview(label)
-        self.view.backgroundColor = UIColor.whiteColor()
+        view.addSubview(label)
+        view.backgroundColor = UIColor.whiteColor()
         
-        self.view.addConstraint(NSLayoutConstraint.init(item: label, attribute: .CenterX, relatedBy: .Equal, toItem: self.view, attribute: .CenterX, multiplier: 1.0, constant: 0.0))
-        self.view.addConstraint(NSLayoutConstraint.init(item: label, attribute: .CenterY, relatedBy: .Equal, toItem: self.view, attribute: .CenterY, multiplier: 1.0, constant: -50.0))
+        view.addConstraint(NSLayoutConstraint(item: label, attribute: .CenterX, relatedBy: .Equal, toItem: view, attribute: .CenterX, multiplier: 1, constant: 0))
+        view.addConstraint(NSLayoutConstraint(item: label, attribute: .CenterY, relatedBy: .Equal, toItem: view, attribute: .CenterY, multiplier: 1, constant: -50))
     }
     
     // MARK: - XLPagerTabStripViewControllerDelegate
     
-    func childHeaderForPagerTabStripViewController(pagerTabStripController: XLPagerTabStripViewController) -> ChildHeader {
-        return ChildHeader(title: "View", image: nil, highlightedImage: nil, color: UIColor.whiteColor())
+    func childHeaderForPagerTabStripViewController(pagerTabStripController: PagerTabStripViewController) -> ChildHeaderData {
+        return ChildHeaderData(title: "View", image: nil, highlightedImage: nil, color: .whiteColor())
     }
 }
