@@ -9,7 +9,7 @@
 import Foundation
 import XLPagerTabStrip
 
-class ChildExampleViewController : UIViewController, PagerTabStripChildItem {
+class ChildExampleViewController: UIViewController, PagerTabStripChildItem {
     
     override func viewDidLoad() {
         super.viewDidLoad()

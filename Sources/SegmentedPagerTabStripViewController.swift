@@ -37,6 +37,7 @@ public class SegmentedPagerTabStripViewController: PagerTabStripViewController {
             navigationItem.titleView = segmentedControl
         }
         segmentedControl.addTarget(self, action: "segmentedControlChanged:", forControlEvents: .ValueChanged)
+        try! reloadSegmentedControl()
     }
     
     public override func reloadPagerTabStripView() {
@@ -48,9 +49,6 @@ public class SegmentedPagerTabStripViewController: PagerTabStripViewController {
     
     func reloadSegmentedControl() throws -> Void {
         segmentedControl.removeAllSegments()
-        guard let pagerTabStripChildViewControllers = pagerTabStripChildViewControllers where pagerTabStripChildViewControllers.count > 0 else {
-            throw PagerTabStripError.PagerTabStripChildViewControllersMustContainAtLeastOneViewController
-        }
         for (index, item) in pagerTabStripChildViewControllers.enumerate(){
             guard let child = item as? PagerTabStripChildItem else {
                 throw PagerTabStripError.ChildViewControllerMustConformToPagerTabStripChildItem
@@ -74,7 +72,6 @@ public class SegmentedPagerTabStripViewController: PagerTabStripViewController {
     
     func segmentedControlChanged(sender: UISegmentedControl) -> Void{
         let index = sender.selectedSegmentIndex
-        shouldUpdateSegmentedControl = true
         try! pagerTabStripViewController(self, updateIndicatorFromIndex: currentIndex, toIndex: index)
         shouldUpdateSegmentedControl = false
         moveToViewControllerAtIndex(index)
@@ -85,9 +82,6 @@ public class SegmentedPagerTabStripViewController: PagerTabStripViewController {
     override public func pagerTabStripViewController(pagerTabStripViewController: PagerTabStripViewController, updateIndicatorFromIndex fromIndex: Int, toIndex: Int) throws {
         try super.pagerTabStripViewController(pagerTabStripViewController, updateIndicatorFromIndex: fromIndex, toIndex: toIndex)
         if shouldUpdateSegmentedControl  {
-            guard let pagerTabStripChildViewControllers = pagerTabStripChildViewControllers where pagerTabStripChildViewControllers.count > 0 else {
-                throw PagerTabStripError.PagerTabStripChildViewControllersMustContainAtLeastOneViewController
-            }
             guard let child = pagerTabStripChildViewControllers[toIndex] as? PagerTabStripChildItem else {
                 throw PagerTabStripError.CurrentIndexIsGreaterThanChildsCount
             }
@@ -100,9 +94,6 @@ public class SegmentedPagerTabStripViewController: PagerTabStripViewController {
     
     public override func pagerTabStripViewController(pagerTabStripViewController: PagerTabStripViewController, updateIndicatorFromIndex fromIndex: Int, toIndex index: Int, withProgressPercentage progressPercentage: Float, indexWasChanged changed: Bool) throws {
         if shouldUpdateSegmentedControl{
-            guard let pagerTabStripChildViewControllers = pagerTabStripChildViewControllers where pagerTabStripChildViewControllers.count > 0 else {
-                throw PagerTabStripError.PagerTabStripChildViewControllersMustContainAtLeastOneViewController
-            }
             let currentIndex = (progressPercentage > 0.5) ? index : fromIndex
             guard let child = pagerTabStripChildViewControllers[currentIndex] as? PagerTabStripChildItem else {
                 throw PagerTabStripError.CurrentIndexIsGreaterThanChildsCount

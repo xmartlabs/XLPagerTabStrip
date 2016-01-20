@@ -14,6 +14,8 @@
 		28F828881C494B2C00330CF4 /* XLPagerTabStrip.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28F8287D1C494B2C00330CF4 /* XLPagerTabStrip.framework */; };
 		CB71C6EE1C4EB988008EC806 /* SegmentedPagerTabStripViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB71C6ED1C4EB988008EC806 /* SegmentedPagerTabStripViewController.swift */; };
 		CB86ED6B1C4D6E6C00DA463B /* PagerTabStripViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB86ED6A1C4D6E6C00DA463B /* PagerTabStripViewController.swift */; };
+		CBA0A1FC1C502DA300C5748C /* BarPagerTabStripViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBA0A1FA1C502DA300C5748C /* BarPagerTabStripViewController.swift */; };
+		CBA0A1FD1C502DA300C5748C /* BarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBA0A1FB1C502DA300C5748C /* BarView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +40,8 @@
 		28F8289B1C494BF100330CF4 /* Playground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Playground.playground; sourceTree = "<group>"; };
 		CB71C6ED1C4EB988008EC806 /* SegmentedPagerTabStripViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentedPagerTabStripViewController.swift; sourceTree = "<group>"; };
 		CB86ED6A1C4D6E6C00DA463B /* PagerTabStripViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PagerTabStripViewController.swift; sourceTree = "<group>"; };
+		CBA0A1FA1C502DA300C5748C /* BarPagerTabStripViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarPagerTabStripViewController.swift; sourceTree = "<group>"; };
+		CBA0A1FB1C502DA300C5748C /* BarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +105,8 @@
 		28F828971C494B4200330CF4 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				CBA0A1FA1C502DA300C5748C /* BarPagerTabStripViewController.swift */,
+				CBA0A1FB1C502DA300C5748C /* BarView.swift */,
 				CB86ED6A1C4D6E6C00DA463B /* PagerTabStripViewController.swift */,
 				CB71C6ED1C4EB988008EC806 /* SegmentedPagerTabStripViewController.swift */,
 				28E098BD1C5002D90083B788 /* PagerTabStripError.swift */,
@@ -216,6 +222,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CBA0A1FD1C502DA300C5748C /* BarView.swift in Sources */,
+				CBA0A1FC1C502DA300C5748C /* BarPagerTabStripViewController.swift in Sources */,
 				CB71C6EE1C4EB988008EC806 /* SegmentedPagerTabStripViewController.swift in Sources */,
 				28E098BE1C5002D90083B788 /* PagerTabStripError.swift in Sources */,
 				CB86ED6B1C4D6E6C00DA463B /* PagerTabStripViewController.swift in Sources */,

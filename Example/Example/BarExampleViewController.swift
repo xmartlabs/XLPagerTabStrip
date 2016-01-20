@@ -1,20 +1,32 @@
 //
-//  SegmentedExampleViewController.swift
+//  BarExampleViewController.swift
 //  Example
 //
-//  Created by Santiago on 1/19/16.
+//  Created by Santiago on 1/20/16.
 //
 //
 
 import Foundation
 import XLPagerTabStrip
 
-public class SegmentedExampleViewController: SegmentedPagerTabStripViewController {
+public class BarExampleViewController: BarPagerTabStripViewController {
     var isReload = false
     
-    // MARK: - XLPagerTabStripViewControllerDataSource
+    required public init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        isProgressiveIndicator = true
+    }
     
-    override public func childViewControllersForPagerTabStripViewController(pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
+    public override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        barView.selectedBar.backgroundColor = .orangeColor()
+    }
+    
+    // MARK: - PagerTabStripViewControllerDataSource
+    
+    public override func childViewControllersForPagerTabStripViewController(pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
+        
         let child_1 = TableChildExampleViewController(style: .Plain)
         let child_2 = ChildExampleViewController()
         let child_3 = TableChildExampleViewController(style: .Grouped)
@@ -38,11 +50,10 @@ public class SegmentedExampleViewController: SegmentedPagerTabStripViewControlle
         return Array(childViewControllers.prefix(Int(nItems)))
     }
     
-    @IBAction func reloadTapped(sender: UIBarButtonItem) {
+    public override func reloadPagerTabStripView() {
         isReload = true
         isProgressiveIndicator = (rand() % 2 == 0)
         isElasticIndicatorLimit = (rand() % 2 == 0)
-        reloadPagerTabStripView()
+        super.reloadPagerTabStripView()
     }
-    
 }
