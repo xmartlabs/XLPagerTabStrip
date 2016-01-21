@@ -69,7 +69,25 @@ public class PagerTabStripViewController: UIViewController, UIScrollViewDelegate
         return CGRectGetWidth(containerView.bounds)
     }
     
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
+    public var scrollPercentage: CGFloat {
+        if swipeDirection != .Right {
+            let module = fmod(containerView.contentOffset.x, pageWidth)
+            return module == 0.0 ? 1.0 : module / pageWidth
+        }
+        return 1 - fmod(containerView.contentOffset.x >= 0 ? containerView.contentOffset.x : pageWidth + containerView.contentOffset.x, pageWidth) / pageWidth
+    }
+    
+    public var swipeDirection: SwipeDirection {
+        if containerView.contentOffset.x > lastContentOffset {
+            return .Left
+        }
+        else if containerView.contentOffset.x < lastContentOffset {
+            return .Right
+        }
+        return .None
+    }
+
+    public override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         delegate = self
         datasource = self
@@ -84,7 +102,7 @@ public class PagerTabStripViewController: UIViewController, UIScrollViewDelegate
     override public func viewDidLoad() {
         super.viewDidLoad()
         if containerView.superview == nil {
-            view.addSubview(containerView!)
+            view.addSubview(containerView)
         }
         containerView.bounces = true
         containerView.alwaysBounceHorizontal = true
@@ -97,16 +115,15 @@ public class PagerTabStripViewController: UIViewController, UIScrollViewDelegate
         guard let dataSource = datasource else {
             fatalError("dataSource must not be nil")
         }
-        let childViewControllers = dataSource.childViewControllersForPagerTabStripViewController(self)
-        guard childViewControllers.count != 0 else {
+        viewControllers = dataSource.childViewControllersForPagerTabStripViewController(self)
+        guard viewControllers.count != 0 else {
             fatalError("childViewControllersForPagerTabStripViewController should provide at least one child view controller")
         }
-        viewControllers = childViewControllers
     }
     
     override public func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        lastSize = containerView!.bounds.size
+        lastSize = containerView.bounds.size
         updateIfNeeded()
     }
     
@@ -166,19 +183,9 @@ public class PagerTabStripViewController: UIViewController, UIScrollViewDelegate
     //MARK: - Helpers
     
     public func updateIfNeeded() {
-        if !CGSizeEqualToSize(lastSize, containerView!.bounds.size){
+        if !CGSizeEqualToSize(lastSize, containerView.bounds.size){
             updateContent()
         }
-    }
-    
-    public func swipeDirection() -> SwipeDirection {
-        if containerView.contentOffset.x > lastContentOffset {
-            return .Left
-        }
-        else if containerView.contentOffset.x < lastContentOffset {
-            return .Right
-        }
-        return .None
     }
     
     public func canMoveToIndex(index index: Int) -> Bool{
@@ -200,12 +207,12 @@ public class PagerTabStripViewController: UIViewController, UIScrollViewDelegate
         return offsetForChildIndex(index: index)
     }
     
-    public func pageForContentOffset(contentOffset contentOffset: CGFloat) -> Int{
-        let result = self.virtualPageForContentOffset(contentOffset: contentOffset)
-        return self.pageForVirtualPage(virtualPage: result)
+    public func pageForContentOffset(contentOffset contentOffset: CGFloat) -> Int {
+        let result = virtualPageForContentOffset(contentOffset: contentOffset)
+        return pageForVirtualPage(virtualPage: result)
     }
     
-    public func virtualPageForContentOffset(contentOffset contentOffset: CGFloat) -> Int{
+    public func virtualPageForContentOffset(contentOffset contentOffset: CGFloat) -> Int {
         return Int((contentOffset + 1.5 * pageWidth) / pageWidth) - 1
     }
     
@@ -215,16 +222,6 @@ public class PagerTabStripViewController: UIViewController, UIScrollViewDelegate
         }
         if virtualPage > viewControllers.count - 1 { return viewControllers.count - 1 }
         return virtualPage
-    }
-    
-    public func scrollPercentage() -> CGFloat{
-        if swipeDirection() != .Right {
-            if fmod(containerView.contentOffset.x, pageWidth) == 0.0{
-                return 1.0
-            }
-            return fmod(containerView.contentOffset.x, pageWidth) / pageWidth
-        }
-        return 1 - fmod(containerView.contentOffset.x >= 0 ? containerView!.contentOffset.x : pageWidth + containerView.contentOffset.x, pageWidth) / pageWidth;
     }
     
     public func updateContent() {
@@ -283,11 +280,11 @@ public class PagerTabStripViewController: UIViewController, UIScrollViewDelegate
         if pagerOptions.contains(.IsProgressiveIndicator) {
             // FIXME: - check if delegate implements? pagerTabStripViewController(pagerTabStripViewController: XLPagerTabStripViewController, updateIndicatorFromIndex fromIndex: Int, toIndex index: Int, withProgressPercentage progressPercentage: Float, indexWasChanged changed: Bool)
             
-            let scrollPercentage = self.scrollPercentage()
+            let scrollPercentage = self.scrollPercentage
             if scrollPercentage > 0 {
                 var fromIndex = currentIndex
                 var toIndex = currentIndex
-                let direction = swipeDirection()
+                let direction = swipeDirection
                 
                 if direction == .Left {
                     if virtualPage > getPagerTabStripChildViewControllersForScrolling.count - 1 {
