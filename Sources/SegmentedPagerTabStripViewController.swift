@@ -47,7 +47,7 @@ public class SegmentedPagerTabStripViewController: PagerTabStripViewController {
         }
     }
     
-    func reloadSegmentedControl() throws -> Void {
+    func reloadSegmentedControl() throws {
         segmentedControl.removeAllSegments()
         for (index, item) in viewControllers.enumerate(){
             guard let child = item as? PagerTabStripChildItem else {
@@ -70,7 +70,7 @@ public class SegmentedPagerTabStripViewController: PagerTabStripViewController {
         }
     }
     
-    func segmentedControlChanged(sender: UISegmentedControl) -> Void{
+    func segmentedControlChanged(sender: UISegmentedControl) {
         let index = sender.selectedSegmentIndex
         try! pagerTabStripViewController(self, updateIndicatorFromIndex: currentIndex, toIndex: index)
         shouldUpdateSegmentedControl = false
