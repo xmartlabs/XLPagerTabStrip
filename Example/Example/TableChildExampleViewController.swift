@@ -42,7 +42,7 @@ class TableChildExampleViewController: UITableViewController, PagerTabStripChild
     
     // MARK: - XLPagerTabStripChildItem
     
-    func childHeaderForPagerTabStripViewController(pagerTabStripController: PagerTabStripViewController) -> ChildHeaderData {
-        return ChildHeaderData(title: "Table View", image: nil, highlightedImage: nil, color: .whiteColor())
+    func childHeaderForPagerTabStripViewController(pagerTabStripController: PagerTabStripViewController) -> ChildItemInfo {
+        return ChildItemInfo(title: "Table View", image: nil, highlightedImage: nil, color: .whiteColor())
     }
 }

@@ -25,8 +25,9 @@
 import Foundation
 
 public class BarPagerTabStripViewController: PagerTabStripViewController {
+    
     @IBOutlet lazy public var barView: BarView! = { [unowned self] in
-        let barView = BarView(frame: CGRectMake(0, 0, self.view.frame.size.width, 5.0), optionsAmount: self.pagerTabStripChildViewControllers.count, selectedOptionIndex: self.currentIndex)
+        let barView = BarView(frame: CGRectMake(0, 0, self.view.frame.size.width, 5.0))
         barView.backgroundColor = .orangeColor()
         barView.selectedBar.backgroundColor = .blackColor()
         barView.autoresizingMask = .FlexibleWidth
@@ -35,21 +36,17 @@ public class BarPagerTabStripViewController: PagerTabStripViewController {
     
     public override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        
-        if let _ = barView.superview{
-            barView.setOptionsAmount(optionsAmount: pagerTabStripChildViewControllers.count, animated: false)
-            barView.moveToIndex(index: currentIndex, animated: false)
+        if barView.superview == nil {
+            view.addSubview(barView)
         }
-        else{
-            view.addSubview(barView!)
-        }
+        barView.optionsCount = pagerTabStripChildViewControllers.count
+        barView.moveToIndex(index: currentIndex, animated: false)
     }
     
     public override func reloadPagerTabStripView() {
         super.reloadPagerTabStripView()
-        
+        barView.optionsCount = pagerTabStripChildViewControllers.count
         if isViewLoaded(){
-            barView.setOptionsAmount(optionsAmount: pagerTabStripChildViewControllers.count, animated: false)
             barView.moveToIndex(index: currentIndex, animated: false)
         }
     }
