@@ -24,41 +24,42 @@
 
 import Foundation
 
-public class BarView: UIView{
+public class BarView: UIView {
+    
     public lazy var selectedBar: UIView = { [unowned self] in
         let selectedBar = UIView(frame: CGRectMake(0, 0, self.frame.size.width, self.frame.size.height))
         return selectedBar
     }()
     
-    var optionsAmount: Int = 1
-    var selectedOptionIndex: Int = 0
+    var optionsCount = 1 {
+        willSet(newOptionsCount) {
+            if newOptionsCount <= selectedIndex {
+                selectedIndex = optionsCount - 1
+            }
+        }
+    }
+    var selectedIndex = 0
     
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-    
         addSubview(selectedBar)
-        updateSelectedBarPositionWithAnimation(false)
     }
     
-    public init(frame: CGRect, optionsAmount: Int, selectedOptionIndex: Int) {
-        self.optionsAmount = optionsAmount
-        self.selectedOptionIndex = selectedOptionIndex
+    override init(frame: CGRect) {
         super.init(frame: frame)
-        
-        selectedBar = UIView(frame: CGRectMake(0, 0, self.frame.size.width, self.frame.size.height))
         addSubview(selectedBar)
-        updateSelectedBarPositionWithAnimation(false)
     }
+    
     
     // MARK: - Helpers
     
-    func updateSelectedBarPositionWithAnimation(animation: Bool) -> Void{
+    private func updateSelectedBarPositionWithAnimation(animation: Bool) {
         var frame = selectedBar.frame
-        frame.size.width = self.frame.size.width / CGFloat(optionsAmount)
-        frame.origin.x = frame.size.width * CGFloat(selectedOptionIndex)
-        if animation{
-            UIView.animateWithDuration(0.3, animations: { () -> Void in
-                self.selectedBar.frame = frame
+        frame.size.width = self.frame.size.width / CGFloat(optionsCount)
+        frame.origin.x = frame.size.width * CGFloat(selectedIndex)
+        if animation {
+            UIView.animateWithDuration(0.3, animations: { [weak self] in
+                self?.selectedBar.frame = frame
             })
         }
         else{
@@ -66,16 +67,16 @@ public class BarView: UIView{
         }
     }
     
-    public func moveToIndex(index index: Int, animated: Bool) -> Void{
-        selectedOptionIndex = index
+    public func moveToIndex(index index: Int, animated: Bool) {
+        selectedIndex = index
         updateSelectedBarPositionWithAnimation(animated)
     }
     
-    public func moveToIndex(fromIndex fromIndex: Int, toIndex: Int, progressPercentage: Float) -> Void {
-        selectedOptionIndex = (progressPercentage > 0.5) ? toIndex : fromIndex
+    public func moveToIndex(fromIndex fromIndex: Int, toIndex: Int, progressPercentage: Float) {
+        selectedIndex = (progressPercentage > 0.5) ? toIndex : fromIndex
         
         var newFrame = selectedBar.frame
-        newFrame.size.width = frame.size.width / CGFloat(optionsAmount)
+        newFrame.size.width = frame.size.width / CGFloat(optionsCount)
         var fromFrame = newFrame
         fromFrame.origin.x = newFrame.size.width * CGFloat(fromIndex)
         var toFrame = newFrame
@@ -85,17 +86,8 @@ public class BarView: UIView{
         selectedBar.frame = targetFrame
     }
     
-    public func setOptionsAmount(optionsAmount optionsAmount: Int, animated: Bool) -> Void {
-        self.optionsAmount = optionsAmount
-        
-        if optionsAmount <= selectedOptionIndex {
-            selectedOptionIndex = optionsAmount - 1
-        }
-        
-        updateSelectedBarPositionWithAnimation(animated)
-    }
-    
     public override func layoutSubviews() {
+        super.layoutSubviews()
         updateSelectedBarPositionWithAnimation(false)
     }
 }

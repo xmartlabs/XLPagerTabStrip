@@ -25,35 +25,12 @@
 
 import Foundation
 
-public struct ChildHeaderData {
-    
-    public var title: String
-    public var image: UIImage?
-//    public var highlightedImage: UIImage?
-    public var color: UIColor?
-    
-    public init(title: String) {
-        self.title = title
-    }
-    
-    public init(title: String, image: UIImage?) {
-        self.init(title: title)
-        self.image = image
-    }
-    
-    public init(title: String, image: UIImage?, highlightedImage: UIImage?) {
-        self.init(title: title, image: image)
-//        self.highlightedImage = highlightedImage
-    }
-    
-    public init(title: String, image: UIImage?, highlightedImage: UIImage?, color: UIColor?){
-        self.init(title: title, image: image, highlightedImage: highlightedImage)
-        self.color = color
-    }
-}
+
+// MARK: Protocols
+
 
 public protocol PagerTabStripChildItem {
-    func childHeaderForPagerTabStripViewController(pagerTabStripController: PagerTabStripViewController) -> ChildHeaderData
+    func childHeaderForPagerTabStripViewController(pagerTabStripController: PagerTabStripViewController) -> ChildItemInfo
 }
 
 public protocol PagerTabStripViewControllerDelegate: class {
@@ -65,31 +42,25 @@ public protocol PagerTabStripViewControllerDataSource: class {
     func childViewControllersForPagerTabStripViewController(pagerTabStripController: PagerTabStripViewController) ->[UIViewController]
 }
 
+
+//MARK: PagerTabStripViewController
+
 public class PagerTabStripViewController: UIViewController, UIScrollViewDelegate, PagerTabStripViewControllerDataSource, PagerTabStripViewControllerDelegate {
-    private(set) var pagerTabStripChildViewControllers = [UIViewController]()
+    
+    
     @IBOutlet lazy public var containerView: UIScrollView! = { [unowned self] in
         let containerView = UIScrollView(frame: CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), CGRectGetHeight(self.view.bounds)))
         containerView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
         return containerView
     }()
+    
     public weak var delegate: PagerTabStripViewControllerDelegate?
     public weak var datasource: PagerTabStripViewControllerDataSource?
-
+    
+    public var pagerOptions = PagerTabStripOptions.SkipIntermediateViewControllers.union(.IsProgressiveIndicator).union(.IsElasticIndicatorLimit)
+    
+    private(set) var pagerTabStripChildViewControllers = [UIViewController]()
     private(set) var currentIndex = 0
-    public var skipIntermediateViewControllers = true
-    public var isProgressiveIndicator = false
-    public var isElasticIndicatorLimit = false
-    
-    private var pagerTabStripChildViewControllersForScrolling : [UIViewController]?
-    private var getPagerTabStripChildViewControllersForScrolling : [UIViewController] {
-        return pagerTabStripChildViewControllersForScrolling ?? pagerTabStripChildViewControllers
-    }
-    
-    private var lastPageNumber = 0
-    private var lastContentOffset: CGFloat = 0.0
-    private var pageBeforeRotate = 0
-    private var lastSize = CGSizeMake(0, 0)
-    
     
     public var pageWidth: CGFloat {
         return CGRectGetWidth(containerView.bounds)
@@ -149,7 +120,7 @@ public class PagerTabStripViewController: UIViewController, UIScrollViewDelegate
         if !isViewLoaded() || view.window == nil {
             currentIndex = index
         }
-        if animated && skipIntermediateViewControllers && abs(currentIndex - index) > 1 {
+        if animated && pagerOptions.contains(.SkipIntermediateViewControllers) && abs(currentIndex - index) > 1 {
             var tmpChildViewControllers = pagerTabStripChildViewControllers
             let currentChildVC = pagerTabStripChildViewControllers[currentIndex]
             let fromIndex = currentIndex < index ? index - 1 : index + 1
@@ -306,7 +277,7 @@ public class PagerTabStripViewController: UIViewController, UIScrollViewDelegate
         currentIndex = newCurrentIndex
         let changeCurrentIndex = newCurrentIndex != oldCurrentIndex
         
-        if isProgressiveIndicator {
+        if pagerOptions.contains(.IsProgressiveIndicator) {
             // FIXME: - check if delegate implements? pagerTabStripViewController(pagerTabStripViewController: XLPagerTabStripViewController, updateIndicatorFromIndex fromIndex: Int, toIndex index: Int, withProgressPercentage progressPercentage: Float, indexWasChanged changed: Bool)
             
             let scrollPercentage = self.scrollPercentage()
@@ -344,7 +315,7 @@ public class PagerTabStripViewController: UIViewController, UIScrollViewDelegate
                     }
                 }
                 
-                try! delegate?.pagerTabStripViewController(self, updateIndicatorFromIndex: fromIndex, toIndex: toIndex, withProgressPercentage: Float(isElasticIndicatorLimit ? scrollPercentage : (toIndex < 0 || toIndex >= getPagerTabStripChildViewControllersForScrolling.count ? CGFloat(0) : scrollPercentage)), indexWasChanged: changeCurrentIndex)
+                try! delegate?.pagerTabStripViewController(self, updateIndicatorFromIndex: fromIndex, toIndex: toIndex, withProgressPercentage: Float(pagerOptions.contains(.IsElasticIndicatorLimit) ? scrollPercentage : (toIndex < 0 || toIndex >= getPagerTabStripChildViewControllersForScrolling.count ? CGFloat(0) : scrollPercentage)), indexWasChanged: changeCurrentIndex)
             }
         }
         else{
@@ -414,4 +385,15 @@ public class PagerTabStripViewController: UIViewController, UIScrollViewDelegate
     public override func willRotateToInterfaceOrientation(toInterfaceOrientation: UIInterfaceOrientation, duration: NSTimeInterval) {
         pageBeforeRotate = currentIndex
     }
+    
+    
+    private var pagerTabStripChildViewControllersForScrolling : [UIViewController]?
+    private var getPagerTabStripChildViewControllersForScrolling : [UIViewController] {
+        return pagerTabStripChildViewControllersForScrolling ?? pagerTabStripChildViewControllers
+    }
+    private var lastPageNumber = 0
+    private var lastContentOffset: CGFloat = 0.0
+    private var pageBeforeRotate = 0
+    private var lastSize = CGSizeMake(0, 0)
+    
 }

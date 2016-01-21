@@ -14,7 +14,6 @@ public class BarExampleViewController: BarPagerTabStripViewController {
     
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        isProgressiveIndicator = true
     }
     
     public override func viewDidLoad() {
@@ -52,8 +51,9 @@ public class BarExampleViewController: BarPagerTabStripViewController {
     
     public override func reloadPagerTabStripView() {
         isReload = true
-        isProgressiveIndicator = (rand() % 2 == 0)
-        isElasticIndicatorLimit = (rand() % 2 == 0)
+        pagerOptions = rand() % 2 == 0 ? pagerOptions.union(.SkipIntermediateViewControllers) : (pagerOptions.remove(.SkipIntermediateViewControllers) ?? pagerOptions)
+        pagerOptions = rand() % 2 == 0 ? pagerOptions.union(.IsProgressiveIndicator) : (pagerOptions.remove(.IsProgressiveIndicator) ?? pagerOptions)
+        pagerOptions = rand() % 2 == 0 ? pagerOptions.union(.IsElasticIndicatorLimit) : (pagerOptions.remove(.IsElasticIndicatorLimit) ?? pagerOptions)
         super.reloadPagerTabStripView()
     }
 }
