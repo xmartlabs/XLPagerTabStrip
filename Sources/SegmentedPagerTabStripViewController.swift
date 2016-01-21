@@ -49,7 +49,7 @@ public class SegmentedPagerTabStripViewController: PagerTabStripViewController {
     
     func reloadSegmentedControl() throws -> Void {
         segmentedControl.removeAllSegments()
-        for (index, item) in pagerTabStripChildViewControllers.enumerate(){
+        for (index, item) in viewControllers.enumerate(){
             guard let child = item as? PagerTabStripChildItem else {
                 throw PagerTabStripError.ChildViewControllerMustConformToPagerTabStripChildItem
             }
@@ -61,7 +61,7 @@ public class SegmentedPagerTabStripViewController: PagerTabStripViewController {
             }
         }
         
-        guard let child = pagerTabStripChildViewControllers[currentIndex] as? PagerTabStripChildItem else {
+        guard let child = viewControllers[currentIndex] as? PagerTabStripChildItem else {
             throw PagerTabStripError.CurrentIndexIsGreaterThanChildsCount
         }
         segmentedControl.selectedSegmentIndex = currentIndex
@@ -82,7 +82,7 @@ public class SegmentedPagerTabStripViewController: PagerTabStripViewController {
     override public func pagerTabStripViewController(pagerTabStripViewController: PagerTabStripViewController, updateIndicatorFromIndex fromIndex: Int, toIndex: Int) throws {
         try super.pagerTabStripViewController(pagerTabStripViewController, updateIndicatorFromIndex: fromIndex, toIndex: toIndex)
         if shouldUpdateSegmentedControl  {
-            guard let child = pagerTabStripChildViewControllers[toIndex] as? PagerTabStripChildItem else {
+            guard let child = viewControllers[toIndex] as? PagerTabStripChildItem else {
                 throw PagerTabStripError.CurrentIndexIsGreaterThanChildsCount
             }
             if let color = child.childHeaderForPagerTabStripViewController(self).color{
@@ -95,13 +95,13 @@ public class SegmentedPagerTabStripViewController: PagerTabStripViewController {
     public override func pagerTabStripViewController(pagerTabStripViewController: PagerTabStripViewController, updateIndicatorFromIndex fromIndex: Int, toIndex index: Int, withProgressPercentage progressPercentage: Float, indexWasChanged changed: Bool) throws {
         if shouldUpdateSegmentedControl{
             let currentIndex = (progressPercentage > 0.5) ? index : fromIndex
-            guard let child = pagerTabStripChildViewControllers[currentIndex] as? PagerTabStripChildItem else {
+            guard let child = viewControllers[currentIndex] as? PagerTabStripChildItem else {
                 throw PagerTabStripError.CurrentIndexIsGreaterThanChildsCount
             }
             if let color = child.childHeaderForPagerTabStripViewController(self).color{
                 segmentedControl.tintColor = color
             }
-            segmentedControl.selectedSegmentIndex = min(currentIndex, pagerTabStripChildViewControllers.count - 1)
+            segmentedControl.selectedSegmentIndex = min(currentIndex, viewControllers.count - 1)
         }
     }
     

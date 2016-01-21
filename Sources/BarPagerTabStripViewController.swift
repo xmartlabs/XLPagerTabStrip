@@ -39,13 +39,13 @@ public class BarPagerTabStripViewController: PagerTabStripViewController {
         if barView.superview == nil {
             view.addSubview(barView)
         }
-        barView.optionsCount = pagerTabStripChildViewControllers.count
+        barView.optionsCount = viewControllers.count
         barView.moveToIndex(index: currentIndex, animated: false)
     }
     
     public override func reloadPagerTabStripView() {
         super.reloadPagerTabStripView()
-        barView.optionsCount = pagerTabStripChildViewControllers.count
+        barView.optionsCount = viewControllers.count
         if isViewLoaded(){
             barView.moveToIndex(index: currentIndex, animated: false)
         }
