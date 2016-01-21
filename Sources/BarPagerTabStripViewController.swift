@@ -24,7 +24,7 @@
 
 import Foundation
 
-public class BarPagerTabStripViewController: PagerTabStripViewController {
+public class BarPagerTabStripViewController: PagerTabStripViewController, PagerTabStripViewControllerDataSource, PagerTabStripViewControllerIsProgressiveDelegate {
     
     @IBOutlet lazy public var barView: BarView! = { [unowned self] in
         let barView = BarView(frame: CGRectMake(0, 0, self.view.frame.size.width, 5.0))
@@ -33,6 +33,18 @@ public class BarPagerTabStripViewController: PagerTabStripViewController {
         barView.autoresizingMask = .FlexibleWidth
         return barView
     }()
+    
+    public override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        delegate = self
+        datasource = self
+    }
+    
+    required public init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        delegate = self
+        datasource = self
+    }
     
     public override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
@@ -53,11 +65,11 @@ public class BarPagerTabStripViewController: PagerTabStripViewController {
     
     // MARK: - PagerTabStripViewControllerDelegate
     
-    public override func pagerTabStripViewController(pagerTabStripViewController: PagerTabStripViewController, updateIndicatorFromIndex fromIndex: Int, toIndex: Int) throws {
+    public func pagerTabStripViewController(pagerTabStripViewController: PagerTabStripViewController, updateIndicatorFromIndex fromIndex: Int, toIndex: Int) throws {
         barView.moveToIndex(index: toIndex, animated: true)
     }
     
-    public override func pagerTabStripViewController(pagerTabStripViewController: PagerTabStripViewController, updateIndicatorFromIndex fromIndex: Int, toIndex: Int, withProgressPercentage progressPercentage: Float, indexWasChanged: Bool) throws {
+    public func pagerTabStripViewController(pagerTabStripViewController: PagerTabStripViewController, updateIndicatorFromIndex fromIndex: Int, toIndex: Int, withProgressPercentage progressPercentage: CGFloat, indexWasChanged: Bool) throws {
         barView.moveToIndex(fromIndex: fromIndex, toIndex: toIndex, progressPercentage: progressPercentage)
     }
 }
