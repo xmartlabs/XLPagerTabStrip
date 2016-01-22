@@ -25,9 +25,21 @@
 import Foundation
 
 
-public class SegmentedPagerTabStripViewController: PagerTabStripViewController {
+public class SegmentedPagerTabStripViewController: PagerTabStripViewController, PagerTabStripViewControllerDataSource, PagerTabStripViewControllerDelegate {
     
     @IBOutlet lazy public var segmentedControl: UISegmentedControl! = UISegmentedControl()
+    
+    public override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        delegate = self
+        datasource = self
+    }
+    
+    required public init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        delegate = self
+        datasource = self
+    }
     
     var shouldUpdateSegmentedControl = true
     
@@ -47,7 +59,7 @@ public class SegmentedPagerTabStripViewController: PagerTabStripViewController {
         }
     }
     
-    func reloadSegmentedControl() throws -> Void {
+    func reloadSegmentedControl() throws {
         segmentedControl.removeAllSegments()
         for (index, item) in viewControllers.enumerate(){
             guard let child = item as? PagerTabStripChildItem else {
@@ -70,7 +82,7 @@ public class SegmentedPagerTabStripViewController: PagerTabStripViewController {
         }
     }
     
-    func segmentedControlChanged(sender: UISegmentedControl) -> Void{
+    func segmentedControlChanged(sender: UISegmentedControl) {
         let index = sender.selectedSegmentIndex
         try! pagerTabStripViewController(self, updateIndicatorFromIndex: currentIndex, toIndex: index)
         shouldUpdateSegmentedControl = false
@@ -79,29 +91,15 @@ public class SegmentedPagerTabStripViewController: PagerTabStripViewController {
     
     // MARK: - PagerTabStripViewControllerDelegate
     
-    override public func pagerTabStripViewController(pagerTabStripViewController: PagerTabStripViewController, updateIndicatorFromIndex fromIndex: Int, toIndex: Int) throws {
-        try super.pagerTabStripViewController(pagerTabStripViewController, updateIndicatorFromIndex: fromIndex, toIndex: toIndex)
-        if shouldUpdateSegmentedControl  {
+    public func pagerTabStripViewController(pagerTabStripViewController: PagerTabStripViewController, updateIndicatorFromIndex fromIndex: Int, toIndex: Int) throws {
+        if shouldUpdateSegmentedControl {
             guard let child = viewControllers[toIndex] as? PagerTabStripChildItem else {
                 throw PagerTabStripError.CurrentIndexIsGreaterThanChildsCount
             }
-            if let color = child.childHeaderForPagerTabStripViewController(self).color{
+            if let color = child.childHeaderForPagerTabStripViewController(self).color {
                 segmentedControl.tintColor = color
             }
             segmentedControl.selectedSegmentIndex = toIndex
-        }
-    }
-    
-    public override func pagerTabStripViewController(pagerTabStripViewController: PagerTabStripViewController, updateIndicatorFromIndex fromIndex: Int, toIndex index: Int, withProgressPercentage progressPercentage: Float, indexWasChanged changed: Bool) throws {
-        if shouldUpdateSegmentedControl{
-            let currentIndex = (progressPercentage > 0.5) ? index : fromIndex
-            guard let child = viewControllers[currentIndex] as? PagerTabStripChildItem else {
-                throw PagerTabStripError.CurrentIndexIsGreaterThanChildsCount
-            }
-            if let color = child.childHeaderForPagerTabStripViewController(self).color{
-                segmentedControl.tintColor = color
-            }
-            segmentedControl.selectedSegmentIndex = min(currentIndex, viewControllers.count - 1)
         }
     }
     

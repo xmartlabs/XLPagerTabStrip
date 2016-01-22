@@ -24,10 +24,10 @@
 
 import Foundation
 
-public class ButtonBarPagerTabStripViewController: PagerTabStripViewController, UICollectionViewDelegate, UICollectionViewDataSource {
+public class ButtonBarPagerTabStripViewController: PagerTabStripViewController, PagerTabStripViewControllerDataSource, PagerTabStripViewControllerIsProgressiveDelegate, UICollectionViewDelegate, UICollectionViewDataSource {
     
     public var changeCurrentIndex: ((oldCell: ButtonBarViewCell?, newCell: ButtonBarViewCell?, animated: Bool) -> Void)? = { _ in }
-    public var changeCurrentIndexProgressive: ((oldCell: ButtonBarViewCell?, newCell: ButtonBarViewCell?, progressPercentage: Float, changeCurrentIndex: Bool, animated: Bool) -> Void)? = { _ in }
+    public var changeCurrentIndexProgressive: ((oldCell: ButtonBarViewCell?, newCell: ButtonBarViewCell?, progressPercentage: CGFloat, changeCurrentIndex: Bool, animated: Bool) -> Void)? = { _ in }
     
     @IBOutlet public lazy var buttonBarView: ButtonBarView! = { [unowned self] in
         var flowLayout = UICollectionViewFlowLayout()
@@ -62,10 +62,14 @@ public class ButtonBarPagerTabStripViewController: PagerTabStripViewController, 
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        delegate = self
+        datasource = self
     }
 
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+        delegate = self
+        datasource = self
     }
     
     public override func viewDidLoad() {
@@ -125,11 +129,6 @@ public class ButtonBarPagerTabStripViewController: PagerTabStripViewController, 
         }
     }
     
-    public override func willRotateToInterfaceOrientation(toInterfaceOrientation: UIInterfaceOrientation, duration: NSTimeInterval) {
-        super.willRotateToInterfaceOrientation(toInterfaceOrientation, duration: duration)
-        isViewRotating = true
-    }
-    
     // MARK: - Public Methods
     
     public override func reloadPagerTabStripView() {
@@ -167,7 +166,7 @@ public class ButtonBarPagerTabStripViewController: PagerTabStripViewController, 
         return calculateStretchedCellWidths(minimumCellWidths, suggestedStretchedCellWidth: newSuggestedStretchedCellWidth, previousNumberOfLargeCells: numberOfLargeCells)
     }
     
-    public override func pagerTabStripViewController(pagerTabStripViewController: PagerTabStripViewController, updateIndicatorFromIndex fromIndex: Int, toIndex: Int) throws {
+    public func pagerTabStripViewController(pagerTabStripViewController: PagerTabStripViewController, updateIndicatorFromIndex fromIndex: Int, toIndex: Int) throws {
         guard shouldUpdateButtonBarView else { return }
         
         let direction: SwipeDirection = (toIndex < fromIndex) ? .Right : .Left
@@ -179,7 +178,7 @@ public class ButtonBarPagerTabStripViewController: PagerTabStripViewController, 
         }
     }
     
-    public override func pagerTabStripViewController(pagerTabStripViewController: PagerTabStripViewController, updateIndicatorFromIndex fromIndex: Int, toIndex: Int, withProgressPercentage progressPercentage: Float, indexWasChanged: Bool) throws {
+    public func pagerTabStripViewController(pagerTabStripViewController: PagerTabStripViewController, updateIndicatorFromIndex fromIndex: Int, toIndex: Int, withProgressPercentage progressPercentage: CGFloat, indexWasChanged: Bool) throws {
         guard shouldUpdateButtonBarView else { return }
         
         buttonBarView.moveFromIndex(fromIndex, toIndex: toIndex, progressPercentage: progressPercentage, pagerScroll: .YES)

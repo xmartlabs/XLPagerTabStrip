@@ -63,7 +63,7 @@ public class ButtonBarView: UICollectionView {
         updateSelectedBarPosition(animated, swipeDirection: swipeDirection, pagerScroll: pagerScroll)
     }
     
-    public func moveFromIndex(fromIndex: Int, toIndex: Int, progressPercentage: Float,pagerScroll: PagerScroll) -> Void {
+    public func moveFromIndex(fromIndex: Int, toIndex: Int, progressPercentage: CGFloat,pagerScroll: PagerScroll) -> Void {
         selectedIndex = (progressPercentage > 0.5) ? toIndex : fromIndex
         
         let fromFrame = layoutAttributesForItemAtIndexPath(NSIndexPath(forItem: fromIndex, inSection: 0))!.frame
@@ -86,8 +86,8 @@ public class ButtonBarView: UICollectionView {
         
         var targetFrame = fromFrame
         targetFrame.size.height = selectedBar.frame.size.height
-        targetFrame.size.width += (toFrame.size.width - fromFrame.size.width) * CGFloat(progressPercentage)
-        targetFrame.origin.x += (toFrame.origin.x - fromFrame.origin.x) * CGFloat(progressPercentage)
+        targetFrame.size.width += (toFrame.size.width - fromFrame.size.width) * progressPercentage
+        targetFrame.origin.x += (toFrame.origin.x - fromFrame.origin.x) * progressPercentage
         
         selectedBar.frame = CGRectMake(targetFrame.origin.x, selectedBar.frame.origin.y, targetFrame.size.width, selectedBar.frame.size.height)
         
@@ -96,7 +96,7 @@ public class ButtonBarView: UICollectionView {
             let toContentOffset = contentOffsetForCell(withFrame: toFrame, andIndex: toIndex)
             let fromContentOffset = contentOffsetForCell(withFrame: fromFrame, andIndex: fromIndex)
             
-            targetContentOffset = fromContentOffset + ((toContentOffset - fromContentOffset) * CGFloat(progressPercentage))
+            targetContentOffset = fromContentOffset + ((toContentOffset - fromContentOffset) * progressPercentage)
         }
         
         let animated = abs(contentOffset.x - targetContentOffset) > 30 || (fromIndex == toIndex)

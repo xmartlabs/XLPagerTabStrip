@@ -72,7 +72,7 @@ public class BarView: UIView {
         updateSelectedBarPositionWithAnimation(animated)
     }
     
-    public func moveToIndex(fromIndex fromIndex: Int, toIndex: Int, progressPercentage: Float) {
+    public func moveToIndex(fromIndex fromIndex: Int, toIndex: Int, progressPercentage: CGFloat) {
         selectedIndex = (progressPercentage > 0.5) ? toIndex : fromIndex
         
         var newFrame = selectedBar.frame
