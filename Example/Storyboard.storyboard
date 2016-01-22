@@ -135,17 +135,17 @@
         <!--Buttons Example-->
         <scene sceneID="c3d-TB-Hyh">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="3jo-Zp-rsN" customClass="ReloadExampleViewController" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="3jo-Zp-rsN" customClass="ReloadExampleViewController" customModule="Example" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="sYC-OQ-Mga"/>
                         <viewControllerLayoutGuide type="bottom" id="LUh-C3-i05"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="TXd-Bq-amB">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9rp-Lg-ckk">
-                                <rect key="frame" x="0.0" y="64" width="600" height="536"/>
+                                <rect key="frame" x="0.0" y="64" width="600" height="487"/>
                                 <connections>
                                     <segue destination="KF9-Il-rUn" kind="embed" id="PEH-Jc-gva"/>
                                 </connections>
@@ -230,6 +230,8 @@
                     <connections>
                         <segue destination="uba-Iz-2L2" kind="relationship" relationship="viewControllers" id="hNx-yW-oR3"/>
                         <segue destination="g7J-zS-0bu" kind="relationship" relationship="viewControllers" id="WG0-Of-C4e"/>
+                        <segue destination="jWp-2W-r7X" kind="relationship" relationship="viewControllers" id="uoj-hE-05b"/>
+                        <segue destination="b3c-Kr-Yhe" kind="relationship" relationship="viewControllers" id="xMr-zV-ubn"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YsA-SS-Qae" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -284,19 +286,19 @@
             </objects>
             <point key="canvasLocation" x="1321" y="515"/>
         </scene>
-        <!--Button Bar Example View Controller-->
+        <!--Button Bar Example View Controlle-->
         <scene sceneID="Ctn-j0-KV6">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="KF9-Il-rUn" customClass="ButtonBarExampleViewController" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="KF9-Il-rUn" customClass="ButtonBarExampleViewControlle" customModule="Example" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="PhK-DQ-FzX"/>
                         <viewControllerLayoutGuide type="bottom" id="DoJ-0a-eFQ"/>
                     </layoutGuides>
                     <view key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="nbo-eG-9Of">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="487"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="FH0-FX-IMd" customClass="XLButtonBarView">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="FH0-FX-IMd" customClass="ButtonBarView" customModule="XLPagerTabStrip">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
                                 <color key="backgroundColor" red="0.027450980390000001" green="0.72549019609999998" blue="0.60784313729999995" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -309,15 +311,15 @@
                                     <inset key="sectionInset" minX="35" minY="0.0" maxX="35" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell" id="aWZ-BZ-wgL" customClass="XLButtonBarViewCell">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell" id="aWZ-BZ-wgL" customClass="ButtonBarViewCell" customModule="XLPagerTabStrip">
                                         <rect key="frame" x="35" y="1" width="79" height="42"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="79" height="42"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Idp-Ip-IhM">
-                                                    <rect key="frame" x="17" y="10" width="44" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Idp-Ip-IhM">
+                                                    <rect key="frame" x="17" y="10" width="45" height="21"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -336,7 +338,7 @@
                                 </cells>
                             </collectionView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mcV-6K-P6b" customClass="UIScrollView">
-                                <rect key="frame" x="-5" y="43" width="610" height="493"/>
+                                <rect key="frame" x="-5" y="43" width="610" height="444"/>
                                 <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
                         </subviews>
@@ -353,7 +355,7 @@
                     </view>
                     <toolbarItems/>
                     <connections>
-                        <outlet property="buttonBarView" destination="FH0-FX-IMd" id="HvT-oB-FoW"/>
+                        <outlet property="buttonBarView" destination="FH0-FX-IMd" id="c7n-e6-pxW"/>
                         <outlet property="containerView" destination="mcV-6K-P6b" id="feg-Vf-NRY"/>
                     </connections>
                 </viewController>
@@ -455,17 +457,17 @@
         <!--Nav Button Bar Example View Controller-->
         <scene sceneID="fS9-Jp-SNl">
             <objects>
-                <viewController id="y3e-AR-HhJ" customClass="NavButtonBarExampleViewController" sceneMemberID="viewController">
+                <viewController id="y3e-AR-HhJ" customClass="NavButtonBarExampleViewController" customModule="Example" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="SCP-tk-3Q4"/>
                         <viewControllerLayoutGuide type="bottom" id="blo-XS-xG2"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Z8p-ri-ydp">
-                        <rect key="frame" x="0.0" y="64" width="600" height="536"/>
+                        <rect key="frame" x="0.0" y="64" width="600" height="487"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QoM-XF-R9X">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="487"/>
                                 <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                             </scrollView>
                         </subviews>

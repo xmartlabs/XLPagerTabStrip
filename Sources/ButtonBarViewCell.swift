@@ -1,4 +1,4 @@
-//  ChildItemInfo.swift
+//  ButtonBarViewCell.swift
 //  XLPagerTabStrip ( https://github.com/xmartlabs/XLPagerTabStrip )
 //
 //  Copyright (c) 2016 Xmartlabs ( http://xmartlabs.com )
@@ -24,29 +24,22 @@
 
 import Foundation
 
-public struct ChildItemInfo {
+public class ButtonBarViewCell: UICollectionViewCell {
     
-    public var title: String
-    public var image: UIImage?
-        public var highlightedImage: UIImage?
-    public var color: UIColor?
+    @IBOutlet public var imageView: UIImageView!
+    @IBOutlet public lazy var label: UILabel! = { [unowned self] in
+        let label = UILabel(frame: self.contentView.bounds)
+        label.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
+        label.textAlignment = .Center
+        label.font = UIFont.systemFontOfSize(14.0, weight: UIFontWeightMedium)
+        return label
+    }()
     
-    public init(title: String) {
-        self.title = title
-    }
-    
-    public init(title: String, image: UIImage?) {
-        self.init(title: title)
-        self.image = image
-    }
-    
-    public init(title: String, image: UIImage?, highlightedImage: UIImage?) {
-        self.init(title: title, image: image)
-        self.highlightedImage = highlightedImage
-    }
-    
-    public init(title: String, image: UIImage?, highlightedImage: UIImage?, color: UIColor?){
-        self.init(title: title, image: image, highlightedImage: highlightedImage)
-        self.color = color
+    public override func willMoveToSuperview(newSuperview: UIView?) {
+        super.willMoveToSuperview(newSuperview)
+        
+        if label.superview != nil {
+            contentView.addSubview(label)
+        }
     }
 }

@@ -10,7 +10,10 @@ import UIKit
 import XLPagerTabStrip
 
 public class ReloadExampleViewController: UIViewController {
-    @IBOutlet public var titleLabel: UILabel!
+    @IBOutlet lazy public var titleLabel: UILabel! = {
+        let label = UILabel()
+        return label
+    }()
     
     public lazy var bigLabel: UILabel = {
         let bigLabel = UILabel()
