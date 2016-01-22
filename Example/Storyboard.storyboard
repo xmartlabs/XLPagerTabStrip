@@ -232,6 +232,7 @@
                         <segue destination="g7J-zS-0bu" kind="relationship" relationship="viewControllers" id="WG0-Of-C4e"/>
                         <segue destination="jWp-2W-r7X" kind="relationship" relationship="viewControllers" id="uoj-hE-05b"/>
                         <segue destination="b3c-Kr-Yhe" kind="relationship" relationship="viewControllers" id="xMr-zV-ubn"/>
+                        <segue destination="uPL-4b-W3j" kind="relationship" relationship="viewControllers" id="klw-Rc-meT"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YsA-SS-Qae" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -366,17 +367,17 @@
         <!--Twitter Example View Controller-->
         <scene sceneID="Zfp-Dk-WxL">
             <objects>
-                <viewController id="Vhq-do-uI2" customClass="TwitterExampleViewController" sceneMemberID="viewController">
+                <viewController id="Vhq-do-uI2" customClass="TwitterExampleViewController" customModule="Example" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="OfJ-gb-drI"/>
                         <viewControllerLayoutGuide type="bottom" id="64r-dM-ghd"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Eak-dg-otx">
-                        <rect key="frame" x="0.0" y="64" width="600" height="536"/>
+                        <rect key="frame" x="0.0" y="64" width="600" height="487"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="A96-PT-Aon">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="487"/>
                                 <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
                             </scrollView>
                         </subviews>
@@ -394,7 +395,7 @@
                         <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="mhz-8g-Ux7">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
-                                <action selector="reloadTapped:" destination="Vhq-do-uI2" id="C47-dn-jtz"/>
+                                <action selector="reloadTapped:" destination="Vhq-do-uI2" id="fx6-UJ-VG1"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

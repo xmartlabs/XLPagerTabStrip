@@ -12,6 +12,7 @@
 		287D0A7E1C4B7B55004566D6 /* XLPagerTabStrip.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 287D0A7A1C4B7B26004566D6 /* XLPagerTabStrip.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		28F828D01C4B714D00330CF4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28F828CF1C4B714D00330CF4 /* AppDelegate.swift */; };
 		28F828DA1C4B714D00330CF4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 28F828D81C4B714D00330CF4 /* LaunchScreen.storyboard */; };
+		CB2125DE1C52A80E002DAF42 /* TwitterExampleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB2125DD1C52A80E002DAF42 /* TwitterExampleViewController.swift */; };
 		CB3697BF1C5177B4001FC5F8 /* ButtonBarExampleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB3697BE1C5177B4001FC5F8 /* ButtonBarExampleViewController.swift */; };
 		CB71C6EB1C4EB964008EC806 /* SegmentedExampleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB71C6EA1C4EB964008EC806 /* SegmentedExampleViewController.swift */; };
 		CB71C6F31C4FDDCE008EC806 /* PostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB71C6F21C4FDDCE008EC806 /* PostCell.swift */; };
@@ -81,6 +82,7 @@
 		28F828DB1C4B714D00330CF4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = Example/Info.plist; sourceTree = "<group>"; };
 		28F828E01C4B714D00330CF4 /* ExampleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ExampleUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		28F828E61C4B714D00330CF4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; name = Info.plist; path = Example/ExampleUITests/Info.plist; sourceTree = "<group>"; };
+		CB2125DD1C52A80E002DAF42 /* TwitterExampleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TwitterExampleViewController.swift; path = Example/TwitterExampleViewController.swift; sourceTree = "<group>"; };
 		CB3697BE1C5177B4001FC5F8 /* ButtonBarExampleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ButtonBarExampleViewController.swift; path = Example/Example/ButtonBarExampleViewController.swift; sourceTree = SOURCE_ROOT; };
 		CB71C6EA1C4EB964008EC806 /* SegmentedExampleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SegmentedExampleViewController.swift; path = Example/SegmentedExampleViewController.swift; sourceTree = "<group>"; };
 		CB71C6F21C4FDDCE008EC806 /* PostCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PostCell.swift; path = Example/PostCell.swift; sourceTree = "<group>"; };
@@ -178,6 +180,7 @@
 				CBA0A1FE1C50304500C5748C /* BarExampleViewController.swift */,
 				CBA0A2031C5033B400C5748C /* ReloadExampleViewController.swift */,
 				CBBD435E1C5274AE001A748E /* NavButtonBarExampleViewController.swift */,
+				CB2125DD1C52A80E002DAF42 /* TwitterExampleViewController.swift */,
 			);
 			name = Demo;
 			sourceTree = "<group>";
@@ -325,6 +328,7 @@
 				CBA0A2041C5033B400C5748C /* ReloadExampleViewController.swift in Sources */,
 				CB3697BF1C5177B4001FC5F8 /* ButtonBarExampleViewController.swift in Sources */,
 				CBA0A1FF1C50304500C5748C /* BarExampleViewController.swift in Sources */,
+				CB2125DE1C52A80E002DAF42 /* TwitterExampleViewController.swift in Sources */,
 				CBBD435F1C5274AE001A748E /* NavButtonBarExampleViewController.swift in Sources */,
 				CB86ED8A1C4D712200DA463B /* ChildExampleViewController.swift in Sources */,
 				CB86ED8E1C4D7A1800DA463B /* TableChildExampleViewController.swift in Sources */,
