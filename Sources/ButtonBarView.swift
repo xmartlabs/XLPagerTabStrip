@@ -24,12 +24,17 @@
 
 import UIKit
 
-public enum PagerScroll: Int {
-    case NO = 1, YES = 2, ScrollOnlyIfOutOfScreen = 3
+public enum PagerScroll {
+    case No
+    case Yes
+    case ScrollOnlyIfOutOfScreen
 }
 
-public enum SelectedBarAlignment: Int {
-    case Left = 1, Center = 2, Right = 3, Progressive = 4
+public enum SelectedBarAlignment {
+    case Left
+    case Center
+    case Right
+    case Progressive
 }
 
 public class ButtonBarView: UICollectionView {
@@ -58,16 +63,17 @@ public class ButtonBarView: UICollectionView {
         addSubview(selectedBar)
     }
     
-    public func moveToIndex(toIndex: Int, animated: Bool, swipeDirection: SwipeDirection, pagerScroll: PagerScroll) -> Void {
+    public func moveToIndex(toIndex: Int, animated: Bool, swipeDirection: SwipeDirection, pagerScroll: PagerScroll) {
         selectedIndex = toIndex
         updateSelectedBarPosition(animated, swipeDirection: swipeDirection, pagerScroll: pagerScroll)
     }
     
-    public func moveFromIndex(fromIndex: Int, toIndex: Int, progressPercentage: CGFloat,pagerScroll: PagerScroll) -> Void {
-        selectedIndex = (progressPercentage > 0.5) ? toIndex : fromIndex
+    public func moveFromIndex(fromIndex: Int, toIndex: Int, progressPercentage: CGFloat,pagerScroll: PagerScroll) {
+        selectedIndex = progressPercentage > 0.5 ? toIndex : fromIndex
         
         let fromFrame = layoutAttributesForItemAtIndexPath(NSIndexPath(forItem: fromIndex, inSection: 0))!.frame
         let numberOfItems = dataSource!.collectionView(self, numberOfItemsInSection: 0)
+        
         var toFrame: CGRect
         
         if toIndex < 0 || toIndex > numberOfItems - 1 {
@@ -128,22 +134,13 @@ public class ButtonBarView: UICollectionView {
     // MARK: - Helpers
     
     private func updateContentOffset(animated: Bool, pagerScroll: PagerScroll, toFrame: CGRect, toIndex: Int) -> Void {
-        guard pagerScroll != .NO else {
-            return
-        }
-        
-        if pagerScroll == .ScrollOnlyIfOutOfScreen {
-            if (toFrame.origin.x >= contentOffset.x) && (toFrame.origin.x < (contentOffset.x + frame.size.width - contentInset.left)) {
-                return
-            }
-        }
-        
+        guard pagerScroll != .No || (pagerScroll != .ScrollOnlyIfOutOfScreen && (toFrame.origin.x < contentOffset.x || toFrame.origin.x >= (contentOffset.x + frame.size.width - contentInset.left))) else { return }
         let targetContentOffset = contentSize.width > frame.size.width ? contentOffsetForCell(withFrame: toFrame, andIndex: toIndex) : 0
         setContentOffset(CGPointMake(targetContentOffset, 0), animated: animated)
     }
     
     private func contentOffsetForCell(withFrame cellFrame: CGRect, andIndex index: Int) -> CGFloat {
-        let sectionInset = (collectionViewLayout as? UICollectionViewFlowLayout)!.sectionInset
+        let sectionInset = (collectionViewLayout as! UICollectionViewFlowLayout).sectionInset
         var alignmentOffset: CGFloat = 0.0
         
         switch selectedBarAlignment {

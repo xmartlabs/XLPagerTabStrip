@@ -18,7 +18,6 @@ public class BarExampleViewController: BarPagerTabStripViewController {
     
     public override func viewDidLoad() {
         super.viewDidLoad()
-        
         barView.selectedBar.backgroundColor = .orangeColor()
     }
     
@@ -35,11 +34,9 @@ public class BarExampleViewController: BarPagerTabStripViewController {
             return [child_1, child_2, child_3, child_4]
         }
         
-        var childViewControllers = [child_1, child_2, child_3, child_4] as Array
-        let count = childViewControllers.count
-        
+        var childViewControllers = [child_1, child_2, child_3, child_4]
         for (index, _) in childViewControllers.enumerate(){
-            let nElements = count - index
+            let nElements = childViewControllers.count - index
             let n = (Int(arc4random()) % nElements) + index
             if n != index{
                 swap(&childViewControllers[index], &childViewControllers[n])

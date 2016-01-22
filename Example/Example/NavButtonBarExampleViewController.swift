@@ -59,11 +59,10 @@ public class NavButtonBarExampleViewController: ButtonBarPagerTabStripViewContro
             return [child_1, child_2, child_3, child_4, child_5, child_6, child_7, child_8]
         }
         
-        var childViewControllers = [child_1, child_2, child_3, child_4, child_6, child_7, child_8] as Array
-        let count = childViewControllers.count
+        var childViewControllers = [child_1, child_2, child_3, child_4, child_6, child_7, child_8]
         
         for (index, _) in childViewControllers.enumerate(){
-            let nElements = count - index
+            let nElements = childViewControllers.count - index
             let n = (Int(arc4random()) % nElements) + index
             if n != index{
                 swap(&childViewControllers[index], &childViewControllers[n])
