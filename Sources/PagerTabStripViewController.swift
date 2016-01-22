@@ -36,7 +36,6 @@ public protocol PagerTabStripChildItem {
 public protocol PagerTabStripViewControllerDelegate: class {
     
     func pagerTabStripViewController(pagerTabStripViewController: PagerTabStripViewController, updateIndicatorFromIndex fromIndex: Int, toIndex: Int) throws
-
 }
 
 public protocol PagerTabStripViewControllerIsProgressiveDelegate : PagerTabStripViewControllerDelegate {
@@ -107,9 +106,11 @@ public class PagerTabStripViewController: UIViewController, UIScrollViewDelegate
             fatalError("dataSource must not be nil")
         }
         viewControllers = dataSource.childViewControllersForPagerTabStripViewController(self)
+       // viewControllers
         guard viewControllers.count != 0 else {
             fatalError("childViewControllersForPagerTabStripViewController should provide at least one child view controller")
         }
+        viewControllers.forEach { if !($0 is PagerTabStripChildItem) { fatalError("Every view controller provided by PagerTabStripViewControllerDataSource's childViewControllersForPagerTabStripViewController method must conform to  PagerTabStripChildItem") }}
     }
     
     override public func viewDidAppear(animated: Bool) {

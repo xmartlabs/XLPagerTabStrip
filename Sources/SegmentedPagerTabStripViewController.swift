@@ -24,10 +24,21 @@
 
 import Foundation
 
+public struct SegmentedPagerTabStripSettings {
+    
+    public struct Style {
+        public var segmentedControlColor: UIColor?
+    }
+    
+    public var style = Style()
+}
+
 
 public class SegmentedPagerTabStripViewController: PagerTabStripViewController, PagerTabStripViewControllerDataSource, PagerTabStripViewControllerDelegate {
     
     @IBOutlet lazy public var segmentedControl: UISegmentedControl! = UISegmentedControl()
+    
+    public var settings = SegmentedPagerTabStripSettings()
     
     public override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -41,13 +52,14 @@ public class SegmentedPagerTabStripViewController: PagerTabStripViewController, 
         datasource = self
     }
     
-    var shouldUpdateSegmentedControl = true
+    private(set) var shouldUpdateSegmentedControl = true
     
     public override func viewDidLoad() {
         super.viewDidLoad()
         if segmentedControl.superview == nil {
             navigationItem.titleView = segmentedControl
         }
+        segmentedControl.tintColor = settings.style.segmentedControlColor
         segmentedControl.addTarget(self, action: "segmentedControlChanged:", forControlEvents: .ValueChanged)
         try! reloadSegmentedControl()
     }
@@ -62,9 +74,7 @@ public class SegmentedPagerTabStripViewController: PagerTabStripViewController, 
     func reloadSegmentedControl() throws {
         segmentedControl.removeAllSegments()
         for (index, item) in viewControllers.enumerate(){
-            guard let child = item as? PagerTabStripChildItem else {
-                throw PagerTabStripError.ChildViewControllerMustConformToPagerTabStripChildItem
-            }
+            let child = item as! PagerTabStripChildItem
             if let image = child.childHeaderForPagerTabStripViewController(self).image {
                 segmentedControl.insertSegmentWithImage(image, atIndex: index, animated: false)
             }
@@ -72,14 +82,7 @@ public class SegmentedPagerTabStripViewController: PagerTabStripViewController, 
                 segmentedControl.insertSegmentWithTitle(child.childHeaderForPagerTabStripViewController(self).title, atIndex: index, animated: false)
             }
         }
-        
-        guard let child = viewControllers[currentIndex] as? PagerTabStripChildItem else {
-            throw PagerTabStripError.CurrentIndexIsGreaterThanChildsCount
-        }
         segmentedControl.selectedSegmentIndex = currentIndex
-        if let color = child.childHeaderForPagerTabStripViewController(self).color {
-            segmentedControl.tintColor = color
-        }
     }
     
     func segmentedControlChanged(sender: UISegmentedControl) {
@@ -93,12 +96,6 @@ public class SegmentedPagerTabStripViewController: PagerTabStripViewController, 
     
     public func pagerTabStripViewController(pagerTabStripViewController: PagerTabStripViewController, updateIndicatorFromIndex fromIndex: Int, toIndex: Int) throws {
         if shouldUpdateSegmentedControl {
-            guard let child = viewControllers[toIndex] as? PagerTabStripChildItem else {
-                throw PagerTabStripError.CurrentIndexIsGreaterThanChildsCount
-            }
-            if let color = child.childHeaderForPagerTabStripViewController(self).color {
-                segmentedControl.tintColor = color
-            }
             segmentedControl.selectedSegmentIndex = toIndex
         }
     }

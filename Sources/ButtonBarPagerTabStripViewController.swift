@@ -272,12 +272,12 @@ public class ButtonBarPagerTabStripViewController: PagerTabStripViewController, 
         var collectionViewContentWidth: CGFloat = 0
         
         for viewController in self.viewControllers {
-            let childController = viewController as? PagerTabStripChildItem
+            let childController = viewController as! PagerTabStripChildItem
             
             let label = UILabel()
             label.translatesAutoresizingMaskIntoConstraints = false
             label.font = self.buttonBarView.labelFont!
-            label.text = childController?.childHeaderForPagerTabStripViewController(self).title
+            label.text = childController.childHeaderForPagerTabStripViewController(self).title
             let labelSize = label.intrinsicContentSize()
             
             let minimumCellWidth = labelSize.width + CGFloat(self.buttonBarView.leftRightMargin! * 2)

@@ -29,7 +29,6 @@ public struct ChildItemInfo {
     public var title: String
     public var image: UIImage?
         public var highlightedImage: UIImage?
-    public var color: UIColor?
     
     public init(title: String) {
         self.title = title
@@ -43,10 +42,5 @@ public struct ChildItemInfo {
     public init(title: String, image: UIImage?, highlightedImage: UIImage?) {
         self.init(title: title, image: image)
         self.highlightedImage = highlightedImage
-    }
-    
-    public init(title: String, image: UIImage?, highlightedImage: UIImage?, color: UIColor?){
-        self.init(title: title, image: image, highlightedImage: highlightedImage)
-        self.color = color
     }
 }

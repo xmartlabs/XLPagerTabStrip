@@ -24,41 +24,22 @@
 
 import Foundation
 
+public struct TwitterPagerTabStripSettings {
+    
+    public struct Style {
+        public var dotColor = UIColor(white: 1, alpha: 0.4)
+        public var selectedDotColor = UIColor.whiteColor()
+        public var portraitTitleFont = UIFont.systemFontOfSize(18)
+        public var landscapeTitleFont = UIFont.systemFontOfSize(15)
+        public var titleColor = UIColor.whiteColor()
+    }
+    
+    public var style = Style()
+}
+
 public class TwitterPagerTabStripViewController: PagerTabStripViewController, PagerTabStripViewControllerDataSource, PagerTabStripViewControllerIsProgressiveDelegate {
-    lazy var navigationView: UIView = {
-       let navigationView = UIView()
-        navigationView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
-        return navigationView
-    }()
     
-    lazy var navigationScrollView: UIScrollView = { [unowned self] in
-        let navigationScrollView = UIScrollView(frame: CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), 44))
-        navigationScrollView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
-        navigationScrollView.bounces = true
-        navigationScrollView.scrollsToTop = false
-        navigationScrollView.delegate = self
-        navigationScrollView.showsVerticalScrollIndicator = false
-        navigationScrollView.showsHorizontalScrollIndicator = false
-        navigationScrollView.pagingEnabled = true
-        navigationScrollView.userInteractionEnabled = false
-        navigationScrollView.alwaysBounceHorizontal = true
-        navigationScrollView.alwaysBounceVertical = false
-        return navigationScrollView
-    }()
-    var navigationPageControl: FXPageControl = {
-        let navigationPageControl = FXPageControl()
-        navigationPageControl.backgroundColor = .clearColor()
-        navigationPageControl.dotSize = 3.8
-        navigationPageControl.dotSpacing = 4.0
-        navigationPageControl.dotColor = UIColor(white: 1, alpha: 0.4)
-        navigationPageControl.selectedDotColor = .whiteColor()
-        navigationPageControl.userInteractionEnabled = false
-        return navigationPageControl
-    }()
-    var navigationItemsViews = [UIView]()
-    
-    var landscapeTitleFont = UIFont.systemFontOfSize(14)
-    var portraitTitleFont = UIFont.systemFontOfSize(18)
+    public var settings = TwitterPagerTabStripSettings()
     
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -69,20 +50,19 @@ public class TwitterPagerTabStripViewController: PagerTabStripViewController, Pa
     public override func viewDidLoad() {
         super.viewDidLoad()
         
-        if navigationView.superview == nil {
-            navigationItem.titleView = navigationView
+        if titleView.superview == nil {
+            navigationItem.titleView = titleView
         }
         
-        navigationView.addObserver(self, forKeyPath: "frame", options: [.New, .Old], context: nil)
-        navigationView.frame = CGRectMake(0, 0, CGRectGetWidth(navigationController!.navigationBar.frame), CGRectGetHeight(navigationController!.navigationBar.frame))
+        // keep watching the frame of titleView
+        titleView.addObserver(self, forKeyPath: "frame", options: [.New, .Old], context: nil)
         
-        if navigationScrollView.superview == nil {
-            navigationView.addSubview(navigationScrollView)
+        guard let navigationController = navigationController  else {
+            fatalError("TwitterPagerTabStripViewController should be embedded in a UINavigationController")
         }
-        if navigationPageControl.superview == nil {
-            navigationView.addSubview(navigationPageControl)
-        }
-        
+        titleView.frame = CGRectMake(0, 0, CGRectGetWidth(navigationController.navigationBar.frame), CGRectGetHeight(navigationController.navigationBar.frame))
+        titleView.addSubview(titleScrollView)
+        titleView.addSubview(pageControl)
         reloadNavigationViewItems()
     }
     
@@ -91,19 +71,20 @@ public class TwitterPagerTabStripViewController: PagerTabStripViewController, Pa
         guard isViewLoaded() else { return }
         
         reloadNavigationViewItems()
-        setNavigationViewItemsPosition()
+        setNavigationViewItemsPosition(updateAlpha: true)
     }
     
     // MARK: - PagerTabStripViewControllerDelegate
     
     public func pagerTabStripViewController(pagerTabStripViewController: PagerTabStripViewController, updateIndicatorFromIndex fromIndex: Int, toIndex: Int) throws {
-        
+        fatalError()
     }
     
     public func pagerTabStripViewController(pagerTabStripViewController: PagerTabStripViewController, updateIndicatorFromIndex fromIndex: Int, toIndex: Int, withProgressPercentage progressPercentage: CGFloat, indexWasChanged: Bool) throws {
-        let distance = getDistanceValue()
-        var xOffset: CGFloat = 0
         
+        // move indicator scroll view
+        let distance = distanceValue
+        var xOffset: CGFloat = 0
         if fromIndex < toIndex {
             xOffset = distance * CGFloat(fromIndex) + distance * progressPercentage
         }
@@ -114,112 +95,133 @@ public class TwitterPagerTabStripViewController: PagerTabStripViewController, Pa
             xOffset = distance * CGFloat(fromIndex)
         }
         
-        navigationScrollView.contentOffset = CGPointMake(xOffset, 0)
-        setAlphaWithOffset(xOffset)
-        navigationPageControl.currentPage = currentIndex
+        titleScrollView.contentOffset = CGPointMake(xOffset, 0)
+        
+        // update alpha of titles
+        setAlphaWithOffset(xOffset, andDistance: distance)
+        
+        // update page control page
+        pageControl.currentPage = currentIndex
     }
     
     public override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
-        guard object as! UIView == navigationView && keyPath! == "frame" && change![NSKeyValueChangeKindKey] as! UInt == NSKeyValueChange.Setting.rawValue else { return }
-        
+        guard object === titleView && keyPath == "frame" && change?[NSKeyValueChangeKindKey] as? UInt == NSKeyValueChange.Setting.rawValue else { return }
         let oldRect = change![NSKeyValueChangeOldKey]!.CGRectValue
         let newRect = change![NSKeyValueChangeOldKey]!.CGRectValue
-        guard !CGRectEqualToRect(oldRect, newRect) else { return }
-        
-        navigationScrollView.frame = CGRectMake(0, 0, CGRectGetWidth(navigationView.frame), CGRectGetHeight(navigationScrollView.frame))
-        setNavigationViewItemsPosition()
+        if CGRectEqualToRect(oldRect, newRect) {
+            titleScrollView.frame = CGRectMake(0, 0, CGRectGetWidth(titleView.frame), CGRectGetHeight(titleScrollView.frame))
+            setNavigationViewItemsPosition(updateAlpha: true)
+        }
     }
     
     deinit {
-        navigationView.removeObserver(self, forKeyPath: "frame")
-    }
-    
-    // MARK: - Helpers
-    
-    func reloadNavigationViewItems() {
-        for item in navigationItemsViews {
-            item.removeFromSuperview()
-        }
-        
-        navigationItemsViews.removeAll()
-        
-        for (index, item) in viewControllers.enumerate() {
-            let child = item as! PagerTabStripChildItem
-            let childHeader = child.childHeaderForPagerTabStripViewController(self)
-            
-            let navTitleLabel = createNewLabelWithText(childHeader.title)
-            navTitleLabel.alpha = currentIndex == index ? 1 : 0
-            navTitleLabel.textColor = childHeader.color ?? .whiteColor()
-            navigationScrollView.addSubview(navTitleLabel)
-            navigationItemsViews.append(navTitleLabel)
-        }
-    }
-    
-    private func setNavigationViewItemsPosition() {
-        setNavigationViewItemsPosition(true)
-    }
-    
-    private func setNavigationViewItemsPosition(updateAlpha: Bool) {
-        let distance = getDistanceValue()
-        let isPortrait = UIDeviceOrientationIsPortrait(UIDevice.currentDevice().orientation)
-        let labelHeightSpace: CGFloat = isPortrait ? 34 : 25
-        for (index, view) in navigationItemsViews.enumerate() {
-            let label = view as! UILabel
-            if updateAlpha {
-                label.alpha = currentIndex == index ? 1 : 0
-            }
-            label.font = isPortrait ? portraitTitleFont : landscapeTitleFont
-            let viewSize = getLabelSize(label)
-            let originX = distance - viewSize.width/2 + CGFloat(index) * distance
-            let originY = (CGFloat(labelHeightSpace) - viewSize.height) / 2
-            label.frame = CGRectMake(originX, originY + 2, viewSize.width, viewSize.height)
-            label.tag = index
-        }
-        
-        let xOffset = distance * CGFloat(currentIndex)
-        navigationScrollView.contentOffset = CGPointMake(xOffset, 0)
-        
-        navigationPageControl.numberOfPages = navigationItemsViews.count
-        navigationPageControl.currentPage = currentIndex
-        let viewSize = navigationPageControl.sizeForNumberOfPages(navigationItemsViews.count)
-        let originX = distance - viewSize.width/2
-        navigationPageControl.frame = CGRectMake(originX, labelHeightSpace, viewSize.width, viewSize.height)
-    }
-    
-    private func setAlphaWithOffset(xOffset: CGFloat) {
-        let distance = getDistanceValue()
-        for (index, view) in navigationItemsViews.enumerate() {
-            var alpha: CGFloat = 0
-            if xOffset < distance * CGFloat(index) {
-                alpha = (xOffset - distance * CGFloat(index - 1)) / distance
-            }
-            else {
-                alpha = 1 - ((xOffset - distance * CGFloat(index)) / distance)
-            }
-            view.alpha = alpha
-        }
-    }
-    
-    private func createNewLabelWithText(text :String) -> UILabel {
-        let label = UILabel()
-        label.text = text
-        label.font = landscapeTitleFont
-        label.textColor = .whiteColor()
-        label.alpha = 0
-        return label
-    }
-    
-    private func getLabelSize(label: UILabel) -> CGSize {
-        return (label.text! as NSString).sizeWithAttributes([NSFontAttributeName : label.font])
-    }
-    
-    private func getDistanceValue() -> CGFloat {
-        let middle = navigationController?.navigationBar .convertPoint(navigationController!.navigationBar.center, toView: navigationView)
-        return middle!.x
+        titleView.removeObserver(self, forKeyPath: "frame")
     }
     
     public override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        setNavigationViewItemsPosition(false)
+        setNavigationViewItemsPosition(updateAlpha: false)
+    }
+    
+    // MARK: - Helpers
+    
+    private lazy var titleView: UIView = { [unowned self] in
+        let navigationView = UIView()
+        navigationView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
+        return navigationView
+        }()
+    
+    private lazy var titleScrollView: UIScrollView = { [unowned self] in
+        let titleScrollView = UIScrollView(frame: CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), 44))
+        titleScrollView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
+        titleScrollView.bounces = true
+        titleScrollView.scrollsToTop = false
+        titleScrollView.delegate = self
+        titleScrollView.showsVerticalScrollIndicator = false
+        titleScrollView.showsHorizontalScrollIndicator = false
+        titleScrollView.pagingEnabled = true
+        titleScrollView.userInteractionEnabled = false
+        titleScrollView.alwaysBounceHorizontal = true
+        titleScrollView.alwaysBounceVertical = false
+        return titleScrollView
+    }()
+    
+    private lazy var pageControl: FXPageControl = { [unowned self] in
+        let pageControl = FXPageControl()
+        pageControl.backgroundColor = .clearColor()
+        pageControl.dotSize = 3.8
+        pageControl.dotSpacing = 4.0
+        pageControl.dotColor = self.settings.style.dotColor
+        pageControl.selectedDotColor = self.settings.style.selectedDotColor
+        pageControl.userInteractionEnabled = false
+        return pageControl
+    }()
+    
+    private var childTitleLabels = [UILabel]()
+
+    private func reloadNavigationViewItems() {
+        // remove all child view controller header labels
+        childTitleLabels.forEach { $0.removeFromSuperview() }
+        childTitleLabels.removeAll()
+        for (index, item) in viewControllers.enumerate() {
+            let child = item as! PagerTabStripChildItem
+            let childHeader = child.childHeaderForPagerTabStripViewController(self)
+            let navTitleLabel : UILabel = {
+                let label = UILabel()
+                label.text = childHeader.title
+                label.font = UIApplication.sharedApplication().statusBarOrientation.isPortrait ? settings.style.portraitTitleFont : settings.style.landscapeTitleFont
+                label.textColor = settings.style.titleColor
+                label.alpha = 0
+                return label
+            }()
+            navTitleLabel.alpha = currentIndex == index ? 1 : 0
+            navTitleLabel.textColor = settings.style.titleColor
+            titleScrollView.addSubview(navTitleLabel)
+            childTitleLabels.append(navTitleLabel)
+        }
+    }
+    
+    private func setNavigationViewItemsPosition(updateAlpha updateAlpha: Bool) {
+        let distance = distanceValue
+        let isPortrait = UIApplication.sharedApplication().statusBarOrientation.isPortrait
+        let navBarHeight: CGFloat = navigationController!.navigationBar.frame.size.height
+        for (index, label) in childTitleLabels.enumerate() {
+            if updateAlpha {
+                label.alpha = currentIndex == index ? 1 : 0
+            }
+            label.font = isPortrait ? settings.style.portraitTitleFont : settings.style.landscapeTitleFont
+            let viewSize = label.intrinsicContentSize()
+            let originX = distance - viewSize.width/2 + CGFloat(index) * distance
+            let originY = (CGFloat(navBarHeight) - viewSize.height) / 2
+            label.frame = CGRectMake(originX, originY - 2, viewSize.width, viewSize.height)
+            label.tag = index
+        }
+        
+        let xOffset = distance * CGFloat(currentIndex)
+        titleScrollView.contentOffset = CGPointMake(xOffset, 0)
+        
+        pageControl.numberOfPages = childTitleLabels.count
+        pageControl.currentPage = currentIndex
+        let viewSize = pageControl.sizeForNumberOfPages(childTitleLabels.count)
+        let originX = distance - viewSize.width / 2
+        pageControl.frame = CGRectMake(originX, navBarHeight - 10, viewSize.width, viewSize.height)
+    }
+    
+    private func setAlphaWithOffset(offset: CGFloat, andDistance distance: CGFloat) {
+        for (index, label) in childTitleLabels.enumerate() {
+            label.alpha = {
+                if offset < distance * CGFloat(index) {
+                    return (offset - distance * CGFloat(index - 1)) / distance
+                }
+                else {
+                    return 1 - ((offset - distance * CGFloat(index)) / distance)
+                }
+            }()
+        }
+    }
+    
+    private var distanceValue: CGFloat {
+        let middle = navigationController!.navigationBar.convertPoint(navigationController!.navigationBar.center, toView: titleView)
+        return middle.x
     }
 }
