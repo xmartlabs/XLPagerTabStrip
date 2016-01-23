@@ -59,7 +59,7 @@ public class SegmentedPagerTabStripViewController: PagerTabStripViewController, 
         if segmentedControl.superview == nil {
             navigationItem.titleView = segmentedControl
         }
-        segmentedControl.tintColor = settings.style.segmentedControlColor
+        segmentedControl.tintColor = settings.style.segmentedControlColor ?? segmentedControl.tintColor
         segmentedControl.addTarget(self, action: "segmentedControlChanged:", forControlEvents: .ValueChanged)
         try! reloadSegmentedControl()
     }

@@ -62,6 +62,7 @@ public class TwitterExampleViewController: TwitterPagerTabStripViewController {
         let nItems = 1 + (rand() % 8)
         return Array(childViewControllers.prefix(Int(nItems)))
     }
+    
     @IBAction func reloadTapped(sender: AnyObject) {
         isReload = true
         reloadPagerTabStripView()

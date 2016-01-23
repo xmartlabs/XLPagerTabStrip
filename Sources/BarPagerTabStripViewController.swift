@@ -24,13 +24,26 @@
 
 import Foundation
 
+public struct BarPagerTabStripSettings {
+    
+    public struct Style {
+        public var barBackgroundColor: UIColor?
+        public var selectedBarBackgroundColor: UIColor?
+        public var barHeight: CGFloat? // barHeight is ony set up when the bar is created programatically and not using storyboards or xib files.
+    }
+    
+    public var style = Style()
+}
+
 public class BarPagerTabStripViewController: PagerTabStripViewController, PagerTabStripViewControllerDataSource, PagerTabStripViewControllerIsProgressiveDelegate {
     
+    public var settings = BarPagerTabStripSettings()
+    
     @IBOutlet lazy public var barView: BarView! = { [unowned self] in
-        let barView = BarView(frame: CGRectMake(0, 0, self.view.frame.size.width, 5.0))
-        barView.backgroundColor = .orangeColor()
-        barView.selectedBar.backgroundColor = .blackColor()
+        let barView = BarView(frame: CGRectMake(0, 0, self.view.frame.size.width, self.settings.style.barHeight ?? 5.0))
         barView.autoresizingMask = .FlexibleWidth
+        barView.backgroundColor = .blackColor()
+        barView.selectedBar.backgroundColor = .whiteColor()
         return barView
     }()
     
@@ -38,6 +51,12 @@ public class BarPagerTabStripViewController: PagerTabStripViewController, PagerT
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         delegate = self
         datasource = self
+    }
+    
+    public override func viewDidLoad() {
+        super.viewDidLoad()
+        barView.backgroundColor = self.settings.style.barBackgroundColor ?? barView.backgroundColor
+        barView.selectedBar.backgroundColor = self.settings.style.selectedBarBackgroundColor ?? barView.selectedBar.backgroundColor
     }
     
     required public init?(coder aDecoder: NSCoder) {

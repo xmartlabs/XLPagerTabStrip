@@ -49,8 +49,6 @@ public class ButtonBarView: UICollectionView {
     public var shouldCellsFillAvailiableWidth = true
     var selectedBarHeight = 5
     var selectedBarAlignment: SelectedBarAlignment = .Center
-    var labelFont: UIFont? = nil
-    var leftRightMargin: Int? = nil
     var selectedIndex = 0
     
     required public init?(coder aDecoder: NSCoder) {

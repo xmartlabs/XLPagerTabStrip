@@ -35,7 +35,7 @@ class ChildExampleViewController: UIViewController, PagerTabStripChildItem {
         label.text = "XLPagerTabStrip"
         
         view.addSubview(label)
-        view.backgroundColor = UIColor.whiteColor()
+        view.backgroundColor = .whiteColor()
         
         view.addConstraint(NSLayoutConstraint(item: label, attribute: .CenterX, relatedBy: .Equal, toItem: view, attribute: .CenterX, multiplier: 1, constant: 0))
         view.addConstraint(NSLayoutConstraint(item: label, attribute: .CenterY, relatedBy: .Equal, toItem: view, attribute: .CenterY, multiplier: 1, constant: -50))

@@ -94,5 +94,4 @@ public class NavButtonBarExampleViewController: ButtonBarPagerTabStripViewContro
         pagerOptions = rand() % 2 == 0 ? pagerOptions.union(.IsElasticIndicatorLimit) : (pagerOptions.remove(.IsElasticIndicatorLimit) ?? pagerOptions)
         super.reloadPagerTabStripView()
     }
-
 }

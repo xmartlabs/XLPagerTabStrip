@@ -26,6 +26,7 @@ import UIKit
 import XLPagerTabStrip
 
 public class ReloadExampleViewController: UIViewController {
+    
     @IBOutlet lazy public var titleLabel: UILabel! = {
         let label = UILabel()
         return label

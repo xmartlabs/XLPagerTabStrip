@@ -24,7 +24,27 @@
 
 import Foundation
 
+public struct ButtonBarPagerTabStripSettings {
+    
+    public struct Style {
+        public var buttonBarBackgroundColor: UIColor?
+        public var selectedBarBackgroundColor: UIColor?
+        
+        public var buttonBarItemFont: UIFont = UIFont.boldSystemFontOfSize(18)
+        public var buttonBarItemLeftRightMargin: CGFloat = 8
+        
+        // only used if button bar is created programaticaly and not using storyboards or nib files
+        public var buttonBarLeftContentInset: CGFloat?
+        public var buttonBarRightContentInset: CGFloat?
+        public var buttonBarHeight: CGFloat?
+    }
+    
+    public var style = Style()
+}
+
 public class ButtonBarPagerTabStripViewController: PagerTabStripViewController, PagerTabStripViewControllerDataSource, PagerTabStripViewControllerIsProgressiveDelegate, UICollectionViewDelegate, UICollectionViewDataSource {
+    
+    public var settings = ButtonBarPagerTabStripSettings()
     
     public var changeCurrentIndex: ((oldCell: ButtonBarViewCell?, newCell: ButtonBarViewCell?, animated: Bool) -> Void)?
     public var changeCurrentIndexProgressive: ((oldCell: ButtonBarViewCell?, newCell: ButtonBarViewCell?, progressPercentage: CGFloat, changeCurrentIndex: Bool, animated: Bool) -> Void)?
@@ -32,9 +52,9 @@ public class ButtonBarPagerTabStripViewController: PagerTabStripViewController, 
     @IBOutlet public lazy var buttonBarView: ButtonBarView! = { [unowned self] in
         var flowLayout = UICollectionViewFlowLayout()
         flowLayout.scrollDirection = .Horizontal
-        flowLayout.sectionInset = UIEdgeInsetsMake(0, 35, 0, 35)
+        flowLayout.sectionInset = UIEdgeInsetsMake(0, self.settings.style.buttonBarLeftContentInset ?? 35, 0, self.settings.style.buttonBarRightContentInset ?? 35)
         
-        let buttonBar: ButtonBarView = ButtonBarView(frame: CGRectMake(0, 0, self.view.frame.size.width, 44), collectionViewLayout: flowLayout)
+        let buttonBar: ButtonBarView = ButtonBarView(frame: CGRectMake(0, 0, self.view.frame.size.width, self.settings.style.buttonBarHeight ?? 44), collectionViewLayout: flowLayout)
         buttonBar.backgroundColor = .orangeColor()
         buttonBar.selectedBar.backgroundColor = .blackColor()
         buttonBar.autoresizingMask = .FlexibleWidth
@@ -80,9 +100,8 @@ public class ButtonBarPagerTabStripViewController: PagerTabStripViewController, 
         flowLayout.scrollDirection = .Horizontal
         buttonBarView.showsHorizontalScrollIndicator = false
         
-        
-        buttonBarView.labelFont = UIFont.boldSystemFontOfSize(18)
-        buttonBarView.leftRightMargin = 8
+        buttonBarView.backgroundColor = settings.style.buttonBarBackgroundColor ?? buttonBarView.backgroundColor
+        buttonBarView.selectedBar.backgroundColor = settings.style.selectedBarBackgroundColor ?? buttonBarView.selectedBar.backgroundColor
         
     }
     
@@ -224,7 +243,7 @@ public class ButtonBarPagerTabStripViewController: PagerTabStripViewController, 
     
     public func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCellWithReuseIdentifier("Cell", forIndexPath: indexPath) as? ButtonBarViewCell else {
-            fatalError("UICollectionViewCell should be or extend from XLButtonBarViewCell")
+            fatalError("UICollectionViewCell should be or extend from ButtonBarViewCell")
         }
         let childController = viewControllers[indexPath.item] as! PagerTabStripChildItem
         let childInfo = childController.childHeaderForPagerTabStripViewController(self)
@@ -276,11 +295,11 @@ public class ButtonBarPagerTabStripViewController: PagerTabStripViewController, 
             
             let label = UILabel()
             label.translatesAutoresizingMaskIntoConstraints = false
-            label.font = self.buttonBarView.labelFont!
+            label.font = settings.style.buttonBarItemFont
             label.text = childController.childHeaderForPagerTabStripViewController(self).title
             let labelSize = label.intrinsicContentSize()
             
-            let minimumCellWidth = labelSize.width + CGFloat(self.buttonBarView.leftRightMargin! * 2)
+            let minimumCellWidth = labelSize.width + CGFloat(settings.style.buttonBarItemLeftRightMargin * 2)
             minimumCellWidths.append(minimumCellWidth)
             
             collectionViewContentWidth += minimumCellWidth

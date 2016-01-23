@@ -222,6 +222,7 @@
             <objects>
                 <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="ptL-BW-nEP" sceneMemberID="viewController">
                     <toolbarItems/>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" translucent="NO" id="Ki8-MR-faU">
                         <autoresizingMask key="autoresizingMask"/>
@@ -313,7 +314,7 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell" id="aWZ-BZ-wgL" customClass="ButtonBarViewCell" customModule="XLPagerTabStrip">
-                                        <rect key="frame" x="35" y="1" width="79" height="42"/>
+                                        <rect key="frame" x="35" y="0.5" width="79" height="42"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="79" height="42"/>

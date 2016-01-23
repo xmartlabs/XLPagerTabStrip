@@ -35,7 +35,7 @@ public class SegmentedExampleViewController: SegmentedPagerTabStripViewControlle
         settings.style.segmentedControlColor = .whiteColor()
     }
     
-    // MARK: - XLPagerTabStripViewControllerDataSource
+    // MARK: - PagerTabStripViewControllerDataSource
     
     override public func childViewControllersForPagerTabStripViewController(pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
         let child_1 = TableChildExampleViewController(style: .Plain)
@@ -66,5 +66,4 @@ public class SegmentedExampleViewController: SegmentedPagerTabStripViewControlle
         pagerOptions = rand() % 2 == 0 ? pagerOptions.union(.SkipIntermediateViewControllers) : (pagerOptions.remove(.SkipIntermediateViewControllers) ?? pagerOptions)
         reloadPagerTabStripView()
     }
-    
 }
