@@ -1,4 +1,4 @@
-//  ButtonBarExampleViewControlle.swift
+//  ButtonBarExampleViewController.swift
 //  XLPagerTabStrip ( https://github.com/xmartlabs/XLPagerTabStrip )
 //
 //  Copyright (c) 2016 Xmartlabs ( http://xmartlabs.com )
@@ -25,7 +25,7 @@
 import Foundation
 import XLPagerTabStrip
 
-public class ButtonBarExampleViewControlle: ButtonBarPagerTabStripViewController {
+public class ButtonBarExampleViewController: ButtonBarPagerTabStripViewController {
     
     var isReload = false
     

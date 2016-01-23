@@ -288,10 +288,10 @@
             </objects>
             <point key="canvasLocation" x="1321" y="515"/>
         </scene>
-        <!--Button Bar Example View Controlle-->
+        <!--Button Bar Example View Controller-->
         <scene sceneID="Ctn-j0-KV6">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="KF9-Il-rUn" customClass="ButtonBarExampleViewControlle" customModule="Example" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="KF9-Il-rUn" customClass="ButtonBarExampleViewController" customModule="Example" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="PhK-DQ-FzX"/>
                         <viewControllerLayoutGuide type="bottom" id="DoJ-0a-eFQ"/>

@@ -29,14 +29,16 @@ public class NavButtonBarExampleViewController: ButtonBarPagerTabStripViewContro
     var isReload = false
     
     public override func viewDidLoad() {
+        // set up style before super view did load is executed
+        settings.style.buttonBarBackgroundColor = .clearColor()
+        settings.style.selectedBarBackgroundColor = .orangeColor()
+        //-
         super.viewDidLoad()
         
         if pagerOptions.contains(.IsProgressiveIndicator) {
             pagerOptions = pagerOptions.remove(.IsProgressiveIndicator)!
         }
         
-        buttonBarView.backgroundColor = .clearColor()
-        buttonBarView.selectedBar.backgroundColor = .orangeColor()
         buttonBarView.removeFromSuperview()
         navigationController?.navigationBar.addSubview(buttonBarView)
         
@@ -93,5 +95,10 @@ public class NavButtonBarExampleViewController: ButtonBarPagerTabStripViewContro
         pagerOptions = rand() % 2 == 0 ? pagerOptions.union(.IsProgressiveIndicator) : (pagerOptions.remove(.IsProgressiveIndicator) ?? pagerOptions)
         pagerOptions = rand() % 2 == 0 ? pagerOptions.union(.IsElasticIndicatorLimit) : (pagerOptions.remove(.IsElasticIndicatorLimit) ?? pagerOptions)
         super.reloadPagerTabStripView()
+    }
+    
+    public override func configureCell(cell: ButtonBarViewCell, childInfo: ChildItemInfo) {
+        super.configureCell(cell, childInfo: childInfo)
+        cell.backgroundColor = .clearColor()
     }
 }
