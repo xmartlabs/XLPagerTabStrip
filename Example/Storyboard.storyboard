@@ -300,6 +300,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="487"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zn6-8Q-9P3">
+                                <rect key="frame" x="0.0" y="43" width="600" height="443"/>
+                            </scrollView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="FH0-FX-IMd" customClass="ButtonBarView" customModule="XLPagerTabStrip">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
                                 <color key="backgroundColor" red="0.027450980390000001" green="0.72549019609999998" blue="0.60784313729999995" alpha="1" colorSpace="calibratedRGB"/>
@@ -312,53 +315,24 @@
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="35" minY="0.0" maxX="35" maxY="0.0"/>
                                 </collectionViewFlowLayout>
-                                <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell" id="aWZ-BZ-wgL" customClass="ButtonBarViewCell" customModule="XLPagerTabStrip">
-                                        <rect key="frame" x="35" y="1" width="79" height="42"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="79" height="42"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Idp-Ip-IhM">
-                                                    <rect key="frame" x="17" y="10" width="45" height="21"/>
-                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        </view>
-                                        <constraints>
-                                            <constraint firstAttribute="centerX" secondItem="Idp-Ip-IhM" secondAttribute="centerX" constant="0.5" id="pih-0U-0bL"/>
-                                            <constraint firstAttribute="centerY" secondItem="Idp-Ip-IhM" secondAttribute="centerY" constant="0.5" id="zfA-qf-esp"/>
-                                        </constraints>
-                                        <connections>
-                                            <outlet property="label" destination="Idp-Ip-IhM" id="mtZ-b6-rE0"/>
-                                        </connections>
-                                    </collectionViewCell>
-                                </cells>
+                                <cells/>
                             </collectionView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mcV-6K-P6b" customClass="UIScrollView">
-                                <rect key="frame" x="-5" y="43" width="610" height="444"/>
-                                <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
-                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="trailing" secondItem="zn6-8Q-9P3" secondAttribute="trailing" id="00Y-OX-DEu"/>
                             <constraint firstItem="FH0-FX-IMd" firstAttribute="leading" secondItem="nbo-eG-9Of" secondAttribute="leading" id="9Vk-yi-Pua"/>
-                            <constraint firstAttribute="trailing" secondItem="mcV-6K-P6b" secondAttribute="trailing" constant="-5" id="Ext-Th-Ehh"/>
-                            <constraint firstItem="mcV-6K-P6b" firstAttribute="leading" secondItem="nbo-eG-9Of" secondAttribute="leading" constant="-5" id="MLz-uv-OaE"/>
-                            <constraint firstItem="DoJ-0a-eFQ" firstAttribute="top" secondItem="mcV-6K-P6b" secondAttribute="bottom" id="nPm-AC-pyc"/>
+                            <constraint firstItem="zn6-8Q-9P3" firstAttribute="leading" secondItem="nbo-eG-9Of" secondAttribute="leading" id="dYD-LR-3dl"/>
+                            <constraint firstItem="zn6-8Q-9P3" firstAttribute="top" secondItem="PhK-DQ-FzX" secondAttribute="bottom" constant="43" id="rzn-Vc-SYa"/>
                             <constraint firstItem="FH0-FX-IMd" firstAttribute="top" secondItem="PhK-DQ-FzX" secondAttribute="bottom" id="s00-0U-AXh"/>
-                            <constraint firstItem="mcV-6K-P6b" firstAttribute="top" secondItem="FH0-FX-IMd" secondAttribute="bottom" id="stn-uq-Zft"/>
+                            <constraint firstItem="DoJ-0a-eFQ" firstAttribute="top" secondItem="zn6-8Q-9P3" secondAttribute="bottom" constant="1" id="wfO-Dh-ZIP"/>
                             <constraint firstAttribute="trailing" secondItem="FH0-FX-IMd" secondAttribute="trailing" id="z4H-9f-Vyy"/>
                         </constraints>
                     </view>
                     <toolbarItems/>
                     <connections>
                         <outlet property="buttonBarView" destination="FH0-FX-IMd" id="c7n-e6-pxW"/>
-                        <outlet property="containerView" destination="mcV-6K-P6b" id="feg-Vf-NRY"/>
+                        <outlet property="containerView" destination="zn6-8Q-9P3" id="4xs-sV-fxb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ls9-Xb-7by" userLabel="First Responder" sceneMemberID="firstResponder"/>

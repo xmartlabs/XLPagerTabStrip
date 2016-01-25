@@ -138,12 +138,6 @@ public class ButtonBarPagerTabStripViewController: PagerTabStripViewController, 
     public override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         buttonBarView.layoutIfNeeded()
-        isViewAppearing = true
-    }
-    
-    public override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
-        isViewAppearing = false
     }
     
     public override func viewDidLayoutSubviews() {
@@ -169,17 +163,6 @@ public class ButtonBarPagerTabStripViewController: PagerTabStripViewController, 
         buttonBarView.moveToIndex(currentIndex, animated: false, swipeDirection: .None, pagerScroll: .ScrollOnlyIfOutOfScreen)
     }
     
-    // MARK: - View Rotation
-    
-    public override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
-        super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
-        
-        isViewRotating = true
-        coordinator.animateAlongsideTransition(nil) { [weak self] _ in
-            self?.isViewRotating = false
-        }
-    }
-    
     // MARK: - Public Methods
     
     public override func reloadPagerTabStripView() {
@@ -194,11 +177,9 @@ public class ButtonBarPagerTabStripViewController: PagerTabStripViewController, 
         var numberOfLargeCells = 0
         var totalWidthOfLargeCells: CGFloat = 0
         
-        for minimumCellWidthValue in minimumCellWidths {
-            if minimumCellWidthValue > suggestedStretchedCellWidth {
-                totalWidthOfLargeCells += minimumCellWidthValue
-                numberOfLargeCells++
-            }
+        for minimumCellWidthValue in minimumCellWidths where minimumCellWidthValue > suggestedStretchedCellWidth {
+            totalWidthOfLargeCells += minimumCellWidthValue
+            numberOfLargeCells++
         }
         
         guard numberOfLargeCells > previousNumberOfLargeCells else { return suggestedStretchedCellWidth }
@@ -358,6 +339,5 @@ public class ButtonBarPagerTabStripViewController: PagerTabStripViewController, 
     }
     
     private var shouldUpdateButtonBarView = true
-    private var isViewAppearing = false
-    private var isViewRotating = false
+    
 }

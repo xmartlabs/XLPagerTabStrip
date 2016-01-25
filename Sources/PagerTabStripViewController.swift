@@ -105,10 +105,16 @@ public class PagerTabStripViewController: UIViewController, UIScrollViewDelegate
         reloadViewControllers()
     }
     
+    public override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        isViewAppearing = true
+    }
+    
     override public func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         lastSize = containerView.bounds.size
         updateIfNeeded()
+        isViewAppearing = false
     }
     
     override public func viewDidLayoutSubviews(){
@@ -302,8 +308,10 @@ public class PagerTabStripViewController: UIViewController, UIScrollViewDelegate
     
     public override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
+        isViewRotating = true
         pageBeforeRotate = currentIndex
         coordinator.animateAlongsideTransition(nil) { [weak self] _ in
+            self?.isViewRotating = false
             guard let me = self else { return }
             me.currentIndex = me.pageBeforeRotate
             me.updateIfNeeded()
@@ -369,5 +377,7 @@ public class PagerTabStripViewController: UIViewController, UIScrollViewDelegate
     private var lastContentOffset: CGFloat = 0.0
     private var pageBeforeRotate = 0
     private var lastSize = CGSizeMake(0, 0)
+    internal var isViewRotating = false
+    internal var isViewAppearing = false
     
 }

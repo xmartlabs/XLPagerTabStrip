@@ -131,11 +131,6 @@ public class BaseButtonBarPagerTabStripViewController<ButtonBarCellType : UIColl
     
     public override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
-        
-        isViewRotating = true
-        coordinator.animateAlongsideTransition(nil) { [weak self] _ in
-            self?.isViewRotating = false
-        }
     }
     
     // MARK: - Public Methods
@@ -310,9 +305,6 @@ public class BaseButtonBarPagerTabStripViewController<ButtonBarCellType : UIColl
     }
     
     private var shouldUpdateButtonBarView = true
-    private var isViewAppearing = false
-    private var isViewRotating = false
-    
 }
 
 
