@@ -28,7 +28,7 @@ public struct ChildItemInfo {
     
     public var title: String
     public var image: UIImage?
-        public var highlightedImage: UIImage?
+    public var highlightedImage: UIImage?
     
     public init(title: String) {
         self.title = title

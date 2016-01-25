@@ -48,11 +48,14 @@ class TableChildExampleViewController: UITableViewController, PagerTabStripChild
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return DataProvider.sharedInstance.postsData.count
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell : PostCell = tableView.dequeueReusableCellWithIdentifier(kCellIdentifier, forIndexPath: indexPath) as! PostCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(kCellIdentifier, forIndexPath: indexPath) as! PostCell
+        let data = DataProvider.sharedInstance.postsData.objectAtIndex(indexPath.row) as!
+    NSDictionary
+        cell.configureWithData(data)
         return cell
     }
     

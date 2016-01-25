@@ -25,5 +25,22 @@
 import UIKit
 
 public class PostCell: UITableViewCell {
-
+    
+    
+    @IBOutlet weak var userImage: UIImageView!
+    @IBOutlet weak var postName: UILabel!
+    @IBOutlet weak var postText: UILabel!
+    
+    public override func awakeFromNib() {
+        super.awakeFromNib()
+        userImage.layer.cornerRadius = 10.0
+    }
+    
+    
+    func configureWithData(data: NSDictionary){
+        postName.text = data["post"]!["user"]!!["name"] as? String
+        postText.text = data["post"]!["text"] as? String
+        userImage.image = UIImage(named: postName.text!.stringByReplacingOccurrencesOfString(" ", withString: "_"))
+        
+    }
 }
