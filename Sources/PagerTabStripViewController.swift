@@ -166,7 +166,7 @@ public class PagerTabStripViewController: UIViewController, UIScrollViewDelegate
     //MARK: - Helpers
     
     public func updateIfNeeded() {
-        if !CGSizeEqualToSize(lastSize, containerView.bounds.size){
+        if isViewLoaded() && !CGSizeEqualToSize(lastSize, containerView.bounds.size){
             updateContent()
         }
     }
@@ -311,8 +311,8 @@ public class PagerTabStripViewController: UIViewController, UIScrollViewDelegate
         isViewRotating = true
         pageBeforeRotate = currentIndex
         coordinator.animateAlongsideTransition(nil) { [weak self] _ in
-            self?.isViewRotating = false
             guard let me = self else { return }
+            me.isViewRotating = false
             me.currentIndex = me.pageBeforeRotate
             me.updateIfNeeded()
         }
