@@ -5,25 +5,41 @@
 <img src="https://img.shields.io/badge/platform-iOS-blue.svg?style=flat" alt="Platform iOS" />
 <a href="https://developer.apple.com/swift"><img src="https://img.shields.io/badge/swift2-compatible-4BC51D.svg?style=flat" alt="Swift 2 compatible" /></a>
 <a href="https://github.com/Carthage/Carthage"><img src="https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat" alt="Carthage compatible" /></a>
-<a href="https://cocoapods.org/pods/XLActionController"><img src="https://img.shields.io/badge/pod-1.0.0-blue.svg" alt="CocoaPods compatible" /></a>
+<a href="https://cocoapods.org/pods/XLActionController"><img src="https://img.shields.io/badge/pod-4.0.0-blue.svg" alt="CocoaPods compatible" /></a>
 <a href="https://raw.githubusercontent.com/xmartlabs/XLPagerTabStrip/master/LICENSE"><img src="http://img.shields.io/badge/license-MIT-blue.svg?style=flat" alt="License: MIT" /></a>
 </p>
 
-By [Xmartlabs SRL](http://xmartlabs.com).
+Made with ❤️ By [Xmartlabs](http://xmartlabs.com).
 
-## Inroduction
+Android [PagerTabStrip](http://developer.android.com/reference/android/support/v4/view/PagerTabStrip.html) for iOS!
 
-XLPagerTabStrip is a library to .......
+**XLPagerTabStrip** is a *Container View Controller* that allows us to switch easily among a collection of view controllers. Pan gesture can be used to move on to next or previous view controller. It shows a interactive indicator of the current, previous, next child view controllers.
 
-<!-- <img src="Example/XLPagerTabStrip.gif" width="300"/> -->
+![Screenshot of native Calendar Event Example](XLPagerTabStrip/Demo/PagerSlidingTabStrip.gif)
 
 ## Usage
 
+In order to use the library we just need to provide the list of child view controllers to show, these view controller should provide the information (title or image) to show in the associated indicator.
+
+Let's see how to do this:
+
+The fist step is select the way we want to show the indicator. The library provides  As you may have noticed the library provides differents ways to show
+
+Using XLPagerTabStrip is as easy as following these steps:
+
+1. Import the library
+
 ```swift
 import XLPagerTabStrip
-..
-.
 ```
+
+2.
+
+
+
+
+
+
 
 ## Requirements
 
@@ -55,7 +71,7 @@ You can also experiment and learn with the *XLPagerTabStrip Playground* which is
 To install XLPagerTabStrip, simply add the following line to your Podfile:
 
 ```ruby
-pod 'XLPagerTabStrip', '~> 1.0'
+pod 'XLPagerTabStrip', '~> 4.0'
 ```
 
 #### Carthage
