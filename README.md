@@ -9,37 +9,81 @@
 <a href="https://raw.githubusercontent.com/xmartlabs/XLPagerTabStrip/master/LICENSE"><img src="http://img.shields.io/badge/license-MIT-blue.svg?style=flat" alt="License: MIT" /></a>
 </p>
 
-Made with ❤️ By [Xmartlabs](http://xmartlabs.com).
+Made with ❤️ by [Xmartlabs](http://xmartlabs.com).
 
 Android [PagerTabStrip](http://developer.android.com/reference/android/support/v4/view/PagerTabStrip.html) for iOS!
 
 **XLPagerTabStrip** is a *Container View Controller* that allows us to switch easily among a collection of view controllers. Pan gesture can be used to move on to next or previous view controller. It shows a interactive indicator of the current, previous, next child view controllers.
 
-![Screenshot of native Calendar Event Example](XLPagerTabStrip/Demo/PagerSlidingTabStrip.gif)
+![Screenshot of native Calendar Event Example](Example/PagerSlidingTabStrip.gif)
+
+As you see in the images above the library provides many ways to show the PagerTabStrip menu.
 
 ## Usage
 
-In order to use the library we just need to provide the list of child view controllers to show, these view controller should provide the information (title or image) to show in the associated indicator.
 
-Let's see how to do this:
+Basically we just need to provide the list of child view controllers to show and these view controllers should provide the information (title or image) to show in the associated indicator.
 
-The fist step is select the way we want to show the indicator. The library provides  As you may have noticed the library provides differents ways to show
+Let's see the steps to do this:
 
-Using XLPagerTabStrip is as easy as following these steps:
+##### Choose which kind of pager we want to create
 
-1. Import the library
+Fist step is choose how we want to show your pager step controller, it must extend from any of the following controllers: `TwitterPagerTabStripViewController`, `ButtonBarPagerTabStripViewController`, `SegmentedPagerTabStripViewController`, `BarPagerTabStripViewController`. All these build-in pager controllers extend from the base class `PagerTabStripViewController`.
+
+> You can also make your menu controller by extending directly from `PagerTabStripViewController` in case pager menu doesn't fit your needs.
 
 ```swift
 import XLPagerTabStrip
+
+class MyPagerTabStripName: ButtonBarPagerTabStripViewController {
+  ..
+}
 ```
 
-2.
+##### Connect outlets and add layout constraints
+
+We strongly recommend to use IB to set up your page controller views.
+
+Drag into the Storyboard a `UIViewController` and set up its class with your pager controller class (`MyPagerTabStripName`).
+Drag a `UIScrollView` into your view controller view and connect `PagerTabStripViewController` `contentView` outlet with the view.
+Depending on which kind of paging view controller you  are working with you may have to connect more outlets.
+
+For `BarPagerTabStripViewController` you should connect `barView` outlet.
+For `ButtonBarPagerTabStripViewController` you should connect `buttonBarView` outlet.
+For `SegmentedPagerTabStripViewController` you should connect `segmentedControl` outlet.
+`TwitterPagerTabStripViewController` doesn't require to connect any additional outlet.
 
 
+> The example project storyboard show how to connect this outlets.
+
+##### Provide view controllers that will appear embedded into the PagerTabStrip view controller
+
+Do that by overriding `func childViewControllersForPagerTabStripViewController(pagerTabStripController: PagerTabStripViewController) -> [UIViewController]` method.
+
+```swift
+override public func childViewControllersForPagerTabStripViewController(pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
+  return [MyEmbeddedViewController(), MySecondEmbeddedViewController()]
+}
+```
+
+> The method above is the only method contained in `PagerTabStripViewControllerDataSource`. We don't need to explicitly conform to it since base base pager class already does it.
 
 
+##### Provide information to show in each indicator
 
+Every UIViewController that will appear in the PagerTabStrip controller should conforms to `PagerTabStripChildItem`. The only method this protocol requires to implement is `func childHeaderForPagerTabStripViewController(pagerTabStripController: PagerTabStripViewController) -> ChildItemInfo`
+ which provides the information required to show the PagerTabStrip menu (indicator) associated with the view controller.
 
+```swift
+class MyEmbeddedViewController: UITableViewController, PagerTabStripChildItem {
+
+  func childInfoForPagerTabStripViewController(pagerTabStripController: PagerTabStripViewController) -> ChildItemInfo {
+    return ChildItemInfo(title: "My Child title")
+  }
+}
+```
+
+That's it! We're done! 🍻🍻
 
 ## Requirements
 
@@ -50,7 +94,7 @@ import XLPagerTabStrip
 
 * If you **want to contribute** please feel free to **submit pull requests**.
 * If you **have a feature request** please **open an issue**.
-* If you **found a bug** or **need help** please **check older issues, [FAQ](#faq) and threads on [StackOverflow](http://stackoverflow.com/questions/tagged/XLPagerTabStrip) (Tag 'XLPagerTabStrip') before submitting an issue.**.
+* If you **found a bug** or **need help** please **check older issues, [FAQ](#faq) and threads on [StackOverflow](http://stackoverflow.com/questions/tagged/XLPagerTabStrip) (Tag 'XLPagerTabStrip') before submitting an issue**.
 
 Before contribute check the [CONTRIBUTING](https://github.com/xmartlabs/XLPagerTabStrip/blob/master/CONTRIBUTING.md) file for more info.
 
@@ -81,19 +125,14 @@ pod 'XLPagerTabStrip', '~> 4.0'
 To install XLPagerTabStrip, simply add the following line to your Cartfile:
 
 ```ogdl
-github "xmartlabs/XLPagerTabStrip" ~> 1.0
+github "xmartlabs/XLPagerTabStrip" ~> 4.0
 ```
 
 ## Author
 
-* [Xmartlabs SRL](https://github.com/xmartlabs) ([@xmartlabs](https://twitter.com/xmartlabs))
+* [Martin Barreto](https://github.com/mtnBarreto) ([@mtnBarreto](https://twitter.com/mtnBarreto))
 
-## FAQ
 
-#### How to .....
-
-You can do it by conforming to .....
-
-# Change Log
+## Change Log
 
 This can be found in the [CHANGELOG.md](CHANGELOG.md) file.

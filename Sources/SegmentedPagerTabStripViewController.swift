@@ -75,11 +75,11 @@ public class SegmentedPagerTabStripViewController: PagerTabStripViewController, 
         segmentedControl.removeAllSegments()
         for (index, item) in viewControllers.enumerate(){
             let child = item as! PagerTabStripChildItem
-            if let image = child.childHeaderForPagerTabStripViewController(self).image {
+            if let image = child.childInfoForPagerTabStripViewController(self).image {
                 segmentedControl.insertSegmentWithImage(image, atIndex: index, animated: false)
             }
             else {
-                segmentedControl.insertSegmentWithTitle(child.childHeaderForPagerTabStripViewController(self).title, atIndex: index, animated: false)
+                segmentedControl.insertSegmentWithTitle(child.childInfoForPagerTabStripViewController(self).title, atIndex: index, animated: false)
             }
         }
         segmentedControl.selectedSegmentIndex = currentIndex

@@ -43,7 +43,7 @@ class ChildExampleViewController: UIViewController, PagerTabStripChildItem {
     
     // MARK: - PagerTabStripChildItem
     
-    func childHeaderForPagerTabStripViewController(pagerTabStripController: PagerTabStripViewController) -> ChildItemInfo {
-        return ChildItemInfo(title: "View", image: nil, highlightedImage: nil)
+    func childInfoForPagerTabStripViewController(pagerTabStripController: PagerTabStripViewController) -> ChildItemInfo {
+        return ChildItemInfo(title: "View")
     }
 }

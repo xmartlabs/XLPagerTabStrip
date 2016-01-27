@@ -30,7 +30,7 @@ import Foundation
 
 public protocol PagerTabStripChildItem {
     
-    func childHeaderForPagerTabStripViewController(pagerTabStripController: PagerTabStripViewController) -> ChildItemInfo
+    func childInfoForPagerTabStripViewController(pagerTabStripController: PagerTabStripViewController) -> ChildItemInfo
 }
 
 public protocol PagerTabStripViewControllerDelegate: class {
