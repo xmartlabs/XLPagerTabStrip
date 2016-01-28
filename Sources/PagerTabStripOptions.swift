@@ -24,18 +24,55 @@
 
 import Foundation
 
-public struct PagerTabStripOptions : OptionSetType {
+//public struct PagerTabStripOptions : OptionSetType {
+//    
+//    private enum PagerTabStripOption : Int {
+//        case SkipIntermediateViewControllers = 1, IsProgressiveIndicator = 2, IsElasticIndicatorLimit = 4
+//    }
+//    
+//    public let rawValue: Int
+//    public init(rawValue: Int) { self.rawValue = rawValue }
+//    private init(_ option:PagerTabStripOption){ self.rawValue = option.rawValue }
+//    
+//    public static let SkipIntermediateViewControllers  = PagerTabStripOptions(.SkipIntermediateViewControllers)
+//    public static let IsProgressiveIndicator  = PagerTabStripOptions(.IsProgressiveIndicator)
+//    public static let IsElasticIndicatorLimit = PagerTabStripOptions(.IsElasticIndicatorLimit)
+//
+//}
+
+public enum PagerTabStripBehaviour {
+    case Common(skipIntermediteViewControllers: Bool)
+    case Progressive(skipIntermediteViewControllers: Bool, elasticIndicatorLimit: Bool)
     
-    private enum PagerTabStripOption : Int {
-        case SkipIntermediateViewControllers = 1, IsProgressiveIndicator = 2, IsElasticIndicatorLimit = 4
+    public var skipIntermediateViewControllers: Bool {
+        switch self {
+        case .Common(let skipIntermediteControllers):
+            return skipIntermediteControllers
+        case .Progressive(let skipIntermediteControllers, _):
+            return skipIntermediteControllers
+        }
     }
     
-    public let rawValue: Int
-    public init(rawValue: Int) { self.rawValue = rawValue }
-    private init(_ option:PagerTabStripOption){ self.rawValue = option.rawValue }
     
-    public static let SkipIntermediateViewControllers  = PagerTabStripOptions(.SkipIntermediateViewControllers)
-    public static let IsProgressiveIndicator  = PagerTabStripOptions(.IsProgressiveIndicator)
-    public static let IsElasticIndicatorLimit = PagerTabStripOptions(.IsElasticIndicatorLimit)
-
+    public var isProgressiveIndicator: Bool {
+        switch self {
+        case .Common(_):
+            return false
+        case .Progressive(_, _):
+            return true
+        }
+    }
+    
+    public var isElasticIndicatorLimit: Bool {
+        switch self {
+        case .Common(_):
+            return false
+        case .Progressive(_, let elasticIndicatorLimit):
+            return elasticIndicatorLimit
+        }
+    }
 }
+
+
+
+

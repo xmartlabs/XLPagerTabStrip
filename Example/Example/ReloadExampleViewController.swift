@@ -70,7 +70,7 @@ class ReloadExampleViewController: UIViewController {
             return bool ? "YES" : "NO"
         }
         
-        titleLabel.text = "Progressive = \(stringFromBool(pagerTabStripViewController.pagerOptions.contains(.IsProgressiveIndicator)))  ElasticLimit = \(stringFromBool(pagerTabStripViewController.pagerOptions.contains(.IsElasticIndicatorLimit)))"
+        titleLabel.text = "Progressive = \(stringFromBool(pagerTabStripViewController.pagerBehaviour.isProgressiveIndicator))  ElasticLimit = \(stringFromBool(pagerTabStripViewController.pagerBehaviour.isElasticIndicatorLimit))"
         
         (navigationItem.titleView as? UILabel)?.text = titleLabel.text
         navigationItem.titleView?.sizeToFit()

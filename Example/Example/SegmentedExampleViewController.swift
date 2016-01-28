@@ -63,7 +63,8 @@ class SegmentedExampleViewController: SegmentedPagerTabStripViewController {
     
     @IBAction func reloadTapped(sender: UIBarButtonItem) {
         isReload = true
-        pagerOptions = rand() % 2 == 0 ? pagerOptions.union(.SkipIntermediateViewControllers) : (pagerOptions.remove(.SkipIntermediateViewControllers) ?? pagerOptions)
+        pagerBehaviour = .Common(skipIntermediteViewControllers: rand() % 2 == 0)
+        pagerBehaviour.skipIntermediateViewControllers
         reloadPagerTabStripView()
     }
 }

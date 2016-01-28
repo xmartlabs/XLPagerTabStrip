@@ -68,9 +68,12 @@ class BarExampleViewController: BarPagerTabStripViewController {
     
     override func reloadPagerTabStripView() {
         isReload = true
-        pagerOptions = rand() % 2 == 0 ? pagerOptions.union(.SkipIntermediateViewControllers) : (pagerOptions.remove(.SkipIntermediateViewControllers) ?? pagerOptions)
-        pagerOptions = rand() % 2 == 0 ? pagerOptions.union(.IsProgressiveIndicator) : (pagerOptions.remove(.IsProgressiveIndicator) ?? pagerOptions)
-        pagerOptions = rand() % 2 == 0 ? pagerOptions.union(.IsElasticIndicatorLimit) : (pagerOptions.remove(.IsElasticIndicatorLimit) ?? pagerOptions)
+        if rand() % 2 == 0 {
+            pagerBehaviour = .Progressive(skipIntermediteViewControllers: rand() % 2 == 0 , elasticIndicatorLimit: rand() % 2 == 0 )
+        }
+        else {
+            pagerBehaviour = .Common(skipIntermediteViewControllers: rand() % 2 == 0)
+        }
         super.reloadPagerTabStripView()
     }
 }

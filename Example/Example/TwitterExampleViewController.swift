@@ -28,13 +28,6 @@ import XLPagerTabStrip
 class TwitterExampleViewController: TwitterPagerTabStripViewController {
     var isReload = false
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        pagerOptions = pagerOptions.union(.IsProgressiveIndicator)
-        pagerOptions = pagerOptions.union(.IsElasticIndicatorLimit)
-    }
-    
     override func childViewControllersForPagerTabStripViewController(pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
         
         let child_1 = TableChildExampleViewController(style: .Plain, itemInfo: "TableView")

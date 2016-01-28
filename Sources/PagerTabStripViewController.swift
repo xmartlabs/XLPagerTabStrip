@@ -62,7 +62,7 @@ public class PagerTabStripViewController: UIViewController, UIScrollViewDelegate
     public weak var delegate: PagerTabStripViewControllerDelegate?
     public weak var datasource: PagerTabStripViewControllerDataSource?
     
-    public var pagerOptions = PagerTabStripOptions.SkipIntermediateViewControllers.union(.IsProgressiveIndicator).union(.IsElasticIndicatorLimit)
+    public var pagerBehaviour = PagerTabStripBehaviour.Progressive(skipIntermediteViewControllers: true, elasticIndicatorLimit: true)
     
     public private(set) var viewControllers = [UIViewController]()
     public private(set) var currentIndex = 0
@@ -131,7 +131,7 @@ public class PagerTabStripViewController: UIViewController, UIScrollViewDelegate
             currentIndex = index
             return
         }
-        if animated && pagerOptions.contains(.SkipIntermediateViewControllers) && abs(currentIndex - index) > 1 {
+        if animated && pagerBehaviour.skipIntermediateViewControllers && abs(currentIndex - index) > 1 {
             var tmpViewControllers = viewControllers
             let currentChildVC = viewControllers[currentIndex]
             let fromIndex = currentIndex < index ? index - 1 : index + 1
@@ -253,7 +253,7 @@ public class PagerTabStripViewController: UIViewController, UIScrollViewDelegate
         currentIndex = newCurrentIndex
         let changeCurrentIndex = newCurrentIndex != oldCurrentIndex
         
-        if let progressiveDeledate = self as? PagerTabStripViewControllerIsProgressiveDelegate where pagerOptions.contains(.IsProgressiveIndicator) {
+        if let progressiveDeledate = self as? PagerTabStripViewControllerIsProgressiveDelegate where pagerBehaviour.isProgressiveIndicator {
             
             let (fromIndex, toIndex, scrollPercentage) = progressiveIndicatorData(virtualPage)
             try! progressiveDeledate.pagerTabStripViewController(self, updateIndicatorFromIndex: fromIndex, toIndex: toIndex, withProgressPercentage: scrollPercentage, indexWasChanged: changeCurrentIndex)
@@ -355,7 +355,7 @@ public class PagerTabStripViewController: UIViewController, UIScrollViewDelegate
                 }
             }
         }
-        let scrollPercentage = pagerOptions.contains(.IsElasticIndicatorLimit) ? self.scrollPercentage : ((toIndex < 0 || toIndex >= count) ? 0.0 : self.scrollPercentage)
+        let scrollPercentage = pagerBehaviour.isElasticIndicatorLimit ? self.scrollPercentage : ((toIndex < 0 || toIndex >= count) ? 0.0 : self.scrollPercentage)
         return (fromIndex, toIndex, scrollPercentage)
     }
     
