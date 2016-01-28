@@ -65,6 +65,8 @@ public class SpotifyExampleViewController: ButtonBarPagerTabStripViewController 
         return [child_1, child_2]
     }
     
+    // MARK: - Actions
+    
     @IBAction func closeAction(sender: UIButton) {
         dismissViewControllerAnimated(true, completion: nil)
     }

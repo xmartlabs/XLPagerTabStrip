@@ -27,10 +27,10 @@ import XLPagerTabStrip
 
 class ChildExampleViewController: UIViewController, PagerTabStripChildItem {
     
-    var indicatorTitle = "View"
+    var itemInfo: ChildItemInfo = "View"
     
-    init(title: String) {
-        indicatorTitle = title
+    init(itemInfo: ChildItemInfo) {
+        self.itemInfo = itemInfo
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -55,6 +55,6 @@ class ChildExampleViewController: UIViewController, PagerTabStripChildItem {
     // MARK: - PagerTabStripChildItem
     
     func childInfoForPagerTabStripViewController(pagerTabStripController: PagerTabStripViewController) -> ChildItemInfo {
-        return ChildItemInfo(title: indicatorTitle)
+        return itemInfo
     }
 }

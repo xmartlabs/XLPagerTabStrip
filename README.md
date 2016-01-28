@@ -102,7 +102,7 @@ That's it! We're done! 🍻🍻
 * If you **have a feature request** please **open an issue**.
 * If you **found a bug** or **need help** please **check older issues, [FAQ](#faq) and threads on [StackOverflow](http://stackoverflow.com/questions/tagged/XLPagerTabStrip) (Tag 'XLPagerTabStrip') before submitting an issue**.
 
-Before contribute check the [CONTRIBUTING](https://github.com/xmartlabs/XLPagerTabStrip/blob/master/CONTRIBUTING.md) file for more info.
+Before contribute check the [CONTRIBUTING](CONTRIBUTING.md) file for more info.
 
 If you use **XLPagerTabStrip** in your app We would love to hear about it! Drop us a line on [twitter](https://twitter.com/xmartlabs).
 

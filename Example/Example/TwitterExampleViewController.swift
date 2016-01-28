@@ -38,13 +38,13 @@ class TwitterExampleViewController: TwitterPagerTabStripViewController {
     override func childViewControllersForPagerTabStripViewController(pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
         
         let child_1 = TableChildExampleViewController(style: .Plain, itemInfo: "TableView")
-        let child_2 = ChildExampleViewController(title: "View")
+        let child_2 = ChildExampleViewController(itemInfo: "View")
         let child_3 = TableChildExampleViewController(style: .Grouped, itemInfo: "TableView 2")
-        let child_4 = ChildExampleViewController(title: "View 2")
+        let child_4 = ChildExampleViewController(itemInfo: "View 2")
         let child_5 = TableChildExampleViewController(style: .Plain, itemInfo: "TableView 3")
-        let child_6 = ChildExampleViewController(title: "View 3")
+        let child_6 = ChildExampleViewController(itemInfo: "View 3")
         let child_7 = TableChildExampleViewController(style: .Grouped, itemInfo: "TableView 4")
-        let child_8 = ChildExampleViewController(title: "View 4")
+        let child_8 = ChildExampleViewController(itemInfo: "View 4")
         
         guard isReload else {
             return [child_1, child_2, child_3, child_4, child_5, child_6, child_7, child_8]

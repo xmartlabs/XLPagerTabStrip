@@ -56,10 +56,11 @@ class InstagramExampleViewController: ButtonBarPagerTabStripViewController {
     
     override func childViewControllersForPagerTabStripViewController(pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
         let child_1 = TableChildExampleViewController(style: .Plain, itemInfo: "FOLLOWING")
-        let child_2 = ChildExampleViewController(title: "YOU")
+        let child_2 = ChildExampleViewController(itemInfo: "YOU")
         return [child_1, child_2]
     }
 
+    // MARK: - Custom Action
     
     @IBAction func closeAction(sender: UIButton) {
         dismissViewControllerAnimated(true, completion: nil)

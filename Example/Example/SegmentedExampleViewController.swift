@@ -39,9 +39,9 @@ class SegmentedExampleViewController: SegmentedPagerTabStripViewController {
     
     override func childViewControllersForPagerTabStripViewController(pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
         let child_1 = TableChildExampleViewController(style: .Plain, itemInfo: "Table View")
-        let child_2 = ChildExampleViewController(title: "View")
+        let child_2 = ChildExampleViewController(itemInfo: "View")
         let child_3 = TableChildExampleViewController(style: .Grouped, itemInfo: "Table View 2")
-        let child_4 = ChildExampleViewController(title: "View 2")
+        let child_4 = ChildExampleViewController(itemInfo: "View 2")
         
         guard isReload else {
             return [child_1, child_2, child_3, child_4]

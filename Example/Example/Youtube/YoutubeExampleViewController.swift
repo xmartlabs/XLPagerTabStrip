@@ -27,9 +27,6 @@ import XLPagerTabStrip
 
 class YoutubeExampleViewController: BaseButtonBarPagerTabStripViewController<YoutubeIconCell> {
 
-    let homeImage = UIImage(named: "home")
-    let trendingImage = UIImage(named: "trending")
-    let profileImage = UIImage(named: "profile")
     let redColor = UIColor(red: 221/255.0, green: 0/255.0, blue: 19/255.0, alpha: 1.0)
     let unselectedIconColor = UIColor(red: 73/255.0, green: 8/255.0, blue: 10/255.0, alpha: 1.0)
 
@@ -74,8 +71,8 @@ class YoutubeExampleViewController: BaseButtonBarPagerTabStripViewController<You
     
     override func childViewControllersForPagerTabStripViewController(pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
         let child_1 = TableChildExampleViewController(style: .Plain, itemInfo: ChildItemInfo(title: "HOME", image: UIImage(named: "home")))
-        let child_2 = TableChildExampleViewController(style: .Grouped, itemInfo: ChildItemInfo(title: "TRENDING", image: UIImage(named: "trending")))
-        let child_3 = TableChildExampleViewController(style: .Plain, itemInfo: ChildItemInfo(title: "PROFILE", image: UIImage(named: "profile")))
+        let child_2 = TableChildExampleViewController(style: .Plain, itemInfo: ChildItemInfo(title: "TRENDING", image: UIImage(named: "trending")))
+        let child_3 = TableChildExampleViewController(style: .Grouped, itemInfo: ChildItemInfo(title: "PROFILE", image: UIImage(named: "profile")))
         return [child_1, child_2, child_3]
     }
     
@@ -95,6 +92,8 @@ class YoutubeExampleViewController: BaseButtonBarPagerTabStripViewController<You
             })
         }
     }
+    
+    // MARK: - Actions
 
     @IBAction func closeAction(sender: UIButton) {
         dismissViewControllerAnimated(true, completion: nil)

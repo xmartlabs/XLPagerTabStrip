@@ -28,7 +28,6 @@ import XLPagerTabStrip
 class TableChildExampleViewController: UITableViewController, PagerTabStripChildItem {
     
     let cellIdentifier = "postCell"
-    
     var blackTheme = false
     var itemInfo = ChildItemInfo(title: "View")
     
