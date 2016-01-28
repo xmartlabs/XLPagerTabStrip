@@ -26,11 +26,12 @@ Basically we just need to provide the list of child view controllers to show and
 
 Let's see the steps to do this:
 
-##### Choose which kind of pager we want to create
+##### Choose which type of pager we want to create
 
-Fist step is choose how we want to show your pager step controller, it must extend from any of the following controllers: `TwitterPagerTabStripViewController`, `ButtonBarPagerTabStripViewController`, `SegmentedPagerTabStripViewController`, `BarPagerTabStripViewController`. All these build-in pager controllers extend from the base class `PagerTabStripViewController`.
+Fist step is choose how we want to show our pager step controller, it must extend from any of the following controllers: `TwitterPagerTabStripViewController`, `ButtonBarPagerTabStripViewController`, `SegmentedPagerTabStripViewController`, `BarPagerTabStripViewController`.
 
-> You can also make your menu controller by extending directly from `PagerTabStripViewController` in case pager menu doesn't fit your needs.
+> All these build-in pager controllers extend from the base class `PagerTabStripViewController`.
+> You can also make your custom pager controller by extending directly from `PagerTabStripViewController` in case no pager menu type fits your needs.
 
 ```swift
 import XLPagerTabStrip
@@ -44,21 +45,21 @@ class MyPagerTabStripName: ButtonBarPagerTabStripViewController {
 
 We strongly recommend to use IB to set up your page controller views.
 
-Drag into the Storyboard a `UIViewController` and set up its class with your pager controller class (`MyPagerTabStripName`).
-Drag a `UIScrollView` into your view controller view and connect `PagerTabStripViewController` `contentView` outlet with the view.
-Depending on which kind of paging view controller you  are working with you may have to connect more outlets.
+Drag into the storyboard a `UIViewController` and set up its class with your pager controller (`MyPagerTabStripName`).
+Drag a `UIScrollView` into your view controller view and connect `PagerTabStripViewController` `contentView` outlet with the scroll view.
+
+Depending on which type of paging view controller you are working with you may have to connect more outlets.
 
 For `BarPagerTabStripViewController` you should connect `barView` outlet.
 For `ButtonBarPagerTabStripViewController` you should connect `buttonBarView` outlet.
 For `SegmentedPagerTabStripViewController` you should connect `segmentedControl` outlet.
 `TwitterPagerTabStripViewController` doesn't require to connect any additional outlet.
 
-
-> The example project storyboard show how to connect this outlets.
+> The example project contains a example for each pager controller type and you can look into it to see how views were added and how outlets were connected.
 
 ##### Provide view controllers that will appear embedded into the PagerTabStrip view controller
 
-Do that by overriding `func childViewControllersForPagerTabStripViewController(pagerTabStripController: PagerTabStripViewController) -> [UIViewController]` method.
+You can provide the view controllers by overriding `func childViewControllersForPagerTabStripViewController(pagerTabStripController: PagerTabStripViewController) -> [UIViewController]` method.
 
 ```swift
 override public func childViewControllersForPagerTabStripViewController(pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
@@ -66,7 +67,7 @@ override public func childViewControllersForPagerTabStripViewController(pagerTab
 }
 ```
 
-> The method above is the only method contained in `PagerTabStripViewControllerDataSource`. We don't need to explicitly conform to it since base base pager class already does it.
+> The method above is the only method contained in `PagerTabStripViewControllerDataSource`. We don't need to explicitly conform to it since base pager class already does it.
 
 
 ##### Provide information to show in each indicator
@@ -84,6 +85,11 @@ class MyEmbeddedViewController: UITableViewController, PagerTabStripChildItem {
 ```
 
 That's it! We're done! 🍻🍻
+
+
+## Customization
+
+
 
 ## Requirements
 
