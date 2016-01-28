@@ -44,3 +44,19 @@ public struct ChildItemInfo {
         self.highlightedImage = highlightedImage
     }
 }
+
+
+extension ChildItemInfo : StringLiteralConvertible {
+    
+    public init(stringLiteral value: String){
+        title = value
+    }
+    
+    public init(extendedGraphemeClusterLiteral value: String){
+        title = value
+    }
+    
+    public init(unicodeScalarLiteral value: String){
+        title = value
+    }
+}
