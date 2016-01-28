@@ -64,8 +64,8 @@ public class PagerTabStripViewController: UIViewController, UIScrollViewDelegate
     
     public var pagerOptions = PagerTabStripOptions.SkipIntermediateViewControllers.union(.IsProgressiveIndicator).union(.IsElasticIndicatorLimit)
     
-    private(set) var viewControllers = [UIViewController]()
-    private(set) var currentIndex = 0
+    public private(set) var viewControllers = [UIViewController]()
+    public private(set) var currentIndex = 0
     
     public var pageWidth: CGFloat {
         return CGRectGetWidth(containerView.bounds)
