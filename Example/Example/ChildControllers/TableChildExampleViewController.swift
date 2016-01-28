@@ -26,14 +26,30 @@ import Foundation
 import XLPagerTabStrip
 
 class TableChildExampleViewController: UITableViewController, PagerTabStripChildItem {
-    let kCellIdentifier = "postCell"
+    
+    let cellIdentifier = "postCell"
+    
+    var blackTheme = false
+    var itemInfo = ChildItemInfo(title: "View")
+    
+    init(style: UITableViewStyle, itemInfo: ChildItemInfo) {
+        self.itemInfo = itemInfo
+        super.init(style: style)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.tableView.registerNib(UINib(nibName: "PostCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: kCellIdentifier)
-        self.tableView.estimatedRowHeight = 60.0;
-        self.tableView.rowHeight = UITableViewAutomaticDimension;
+        tableView.registerNib(UINib(nibName: "PostCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: cellIdentifier)
+        tableView.estimatedRowHeight = 60.0;
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.allowsSelection = false
+        if blackTheme {
+            tableView.backgroundColor = UIColor(red: 15/255.0, green: 16/255.0, blue: 16/255.0, alpha: 1.0)
+        }
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -52,16 +68,19 @@ class TableChildExampleViewController: UITableViewController, PagerTabStripChild
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(kCellIdentifier, forIndexPath: indexPath) as! PostCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! PostCell
         let data = DataProvider.sharedInstance.postsData.objectAtIndex(indexPath.row) as!
     NSDictionary
         cell.configureWithData(data)
+        if blackTheme {
+            cell.changeStylToBlack()
+        }
         return cell
     }
     
     // MARK: - PagerTabStripChildItem
     
     func childInfoForPagerTabStripViewController(pagerTabStripController: PagerTabStripViewController) -> ChildItemInfo {
-        return ChildItemInfo(title: "Table View")
+        return itemInfo
     }
 }

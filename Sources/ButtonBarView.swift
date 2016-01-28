@@ -46,8 +46,11 @@ public class ButtonBarView: UICollectionView {
         return bar
     }()
     
-    public var shouldCellsFillAvailiableWidth = true
-    var selectedBarHeight = 5
+    internal var selectedBarHeight: CGFloat = 4 {
+        didSet {
+            self.updateSlectedBarYPosition()
+        }
+    }
     var selectedBarAlignment: SelectedBarAlignment = .Center
     var selectedIndex = 0
     
@@ -161,5 +164,12 @@ public class ButtonBarView: UICollectionView {
         contentOffset = max(0, contentOffset)
         contentOffset = min(contentSize.width - frame.size.width, contentOffset)
         return contentOffset
+    }
+    
+    private func updateSlectedBarYPosition() {
+        var selectedBarFrame = selectedBar.frame
+        selectedBarFrame.origin.y = frame.size.height - selectedBarHeight
+        selectedBarFrame.size.height = selectedBarHeight
+        selectedBar.frame = selectedBarFrame
     }
 }

@@ -24,14 +24,14 @@
 
 import UIKit
 
-public class PostCell: UITableViewCell {
+internal class PostCell: UITableViewCell {
     
     
     @IBOutlet weak var userImage: UIImageView!
     @IBOutlet weak var postName: UILabel!
     @IBOutlet weak var postText: UILabel!
     
-    public override func awakeFromNib() {
+    override func awakeFromNib() {
         super.awakeFromNib()
         userImage.layer.cornerRadius = 10.0
     }
@@ -41,6 +41,14 @@ public class PostCell: UITableViewCell {
         postName.text = data["post"]!["user"]!!["name"] as? String
         postText.text = data["post"]!["text"] as? String
         userImage.image = UIImage(named: postName.text!.stringByReplacingOccurrencesOfString(" ", withString: "_"))
-        
+    }
+    
+    
+    func changeStylToBlack(){
+        userImage?.layer.cornerRadius = 30.0
+        postText.text = nil
+        postName.font = UIFont(name: "HelveticaNeue-Light", size:18) ?? UIFont.systemFontOfSize(18)
+        postName.textColor = .whiteColor()
+        backgroundColor = UIColor(red: 15/255.0, green: 16/255.0, blue: 16/255.0, alpha: 1.0)
     }
 }

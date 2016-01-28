@@ -43,14 +43,21 @@ public struct ButtonBarPagerTabStripSettings {
     
     public struct Style {
         public var buttonBarBackgroundColor: UIColor?
-        public var selectedBarBackgroundColor: UIColor?
-        
-        public var buttonBarItemFont: UIFont = UIFont.boldSystemFontOfSize(18)
-        public var buttonBarItemLeftRightMargin: CGFloat = 8
-        
-        // only used if button bar is created programaticaly and not using storyboards or nib files
+        public var buttonBarMinimumInteritemSpacing: CGFloat?
+        public var buttonBarMinimumLineSpacing: CGFloat?
         public var buttonBarLeftContentInset: CGFloat?
         public var buttonBarRightContentInset: CGFloat?
+
+        public var selectedBarBackgroundColor: UIColor?
+        public var selectedBarHeight: CGFloat = 5
+        
+        public var buttonBarItemBackgroundColor: UIColor?
+        public var buttonBarItemFont = UIFont.systemFontOfSize(18)
+        public var buttonBarItemLeftRightMargin: CGFloat = 8
+        public var buttonBarItemTitleColor: UIColor?
+        public var buttonBarItemsShouldFillAvailiableWidth = true
+       
+        // only used if button bar is created programaticaly and not using storyboards or nib files
         public var buttonBarHeight: CGFloat?
     }
     
@@ -76,7 +83,6 @@ public class ButtonBarPagerTabStripViewController: PagerTabStripViewController, 
     @IBOutlet public lazy var buttonBarView: ButtonBarView! = { [unowned self] in
         var flowLayout = UICollectionViewFlowLayout()
         flowLayout.scrollDirection = .Horizontal
-        flowLayout.sectionInset = UIEdgeInsetsMake(0, self.settings.style.buttonBarLeftContentInset ?? 35, 0, self.settings.style.buttonBarRightContentInset ?? 35)
         let buttonBar = ButtonBarView(frame: CGRectMake(0, 0, self.view.frame.size.width, self.settings.style.buttonBarHeight ?? 44), collectionViewLayout: flowLayout)
         buttonBar.backgroundColor = .orangeColor()
         buttonBar.selectedBar.backgroundColor = .blackColor()
@@ -119,11 +125,15 @@ public class ButtonBarPagerTabStripViewController: PagerTabStripViewController, 
         buttonBarView.scrollsToTop = false
         let flowLayout = buttonBarView.collectionViewLayout as! UICollectionViewFlowLayout
         flowLayout.scrollDirection = .Horizontal
+        flowLayout.minimumInteritemSpacing = settings.style.buttonBarMinimumInteritemSpacing ?? flowLayout.minimumInteritemSpacing
+        flowLayout.minimumLineSpacing = settings.style.buttonBarMinimumLineSpacing ?? flowLayout.minimumLineSpacing
+        flowLayout.sectionInset = UIEdgeInsetsMake(0, self.settings.style.buttonBarLeftContentInset ?? 35, 0, self.settings.style.buttonBarRightContentInset ?? 35)
+
         buttonBarView.showsHorizontalScrollIndicator = false
-        
         buttonBarView.backgroundColor = settings.style.buttonBarBackgroundColor ?? buttonBarView.backgroundColor
         buttonBarView.selectedBar.backgroundColor = settings.style.selectedBarBackgroundColor ?? buttonBarView.selectedBar.backgroundColor
         
+        buttonBarView.selectedBarHeight = settings.style.selectedBarHeight ?? buttonBarView.selectedBarHeight
         // register button bar item cell
         switch buttonBarItemSpec {
         case .NibFile(let nibName, let bundle, _):
@@ -132,7 +142,6 @@ public class ButtonBarPagerTabStripViewController: PagerTabStripViewController, 
             buttonBarView.registerClass(ButtonBarViewCell.self, forCellWithReuseIdentifier:"Cell")
         }
         //-
-        
     }
     
     public override func viewWillAppear(animated: Bool) {
@@ -259,6 +268,18 @@ public class ButtonBarPagerTabStripViewController: PagerTabStripViewController, 
         let childController = viewControllers[indexPath.item] as! PagerTabStripChildItem
         let childInfo = childController.childInfoForPagerTabStripViewController(self)
         
+        cell.label.text = childInfo.title
+        cell.label.font = settings.style.buttonBarItemFont ?? cell.label.font
+        cell.label.textColor = settings.style.buttonBarItemTitleColor ?? cell.label.textColor
+        cell.contentView.backgroundColor = settings.style.buttonBarItemBackgroundColor ?? cell.contentView.backgroundColor
+        cell.backgroundColor = settings.style.buttonBarItemBackgroundColor ?? cell.backgroundColor
+        if let image = childInfo.image {
+            cell.imageView.image = image
+        }
+        if let highlightedImage = childInfo.highlightedImage {
+            cell.imageView.highlightedImage = highlightedImage
+        }
+
         configureCell(cell, childInfo: childInfo)
         
         if pagerOptions.contains(.IsProgressiveIndicator) {
@@ -271,7 +292,6 @@ public class ButtonBarPagerTabStripViewController: PagerTabStripViewController, 
                 changeCurrentIndex(oldCell: currentIndex == indexPath.item ? nil : cell, newCell: currentIndex == indexPath.item ? cell : nil, animated: false)
             }
         }
-        
         return cell
     }
     
@@ -285,13 +305,6 @@ public class ButtonBarPagerTabStripViewController: PagerTabStripViewController, 
     }
     
     public func configureCell(cell: ButtonBarViewCell, childInfo: ChildItemInfo){
-        cell.label.text = childInfo.title
-        if let image = childInfo.image {
-            cell.imageView.image = image
-        }
-        if let highlightedImage = childInfo.highlightedImage {
-            cell.imageView.highlightedImage = highlightedImage
-        }
     }
     
     private func calculateWidths() -> [CGFloat] {
@@ -321,7 +334,7 @@ public class ButtonBarPagerTabStripViewController: PagerTabStripViewController, 
         
         let collectionViewAvailableVisibleWidth = self.buttonBarView.frame.size.width - flowLayout.sectionInset.left - flowLayout.sectionInset.right
         
-        if self.buttonBarView.shouldCellsFillAvailiableWidth || collectionViewAvailableVisibleWidth < collectionViewContentWidth {
+        if !settings.style.buttonBarItemsShouldFillAvailiableWidth || collectionViewAvailableVisibleWidth < collectionViewContentWidth {
             return minimumCellWidths
         }
         else {

@@ -23,6 +23,7 @@
 // THE SOFTWARE.
 
 import Foundation
+import UIKit
 
 class DataProvider {
     static let sharedInstance = DataProvider()
@@ -33,5 +34,26 @@ class DataProvider {
         return try! NSJSONSerialization.JSONObjectWithData(jsonData!, options: []) as! NSArray
     }()
 }
+
+public class NavController: UINavigationController {
+    
+    
+    public override func preferredStatusBarStyle() -> UIStatusBarStyle {
+        return UIStatusBarStyle.LightContent
+    }
+    
+}
+
+
+public class TabBarController : UITabBarController {
+    
+    public override func preferredStatusBarStyle() -> UIStatusBarStyle {
+        return UIStatusBarStyle.LightContent
+    }
+    
+}
+
+
+
 
 

@@ -75,4 +75,8 @@ public class ReloadExampleViewController: UIViewController {
         (navigationItem.titleView as? UILabel)?.text = titleLabel.text
         navigationItem.titleView?.sizeToFit()
     }
+    
+    public override func preferredStatusBarStyle() -> UIStatusBarStyle {
+        return .LightContent
+    }
 }

@@ -52,7 +52,7 @@ public class BaseButtonBarPagerTabStripViewController<ButtonBarCellType : UIColl
         return self.calculateWidths()
         }()
     
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
+    public override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         delegate = self
         datasource = self
@@ -79,6 +79,8 @@ public class BaseButtonBarPagerTabStripViewController<ButtonBarCellType : UIColl
         buttonBarView.scrollsToTop = false
         let flowLayout = buttonBarView.collectionViewLayout as! UICollectionViewFlowLayout
         flowLayout.scrollDirection = .Horizontal
+        flowLayout.minimumInteritemSpacing = settings.style.buttonBarMinimumInteritemSpacing ?? flowLayout.minimumInteritemSpacing
+        flowLayout.minimumLineSpacing = settings.style.buttonBarMinimumLineSpacing ?? flowLayout.minimumLineSpacing
         buttonBarView.showsHorizontalScrollIndicator = false
         buttonBarView.backgroundColor = settings.style.buttonBarBackgroundColor ?? buttonBarView.backgroundColor
         buttonBarView.selectedBar.backgroundColor = settings.style.selectedBarBackgroundColor ?? buttonBarView.selectedBar.backgroundColor
@@ -287,7 +289,7 @@ public class BaseButtonBarPagerTabStripViewController<ButtonBarCellType : UIColl
         
         let collectionViewAvailableVisibleWidth = self.buttonBarView.frame.size.width - flowLayout.sectionInset.left - flowLayout.sectionInset.right
         
-        if self.buttonBarView.shouldCellsFillAvailiableWidth || collectionViewAvailableVisibleWidth < collectionViewContentWidth {
+        if !settings.style.buttonBarItemsShouldFillAvailiableWidth || collectionViewAvailableVisibleWidth < collectionViewContentWidth {
             return minimumCellWidths
         }
         else {
@@ -324,7 +326,7 @@ public class ExampleBaseButtonBarPagerTabStripViewController: BaseButtonBarPager
         buttonBarItemSpec = .NibFile(nibName: "ButtonCell", bundle: NSBundle(forClass: ButtonBarViewCell.self), width:{ [weak self] (childItemInfo) -> CGFloat in
             let label = UILabel()
             label.translatesAutoresizingMaskIntoConstraints = false
-            label.font = self?.settings.style.buttonBarItemFont
+            label.font = self?.settings.style.buttonBarItemFont ?? label.font
             label.text = childItemInfo.title
             let labelSize = label.intrinsicContentSize()
             return labelSize.width + CGFloat(self?.settings.style.buttonBarItemLeftRightMargin ?? 8 * 2)
