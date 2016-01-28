@@ -24,7 +24,7 @@
 
 import UIKit
 
-internal class PostCell: UITableViewCell {
+class PostCell: UITableViewCell {
     
     
     @IBOutlet weak var userImage: UIImageView!

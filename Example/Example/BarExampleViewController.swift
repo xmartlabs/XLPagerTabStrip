@@ -25,14 +25,14 @@
 import Foundation
 import XLPagerTabStrip
 
-public class BarExampleViewController: BarPagerTabStripViewController {
+class BarExampleViewController: BarPagerTabStripViewController {
     var isReload = false
     
-    required public init?(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
     
-    public override func viewDidLoad() {
+    override func viewDidLoad() {
         
         // set up style before super view did load is executed
         settings.style.selectedBarBackgroundColor = .orangeColor()
@@ -43,7 +43,7 @@ public class BarExampleViewController: BarPagerTabStripViewController {
     
     // MARK: - PagerTabStripViewControllerDataSource
     
-    public override func childViewControllersForPagerTabStripViewController(pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
+    override func childViewControllersForPagerTabStripViewController(pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
         
         let child_1 = TableChildExampleViewController(style: .Plain, itemInfo: "Table View")
         let child_2 = ChildExampleViewController(title: "View")
@@ -66,7 +66,7 @@ public class BarExampleViewController: BarPagerTabStripViewController {
         return Array(childViewControllers.prefix(Int(nItems)))
     }
     
-    public override func reloadPagerTabStripView() {
+    override func reloadPagerTabStripView() {
         isReload = true
         pagerOptions = rand() % 2 == 0 ? pagerOptions.union(.SkipIntermediateViewControllers) : (pagerOptions.remove(.SkipIntermediateViewControllers) ?? pagerOptions)
         pagerOptions = rand() % 2 == 0 ? pagerOptions.union(.IsProgressiveIndicator) : (pagerOptions.remove(.IsProgressiveIndicator) ?? pagerOptions)

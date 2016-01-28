@@ -25,14 +25,14 @@
 import UIKit
 import XLPagerTabStrip
 
-public class ReloadExampleViewController: UIViewController {
+class ReloadExampleViewController: UIViewController {
     
-    @IBOutlet lazy public var titleLabel: UILabel! = {
+    @IBOutlet lazy var titleLabel: UILabel! = {
         let label = UILabel()
         return label
     }()
     
-    public lazy var bigLabel: UILabel = {
+    lazy var bigLabel: UILabel = {
         let bigLabel = UILabel()
         bigLabel.backgroundColor = .clearColor()
         bigLabel.textColor = .whiteColor()
@@ -41,7 +41,7 @@ public class ReloadExampleViewController: UIViewController {
         return bigLabel
     }()
     
-    public override func viewDidLoad() {
+    override func viewDidLoad() {
         super.viewDidLoad()
         
         if let _ = navigationController {
@@ -76,7 +76,7 @@ public class ReloadExampleViewController: UIViewController {
         navigationItem.titleView?.sizeToFit()
     }
     
-    public override func preferredStatusBarStyle() -> UIStatusBarStyle {
+    override func preferredStatusBarStyle() -> UIStatusBarStyle {
         return .LightContent
     }
 }

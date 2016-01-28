@@ -35,19 +35,19 @@ class DataProvider {
     }()
 }
 
-public class NavController: UINavigationController {
+class NavController: UINavigationController {
     
     
-    public override func preferredStatusBarStyle() -> UIStatusBarStyle {
+    override func preferredStatusBarStyle() -> UIStatusBarStyle {
         return UIStatusBarStyle.LightContent
     }
     
 }
 
 
-public class TabBarController : UITabBarController {
+class TabBarController : UITabBarController {
     
-    public override func preferredStatusBarStyle() -> UIStatusBarStyle {
+    override func preferredStatusBarStyle() -> UIStatusBarStyle {
         return UIStatusBarStyle.LightContent
     }
     

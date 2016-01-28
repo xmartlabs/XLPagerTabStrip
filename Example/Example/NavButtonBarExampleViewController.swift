@@ -25,10 +25,10 @@
 import Foundation
 import XLPagerTabStrip
 
-public class NavButtonBarExampleViewController: ButtonBarPagerTabStripViewController {
+class NavButtonBarExampleViewController: ButtonBarPagerTabStripViewController {
     var isReload = false
     
-    public override func viewDidLoad() {
+    override func viewDidLoad() {
         // set up style before super view did load is executed
         settings.style.buttonBarBackgroundColor = .clearColor()
         settings.style.selectedBarBackgroundColor = .orangeColor()
@@ -63,7 +63,7 @@ public class NavButtonBarExampleViewController: ButtonBarPagerTabStripViewContro
     
     // MARK: - PagerTabStripViewControllerDataSource
     
-    public override func childViewControllersForPagerTabStripViewController(pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
+    override func childViewControllersForPagerTabStripViewController(pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
         let child_1 = TableChildExampleViewController(style: .Plain, itemInfo: "Table View")
         let child_2 = ChildExampleViewController(title: "View")
         let child_3 = TableChildExampleViewController(style: .Grouped, itemInfo: "Table View 2")
@@ -90,14 +90,14 @@ public class NavButtonBarExampleViewController: ButtonBarPagerTabStripViewContro
         return Array(childViewControllers.prefix(Int(nItems)))
     }
     
-    public override func reloadPagerTabStripView() {
+    override func reloadPagerTabStripView() {
         isReload = true
         pagerOptions = rand() % 2 == 0 ? pagerOptions.union(.IsProgressiveIndicator) : (pagerOptions.remove(.IsProgressiveIndicator) ?? pagerOptions)
         pagerOptions = rand() % 2 == 0 ? pagerOptions.union(.IsElasticIndicatorLimit) : (pagerOptions.remove(.IsElasticIndicatorLimit) ?? pagerOptions)
         super.reloadPagerTabStripView()
     }
     
-    public override func configureCell(cell: ButtonBarViewCell, childInfo: ChildItemInfo) {
+    override func configureCell(cell: ButtonBarViewCell, childInfo: ChildItemInfo) {
         super.configureCell(cell, childInfo: childInfo)
         cell.backgroundColor = .clearColor()
     }

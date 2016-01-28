@@ -25,12 +25,12 @@
 import Foundation
 import XLPagerTabStrip
 
-public class InstagramExampleViewController: ButtonBarPagerTabStripViewController {
+class InstagramExampleViewController: ButtonBarPagerTabStripViewController {
     
     @IBOutlet weak var shadowView: UIView!
     let blueInstagramColor = UIColor(red: 37/255.0, green: 111/255.0, blue: 206/255.0, alpha: 1.0)
     
-    public override func viewDidLoad() {
+    override func viewDidLoad() {
         // change selected bar color
         settings.style.buttonBarBackgroundColor = .whiteColor()
         settings.style.buttonBarItemBackgroundColor = .whiteColor()
@@ -54,7 +54,7 @@ public class InstagramExampleViewController: ButtonBarPagerTabStripViewControlle
     
     // MARK: - PagerTabStripVIewControllerDataSource
     
-    public override func childViewControllersForPagerTabStripViewController(pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
+    override func childViewControllersForPagerTabStripViewController(pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
         let child_1 = TableChildExampleViewController(style: .Plain, itemInfo: "FOLLOWING")
         let child_2 = ChildExampleViewController(title: "YOU")
         return [child_1, child_2]

@@ -25,17 +25,17 @@
 import Foundation
 import XLPagerTabStrip
 
-public class TwitterExampleViewController: TwitterPagerTabStripViewController {
+class TwitterExampleViewController: TwitterPagerTabStripViewController {
     var isReload = false
     
-    public override func viewDidLoad() {
+    override func viewDidLoad() {
         super.viewDidLoad()
         
         pagerOptions = pagerOptions.union(.IsProgressiveIndicator)
         pagerOptions = pagerOptions.union(.IsElasticIndicatorLimit)
     }
     
-    public override func childViewControllersForPagerTabStripViewController(pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
+    override func childViewControllersForPagerTabStripViewController(pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
         
         let child_1 = TableChildExampleViewController(style: .Plain, itemInfo: "TableView")
         let child_2 = ChildExampleViewController(title: "View")

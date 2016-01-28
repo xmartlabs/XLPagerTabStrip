@@ -25,11 +25,11 @@
 import Foundation
 import XLPagerTabStrip
 
-public class SegmentedExampleViewController: SegmentedPagerTabStripViewController {
+class SegmentedExampleViewController: SegmentedPagerTabStripViewController {
     
     var isReload = false
     
-    required public init?(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         // change segmented style
         settings.style.segmentedControlColor = .whiteColor()
@@ -37,7 +37,7 @@ public class SegmentedExampleViewController: SegmentedPagerTabStripViewControlle
     
     // MARK: - PagerTabStripViewControllerDataSource
     
-    override public func childViewControllersForPagerTabStripViewController(pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
+    override func childViewControllersForPagerTabStripViewController(pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
         let child_1 = TableChildExampleViewController(style: .Plain, itemInfo: "Table View")
         let child_2 = ChildExampleViewController(title: "View")
         let child_3 = TableChildExampleViewController(style: .Grouped, itemInfo: "Table View 2")
