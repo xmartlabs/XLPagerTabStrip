@@ -15,9 +15,16 @@ Android [PagerTabStrip](http://developer.android.com/reference/android/support/v
 
 **XLPagerTabStrip** is a *Container View Controller* that allows us to switch easily among a collection of view controllers. Pan gesture can be used to move on to next or previous view controller. It shows a interactive indicator of the current, previous, next child view controllers.
 
-![Screenshot of native Calendar Event Example](Example/PagerSlidingTabStrip.gif)
+<table>
+  <tr>
+    <th><img src="Example/instagram.gif" width="250"/></th>
+    <th><img src="Example/spotify.gif" width="250"/></th>
+    <th><img src="Example/youtube.gif" width="250"/></th>
+    <th><img src="Example/pagerTabStripTypes.gif" width="250"/></th>
+  </tr>
+</table>
 
-As you see in the images above the library provides many ways to show the PagerTabStrip menu.
+The library provides many ways to show the PagerTabStrip menu.
 
 ## Usage
 

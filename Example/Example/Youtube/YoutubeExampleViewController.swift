@@ -65,14 +65,15 @@ class YoutubeExampleViewController: BaseButtonBarPagerTabStripViewController<You
         }
         super.viewDidLoad()
         navigationController?.navigationBar.shadowImage = UIImage()
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: .Default)
     }
     
     // MARK: - PagerTabStripVIewControllerDataSource
     
     override func childViewControllersForPagerTabStripViewController(pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
-        let child_1 = TableChildExampleViewController(style: .Plain, itemInfo: ChildItemInfo(title: "HOME", image: UIImage(named: "home")))
-        let child_2 = TableChildExampleViewController(style: .Plain, itemInfo: ChildItemInfo(title: "TRENDING", image: UIImage(named: "trending")))
-        let child_3 = TableChildExampleViewController(style: .Grouped, itemInfo: ChildItemInfo(title: "PROFILE", image: UIImage(named: "profile")))
+        let child_1 = TableChildExampleViewController(style: .Plain, itemInfo: ChildItemInfo(title: " HOME", image: UIImage(named: "home")))
+        let child_2 = TableChildExampleViewController(style: .Plain, itemInfo: ChildItemInfo(title: " TRENDING", image: UIImage(named: "trending")))
+        let child_3 = ChildExampleViewController(itemInfo: ChildItemInfo(title: " ACCOUNT", image: UIImage(named: "profile")))
         return [child_1, child_2, child_3]
     }
     
