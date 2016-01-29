@@ -185,7 +185,7 @@ public class PagerTabStripViewController: UIViewController, UIScrollViewDelegate
     
     public func offsetForChildViewController(viewController: UIViewController) throws -> CGFloat{
         guard let index = viewControllers.indexOf(viewController) else {
-            throw PagerTabStripError.ViewControllerNotContainedInPagerTabStripChildViewControllers
+            throw PagerTabStripError.ViewControllerNotContainedInPagerTabStrip
         }
         return offsetForChildIndex(index)
     }

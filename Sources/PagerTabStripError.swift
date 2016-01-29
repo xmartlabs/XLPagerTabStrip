@@ -25,9 +25,5 @@
 import Foundation
 
 public enum PagerTabStripError: ErrorType {
-    case DataSourceMustNotBeNil
-    case ChildViewControllerMustConformToInfoProvider
-    case CurrentIndexIsGreaterThanChildsCount
-    case PagerTabStripChildViewControllersMustContainAtLeastOneViewController
-    case ViewControllerNotContainedInPagerTabStripChildViewControllers
+    case ViewControllerNotContainedInPagerTabStrip
 }

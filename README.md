@@ -46,7 +46,7 @@ This is likely to be the most common pager type. It's used by many well known ap
 
 ### Bar
 
-This mode doesn't show a title neither a image. It only shows a bar that indicates the current view controller.
+This mode doesn't show a title neither an image. It only shows a bar that indicates the current view controller.
 
 <img src="Example/bar.gif" width="250"/>
 
@@ -63,7 +63,6 @@ This mode uses a `UISegmentedControl` to indicates which is the view controller 
 <img src="Example/segmented.gif" width="250"/>
 
 ## Usage
-
 
 Basically we just need to provide the list of child view controllers to show and these view controllers should provide the information (title or image) that will be shown in the associated indicator.
 
@@ -130,7 +129,7 @@ That's it! We're done! 🍻🍻
 
 ## Customization
 
-### Page Behaviour
+##### Pager Behaviour
 
 The pager indicator can be updated progressive as we swipe or at once in the middle of the transition between the view controllers.
 By setting up `pagerBehaviour` property we can choose how the indicator should be updated.
@@ -163,6 +162,27 @@ As you might have noticed `Common` and `Progressive` enumeration cases has `skip
 `skipIntermediteViewControllers` allows us to skip intermediate view controllers when a tab indicator is tapped.
 
 `elasticIndicatorLimit` allows us to tension the indicator when we reach a limit, I mean when we try to move forward from last indicator or move back from first indicator.
+
+##### PagerTabStripDelegate & PagerTabStripIsProgressiveDelegate
+
+Normally we don't need to implement these protocols because each pager type already conforms to it in order to properly update its indicator. Anyway there may be some scenarios when overriding a method come come in handy.
+
+```swift
+public protocol PagerTabStripDelegate: class {
+
+    func pagerTabStripViewController(pagerTabStripViewController: PagerTabStripViewController, updateIndicatorFromIndex fromIndex: Int, toIndex: Int) throws
+}
+
+public protocol PagerTabStripIsProgressiveDelegate : PagerTabStripDelegate {
+
+    func pagerTabStripViewController(pagerTabStripViewController: PagerTabStripViewController, updateIndicatorFromIndex fromIndex: Int, toIndex: Int, withProgressPercentage progressPercentage: CGFloat, indexWasChanged: Bool) throws
+}
+```
+
+> Again, The method invoked by the library depends on the `pagerBehaviour` value.
+
+
+
 
 ### ButtonBar Customization
 
@@ -258,8 +278,6 @@ settings.style.segmentedControlColor: UIColor?
 ## Examples
 
 Follow these 3 steps to run Example project: Clone XLPagerTabStrip repository, open XLPagerTabStrip workspace and run the *Example* project.
-
-You can also experiment and learn with the *XLPagerTabStrip Playground* which is contained in *XLPagerTabStrip.workspace*.
 
 ## Installation
 
