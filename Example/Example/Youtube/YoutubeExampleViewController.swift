@@ -38,7 +38,7 @@ class YoutubeExampleViewController: BaseButtonBarPagerTabStripViewController<You
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         
-        buttonBarItemSpec = ButtonBarItemSpec.NibFile(nibName: "YoutubeIconCell", bundle: NSBundle(forClass: YoutubeIconCell.self), width: { (cell: ChildItemInfo) -> CGFloat in
+        buttonBarItemSpec = ButtonBarItemSpec.NibFile(nibName: "YoutubeIconCell", bundle: NSBundle(forClass: YoutubeIconCell.self), width: { (cell: IndicatorInfo) -> CGFloat in
                 return 55.0
         })
     }
@@ -72,26 +72,26 @@ class YoutubeExampleViewController: BaseButtonBarPagerTabStripViewController<You
     
     // MARK: - PagerTabStripVIewControllerDataSource
     
-    override func childViewControllersForPagerTabStripViewController(pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
-        let child_1 = TableChildExampleViewController(style: .Plain, itemInfo: ChildItemInfo(title: " HOME", image: UIImage(named: "home")))
-        let child_2 = TableChildExampleViewController(style: .Plain, itemInfo: ChildItemInfo(title: " TRENDING", image: UIImage(named: "trending")))
-        let child_3 = ChildExampleViewController(itemInfo: ChildItemInfo(title: " ACCOUNT", image: UIImage(named: "profile")))
+    override func viewControllersForPagerTabStripViewController(pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
+        let child_1 = TableChildExampleViewController(style: .Plain, itemInfo: IndicatorInfo(title: " HOME", image: UIImage(named: "home")))
+        let child_2 = TableChildExampleViewController(style: .Plain, itemInfo: IndicatorInfo(title: " TRENDING", image: UIImage(named: "trending")))
+        let child_3 = ChildExampleViewController(itemInfo: IndicatorInfo(title: " ACCOUNT", image: UIImage(named: "profile")))
         return [child_1, child_2, child_3]
     }
     
     
-    override func configureCell(cell: YoutubeIconCell, childInfo: ChildItemInfo) {
-        cell.iconImage.image = childInfo.image?.imageWithRenderingMode(.AlwaysTemplate)
+    override func configureCell(cell: YoutubeIconCell, indicatorInfo: IndicatorInfo) {
+        cell.iconImage.image = indicatorInfo.image?.imageWithRenderingMode(.AlwaysTemplate)
     }
     
     
     override func pagerTabStripViewController(pagerTabStripViewController: PagerTabStripViewController, updateIndicatorFromIndex fromIndex: Int, toIndex: Int, withProgressPercentage progressPercentage: CGFloat, indexWasChanged: Bool) throws {
         try super.pagerTabStripViewController(pagerTabStripViewController, updateIndicatorFromIndex: fromIndex, toIndex: toIndex, withProgressPercentage: progressPercentage, indexWasChanged: indexWasChanged)
         if indexWasChanged && toIndex > -1 && toIndex < viewControllers.count {
-            let child = viewControllers[toIndex] as! PagerTabStripChildItem
+            let child = viewControllers[toIndex] as! IndicatorInfoProvider
             UIView.performWithoutAnimation({ [weak self] () -> Void in
                 guard let me = self else { return }
-                me.navigationItem.leftBarButtonItem?.title =  child.childInfoForPagerTabStripViewController(me).title
+                me.navigationItem.leftBarButtonItem?.title =  child.infoForPagerTabStripViewController(me).title
             })
         }
     }

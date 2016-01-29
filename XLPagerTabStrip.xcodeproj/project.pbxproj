@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		281BFDC11C511C420090C26F /* ChildItemInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 281BFDC01C511C420090C26F /* ChildItemInfo.swift */; };
-		281BFDC31C511F120090C26F /* PagerTabStripOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 281BFDC21C511F120090C26F /* PagerTabStripOptions.swift */; };
+		281BFDC31C511F120090C26F /* PagerTabStripBehaviour.swift in Sources */ = {isa = PBXBuildFile; fileRef = 281BFDC21C511F120090C26F /* PagerTabStripBehaviour.swift */; };
 		287D0A6E1C4B73BD004566D6 /* XLPagerTabStripTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 287D0A6D1C4B73BD004566D6 /* XLPagerTabStripTests.swift */; };
 		28C83C841C54229A000B2902 /* BaseButtonBarPagerTabStripViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C83C831C54229A000B2902 /* BaseButtonBarPagerTabStripViewController.swift */; };
 		28E098BE1C5002D90083B788 /* PagerTabStripError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E098BD1C5002D90083B788 /* PagerTabStripError.swift */; };
@@ -40,7 +40,7 @@
 
 /* Begin PBXFileReference section */
 		281BFDC01C511C420090C26F /* ChildItemInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChildItemInfo.swift; sourceTree = "<group>"; };
-		281BFDC21C511F120090C26F /* PagerTabStripOptions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PagerTabStripOptions.swift; sourceTree = "<group>"; };
+		281BFDC21C511F120090C26F /* PagerTabStripBehaviour.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PagerTabStripBehaviour.swift; sourceTree = "<group>"; };
 		287D0A6D1C4B73BD004566D6 /* XLPagerTabStripTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = XLPagerTabStripTests.swift; path = Tests/XLPagerTabStripTests.swift; sourceTree = SOURCE_ROOT; };
 		28C83C831C54229A000B2902 /* BaseButtonBarPagerTabStripViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseButtonBarPagerTabStripViewController.swift; sourceTree = "<group>"; };
 		28E098BD1C5002D90083B788 /* PagerTabStripError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PagerTabStripError.swift; sourceTree = "<group>"; };
@@ -58,7 +58,7 @@
 		CB71C6ED1C4EB988008EC806 /* SegmentedPagerTabStripViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentedPagerTabStripViewController.swift; sourceTree = "<group>"; };
 		CB7D614A1C529B9500A957BA /* FXPageControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FXPageControl.h; sourceTree = "<group>"; };
 		CB7D614B1C529B9500A957BA /* FXPageControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FXPageControl.m; sourceTree = "<group>"; };
-		CB86ED6A1C4D6E6C00DA463B /* PagerTabStripViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PagerTabStripViewController.swift; sourceTree = "<group>"; };
+		CB86ED6A1C4D6E6C00DA463B /* PagerTabStripViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = PagerTabStripViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		CBA0A1FA1C502DA300C5748C /* BarPagerTabStripViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarPagerTabStripViewController.swift; sourceTree = "<group>"; };
 		CBA0A1FB1C502DA300C5748C /* BarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarView.swift; sourceTree = "<group>"; };
 		CBBD43611C527E80001A748E /* TwitterPagerTabStripViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitterPagerTabStripViewController.swift; sourceTree = "<group>"; };
@@ -155,7 +155,7 @@
 				28E098BD1C5002D90083B788 /* PagerTabStripError.swift */,
 				28E098BF1C5003130083B788 /* SwipeDirection.swift */,
 				281BFDC01C511C420090C26F /* ChildItemInfo.swift */,
-				281BFDC21C511F120090C26F /* PagerTabStripOptions.swift */,
+				281BFDC21C511F120090C26F /* PagerTabStripBehaviour.swift */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -283,7 +283,7 @@
 				CBBD43621C527E80001A748E /* TwitterPagerTabStripViewController.swift in Sources */,
 				CBA0A1FD1C502DA300C5748C /* BarView.swift in Sources */,
 				CB7D614D1C529B9500A957BA /* FXPageControl.m in Sources */,
-				281BFDC31C511F120090C26F /* PagerTabStripOptions.swift in Sources */,
+				281BFDC31C511F120090C26F /* PagerTabStripBehaviour.swift in Sources */,
 				CBA0A1FC1C502DA300C5748C /* BarPagerTabStripViewController.swift in Sources */,
 				CB71C6EE1C4EB988008EC806 /* SegmentedPagerTabStripViewController.swift in Sources */,
 				28E098BE1C5002D90083B788 /* PagerTabStripError.swift in Sources */,

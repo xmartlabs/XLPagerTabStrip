@@ -230,10 +230,10 @@ public class BaseButtonBarPagerTabStripViewController<ButtonBarCellType : UIColl
         guard let cell = collectionView.dequeueReusableCellWithReuseIdentifier("Cell", forIndexPath: indexPath) as? ButtonBarCellType else {
             fatalError("UICollectionViewCell should be or extend from ButtonBarViewCell")
         }
-        let childController = viewControllers[indexPath.item] as! PagerTabStripChildItem
-        let childInfo = childController.childInfoForPagerTabStripViewController(self)
+        let childController = viewControllers[indexPath.item] as! IndicatorInfoProvider
+        let indicatorInfo = childController.infoForPagerTabStripViewController(self)
         
-        configureCell(cell, childInfo: childInfo)
+        configureCell(cell, indicatorInfo: indicatorInfo)
         
         if pagerBehaviour.isProgressiveIndicator {
             if let changeCurrentIndexProgressive = changeCurrentIndexProgressive {
@@ -258,7 +258,7 @@ public class BaseButtonBarPagerTabStripViewController<ButtonBarCellType : UIColl
         shouldUpdateButtonBarView = true
     }
     
-    public func configureCell(cell: ButtonBarCellType, childInfo: ChildItemInfo){
+    public func configureCell(cell: ButtonBarCellType, indicatorInfo: IndicatorInfo){
         fatalError("You must override this method to set up ButtonBarView cell accordingly")
     }
     
@@ -270,15 +270,15 @@ public class BaseButtonBarPagerTabStripViewController<ButtonBarCellType : UIColl
         var collectionViewContentWidth: CGFloat = 0
         
         for viewController in self.viewControllers {
-            let childController = viewController as! PagerTabStripChildItem
-            let childInfo = childController.childInfoForPagerTabStripViewController(self)
+            let childController = viewController as! IndicatorInfoProvider
+            let indicatorInfo = childController.infoForPagerTabStripViewController(self)
             switch buttonBarItemSpec! {
             case .CellClass(let widthCallback):
-                let width = widthCallback(childInfo)
+                let width = widthCallback(indicatorInfo)
                 minimumCellWidths.append(width)
                 collectionViewContentWidth += width
             case .NibFile(_, _, let widthCallback):
-                let width = widthCallback(childInfo)
+                let width = widthCallback(indicatorInfo)
                 minimumCellWidths.append(width)
                 collectionViewContentWidth += width
             }
@@ -333,12 +333,12 @@ public class ExampleBaseButtonBarPagerTabStripViewController: BaseButtonBarPager
             })
     }
     
-    public override func configureCell(cell: ButtonBarViewCell, childInfo: ChildItemInfo){
-        cell.label.text = childInfo.title
-        if let image = childInfo.image {
+    public override func configureCell(cell: ButtonBarViewCell, indicatorInfo: IndicatorInfo){
+        cell.label.text = indicatorInfo.title
+        if let image = indicatorInfo.image {
             cell.imageView.image = image
         }
-        if let highlightedImage = childInfo.highlightedImage {
+        if let highlightedImage = indicatorInfo.highlightedImage {
             cell.imageView.highlightedImage = highlightedImage
         }
     }

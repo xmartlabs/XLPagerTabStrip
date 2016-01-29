@@ -24,18 +24,44 @@ Android [PagerTabStrip](http://developer.android.com/reference/android/support/v
   </tr>
 </table>
 
-The library provides many ways to show the PagerTabStrip menu.
+## Pager Types
+
+The library provides 4 different ways to show the view controllers.
+
+### Button Bar
+
+This is likely to be the most common pager type. It's used by many well known apps such as instagram, youtube, skype and many others.
+
+<img src="Example/barButton.gif" width="250"/>
+
+### Bar
+
+This mode doesn't show a title neither a image. It only shows a bar that indicates the current view controller.
+
+<img src="Example/bar.gif" width="250"/>
+
+### Twitter
+
+Long time ago twitter app made use of this type of pager in the app main screen.
+
+<img src="Example/twitter.gif" width="250"/>
+
+### Segmented
+
+This mode uses a `UIsegmentedControl` to indicates which is the view controller being displayed.
+
+<img src="Example/segmented.gif" width="250"/>
 
 ## Usage
 
 
-Basically we just need to provide the list of child view controllers to show and these view controllers should provide the information (title or image) to show in the associated indicator.
+Basically we just need to provide the list of child view controllers to show and these view controllers should provide the information (title or image) that will be shown in the associated indicator.
 
 Let's see the steps to do this:
 
 ##### Choose which type of pager we want to create
 
-Fist step is choose how we want to show our pager step controller, it must extend from any of the following controllers: `TwitterPagerTabStripViewController`, `ButtonBarPagerTabStripViewController`, `SegmentedPagerTabStripViewController`, `BarPagerTabStripViewController`.
+Fist we should choose the type of pager we want to create, depending on our choice we will have to create a view controller that extend from one of the following controllers: `TwitterPagerTabStripViewController`, `ButtonBarPagerTabStripViewController`, `SegmentedPagerTabStripViewController`, `BarPagerTabStripViewController`.
 
 > All these build-in pager controllers extend from the base class `PagerTabStripViewController`.
 > You can also make your custom pager controller by extending directly from `PagerTabStripViewController` in case no pager menu type fits your needs.
@@ -50,36 +76,34 @@ class MyPagerTabStripName: ButtonBarPagerTabStripViewController {
 
 ##### Connect outlets and add layout constraints
 
-We strongly recommend to use IB to set up your page controller views.
+We strongly recommend to use IB to set up our page controller views.
 
 Drag into the storyboard a `UIViewController` and set up its class with your pager controller (`MyPagerTabStripName`).
 Drag a `UIScrollView` into your view controller view and connect `PagerTabStripViewController` `contentView` outlet with the scroll view.
 
 Depending on which type of paging view controller you are working with you may have to connect more outlets.
 
-For `BarPagerTabStripViewController` you should connect `barView` outlet.
-For `ButtonBarPagerTabStripViewController` you should connect `buttonBarView` outlet.
-For `SegmentedPagerTabStripViewController` you should connect `segmentedControl` outlet.
-`TwitterPagerTabStripViewController` doesn't require to connect any additional outlet.
+For `BarPagerTabStripViewController` we should connect `barView` outlet. `ButtonBarPagerTabStripViewController` requires us to connect `buttonBarView` outlet. `SegmentedPagerTabStripViewController` has a `segmentedControl` outlet, if the outlet is not connected the library try to set up the navigationItem titleView using a `UIsegmentedControl`. `TwitterPagerTabStripViewController` doesn't require to connect any additional outlet.
 
-> The example project contains a example for each pager controller type and you can look into it to see how views were added and how outlets were connected.
+> The example project contains a example for each pager controller type and we can look into it to see how views were added and how outlets were connected.
 
-##### Provide view controllers that will appear embedded into the PagerTabStrip view controller
+##### Provide the view controllers that will appear embedded into the PagerTabStrip view controller
 
-You can provide the view controllers by overriding `func childViewControllersForPagerTabStripViewController(pagerTabStripController: PagerTabStripViewController) -> [UIViewController]` method.
+You can provide the view controllers by overriding `func viewControllersForPagerTabStripViewController(pagerTabStripController: PagerTabStripViewController) -> [UIViewController]` method.
 
 ```swift
-override public func childViewControllersForPagerTabStripViewController(pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
+override public func viewControllersForPagerTabStripViewController(pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
   return [MyEmbeddedViewController(), MySecondEmbeddedViewController()]
 }
 ```
 
-> The method above is the only method contained in `PagerTabStripViewControllerDataSource`. We don't need to explicitly conform to it since base pager class already does it.
+> The method above is the only method declared in `PagerTabStripViewControllerDataSource` protocol. We don't need to explicitly conform to it since base pager class already does it.
 
 
 ##### Provide information to show in each indicator
 
-Every UIViewController that will appear in the PagerTabStrip controller should conforms to `PagerTabStripChildItem`. The only method this protocol requires to implement is `func childHeaderForPagerTabStripViewController(pagerTabStripController: PagerTabStripViewController) -> ChildItemInfo`
+Every UIViewController that will appear within the PagerTabStrip controller needs to provide either a title or an image.
+In order to do so they should conform to `PagerTabStripChildItem` by implementing `func childHeaderForPagerTabStripViewController(pagerTabStripController: PagerTabStripViewController) -> ChildItemInfo`
  which provides the information required to show the PagerTabStrip menu (indicator) associated with the view controller.
 
 ```swift

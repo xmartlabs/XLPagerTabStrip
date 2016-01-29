@@ -164,11 +164,11 @@ public class TwitterPagerTabStripViewController: PagerTabStripViewController, Pa
         childTitleLabels.forEach { $0.removeFromSuperview() }
         childTitleLabels.removeAll()
         for (index, item) in viewControllers.enumerate() {
-            let child = item as! PagerTabStripChildItem
-            let childInfo = child.childInfoForPagerTabStripViewController(self)
+            let child = item as! IndicatorInfoProvider
+            let indicatorInfo = child.infoForPagerTabStripViewController(self)
             let navTitleLabel : UILabel = {
                 let label = UILabel()
-                label.text = childInfo.title
+                label.text = indicatorInfo.title
                 label.font = UIApplication.sharedApplication().statusBarOrientation.isPortrait ? settings.style.portraitTitleFont : settings.style.landscapeTitleFont
                 label.textColor = settings.style.titleColor
                 label.alpha = 0

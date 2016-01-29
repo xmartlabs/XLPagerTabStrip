@@ -26,10 +26,10 @@ import Foundation
 
 public enum ButtonBarItemSpec<CellType: UICollectionViewCell> {
     
-    case NibFile(nibName: String, bundle: NSBundle?, width:((ChildItemInfo)-> CGFloat))
-    case CellClass(width:((ChildItemInfo)-> CGFloat))
+    case NibFile(nibName: String, bundle: NSBundle?, width:((IndicatorInfo)-> CGFloat))
+    case CellClass(width:((IndicatorInfo)-> CGFloat))
     
-    public var weight: ((ChildItemInfo) -> CGFloat) {
+    public var weight: ((IndicatorInfo) -> CGFloat) {
         switch self {
         case .CellClass(let widthCallback):
             return widthCallback
@@ -265,22 +265,22 @@ public class ButtonBarPagerTabStripViewController: PagerTabStripViewController, 
         guard let cell = collectionView.dequeueReusableCellWithReuseIdentifier("Cell", forIndexPath: indexPath) as? ButtonBarViewCell else {
             fatalError("UICollectionViewCell should be or extend from ButtonBarViewCell")
         }
-        let childController = viewControllers[indexPath.item] as! PagerTabStripChildItem
-        let childInfo = childController.childInfoForPagerTabStripViewController(self)
+        let childController = viewControllers[indexPath.item] as! IndicatorInfoProvider
+        let indicatorInfo = childController.infoForPagerTabStripViewController(self)
         
-        cell.label.text = childInfo.title
+        cell.label.text = indicatorInfo.title
         cell.label.font = settings.style.buttonBarItemFont ?? cell.label.font
         cell.label.textColor = settings.style.buttonBarItemTitleColor ?? cell.label.textColor
         cell.contentView.backgroundColor = settings.style.buttonBarItemBackgroundColor ?? cell.contentView.backgroundColor
         cell.backgroundColor = settings.style.buttonBarItemBackgroundColor ?? cell.backgroundColor
-        if let image = childInfo.image {
+        if let image = indicatorInfo.image {
             cell.imageView.image = image
         }
-        if let highlightedImage = childInfo.highlightedImage {
+        if let highlightedImage = indicatorInfo.highlightedImage {
             cell.imageView.highlightedImage = highlightedImage
         }
 
-        configureCell(cell, childInfo: childInfo)
+        configureCell(cell, indicatorInfo: indicatorInfo)
         
         if pagerBehaviour.isProgressiveIndicator {
             if let changeCurrentIndexProgressive = changeCurrentIndexProgressive {
@@ -304,7 +304,7 @@ public class ButtonBarPagerTabStripViewController: PagerTabStripViewController, 
         shouldUpdateButtonBarView = true
     }
     
-    public func configureCell(cell: ButtonBarViewCell, childInfo: ChildItemInfo){
+    public func configureCell(cell: ButtonBarViewCell, indicatorInfo: IndicatorInfo){
     }
     
     private func calculateWidths() -> [CGFloat] {
@@ -315,15 +315,15 @@ public class ButtonBarPagerTabStripViewController: PagerTabStripViewController, 
         var collectionViewContentWidth: CGFloat = 0
         
         for viewController in self.viewControllers {
-            let childController = viewController as! PagerTabStripChildItem
-            let childInfo = childController.childInfoForPagerTabStripViewController(self)
+            let childController = viewController as! IndicatorInfoProvider
+            let indicatorInfo = childController.infoForPagerTabStripViewController(self)
             switch buttonBarItemSpec {
             case .CellClass(let widthCallback):
-                let width = widthCallback(childInfo)
+                let width = widthCallback(indicatorInfo)
                 minimumCellWidths.append(width)
                 collectionViewContentWidth += width
             case .NibFile(_, _, let widthCallback):
-                let width = widthCallback(childInfo)
+                let width = widthCallback(indicatorInfo)
                 minimumCellWidths.append(width)
                 collectionViewContentWidth += width
             }

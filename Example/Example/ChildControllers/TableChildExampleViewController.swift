@@ -25,13 +25,13 @@
 import Foundation
 import XLPagerTabStrip
 
-class TableChildExampleViewController: UITableViewController, PagerTabStripChildItem {
+class TableChildExampleViewController: UITableViewController, IndicatorInfoProvider {
     
     let cellIdentifier = "postCell"
     var blackTheme = false
-    var itemInfo = ChildItemInfo(title: "View")
+    var itemInfo = IndicatorInfo(title: "View")
     
-    init(style: UITableViewStyle, itemInfo: ChildItemInfo) {
+    init(style: UITableViewStyle, itemInfo: IndicatorInfo) {
         self.itemInfo = itemInfo
         super.init(style: style)
     }
@@ -77,9 +77,9 @@ class TableChildExampleViewController: UITableViewController, PagerTabStripChild
         return cell
     }
     
-    // MARK: - PagerTabStripChildItem
-    
-    func childInfoForPagerTabStripViewController(pagerTabStripController: PagerTabStripViewController) -> ChildItemInfo {
+    // MARK: - IndicatorInfoProvider
+
+    func infoForPagerTabStripViewController(pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
         return itemInfo
     }
 }

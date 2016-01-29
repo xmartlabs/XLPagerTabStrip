@@ -24,23 +24,8 @@
 
 import Foundation
 
-//public struct PagerTabStripOptions : OptionSetType {
-//    
-//    private enum PagerTabStripOption : Int {
-//        case SkipIntermediateViewControllers = 1, IsProgressiveIndicator = 2, IsElasticIndicatorLimit = 4
-//    }
-//    
-//    public let rawValue: Int
-//    public init(rawValue: Int) { self.rawValue = rawValue }
-//    private init(_ option:PagerTabStripOption){ self.rawValue = option.rawValue }
-//    
-//    public static let SkipIntermediateViewControllers  = PagerTabStripOptions(.SkipIntermediateViewControllers)
-//    public static let IsProgressiveIndicator  = PagerTabStripOptions(.IsProgressiveIndicator)
-//    public static let IsElasticIndicatorLimit = PagerTabStripOptions(.IsElasticIndicatorLimit)
-//
-//}
-
 public enum PagerTabStripBehaviour {
+    
     case Common(skipIntermediteViewControllers: Bool)
     case Progressive(skipIntermediteViewControllers: Bool, elasticIndicatorLimit: Bool)
     

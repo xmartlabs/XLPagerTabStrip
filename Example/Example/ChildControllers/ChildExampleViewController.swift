@@ -25,11 +25,11 @@
 import Foundation
 import XLPagerTabStrip
 
-class ChildExampleViewController: UIViewController, PagerTabStripChildItem {
+class ChildExampleViewController: UIViewController, IndicatorInfoProvider {
     
-    var itemInfo: ChildItemInfo = "View"
+    var itemInfo: IndicatorInfo = "View"
     
-    init(itemInfo: ChildItemInfo) {
+    init(itemInfo: IndicatorInfo) {
         self.itemInfo = itemInfo
         super.init(nibName: nil, bundle: nil)
     }
@@ -52,9 +52,9 @@ class ChildExampleViewController: UIViewController, PagerTabStripChildItem {
         view.addConstraint(NSLayoutConstraint(item: label, attribute: .CenterY, relatedBy: .Equal, toItem: view, attribute: .CenterY, multiplier: 1, constant: -50))
     }
     
-    // MARK: - PagerTabStripChildItem
+    // MARK: - IndicatorInfoProvider
     
-    func childInfoForPagerTabStripViewController(pagerTabStripController: PagerTabStripViewController) -> ChildItemInfo {
+    func infoForPagerTabStripViewController(pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
         return itemInfo
     }
 }

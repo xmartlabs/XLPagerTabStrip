@@ -1,4 +1,4 @@
-//  ChildItemInfo.swift
+//  IndicatorInfo.swift
 //  XLPagerTabStrip ( https://github.com/xmartlabs/XLPagerTabStrip )
 //
 //  Copyright (c) 2016 Xmartlabs ( http://xmartlabs.com )
@@ -24,7 +24,7 @@
 
 import Foundation
 
-public struct ChildItemInfo {
+public struct IndicatorInfo {
     
     public var title: String
     public var image: UIImage?
@@ -46,7 +46,7 @@ public struct ChildItemInfo {
 }
 
 
-extension ChildItemInfo : StringLiteralConvertible {
+extension IndicatorInfo : StringLiteralConvertible {
     
     public init(stringLiteral value: String){
         title = value

@@ -28,9 +28,9 @@ import Foundation
 
 // MARK: Protocols
 
-public protocol PagerTabStripChildItem {
+public protocol IndicatorInfoProvider {
     
-    func childInfoForPagerTabStripViewController(pagerTabStripController: PagerTabStripViewController) -> ChildItemInfo
+    func infoForPagerTabStripViewController(pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo
 }
 
 public protocol PagerTabStripViewControllerDelegate: class {
@@ -45,7 +45,7 @@ public protocol PagerTabStripViewControllerIsProgressiveDelegate : PagerTabStrip
 
 public protocol PagerTabStripViewControllerDataSource: class {
     
-    func childViewControllersForPagerTabStripViewController(pagerTabStripController: PagerTabStripViewController) -> [UIViewController]
+    func viewControllersForPagerTabStripViewController(pagerTabStripController: PagerTabStripViewController) -> [UIViewController]
 }
 
 
@@ -158,8 +158,8 @@ public class PagerTabStripViewController: UIViewController, UIScrollViewDelegate
     
     //MARK: - PagerTabStripViewControllerDataSource
     
-    public func childViewControllersForPagerTabStripViewController(pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
-        assertionFailure("Sub-class must implement the PagerTabStripViewControllerDataSource childViewControllersForPagerTabStripViewController: method")
+    public func viewControllersForPagerTabStripViewController(pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
+        assertionFailure("Sub-class must implement the PagerTabStripViewControllerDataSource viewControllersForPagerTabStripViewController: method")
         return []
     }
     
@@ -363,12 +363,12 @@ public class PagerTabStripViewController: UIViewController, UIScrollViewDelegate
         guard let dataSource = datasource else {
             fatalError("dataSource must not be nil")
         }
-        viewControllers = dataSource.childViewControllersForPagerTabStripViewController(self)
+        viewControllers = dataSource.viewControllersForPagerTabStripViewController(self)
         // viewControllers
         guard viewControllers.count != 0 else {
-            fatalError("childViewControllersForPagerTabStripViewController should provide at least one child view controller")
+            fatalError("viewControllersForPagerTabStripViewController should provide at least one child view controller")
         }
-        viewControllers.forEach { if !($0 is PagerTabStripChildItem) { fatalError("Every view controller provided by PagerTabStripViewControllerDataSource's childViewControllersForPagerTabStripViewController method must conform to  PagerTabStripChildItem") }}
+        viewControllers.forEach { if !($0 is IndicatorInfoProvider) { fatalError("Every view controller provided by PagerTabStripViewControllerDataSource's viewControllersForPagerTabStripViewController method must conform to  InfoProvider") }}
 
     }
     

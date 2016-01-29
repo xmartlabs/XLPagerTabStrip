@@ -37,7 +37,7 @@ class SegmentedExampleViewController: SegmentedPagerTabStripViewController {
     
     // MARK: - PagerTabStripViewControllerDataSource
     
-    override func childViewControllersForPagerTabStripViewController(pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
+    override func viewControllersForPagerTabStripViewController(pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
         let child_1 = TableChildExampleViewController(style: .Plain, itemInfo: "Table View")
         let child_2 = ChildExampleViewController(itemInfo: "View")
         let child_3 = TableChildExampleViewController(style: .Grouped, itemInfo: "Table View 2")
