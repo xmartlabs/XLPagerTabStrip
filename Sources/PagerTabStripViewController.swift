@@ -30,22 +30,22 @@ import Foundation
 
 public protocol IndicatorInfoProvider {
     
-    func infoForPagerTabStripViewController(pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo
+    func indicatorInfoForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo
 }
 
-public protocol PagerTabStripViewControllerDelegate: class {
+public protocol PagerTabStripDelegate: class {
     
     func pagerTabStripViewController(pagerTabStripViewController: PagerTabStripViewController, updateIndicatorFromIndex fromIndex: Int, toIndex: Int) throws
 }
 
-public protocol PagerTabStripViewControllerIsProgressiveDelegate : PagerTabStripViewControllerDelegate {
+public protocol PagerTabStripIsProgressiveDelegate : PagerTabStripDelegate {
 
     func pagerTabStripViewController(pagerTabStripViewController: PagerTabStripViewController, updateIndicatorFromIndex fromIndex: Int, toIndex: Int, withProgressPercentage progressPercentage: CGFloat, indexWasChanged: Bool) throws
 }
 
-public protocol PagerTabStripViewControllerDataSource: class {
+public protocol PagerTabStripDataSource: class {
     
-    func viewControllersForPagerTabStripViewController(pagerTabStripController: PagerTabStripViewController) -> [UIViewController]
+    func viewControllersForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> [UIViewController]
 }
 
 
@@ -59,8 +59,8 @@ public class PagerTabStripViewController: UIViewController, UIScrollViewDelegate
         return containerView
     }()
     
-    public weak var delegate: PagerTabStripViewControllerDelegate?
-    public weak var datasource: PagerTabStripViewControllerDataSource?
+    public weak var delegate: PagerTabStripDelegate?
+    public weak var datasource: PagerTabStripDataSource?
     
     public var pagerBehaviour = PagerTabStripBehaviour.Progressive(skipIntermediteViewControllers: true, elasticIndicatorLimit: true)
     
@@ -156,10 +156,10 @@ public class PagerTabStripViewController: UIViewController, UIScrollViewDelegate
         moveToViewControllerAtIndex(viewControllers.indexOf(viewController)!, animated: animated)
     }
     
-    //MARK: - PagerTabStripViewControllerDataSource
+    //MARK: - PagerTabStripDataSource
     
-    public func viewControllersForPagerTabStripViewController(pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
-        assertionFailure("Sub-class must implement the PagerTabStripViewControllerDataSource viewControllersForPagerTabStripViewController: method")
+    public func viewControllersForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
+        assertionFailure("Sub-class must implement the PagerTabStripDataSource viewControllersForPagerTabStrip: method")
         return []
     }
     
@@ -253,7 +253,7 @@ public class PagerTabStripViewController: UIViewController, UIScrollViewDelegate
         currentIndex = newCurrentIndex
         let changeCurrentIndex = newCurrentIndex != oldCurrentIndex
         
-        if let progressiveDeledate = self as? PagerTabStripViewControllerIsProgressiveDelegate where pagerBehaviour.isProgressiveIndicator {
+        if let progressiveDeledate = self as? PagerTabStripIsProgressiveDelegate where pagerBehaviour.isProgressiveIndicator {
             
             let (fromIndex, toIndex, scrollPercentage) = progressiveIndicatorData(virtualPage)
             try! progressiveDeledate.pagerTabStripViewController(self, updateIndicatorFromIndex: fromIndex, toIndex: toIndex, withProgressPercentage: scrollPercentage, indexWasChanged: changeCurrentIndex)
@@ -363,12 +363,12 @@ public class PagerTabStripViewController: UIViewController, UIScrollViewDelegate
         guard let dataSource = datasource else {
             fatalError("dataSource must not be nil")
         }
-        viewControllers = dataSource.viewControllersForPagerTabStripViewController(self)
+        viewControllers = dataSource.viewControllersForPagerTabStrip(self)
         // viewControllers
         guard viewControllers.count != 0 else {
-            fatalError("viewControllersForPagerTabStripViewController should provide at least one child view controller")
+            fatalError("viewControllersForPagerTabStrip should provide at least one child view controller")
         }
-        viewControllers.forEach { if !($0 is IndicatorInfoProvider) { fatalError("Every view controller provided by PagerTabStripViewControllerDataSource's viewControllersForPagerTabStripViewController method must conform to  InfoProvider") }}
+        viewControllers.forEach { if !($0 is IndicatorInfoProvider) { fatalError("Every view controller provided by PagerTabStripDataSource's viewControllersForPagerTabStrip method must conform to  InfoProvider") }}
 
     }
     

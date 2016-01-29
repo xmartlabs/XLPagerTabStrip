@@ -79,7 +79,7 @@ class TableChildExampleViewController: UITableViewController, IndicatorInfoProvi
     
     // MARK: - IndicatorInfoProvider
 
-    func infoForPagerTabStripViewController(pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
+    func indicatorInfoForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
         return itemInfo
     }
 }

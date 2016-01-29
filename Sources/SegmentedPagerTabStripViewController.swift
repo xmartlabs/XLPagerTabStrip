@@ -34,7 +34,7 @@ public struct SegmentedPagerTabStripSettings {
 }
 
 
-public class SegmentedPagerTabStripViewController: PagerTabStripViewController, PagerTabStripViewControllerDataSource, PagerTabStripViewControllerDelegate {
+public class SegmentedPagerTabStripViewController: PagerTabStripViewController, PagerTabStripDataSource, PagerTabStripDelegate {
     
     @IBOutlet lazy public var segmentedControl: UISegmentedControl! = UISegmentedControl()
     
@@ -75,11 +75,11 @@ public class SegmentedPagerTabStripViewController: PagerTabStripViewController, 
         segmentedControl.removeAllSegments()
         for (index, item) in viewControllers.enumerate(){
             let child = item as! IndicatorInfoProvider
-            if let image = child.infoForPagerTabStripViewController(self).image {
+            if let image = child.indicatorInfoForPagerTabStrip(self).image {
                 segmentedControl.insertSegmentWithImage(image, atIndex: index, animated: false)
             }
             else {
-                segmentedControl.insertSegmentWithTitle(child.infoForPagerTabStripViewController(self).title, atIndex: index, animated: false)
+                segmentedControl.insertSegmentWithTitle(child.indicatorInfoForPagerTabStrip(self).title, atIndex: index, animated: false)
             }
         }
         segmentedControl.selectedSegmentIndex = currentIndex
@@ -92,7 +92,7 @@ public class SegmentedPagerTabStripViewController: PagerTabStripViewController, 
         moveToViewControllerAtIndex(index)
     }
     
-    // MARK: - PagerTabStripViewControllerDelegate
+    // MARK: - PagerTabStripDelegate
     
     public func pagerTabStripViewController(pagerTabStripViewController: PagerTabStripViewController, updateIndicatorFromIndex fromIndex: Int, toIndex: Int) throws {
         if shouldUpdateSegmentedControl {

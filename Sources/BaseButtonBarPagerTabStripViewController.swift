@@ -24,7 +24,7 @@
 
 import Foundation
 
-public class BaseButtonBarPagerTabStripViewController<ButtonBarCellType : UICollectionViewCell>: PagerTabStripViewController, PagerTabStripViewControllerDataSource, PagerTabStripViewControllerIsProgressiveDelegate, UICollectionViewDelegate, UICollectionViewDataSource {
+public class BaseButtonBarPagerTabStripViewController<ButtonBarCellType : UICollectionViewCell>: PagerTabStripViewController, PagerTabStripDataSource, PagerTabStripIsProgressiveDelegate, UICollectionViewDelegate, UICollectionViewDataSource {
     
     public var settings = ButtonBarPagerTabStripSettings()
     public var buttonBarItemSpec: ButtonBarItemSpec<ButtonBarCellType>!
@@ -231,7 +231,7 @@ public class BaseButtonBarPagerTabStripViewController<ButtonBarCellType : UIColl
             fatalError("UICollectionViewCell should be or extend from ButtonBarViewCell")
         }
         let childController = viewControllers[indexPath.item] as! IndicatorInfoProvider
-        let indicatorInfo = childController.infoForPagerTabStripViewController(self)
+        let indicatorInfo = childController.indicatorInfoForPagerTabStrip(self)
         
         configureCell(cell, indicatorInfo: indicatorInfo)
         
@@ -271,7 +271,7 @@ public class BaseButtonBarPagerTabStripViewController<ButtonBarCellType : UIColl
         
         for viewController in self.viewControllers {
             let childController = viewController as! IndicatorInfoProvider
-            let indicatorInfo = childController.infoForPagerTabStripViewController(self)
+            let indicatorInfo = childController.indicatorInfoForPagerTabStrip(self)
             switch buttonBarItemSpec! {
             case .CellClass(let widthCallback):
                 let width = widthCallback(indicatorInfo)

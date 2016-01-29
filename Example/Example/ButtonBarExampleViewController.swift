@@ -36,9 +36,9 @@ class ButtonBarExampleViewController: ButtonBarPagerTabStripViewController {
         buttonBarView.backgroundColor = UIColor(red: 7/255, green: 185/255, blue: 155/255, alpha: 1)
     }
     
-    // MARK: - PagerTabStripVIewControllerDataSource
+    // MARK: - PagerTabStripDataSource
     
-    override func viewControllersForPagerTabStripViewController(pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
+    override func viewControllersForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
         let child_1 = TableChildExampleViewController(style: .Plain, itemInfo: "Table View")
         let child_2 = ChildExampleViewController(itemInfo: "View")
         let child_3 = TableChildExampleViewController(style: .Grouped, itemInfo: "Table View 2")

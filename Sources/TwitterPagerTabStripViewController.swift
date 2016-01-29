@@ -37,7 +37,7 @@ public struct TwitterPagerTabStripSettings {
     public var style = Style()
 }
 
-public class TwitterPagerTabStripViewController: PagerTabStripViewController, PagerTabStripViewControllerDataSource, PagerTabStripViewControllerIsProgressiveDelegate {
+public class TwitterPagerTabStripViewController: PagerTabStripViewController, PagerTabStripDataSource, PagerTabStripIsProgressiveDelegate {
     
     public var settings = TwitterPagerTabStripSettings()
     
@@ -74,7 +74,7 @@ public class TwitterPagerTabStripViewController: PagerTabStripViewController, Pa
         setNavigationViewItemsPosition(updateAlpha: true)
     }
     
-    // MARK: - PagerTabStripViewControllerDelegate
+    // MARK: - PagerTabStripDelegate
     
     public func pagerTabStripViewController(pagerTabStripViewController: PagerTabStripViewController, updateIndicatorFromIndex fromIndex: Int, toIndex: Int) throws {
         fatalError()
@@ -165,7 +165,7 @@ public class TwitterPagerTabStripViewController: PagerTabStripViewController, Pa
         childTitleLabels.removeAll()
         for (index, item) in viewControllers.enumerate() {
             let child = item as! IndicatorInfoProvider
-            let indicatorInfo = child.infoForPagerTabStripViewController(self)
+            let indicatorInfo = child.indicatorInfoForPagerTabStrip(self)
             let navTitleLabel : UILabel = {
                 let label = UILabel()
                 label.text = indicatorInfo.title

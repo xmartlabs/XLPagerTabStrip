@@ -48,7 +48,7 @@ Long time ago twitter app made use of this type of pager in the app main screen.
 
 ### Segmented
 
-This mode uses a `UIsegmentedControl` to indicates which is the view controller being displayed.
+This mode uses a `UISegmentedControl` to indicates which is the view controller being displayed.
 
 <img src="Example/segmented.gif" width="250"/>
 
@@ -83,34 +83,34 @@ Drag a `UIScrollView` into your view controller view and connect `PagerTabStripV
 
 Depending on which type of paging view controller you are working with you may have to connect more outlets.
 
-For `BarPagerTabStripViewController` we should connect `barView` outlet. `ButtonBarPagerTabStripViewController` requires us to connect `buttonBarView` outlet. `SegmentedPagerTabStripViewController` has a `segmentedControl` outlet, if the outlet is not connected the library try to set up the navigationItem titleView using a `UIsegmentedControl`. `TwitterPagerTabStripViewController` doesn't require to connect any additional outlet.
+For `BarPagerTabStripViewController` we should connect `barView` outlet. `ButtonBarPagerTabStripViewController` requires us to connect `buttonBarView` outlet. `SegmentedPagerTabStripViewController` has a `segmentedControl` outlet, if the outlet is not connected the library try to set up the navigationItem `titleView` property using a `UISegmentedControl`. `TwitterPagerTabStripViewController` doesn't require us to connect any additional outlet.
 
 > The example project contains a example for each pager controller type and we can look into it to see how views were added and how outlets were connected.
 
 ##### Provide the view controllers that will appear embedded into the PagerTabStrip view controller
 
-You can provide the view controllers by overriding `func viewControllersForPagerTabStripViewController(pagerTabStripController: PagerTabStripViewController) -> [UIViewController]` method.
+You can provide the view controllers by overriding `func viewControllersForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> [UIViewController]` method.
 
 ```swift
-override public func viewControllersForPagerTabStripViewController(pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
+override public func viewControllersForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
   return [MyEmbeddedViewController(), MySecondEmbeddedViewController()]
 }
 ```
 
-> The method above is the only method declared in `PagerTabStripViewControllerDataSource` protocol. We don't need to explicitly conform to it since base pager class already does it.
+> The method above is the only method declared in `PagerTabStripDataSource` protocol. We don't need to explicitly conform to it since base pager class already does it.
 
 
 ##### Provide information to show in each indicator
 
-Every UIViewController that will appear within the PagerTabStrip controller needs to provide either a title or an image.
-In order to do so they should conform to `PagerTabStripChildItem` by implementing `func childHeaderForPagerTabStripViewController(pagerTabStripController: PagerTabStripViewController) -> ChildItemInfo`
+Every UIViewController that will appear within the PagerTabStrip needs to provide either a title or an image.
+In order to do so they should conform to `IndicatorInfoProvider` by implementing `func indicatorInfoForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo`
  which provides the information required to show the PagerTabStrip menu (indicator) associated with the view controller.
 
 ```swift
-class MyEmbeddedViewController: UITableViewController, PagerTabStripChildItem {
+class MyEmbeddedViewController: UITableViewController, IndicatorInfoProvider {
 
-  func childInfoForPagerTabStripViewController(pagerTabStripController: PagerTabStripViewController) -> ChildItemInfo {
-    return ChildItemInfo(title: "My Child title")
+  func indicatorInfoForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
+    return IndicatorInfo(title: "My Child title")
   }
 }
 ```
@@ -119,7 +119,6 @@ That's it! We're done! 🍻🍻
 
 
 ## Customization
-
 
 
 ## Requirements
@@ -145,7 +144,7 @@ You can also experiment and learn with the *XLPagerTabStrip Playground* which is
 
 ## Installation
 
-#### CocoaPods
+### CocoaPods
 
 [CocoaPods](https://cocoapods.org/) is a dependency manager for Cocoa projects.
 
@@ -155,7 +154,7 @@ To install XLPagerTabStrip, simply add the following line to your Podfile:
 pod 'XLPagerTabStrip', '~> 4.0'
 ```
 
-#### Carthage
+### Carthage
 
 [Carthage](https://github.com/Carthage/Carthage) is a simple, decentralized dependency manager for Cocoa.
 
@@ -164,6 +163,20 @@ To install XLPagerTabStrip, simply add the following line to your Cartfile:
 ```ogdl
 github "xmartlabs/XLPagerTabStrip" ~> 4.0
 ```
+
+## FAQ
+
+#### How to change the visible child view controller programmatically
+
+`XLPagerTabStripViewController` provides the following methods to programmatically change the visible child view controller:
+
+```swift
+func moveToViewControllerAtIndex(index: Int)
+func moveToViewControllerAtIndex(index: Int, animated: Bool)
+func moveToViewController(viewController: UIViewController)
+func moveToViewController(viewController: UIViewController, animated: Bool)
+```
+
 
 ## Author
 

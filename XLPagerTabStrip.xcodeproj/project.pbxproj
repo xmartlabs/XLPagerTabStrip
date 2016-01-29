@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		281BFDC11C511C420090C26F /* ChildItemInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 281BFDC01C511C420090C26F /* ChildItemInfo.swift */; };
+		281BFDC11C511C420090C26F /* IndicatorInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 281BFDC01C511C420090C26F /* IndicatorInfo.swift */; };
 		281BFDC31C511F120090C26F /* PagerTabStripBehaviour.swift in Sources */ = {isa = PBXBuildFile; fileRef = 281BFDC21C511F120090C26F /* PagerTabStripBehaviour.swift */; };
 		287D0A6E1C4B73BD004566D6 /* XLPagerTabStripTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 287D0A6D1C4B73BD004566D6 /* XLPagerTabStripTests.swift */; };
 		28C83C841C54229A000B2902 /* BaseButtonBarPagerTabStripViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C83C831C54229A000B2902 /* BaseButtonBarPagerTabStripViewController.swift */; };
@@ -39,7 +39,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		281BFDC01C511C420090C26F /* ChildItemInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChildItemInfo.swift; sourceTree = "<group>"; };
+		281BFDC01C511C420090C26F /* IndicatorInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IndicatorInfo.swift; sourceTree = "<group>"; };
 		281BFDC21C511F120090C26F /* PagerTabStripBehaviour.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PagerTabStripBehaviour.swift; sourceTree = "<group>"; };
 		287D0A6D1C4B73BD004566D6 /* XLPagerTabStripTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = XLPagerTabStripTests.swift; path = Tests/XLPagerTabStripTests.swift; sourceTree = SOURCE_ROOT; };
 		28C83C831C54229A000B2902 /* BaseButtonBarPagerTabStripViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseButtonBarPagerTabStripViewController.swift; sourceTree = "<group>"; };
@@ -154,7 +154,7 @@
 				281BFDBE1C511B890090C26F /* Views */,
 				28E098BD1C5002D90083B788 /* PagerTabStripError.swift */,
 				28E098BF1C5003130083B788 /* SwipeDirection.swift */,
-				281BFDC01C511C420090C26F /* ChildItemInfo.swift */,
+				281BFDC01C511C420090C26F /* IndicatorInfo.swift */,
 				281BFDC21C511F120090C26F /* PagerTabStripBehaviour.swift */,
 			);
 			path = Sources;
@@ -287,7 +287,7 @@
 				CBA0A1FC1C502DA300C5748C /* BarPagerTabStripViewController.swift in Sources */,
 				CB71C6EE1C4EB988008EC806 /* SegmentedPagerTabStripViewController.swift in Sources */,
 				28E098BE1C5002D90083B788 /* PagerTabStripError.swift in Sources */,
-				281BFDC11C511C420090C26F /* ChildItemInfo.swift in Sources */,
+				281BFDC11C511C420090C26F /* IndicatorInfo.swift in Sources */,
 				CB86ED6B1C4D6E6C00DA463B /* PagerTabStripViewController.swift in Sources */,
 				28E098C01C5003130083B788 /* SwipeDirection.swift in Sources */,
 				CB0986C81C5158A000DF7087 /* ButtonBarViewCell.swift in Sources */,

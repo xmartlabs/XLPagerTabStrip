@@ -35,7 +35,7 @@ public struct BarPagerTabStripSettings {
     public var style = Style()
 }
 
-public class BarPagerTabStripViewController: PagerTabStripViewController, PagerTabStripViewControllerDataSource, PagerTabStripViewControllerIsProgressiveDelegate {
+public class BarPagerTabStripViewController: PagerTabStripViewController, PagerTabStripDataSource, PagerTabStripIsProgressiveDelegate {
     
     public var settings = BarPagerTabStripSettings()
     
@@ -82,7 +82,7 @@ public class BarPagerTabStripViewController: PagerTabStripViewController, PagerT
         }
     }
     
-    // MARK: - PagerTabStripViewControllerDelegate
+    // MARK: - PagerTabStripDelegate
     
     public func pagerTabStripViewController(pagerTabStripViewController: PagerTabStripViewController, updateIndicatorFromIndex fromIndex: Int, toIndex: Int) throws {
         barView.moveToIndex(index: toIndex, animated: true)

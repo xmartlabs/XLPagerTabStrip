@@ -28,7 +28,7 @@ import XLPagerTabStrip
 class TwitterExampleViewController: TwitterPagerTabStripViewController {
     var isReload = false
     
-    override func viewControllersForPagerTabStripViewController(pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
+    override func viewControllersForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
         
         let child_1 = TableChildExampleViewController(style: .Plain, itemInfo: "TableView")
         let child_2 = ChildExampleViewController(itemInfo: "View")
