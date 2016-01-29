@@ -41,8 +41,16 @@ public class TwitterPagerTabStripViewController: PagerTabStripViewController, Pa
     
     public var settings = TwitterPagerTabStripSettings()
     
+    public override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        pagerBehaviour = .Common(skipIntermediateViewControllers: true)
+        delegate = self
+        datasource = self
+    }
+    
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+        pagerBehaviour = PagerTabStripBehaviour.Common(skipIntermediateViewControllers: true)
         delegate = self
         datasource = self
     }

@@ -62,7 +62,7 @@ public class PagerTabStripViewController: UIViewController, UIScrollViewDelegate
     public weak var delegate: PagerTabStripDelegate?
     public weak var datasource: PagerTabStripDataSource?
     
-    public var pagerBehaviour = PagerTabStripBehaviour.Progressive(skipIntermediteViewControllers: true, elasticIndicatorLimit: true)
+    public var pagerBehaviour = PagerTabStripBehaviour.Progressive(skipIntermediateViewControllers: true, elasticIndicatorLimit: true)
     
     public private(set) var viewControllers = [UIViewController]()
     public private(set) var currentIndex = 0

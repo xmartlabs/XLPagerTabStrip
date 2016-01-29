@@ -42,12 +42,14 @@ public class SegmentedPagerTabStripViewController: PagerTabStripViewController, 
     
     public override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        pagerBehaviour = PagerTabStripBehaviour.Common(skipIntermediateViewControllers: true)
         delegate = self
         datasource = self
     }
     
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+        pagerBehaviour = PagerTabStripBehaviour.Common(skipIntermediateViewControllers: true)
         delegate = self
         datasource = self
     }

@@ -120,6 +120,37 @@ That's it! We're done! 🍻🍻
 
 ## Customization
 
+The pager indicator can be updated progressive as we swipe or at once in the middle of the transition between the view controllers.
+By setting up `pagerBehaviour` property we can choose how the indicator should be updated.
+
+```swift
+public var pagerBehaviour: PagerTabStripBehaviour
+```
+
+```swift
+public enum PagerTabStripBehaviour {
+    case Common(skipIntermediteViewControllers: Bool)
+    case Progressive(skipIntermediteViewControllers: Bool, elasticIndicatorLimit: Bool)
+}
+```
+
+Default Values:
+```swift
+// Twitter Type
+PagerTabStripBehaviour.Common(skipIntermediteViewControllers: true)
+// Segmented Type
+PagerTabStripBehaviour.Common(skipIntermediteViewControllers: true)
+// Bar Type
+PagerTabStripBehaviour.Progressive(skipIntermediteViewControllers: true, elasticIndicatorLimit: true)
+// ButtonBar Type
+PagerTabStripBehaviour.Progressive(skipIntermediteViewControllers: true, elasticIndicatorLimit: true)`
+```
+
+As you may've noticed `Common` and `Progressive` enumeration cases has `skipIntermediteViewControllers` and `elasticIndicatorLimit` associated values.
+
+`skipIntermediteViewControllers` allows us to skip intermediate view controllers when a tab indicator is tapped.
+
+`elasticIndicatorLimit` allows us to tension the indicator when we reach a limit, I mean when we try to move forward from last indicator or move back from first indicator.
 
 ## Requirements
 
