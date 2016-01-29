@@ -46,7 +46,7 @@ This is likely to be the most common pager type. It's used by many well known ap
 
 ### Bar
 
-This mode doesn't show a title neither a image. It only shows a bar that indicates the current view controller.
+This mode doesn't show a title neither an image. It only shows a bar that indicates the current view controller.
 
 <img src="Example/bar.gif" width="250"/>
 
@@ -71,7 +71,7 @@ Let's see the steps to do this:
 
 ##### Choose which type of pager we want to create
 
-Fist we should choose the type of pager we want to create, depending on our choice we will have to create a view controller that extend from one of the following controllers: `TwitterPagerTabStripViewController`, `ButtonBarPagerTabStripViewController`, `SegmentedPagerTabStripViewController`, `BarPagerTabStripViewController`.
+First we should choose the type of pager we want to create, depending on our choice we will have to create a view controller that extends from one of the following controllers: `TwitterPagerTabStripViewController`, `ButtonBarPagerTabStripViewController`, `SegmentedPagerTabStripViewController`, `BarPagerTabStripViewController`.
 
 > All these build-in pager controllers extend from the base class `PagerTabStripViewController`.
 > You can also make your custom pager controller by extending directly from `PagerTabStripViewController` in case no pager menu type fits your needs.
@@ -198,8 +198,10 @@ public var buttonBarHeight: CGFloat?
 
 We may need to update the indicator cell when the displayed view controller changes. The following function properties help to accomplish that. Depending on our pager `pagerBehaviour` value we will have to set up `changeCurrentIndex` or `changeCurrentIndexProgressive`.
 
+```swift
 public var changeCurrentIndex: ((oldCell: ButtonBarViewCell?, newCell: ButtonBarViewCell?, animated: Bool) -> Void)?
 public var changeCurrentIndexProgressive: ((oldCell: ButtonBarViewCell?, newCell: ButtonBarViewCell?, progressPercentage: CGFloat, changeCurrentIndex: Bool, animated: Bool) -> Void)?
+```
 
 Let's see an example:
 
