@@ -42,7 +42,6 @@ public class ButtonBarView: UICollectionView {
     public lazy var selectedBar: UIView = { [unowned self] in
         let bar  = UIView(frame: CGRectMake(0, self.frame.size.height - CGFloat(self.selectedBarHeight), 0, CGFloat(self.selectedBarHeight)))
         bar.layer.zPosition = 9999
-        bar.backgroundColor = .blackColor()
         return bar
     }()
     

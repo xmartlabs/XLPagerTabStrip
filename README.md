@@ -24,6 +24,16 @@ Android [PagerTabStrip](http://developer.android.com/reference/android/support/v
   </tr>
 </table>
 
+## Getting involved
+
+* If you **want to contribute** please feel free to **submit pull requests**.
+* If you **have a feature request** please **open an issue**.
+* If you **found a bug** or **need help** please **check older issues, [FAQ](#faq) and threads on [StackOverflow](http://stackoverflow.com/questions/tagged/XLPagerTabStrip) (Tag 'XLPagerTabStrip') before submitting an issue**.
+
+**Before contribute check the [CONTRIBUTING](CONTRIBUTING.md) file for more info.**
+
+If you use **XLPagerTabStrip** in your app We would love to hear about it! Drop us a line on [twitter](https://twitter.com/xmartlabs).
+
 ## Pager Types
 
 The library provides 4 different ways to show the view controllers.
@@ -83,7 +93,7 @@ Drag a `UIScrollView` into your view controller view and connect `PagerTabStripV
 
 Depending on which type of paging view controller you are working with you may have to connect more outlets.
 
-For `BarPagerTabStripViewController` we should connect `barView` outlet. `ButtonBarPagerTabStripViewController` requires us to connect `buttonBarView` outlet. `SegmentedPagerTabStripViewController` has a `segmentedControl` outlet, if the outlet is not connected the library try to set up the navigationItem `titleView` property using a `UISegmentedControl`. `TwitterPagerTabStripViewController` doesn't require us to connect any additional outlet.
+For `BarPagerTabStripViewController` we should connect `barView` outlet. barView type is UIView. `ButtonBarPagerTabStripViewController` requires us to connect `buttonBarView` outlet. `buttonBarView` type is `ButtonBarView` which extends from `UICollectionView`. `SegmentedPagerTabStripViewController` has a `segmentedControl` outlet, if the outlet is not connected the library try to set up the navigationItem `titleView` property using a `UISegmentedControl`. `TwitterPagerTabStripViewController` doesn't require us to connect any additional outlet.
 
 > The example project contains a example for each pager controller type and we can look into it to see how views were added and how outlets were connected.
 
@@ -120,6 +130,8 @@ That's it! We're done! 🍻🍻
 
 ## Customization
 
+### Page Behaviour
+
 The pager indicator can be updated progressive as we swipe or at once in the middle of the transition between the view controllers.
 By setting up `pagerBehaviour` property we can choose how the indicator should be updated.
 
@@ -146,26 +158,102 @@ PagerTabStripBehaviour.Progressive(skipIntermediteViewControllers: true, elastic
 PagerTabStripBehaviour.Progressive(skipIntermediteViewControllers: true, elasticIndicatorLimit: true)`
 ```
 
-As you may've noticed `Common` and `Progressive` enumeration cases has `skipIntermediteViewControllers` and `elasticIndicatorLimit` associated values.
+As you might have noticed `Common` and `Progressive` enumeration cases has `skipIntermediteViewControllers` and `elasticIndicatorLimit` associated values.
 
 `skipIntermediteViewControllers` allows us to skip intermediate view controllers when a tab indicator is tapped.
 
 `elasticIndicatorLimit` allows us to tension the indicator when we reach a limit, I mean when we try to move forward from last indicator or move back from first indicator.
 
+### ButtonBar Customization
+
+```swift
+
+settings.style.buttonBarBackgroundColor: UIColor?
+// buttonBar minimumInteritemSpacing value, note that button bar extends from UICollectionView
+settings.style.buttonBarMinimumInteritemSpacing: CGFloat?
+// buttonBar minimumLineSpacing value
+settings.style.buttonBarMinimumLineSpacing: CGFloat?
+// buttonBar flow layout left content inset value
+settings.style.buttonBarLeftContentInset: CGFloat?
+// buttonBar flow layout right content inset value
+settings.style.buttonBarRightContentInset: CGFloat?
+
+// selected bar view is created programmatically so it's important to set up the following 2 properties properly
+settings.style.selectedBarBackgroundColor = UIColor.blackColor()
+settings.style.selectedBarHeight: CGFloat = 5
+
+// each buttonBar item is a UICollectionView cell of type ButtonBarViewCell
+settings.style.buttonBarItemBackgroundColor: UIColor?
+settings.style.buttonBarItemFont = UIFont.systemFontOfSize(18)
+// helps to determine the cell width, it represent the space before and after the title label
+settings.style.buttonBarItemLeftRightMargin: CGFloat = 8
+settings.style.buttonBarItemTitleColor: UIColor?
+// in case the barView items do not fill the screen width this property stretch the cells to fill the screen
+settings.style.buttonBarItemsShouldFillAvailiableWidth = true
+// only used if button bar is created programmatically and not using storyboards or nib files as recommended.
+public var buttonBarHeight: CGFloat?
+```
+
+#####  Update cells when selected indicator changes
+
+We may need to update the indicator cell when the displayed view controller changes. The following function properties help to accomplish that. Depending on our pager `pagerBehaviour` value we will have to set up `changeCurrentIndex` or `changeCurrentIndexProgressive`.
+
+public var changeCurrentIndex: ((oldCell: ButtonBarViewCell?, newCell: ButtonBarViewCell?, animated: Bool) -> Void)?
+public var changeCurrentIndexProgressive: ((oldCell: ButtonBarViewCell?, newCell: ButtonBarViewCell?, progressPercentage: CGFloat, changeCurrentIndex: Bool, animated: Bool) -> Void)?
+
+Let's see am example:
+
+```swift
+changeCurrentIndexProgressive = { (oldCell: ButtonBarViewCell?, newCell: ButtonBarViewCell?, progressPercentage: CGFloat, changeCurrentIndex: Bool, animated: Bool) -> Void in
+    guard changeCurrentIndex == true else { return }
+
+    oldCell?.label.textColor = UIColor(white: 1, alpha: 0.6)
+    newCell?.label.textColor = .whiteColor()
+
+    if animated {
+        UIView.animateWithDuration(0.1, animations: { () -> Void in
+            newCell?.transform = CGAffineTransformMakeScale(1.0, 1.0)
+            oldCell?.transform = CGAffineTransformMakeScale(0.8, 0.8)
+        })
+    }
+    else {
+        newCell?.transform = CGAffineTransformMakeScale(1.0, 1.0)
+        oldCell?.transform = CGAffineTransformMakeScale(0.8, 0.8)
+    }
+}
+```
+
+### Bar Type Customization
+
+```swift
+settings.style.barBackgroundColor: UIColor?
+settings.style.selectedBarBackgroundColor: UIColor?
+// barHeight is only set up when the bar is created programmatically and not using storyboards or xib files as recommended.
+settings.style.barHeight: CGFloat = 5
+```
+
+### Twitter Type Customization
+
+```swift
+settings.style.dotColor = UIColor(white: 1, alpha: 0.4)
+settings.style.selectedDotColor = UIColor.whiteColor()
+settings.style.portraitTitleFont = UIFont.systemFontOfSize(18)
+settings.style.landscapeTitleFont = UIFont.systemFontOfSize(15)
+settings.style.titleColor = UIColor.whiteColor()
+```
+
+### Segmented Type Customization
+
+```swift
+settings.style.segmentedControlColor: UIColor?
+```
+
+
+
 ## Requirements
 
 * iOS 8.0+
 * Xcode 7.2+
-
-## Getting involved
-
-* If you **want to contribute** please feel free to **submit pull requests**.
-* If you **have a feature request** please **open an issue**.
-* If you **found a bug** or **need help** please **check older issues, [FAQ](#faq) and threads on [StackOverflow](http://stackoverflow.com/questions/tagged/XLPagerTabStrip) (Tag 'XLPagerTabStrip') before submitting an issue**.
-
-Before contribute check the [CONTRIBUTING](CONTRIBUTING.md) file for more info.
-
-If you use **XLPagerTabStrip** in your app We would love to hear about it! Drop us a line on [twitter](https://twitter.com/xmartlabs).
 
 ## Examples
 

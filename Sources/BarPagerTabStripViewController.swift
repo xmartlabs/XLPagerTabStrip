@@ -29,7 +29,7 @@ public struct BarPagerTabStripSettings {
     public struct Style {
         public var barBackgroundColor: UIColor?
         public var selectedBarBackgroundColor: UIColor?
-        public var barHeight: CGFloat? // barHeight is ony set up when the bar is created programatically and not using storyboards or xib files.
+        public var barHeight: CGFloat = 5 // barHeight is ony set up when the bar is created programatically and not using storyboards or xib files.
     }
     
     public var style = Style()
@@ -40,7 +40,7 @@ public class BarPagerTabStripViewController: PagerTabStripViewController, PagerT
     public var settings = BarPagerTabStripSettings()
     
     @IBOutlet lazy public var barView: BarView! = { [unowned self] in
-        let barView = BarView(frame: CGRectMake(0, 0, self.view.frame.size.width, self.settings.style.barHeight ?? 5.0))
+        let barView = BarView(frame: CGRectMake(0, 0, self.view.frame.size.width, self.settings.style.barHeight))
         barView.autoresizingMask = .FlexibleWidth
         barView.backgroundColor = .blackColor()
         barView.selectedBar.backgroundColor = .whiteColor()

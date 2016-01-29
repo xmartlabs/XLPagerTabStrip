@@ -48,7 +48,7 @@ public struct ButtonBarPagerTabStripSettings {
         public var buttonBarLeftContentInset: CGFloat?
         public var buttonBarRightContentInset: CGFloat?
 
-        public var selectedBarBackgroundColor: UIColor?
+        public var selectedBarBackgroundColor = UIColor.blackColor()
         public var selectedBarHeight: CGFloat = 5
         
         public var buttonBarItemBackgroundColor: UIColor?
@@ -131,7 +131,7 @@ public class ButtonBarPagerTabStripViewController: PagerTabStripViewController, 
 
         buttonBarView.showsHorizontalScrollIndicator = false
         buttonBarView.backgroundColor = settings.style.buttonBarBackgroundColor ?? buttonBarView.backgroundColor
-        buttonBarView.selectedBar.backgroundColor = settings.style.selectedBarBackgroundColor ?? buttonBarView.selectedBar.backgroundColor
+        buttonBarView.selectedBar.backgroundColor = settings.style.selectedBarBackgroundColor
         
         buttonBarView.selectedBarHeight = settings.style.selectedBarHeight ?? buttonBarView.selectedBarHeight
         // register button bar item cell
