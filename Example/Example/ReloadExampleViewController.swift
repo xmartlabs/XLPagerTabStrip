@@ -65,6 +65,11 @@ class ReloadExampleViewController: UIViewController {
         }
     }
     
+    
+    @IBAction func closeTapped(sender: UIButton) {
+        dismissViewControllerAnimated(true, completion: nil)
+    }
+    
     func updateTitle(pagerTabStripViewController: PagerTabStripViewController) {
         func stringFromBool(bool: Bool) -> String {
             return bool ? "YES" : "NO"

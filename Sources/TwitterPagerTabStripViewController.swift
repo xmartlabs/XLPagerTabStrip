@@ -43,14 +43,14 @@ public class TwitterPagerTabStripViewController: PagerTabStripViewController, Pa
     
     public override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-        pagerBehaviour = .Common(skipIntermediateViewControllers: true)
+        pagerBehaviour = .Progressive(skipIntermediateViewControllers: true, elasticIndicatorLimit: true)
         delegate = self
         datasource = self
     }
     
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        pagerBehaviour = PagerTabStripBehaviour.Common(skipIntermediateViewControllers: true)
+        pagerBehaviour = .Progressive(skipIntermediateViewControllers: true, elasticIndicatorLimit: true)
         delegate = self
         datasource = self
     }
@@ -73,7 +73,7 @@ public class TwitterPagerTabStripViewController: PagerTabStripViewController, Pa
         titleView.addSubview(pageControl)
         reloadNavigationViewItems()
     }
-    
+
     public override func reloadPagerTabStripView() {
         super.reloadPagerTabStripView()
         guard isViewLoaded() else { return }
@@ -123,7 +123,7 @@ public class TwitterPagerTabStripViewController: PagerTabStripViewController, Pa
     }
     
     deinit {
-        titleView.removeObserver(self, forKeyPath: "frame")
+        NSNotificationCenter.defaultCenter().removeObserver(self)
     }
     
     public override func viewDidLayoutSubviews() {
@@ -133,7 +133,7 @@ public class TwitterPagerTabStripViewController: PagerTabStripViewController, Pa
     
     // MARK: - Helpers
     
-    private lazy var titleView: UIView = { [unowned self] in
+    private lazy var titleView: UIView = {
         let navigationView = UIView()
         navigationView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
         return navigationView
