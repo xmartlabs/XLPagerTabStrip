@@ -31,7 +31,7 @@ public class ButtonBarViewCell: UICollectionViewCell {
         let label = UILabel(frame: self.contentView.bounds)
         label.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
         label.textAlignment = .Center
-        label.font = UIFont.systemFontOfSize(14.0, weight: UIFontWeightMedium)
+        label.font = UIFont.boldSystemFontOfSize(14.0)
         return label
     }()
     
