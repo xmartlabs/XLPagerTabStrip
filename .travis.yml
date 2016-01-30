@@ -1,0 +1,13 @@
+language: objective-c
+osx_image: xcode7.2
+
+before_install:
+- brew update
+- brew install carthage
+- if brew outdated | grep -qx xctool; then brew upgrade xctool; fi
+- carthage update --platform iOS
+- gem install xcpretty --no-rdoc --no-ri --no-document --quiet
+
+script:
+- xctool clean build -project XLPagerTabStrip.xcodeproj -scheme XLPagerTabStrip -sdk iphonesimulator
+- xctool test -project XLPagerTabStrip.xcodeproj -scheme XLPagerTabStrip -sdk iphonesimulator
