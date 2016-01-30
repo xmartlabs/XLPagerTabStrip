@@ -35,12 +35,12 @@ public protocol IndicatorInfoProvider {
 
 public protocol PagerTabStripDelegate: class {
     
-    func pagerTabStripViewController(pagerTabStripViewController: PagerTabStripViewController, updateIndicatorFromIndex fromIndex: Int, toIndex: Int) throws
+    func pagerTabStripViewController(pagerTabStripViewController: PagerTabStripViewController, updateIndicatorFromIndex fromIndex: Int, toIndex: Int)
 }
 
 public protocol PagerTabStripIsProgressiveDelegate : PagerTabStripDelegate {
 
-    func pagerTabStripViewController(pagerTabStripViewController: PagerTabStripViewController, updateIndicatorFromIndex fromIndex: Int, toIndex: Int, withProgressPercentage progressPercentage: CGFloat, indexWasChanged: Bool) throws
+    func pagerTabStripViewController(pagerTabStripViewController: PagerTabStripViewController, updateIndicatorFromIndex fromIndex: Int, toIndex: Int, withProgressPercentage progressPercentage: CGFloat, indexWasChanged: Bool)
 }
 
 public protocol PagerTabStripDataSource: class {
@@ -256,10 +256,10 @@ public class PagerTabStripViewController: UIViewController, UIScrollViewDelegate
         if let progressiveDeledate = self as? PagerTabStripIsProgressiveDelegate where pagerBehaviour.isProgressiveIndicator {
             
             let (fromIndex, toIndex, scrollPercentage) = progressiveIndicatorData(virtualPage)
-            try! progressiveDeledate.pagerTabStripViewController(self, updateIndicatorFromIndex: fromIndex, toIndex: toIndex, withProgressPercentage: scrollPercentage, indexWasChanged: changeCurrentIndex)
+            progressiveDeledate.pagerTabStripViewController(self, updateIndicatorFromIndex: fromIndex, toIndex: toIndex, withProgressPercentage: scrollPercentage, indexWasChanged: changeCurrentIndex)
         }
         else{
-            try! delegate?.pagerTabStripViewController(self, updateIndicatorFromIndex: min(oldCurrentIndex, pagerViewControllers.count - 1), toIndex: newCurrentIndex)
+            delegate?.pagerTabStripViewController(self, updateIndicatorFromIndex: min(oldCurrentIndex, pagerViewControllers.count - 1), toIndex: newCurrentIndex)
         }
     }
         

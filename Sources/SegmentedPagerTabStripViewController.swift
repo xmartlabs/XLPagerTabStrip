@@ -63,17 +63,17 @@ public class SegmentedPagerTabStripViewController: PagerTabStripViewController, 
         }
         segmentedControl.tintColor = settings.style.segmentedControlColor ?? segmentedControl.tintColor
         segmentedControl.addTarget(self, action: "segmentedControlChanged:", forControlEvents: .ValueChanged)
-        try! reloadSegmentedControl()
+        reloadSegmentedControl()
     }
     
     public override func reloadPagerTabStripView() {
         super.reloadPagerTabStripView()
         if isViewLoaded() {
-            try! reloadSegmentedControl()
+            reloadSegmentedControl()
         }
     }
     
-    func reloadSegmentedControl() throws {
+    func reloadSegmentedControl() {
         segmentedControl.removeAllSegments()
         for (index, item) in viewControllers.enumerate(){
             let child = item as! IndicatorInfoProvider
@@ -89,14 +89,14 @@ public class SegmentedPagerTabStripViewController: PagerTabStripViewController, 
     
     func segmentedControlChanged(sender: UISegmentedControl) {
         let index = sender.selectedSegmentIndex
-        try! pagerTabStripViewController(self, updateIndicatorFromIndex: currentIndex, toIndex: index)
+        pagerTabStripViewController(self, updateIndicatorFromIndex: currentIndex, toIndex: index)
         shouldUpdateSegmentedControl = false
         moveToViewControllerAtIndex(index)
     }
     
     // MARK: - PagerTabStripDelegate
     
-    public func pagerTabStripViewController(pagerTabStripViewController: PagerTabStripViewController, updateIndicatorFromIndex fromIndex: Int, toIndex: Int) throws {
+    public func pagerTabStripViewController(pagerTabStripViewController: PagerTabStripViewController, updateIndicatorFromIndex fromIndex: Int, toIndex: Int) {
         if shouldUpdateSegmentedControl {
             segmentedControl.selectedSegmentIndex = toIndex
         }
