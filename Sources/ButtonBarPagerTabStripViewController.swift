@@ -188,7 +188,7 @@ public class ButtonBarPagerTabStripViewController: PagerTabStripViewController, 
         
         for minimumCellWidthValue in minimumCellWidths where minimumCellWidthValue > suggestedStretchedCellWidth {
             totalWidthOfLargeCells += minimumCellWidthValue
-            numberOfLargeCells++
+            numberOfLargeCells += 1
         }
         
         guard numberOfLargeCells > previousNumberOfLargeCells else { return suggestedStretchedCellWidth }

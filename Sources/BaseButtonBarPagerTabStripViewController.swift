@@ -152,7 +152,7 @@ public class BaseButtonBarPagerTabStripViewController<ButtonBarCellType : UIColl
         for minimumCellWidthValue in minimumCellWidths {
             if minimumCellWidthValue > suggestedStretchedCellWidth {
                 totalWidthOfLargeCells += minimumCellWidthValue
-                numberOfLargeCells++
+                numberOfLargeCells += 1
             }
         }
         
