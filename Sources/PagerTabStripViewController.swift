@@ -122,11 +122,7 @@ public class PagerTabStripViewController: UIViewController, UIScrollViewDelegate
         updateIfNeeded()
     }
     
-    public func moveToViewControllerAtIndex(index: Int) {
-        moveToViewControllerAtIndex(index, animated: true)
-    }
-    
-    public func moveToViewControllerAtIndex(index: Int, animated: Bool) {
+    public func moveToViewControllerAtIndex(index: Int, animated: Bool = true) {
         guard isViewLoaded() && view.window != nil else {
             currentIndex = index
             return
@@ -148,11 +144,7 @@ public class PagerTabStripViewController: UIViewController, UIScrollViewDelegate
         }
     }
     
-    public func moveToViewController(viewController: UIViewController) {
-        moveToViewControllerAtIndex(viewControllers.indexOf(viewController)!)
-    }
-
-    public func moveToViewController(viewController: UIViewController, animated: Bool) {
+    public func moveToViewController(viewController: UIViewController, animated: Bool = true) {
         moveToViewControllerAtIndex(viewControllers.indexOf(viewController)!, animated: animated)
     }
     
