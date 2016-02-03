@@ -240,8 +240,8 @@ public class ButtonBarPagerTabStripViewController: PagerTabStripViewController, 
         buttonBarView.moveToIndex(indexPath.item, animated: true, swipeDirection: .None, pagerScroll: .Yes)
         shouldUpdateButtonBarView = false
         
-        let oldCell = buttonBarView.cellForItemAtIndexPath(NSIndexPath(forItem: currentIndex, inSection: 0)) as! ButtonBarViewCell
-        let newCell = buttonBarView.cellForItemAtIndexPath(NSIndexPath(forItem: indexPath.item, inSection: 0)) as! ButtonBarViewCell
+        let oldCell = buttonBarView.cellForItemAtIndexPath(NSIndexPath(forItem: currentIndex, inSection: 0)) as? ButtonBarViewCell
+        let newCell = buttonBarView.cellForItemAtIndexPath(NSIndexPath(forItem: indexPath.item, inSection: 0)) as? ButtonBarViewCell
         if pagerBehaviour.isProgressiveIndicator {
             if let changeCurrentIndexProgressive = changeCurrentIndexProgressive {
                 changeCurrentIndexProgressive(oldCell: oldCell, newCell: newCell, progressPercentage: 1, changeCurrentIndex: true, animated: true)
