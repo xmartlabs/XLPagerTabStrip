@@ -123,7 +123,7 @@ public class TwitterPagerTabStripViewController: PagerTabStripViewController, Pa
     }
     
     deinit {
-        NSNotificationCenter.defaultCenter().removeObserver(self)
+        titleView.removeObserver(self, forKeyPath: "frame")
     }
     
     public override func viewDidLayoutSubviews() {
