@@ -250,7 +250,8 @@ public class PagerTabStripViewController: UIViewController, UIScrollViewDelegate
             let (fromIndex, toIndex, scrollPercentage) = progressiveIndicatorData(virtualPage)
             progressiveDeledate.pagerTabStripViewController(self, updateIndicatorFromIndex: fromIndex, toIndex: toIndex, withProgressPercentage: scrollPercentage, indexWasChanged: changeCurrentIndex)
         }
-        else{
+        
+        if changeCurrentIndex {
             delegate?.pagerTabStripViewController(self, updateIndicatorFromIndex: min(oldCurrentIndex, pagerViewControllers.count - 1), toIndex: newCurrentIndex)
         }
     }
