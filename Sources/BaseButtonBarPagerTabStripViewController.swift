@@ -1,4 +1,4 @@
-//  TwitterPagerTabStripViewController.swift
+//  BaseButtonBarPagerTabStripViewController.swift
 //  XLPagerTabStrip ( https://github.com/xmartlabs/XLPagerTabStrip )
 //
 //  Copyright (c) 2016 Xmartlabs ( http://xmartlabs.com )
@@ -36,14 +36,14 @@ public class BaseButtonBarPagerTabStripViewController<ButtonBarCellType : UIColl
         var flowLayout = UICollectionViewFlowLayout()
         flowLayout.scrollDirection = .Horizontal
         flowLayout.sectionInset = UIEdgeInsetsMake(0, self.settings.style.buttonBarLeftContentInset ?? 35, 0, self.settings.style.buttonBarRightContentInset ?? 35)
-        
-        let buttonBar = ButtonBarView(frame: CGRectMake(0, 0, self.view.frame.size.width, self.settings.style.buttonBarHeight ?? 44), collectionViewLayout: flowLayout)
+        let buttonBarHeight = self.settings.style.buttonBarHeight ?? 44
+        let buttonBar = ButtonBarView(frame: CGRectMake(0, 0, self.view.frame.size.width, buttonBarHeight), collectionViewLayout: flowLayout)
         buttonBar.backgroundColor = .orangeColor()
         buttonBar.selectedBar.backgroundColor = .blackColor()
         buttonBar.autoresizingMask = .FlexibleWidth
         var newContainerViewFrame = self.containerView.frame
-        newContainerViewFrame.origin.y = 44
-        newContainerViewFrame.size.height = self.containerView.frame.size.height - (44 - self.containerView.frame.origin.y)
+        newContainerViewFrame.origin.y = buttonBarHeight
+        newContainerViewFrame.size.height = self.containerView.frame.size.height - (buttonBarHeight - self.containerView.frame.origin.y)
         self.containerView.frame = newContainerViewFrame
         return buttonBar
         }()
