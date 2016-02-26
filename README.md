@@ -90,7 +90,7 @@ class MyPagerTabStripName: ButtonBarPagerTabStripViewController {
 We strongly recommend to use IB to set up our page controller views.
 
 Drag into the storyboard a `UIViewController` and set up its class with your pager controller (`MyPagerTabStripName`).
-Drag a `UIScrollView` into your view controller view and connect `PagerTabStripViewController` `contentView` outlet with the scroll view.
+Drag a `UIScrollView` into your view controller view and connect `PagerTabStripViewController` `containerView` outlet with the scroll view.
 
 Depending on which type of paging view controller you are working with you may have to connect more outlets.
 
