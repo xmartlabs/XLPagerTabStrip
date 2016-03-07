@@ -54,8 +54,8 @@ class YoutubeExampleViewController: BaseButtonBarPagerTabStripViewController<You
         settings.style.buttonBarItemTitleColor = .blackColor()
         settings.style.buttonBarItemsShouldFillAvailiableWidth = true
         
-        settings.style.buttonBarLeftContentInset = 20
-        settings.style.buttonBarRightContentInset = 20
+        settings.style.buttonBarLeftContentInset = 0
+        settings.style.buttonBarRightContentInset = 0
         
         
         
