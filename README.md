@@ -216,6 +216,16 @@ settings.style.buttonBarItemsShouldFillAvailiableWidth = true
 public var buttonBarHeight: CGFloat?
 ```
 
+**Important:** Settings should be called before `viewDidLoad` is called.
+```swift
+override func viewDidLoad() {
+   self.settings.style.selectedBarHeight = 2
+   self.settings.style.selectedBarBackgroundColor = UIColor.whiteColor()
+        
+   super.viewDidLoad()
+}
+```
+
 #####  Update cells when selected indicator changes
 
 We may need to update the indicator cell when the displayed view controller changes. The following function properties help to accomplish that. Depending on our pager `pagerBehaviour` value we will have to set up `changeCurrentIndex` or `changeCurrentIndexProgressive`.
