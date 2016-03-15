@@ -1,6 +1,14 @@
 # Change Log
 All notable changes to XLPagerTabStrip will be documented in this file.
 
+### [4.0.2](https://github.com/xmartlabs/XLPagerTabStrip/releases/tag/4.0.2)
+
+* Bug fixes
+
+### [4.0.1](https://github.com/xmartlabs/XLPagerTabStrip/releases/tag/4.0.1)
+
+* Bug fixes and stability improvements
+
 ### [4.0.0](https://github.com/xmartlabs/XLPagerTabStrip/releases/tag/4.0.0)
 <!-- Released on 2016-01-20. -->
 
