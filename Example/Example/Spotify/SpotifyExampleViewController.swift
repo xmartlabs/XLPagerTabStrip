@@ -40,7 +40,6 @@ public class SpotifyExampleViewController: ButtonBarPagerTabStripViewController 
         settings.style.buttonBarItemFont = UIFont(name: "HelveticaNeue-Light", size:14) ?? UIFont.systemFontOfSize(14)
         settings.style.selectedBarHeight = 3.0
         settings.style.buttonBarMinimumLineSpacing = 0
-        settings.style.buttonBarMinimumInteritemSpacing = 0
         settings.style.buttonBarItemTitleColor = .blackColor()
         settings.style.buttonBarItemsShouldFillAvailiableWidth = true
         
