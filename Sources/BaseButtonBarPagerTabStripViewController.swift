@@ -78,7 +78,7 @@ public class BaseButtonBarPagerTabStripViewController<ButtonBarCellType : UIColl
         buttonBarView.scrollsToTop = false
         let flowLayout = buttonBarView.collectionViewLayout as! UICollectionViewFlowLayout
         flowLayout.scrollDirection = .Horizontal
-        flowLayout.minimumInteritemSpacing = 0
+        flowLayout.minimumInteritemSpacing = settings.style.buttonBarMinimumLineSpacing ?? flowLayout.minimumLineSpacing
         flowLayout.minimumLineSpacing = settings.style.buttonBarMinimumLineSpacing ?? flowLayout.minimumLineSpacing
         let sectionInset = flowLayout.sectionInset
         flowLayout.sectionInset = UIEdgeInsetsMake(sectionInset.top, self.settings.style.buttonBarLeftContentInset ?? sectionInset.left, sectionInset.bottom, self.settings.style.buttonBarRightContentInset ?? sectionInset.right)
