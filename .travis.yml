@@ -1,13 +1,16 @@
 language: objective-c
-osx_image: xcode7.2
-
+osx_image: xcode7.3
+env:
+  - DESTINATION="OS=9.3,name=iPhone 6s" SCHEME="XLPagerTabStrip" SDK=iphonesimulator9.3
 before_install:
 - brew update
-- brew outdated carthage || brew upgrade carthage
+#- brew outdated carthage || brew upgrade carthage
 - if brew outdated | grep -qx xctool; then brew upgrade xctool; fi
-- carthage update --platform iOS
+#- carthage update --platform iOS
 - gem install xcpretty --no-rdoc --no-ri --no-document --quiet
 
 script:
-- xctool clean build -project XLPagerTabStrip.xcodeproj -scheme XLPagerTabStrip -sdk iphonesimulator
-- xctool test -project XLPagerTabStrip.xcodeproj -scheme XLPagerTabStrip -sdk iphonesimulator
+- xctool clean build -project XLPagerTabStrip.xcodeproj -scheme XLPagerTabStrip -sdk iphonesimulator9.3
+#- xctool test -project XLPagerTabStrip.xcodeproj -scheme XLPagerTabStrip -sdk iphonesimulator9.3
+- xcodebuild -project XLPagerTabStrip.xcodeproj -scheme "$SCHEME" -sdk "$SDK" -destination "$DESTINATION"
+  -configuration Debug ONLY_ACTIVE_ARCH=NO test | xcpretty -c
