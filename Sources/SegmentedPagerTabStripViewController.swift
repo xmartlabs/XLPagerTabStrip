@@ -62,7 +62,7 @@ public class SegmentedPagerTabStripViewController: PagerTabStripViewController, 
             navigationItem.titleView = segmentedControl
         }
         segmentedControl.tintColor = settings.style.segmentedControlColor ?? segmentedControl.tintColor
-        segmentedControl.addTarget(self, action: "segmentedControlChanged:", forControlEvents: .ValueChanged)
+        segmentedControl.addTarget(self, action: #selector(SegmentedPagerTabStripViewController.segmentedControlChanged(_:)), forControlEvents: .ValueChanged)
         reloadSegmentedControl()
     }
     

@@ -1,6 +1,11 @@
 # Change Log
 All notable changes to XLPagerTabStrip will be documented in this file.
 
+### [4.1.0](https://github.com/xmartlabs/XLPagerTabStrip/releases/tag/4.1.0)
+
+* Xcode 7.3 support.
+* Bug fixes and stability improvements.
+
 ### [4.0.2](https://github.com/xmartlabs/XLPagerTabStrip/releases/tag/4.0.2)
 
 * Bug fixes
