@@ -83,13 +83,14 @@ public class ButtonBarPagerTabStripViewController: PagerTabStripViewController, 
     @IBOutlet public lazy var buttonBarView: ButtonBarView! = { [unowned self] in
         var flowLayout = UICollectionViewFlowLayout()
         flowLayout.scrollDirection = .Horizontal
-        let buttonBar = ButtonBarView(frame: CGRectMake(0, 0, self.view.frame.size.width, self.settings.style.buttonBarHeight ?? 44), collectionViewLayout: flowLayout)
+        let buttonBarHeight = self.settings.style.buttonBarHeight ?? 44
+        let buttonBar = ButtonBarView(frame: CGRectMake(0, 0, self.view.frame.size.width, buttonBarHeight), collectionViewLayout: flowLayout)
         buttonBar.backgroundColor = .orangeColor()
         buttonBar.selectedBar.backgroundColor = .blackColor()
         buttonBar.autoresizingMask = .FlexibleWidth
         var newContainerViewFrame = self.containerView.frame
-        newContainerViewFrame.origin.y = 44
-        newContainerViewFrame.size.height = self.containerView.frame.size.height - (44 - self.containerView.frame.origin.y)
+        newContainerViewFrame.origin.y = buttonBarHeight
+        newContainerViewFrame.size.height = self.containerView.frame.size.height - (buttonBarHeight - self.containerView.frame.origin.y)
         self.containerView.frame = newContainerViewFrame
         return buttonBar
     }()
