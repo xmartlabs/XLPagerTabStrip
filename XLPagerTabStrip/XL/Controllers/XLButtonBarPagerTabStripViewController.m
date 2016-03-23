@@ -405,6 +405,10 @@
     
     [buttonBarCell.label setText:[childController titleForPagerTabStripViewController:self]];
     
+    if (self.buttonBarView.labelFont) {
+        buttonBarCell.label.font = self.buttonBarView.labelFont;
+    }
+    
     if ([childController respondsToSelector:@selector(imageForPagerTabStripViewController:)]) {
         UIImage *image = [childController imageForPagerTabStripViewController:self];
         buttonBarCell.imageView.image = image;
