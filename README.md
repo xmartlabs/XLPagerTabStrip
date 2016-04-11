@@ -204,6 +204,9 @@ settings.style.buttonBarRightContentInset: CGFloat?
 settings.style.selectedBarBackgroundColor = UIColor.blackColor()
 settings.style.selectedBarHeight: CGFloat = 5
 
+// if you want the selected bar to be below the buttons bar, set it to true
+settings.style.isSelectedBarBelow: Bool = false
+
 // each buttonBar item is a UICollectionView cell of type ButtonBarViewCell
 settings.style.buttonBarItemBackgroundColor: UIColor?
 settings.style.buttonBarItemFont = UIFont.systemFontOfSize(18)

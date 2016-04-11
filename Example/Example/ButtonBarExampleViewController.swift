@@ -31,7 +31,6 @@ class ButtonBarExampleViewController: ButtonBarPagerTabStripViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         buttonBarView.selectedBar.backgroundColor = .orangeColor()
         buttonBarView.backgroundColor = UIColor(red: 7/255, green: 185/255, blue: 155/255, alpha: 1)
     }
@@ -74,5 +73,26 @@ class ButtonBarExampleViewController: ButtonBarPagerTabStripViewController {
             pagerBehaviour = .Common(skipIntermediateViewControllers: rand() % 2 == 0)
         }
         super.reloadPagerTabStripView()
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "ButtonBarExampleSettings" {
+            let controller = segue.destinationViewController as! ButtonBarExampleSettingsViewController
+            controller.delegate = self
+        }
+    }
+}
+
+extension ButtonBarExampleViewController: ButtonBarExampleSettingsDelegate {
+    func buttonBarExampleSettings(isSelectedBarBelow isSelectedBarBelow: Bool) {
+        buttonBarView.isSelectedBarBelow = isSelectedBarBelow
+    }
+    func buttonBarExampleSettingsUpdateTapped() {
+        navigationController?.dismissViewControllerAnimated(true) {
+            super.reloadPagerTabStripView()
+        }
+    }
+    func buttonBarExampleSettingsIsSelectedBarBelow() -> Bool {
+        return buttonBarView.isSelectedBarBelow
     }
 }

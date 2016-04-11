@@ -45,9 +45,16 @@ public class ButtonBarView: UICollectionView {
         return bar
     }()
     
+    public var isSelectedBarBelow = false {
+        didSet {
+            clipsToBounds = !isSelectedBarBelow
+            updateSelectedBarYPosition()
+        }
+    }
+    
     internal var selectedBarHeight: CGFloat = 4 {
         didSet {
-            self.updateSlectedBarYPosition()
+            updateSelectedBarYPosition()
         }
     }
     var selectedBarAlignment: SelectedBarAlignment = .Center
@@ -131,6 +138,13 @@ public class ButtonBarView: UICollectionView {
         }
     }
     
+    public func updateSelectedBarYPosition() {
+        var selectedBarFrame = selectedBar.frame
+        selectedBarFrame.origin.y = frame.size.height - (isSelectedBarBelow ? 0 : selectedBarHeight)
+        selectedBarFrame.size.height = selectedBarHeight
+        selectedBar.frame = selectedBarFrame
+    }
+    
     // MARK: - Helpers
     
     private func updateContentOffset(animated: Bool, pagerScroll: PagerScroll, toFrame: CGRect, toIndex: Int) -> Void {
@@ -163,12 +177,5 @@ public class ButtonBarView: UICollectionView {
         contentOffset = max(0, contentOffset)
         contentOffset = min(contentSize.width - frame.size.width, contentOffset)
         return contentOffset
-    }
-    
-    private func updateSlectedBarYPosition() {
-        var selectedBarFrame = selectedBar.frame
-        selectedBarFrame.origin.y = frame.size.height - selectedBarHeight
-        selectedBarFrame.size.height = selectedBarHeight
-        selectedBar.frame = selectedBarFrame
     }
 }

@@ -70,6 +70,20 @@ class ReloadExampleViewController: UIViewController {
         dismissViewControllerAnimated(true, completion: nil)
     }
     
+    @IBAction func editTapped(sender: UIBarButtonItem) {
+        let settings = storyboard?.instantiateViewControllerWithIdentifier("ButtonBarExampleSettings")
+            as! ButtonBarExampleSettingsViewController
+        
+        let _ = childViewControllers.flatMap { element in
+            return element as? ButtonBarExampleViewController
+        }.map { controller in
+            settings.delegate = controller
+        }
+        
+        let nav = UINavigationController(rootViewController: settings)
+        presentViewController(nav, animated: true, completion: nil)
+    }
+    
     func updateTitle(pagerTabStripViewController: PagerTabStripViewController) {
         func stringFromBool(bool: Bool) -> String {
             return bool ? "YES" : "NO"

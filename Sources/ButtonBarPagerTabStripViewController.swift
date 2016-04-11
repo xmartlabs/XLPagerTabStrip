@@ -50,6 +50,7 @@ public struct ButtonBarPagerTabStripSettings {
 
         public var selectedBarBackgroundColor = UIColor.blackColor()
         public var selectedBarHeight: CGFloat = 5
+        public var isSelectedBarBelow = false
         
         public var buttonBarItemBackgroundColor: UIColor?
         public var buttonBarItemFont = UIFont.systemFontOfSize(18)
@@ -134,8 +135,9 @@ public class ButtonBarPagerTabStripViewController: PagerTabStripViewController, 
         buttonBarView.showsHorizontalScrollIndicator = false
         buttonBarView.backgroundColor = settings.style.buttonBarBackgroundColor ?? buttonBarView.backgroundColor
         buttonBarView.selectedBar.backgroundColor = settings.style.selectedBarBackgroundColor
-        
         buttonBarView.selectedBarHeight = settings.style.selectedBarHeight ?? buttonBarView.selectedBarHeight
+        buttonBarView.isSelectedBarBelow = settings.style.isSelectedBarBelow
+		
         // register button bar item cell
         switch buttonBarItemSpec {
         case .NibFile(let nibName, let bundle, _):
@@ -179,6 +181,7 @@ public class ButtonBarPagerTabStripViewController: PagerTabStripViewController, 
     public override func reloadPagerTabStripView() {
         super.reloadPagerTabStripView()
         guard isViewLoaded() else { return }
+        buttonBarView.updateSelectedBarYPosition()
         buttonBarView.reloadData()
         cachedCellWidths = calculateWidths()
         buttonBarView.moveToIndex(currentIndex, animated: false, swipeDirection: .None, pagerScroll: .Yes)
