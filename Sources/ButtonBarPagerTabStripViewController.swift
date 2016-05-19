@@ -83,7 +83,7 @@ open class ButtonBarPagerTabStripViewController: PagerTabStripViewController, Pa
 
     @IBOutlet public weak var buttonBarView: ButtonBarView!
 
-    lazy private var cachedCellWidths: [CGFloat]? = { [unowned self] in
+    lazy private(set) var cachedCellWidths: [CGFloat]? = { [unowned self] in
         return self.calculateWidths()
     }()
 
@@ -351,7 +351,7 @@ open class ButtonBarPagerTabStripViewController: PagerTabStripViewController, Pa
     open func configureCell(_ cell: ButtonBarViewCell, indicatorInfo: IndicatorInfo) {
     }
 
-    private func calculateWidths() -> [CGFloat] {
+    func calculateWidths() -> [CGFloat] {
         let flowLayout = buttonBarView.collectionViewLayout as! UICollectionViewFlowLayout // swiftlint:disable:this force_cast
         let numberOfCells = viewControllers.count
 
