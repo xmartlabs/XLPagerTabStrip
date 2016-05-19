@@ -25,6 +25,14 @@ public class ButtonLoopBarPagerTabStripViewController: ButtonBarPagerTabStripVie
         return rotatedArray(widths, rotation: indexAheadForLoop)
     }
 
+    public override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+
+        if !scrollingBySelectingButton {
+            shiftButtonsIndex()
+        }
+    }
+
     // MARK: - UICollectionViewDelegate
 
     public override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
