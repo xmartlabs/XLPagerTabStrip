@@ -39,6 +39,7 @@ public class ButtonLoopBarPagerTabStripViewController: ButtonBarPagerTabStripVie
         super.scrollViewDidScroll(scrollView)
 
         if scrollView == buttonBarView && !scrollingBySelectingButton {
+            scrollToSelectedButton = false
             shiftButtonsIndex()
         }
     }
@@ -66,6 +67,17 @@ public class ButtonLoopBarPagerTabStripViewController: ButtonBarPagerTabStripVie
 
         self.indexAheadForLoop = tmp
         return widths
+    }
+
+    public override func pagerTabStripViewController(pagerTabStripViewController: PagerTabStripViewController, updateIndicatorFromIndex fromIndex: Int, toIndex: Int, withProgressPercentage progressPercentage: CGFloat, indexWasChanged: Bool) {
+        guard shouldUpdateButtonBarView else { return }
+        buttonBarView.moveFromIndex(fromIndex, toIndex: toIndex, progressPercentage: progressPercentage, pagerScroll: .Yes, scrollToSelectedButton: scrollToSelectedButton)
+        scrollToSelectedButton = true
+        if let changeCurrentIndexProgressive = changeCurrentIndexProgressive {
+            let oldCell = buttonBarView.cellForItemAtIndexPath(NSIndexPath(forItem: currentIndex != fromIndex ? fromIndex : toIndex, inSection: 0)) as? ButtonBarViewCell
+            let newCell = buttonBarView.cellForItemAtIndexPath(NSIndexPath(forItem: currentIndex, inSection: 0)) as? ButtonBarViewCell
+            changeCurrentIndexProgressive(oldCell: oldCell, newCell: newCell, progressPercentage: progressPercentage, changeCurrentIndex: indexWasChanged, animated: true)
+        }
     }
 
     // MARK: - Private Methods
@@ -106,6 +118,7 @@ public class ButtonLoopBarPagerTabStripViewController: ButtonBarPagerTabStripVie
         return Array(array[rotation...array.count-1] + array[0...rotation-1])
     }
 
+    private var scrollToSelectedButton = true
     private var scrollingBySelectingButton = false
 
 }
