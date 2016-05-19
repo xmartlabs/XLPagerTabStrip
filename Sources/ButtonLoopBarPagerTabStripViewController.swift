@@ -25,6 +25,39 @@ public class ButtonLoopBarPagerTabStripViewController: ButtonBarPagerTabStripVie
         return rotatedArray(widths, rotation: indexAheadForLoop)
     }
 
+    // MARK: - UICollectionViewDelegate
+
+    public override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        scrollingBySelectingButton = true
+
+        super.collectionView(collectionView, didSelectItemAtIndexPath:indexPath)
+    }
+
+    // MARK: - UIScrollViewDelegate
+
+    public override func scrollViewDidScroll(scrollView: UIScrollView) {
+        super.scrollViewDidScroll(scrollView)
+
+        if scrollView == buttonBarView && !scrollingBySelectingButton {
+            shiftButtonsIndex()
+        }
+    }
+
+    public override func scrollViewDidEndScrollingAnimation(scrollView: UIScrollView) {
+        super.scrollViewDidEndScrollingAnimation(scrollView)
+
+        guard scrollView == containerView else { return }
+
+        scrollingBySelectingButton = false
+        shiftButtonsIndex()
+    }
+
+    // MARK: - Public Methods
+
+    public override func pageForVirtualPage(virtualPage: Int) -> Int {
+        return virtualPage + indexAheadForLoop
+    }
+
     public override func calculateWidths() -> [CGFloat] {
         let tmp = self.indexAheadForLoop
         self.indexAheadForLoop = 0
@@ -72,5 +105,7 @@ public class ButtonLoopBarPagerTabStripViewController: ButtonBarPagerTabStripVie
         guard rotation > 0 else { return array }
         return Array(array[rotation...array.count-1] + array[0...rotation-1])
     }
+
+    private var scrollingBySelectingButton = false
 
 }
