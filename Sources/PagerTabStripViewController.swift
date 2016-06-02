@@ -29,7 +29,7 @@ import Foundation
 // MARK: Protocols
 
 public protocol IndicatorInfoProvider {
-    
+    var itemInfo: IndicatorInfo { get set }
     func indicatorInfoForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo
 }
 
