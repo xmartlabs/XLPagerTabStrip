@@ -25,13 +25,13 @@
 import Foundation
 
 public enum ButtonBarItemSpec<CellType: UICollectionViewCell> {
-    
+
     case NibFile(nibName: String, bundle: NSBundle?, width:((IndicatorInfo)-> CGFloat))
-    case CellClass(width:((IndicatorInfo)-> CGFloat))
-    
+    case CellClass(cellClass: ButtonBarViewCell.Type, width:((IndicatorInfo)-> CGFloat))
+
     public var weight: ((IndicatorInfo) -> CGFloat) {
         switch self {
-        case .CellClass(let widthCallback):
+        case .CellClass(_, let widthCallback):
             return widthCallback
         case .NibFile(_, _, let widthCallback):
             return widthCallback
@@ -140,8 +140,8 @@ public class ButtonBarPagerTabStripViewController: PagerTabStripViewController, 
         switch buttonBarItemSpec {
         case .NibFile(let nibName, let bundle, _):
             buttonBarView.registerNib(UINib(nibName: nibName, bundle: bundle), forCellWithReuseIdentifier:"Cell")
-        case .CellClass:
-            buttonBarView.registerClass(ButtonBarViewCell.self, forCellWithReuseIdentifier:"Cell")
+        case .CellClass(let cellClass, _):
+            buttonBarView.registerClass(cellClass, forCellWithReuseIdentifier:"Cell")
         }
         //-
     }
@@ -320,7 +320,7 @@ public class ButtonBarPagerTabStripViewController: PagerTabStripViewController, 
             let childController = viewController as! IndicatorInfoProvider
             let indicatorInfo = childController.indicatorInfoForPagerTabStrip(self)
             switch buttonBarItemSpec {
-            case .CellClass(let widthCallback):
+            case .CellClass(_, let widthCallback):
                 let width = widthCallback(indicatorInfo)
                 minimumCellWidths.append(width)
                 collectionViewContentWidth += width
