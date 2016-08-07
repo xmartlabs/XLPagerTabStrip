@@ -38,7 +38,7 @@ public class BaseButtonBarPagerTabStripViewController<ButtonBarCellType : UIColl
         flowLayout.sectionInset = UIEdgeInsetsMake(0, self.settings.style.buttonBarLeftContentInset ?? 35, 0, self.settings.style.buttonBarRightContentInset ?? 35)
         let buttonBarHeight = self.settings.style.buttonBarHeight ?? 44
         let buttonBar = ButtonBarView(frame: CGRectMake(0, 0, self.view.frame.size.width, buttonBarHeight), collectionViewLayout: flowLayout)
-        buttonBar.backgroundColor = .orangeColor()
+        buttonBar.backgroundColor = UIColor.whiteColor()
         buttonBar.selectedBar.backgroundColor = .blackColor()
         buttonBar.autoresizingMask = .FlexibleWidth
         var newContainerViewFrame = self.containerView.frame
