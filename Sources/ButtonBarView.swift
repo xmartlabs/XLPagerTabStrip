@@ -51,7 +51,7 @@ public class ButtonBarView: UICollectionView {
         }
     }
     var selectedBarAlignment: SelectedBarAlignment = .Center
-    var selectedIndex = 0
+    public internal(set) var selectedIndex = 0
     
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
