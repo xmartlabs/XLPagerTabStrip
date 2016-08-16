@@ -46,6 +46,8 @@ public class TwitterPagerTabStripViewController: PagerTabStripViewController, Pa
         pagerBehaviour = .Progressive(skipIntermediateViewControllers: true, elasticIndicatorLimit: true)
         delegate = self
         datasource = self
+        // keep watching the frame of titleView
+        titleView.addObserver(self, forKeyPath: "frame", options: [.New, .Old], context: nil)
     }
     
     required public init?(coder aDecoder: NSCoder) {
@@ -53,6 +55,8 @@ public class TwitterPagerTabStripViewController: PagerTabStripViewController, Pa
         pagerBehaviour = .Progressive(skipIntermediateViewControllers: true, elasticIndicatorLimit: true)
         delegate = self
         datasource = self
+        // keep watching the frame of titleView
+        titleView.addObserver(self, forKeyPath: "frame", options: [.New, .Old], context: nil)
     }
     
     public override func viewDidLoad() {
@@ -61,10 +65,7 @@ public class TwitterPagerTabStripViewController: PagerTabStripViewController, Pa
         if titleView.superview == nil {
             navigationItem.titleView = titleView
         }
-        
-        // keep watching the frame of titleView
-        titleView.addObserver(self, forKeyPath: "frame", options: [.New, .Old], context: nil)
-        
+
         guard let navigationController = navigationController  else {
             fatalError("TwitterPagerTabStripViewController should be embedded in a UINavigationController")
         }
