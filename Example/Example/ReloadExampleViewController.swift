@@ -34,9 +34,9 @@ class ReloadExampleViewController: UIViewController {
     
     lazy var bigLabel: UILabel = {
         let bigLabel = UILabel()
-        bigLabel.backgroundColor = .clearColor()
-        bigLabel.textColor = .whiteColor()
-        bigLabel.font = UIFont.boldSystemFontOfSize(20)
+        bigLabel.backgroundColor = .clear
+        bigLabel.textColor = .white
+        bigLabel.font = UIFont.boldSystemFont(ofSize: 20)
         bigLabel.adjustsFontSizeToFitWidth = true
         return bigLabel
     }()
@@ -54,7 +54,7 @@ class ReloadExampleViewController: UIViewController {
         }
     }
     
-    @IBAction func reloadTapped(sender: UIBarButtonItem) {
+    @IBAction func reloadTapped(_ sender: UIBarButtonItem) {
         for childViewController in childViewControllers {
             guard let child = childViewController as? PagerTabStripViewController else {
                 continue
@@ -66,12 +66,12 @@ class ReloadExampleViewController: UIViewController {
     }
     
     
-    @IBAction func closeTapped(sender: UIButton) {
-        dismissViewControllerAnimated(true, completion: nil)
+    @IBAction func closeTapped(_ sender: UIButton) {
+        dismiss(animated: true, completion: nil)
     }
     
-    func updateTitle(pagerTabStripViewController: PagerTabStripViewController) {
-        func stringFromBool(bool: Bool) -> String {
+    func updateTitle(_ pagerTabStripViewController: PagerTabStripViewController) {
+        func stringFromBool(_ bool: Bool) -> String {
             return bool ? "YES" : "NO"
         }
         
@@ -81,7 +81,7 @@ class ReloadExampleViewController: UIViewController {
         navigationItem.titleView?.sizeToFit()
     }
     
-    override func preferredStatusBarStyle() -> UIStatusBarStyle {
-        return .LightContent
+    override var preferredStatusBarStyle : UIStatusBarStyle {
+        return .lightContent
     }
 }
