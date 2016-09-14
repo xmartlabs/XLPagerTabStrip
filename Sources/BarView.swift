@@ -24,10 +24,10 @@
 
 import Foundation
 
-public class BarView: UIView {
+open class BarView: UIView {
     
-    public lazy var selectedBar: UIView = { [unowned self] in
-        let selectedBar = UIView(frame: CGRectMake(0, 0, self.frame.size.width, self.frame.size.height))
+    open lazy var selectedBar: UIView = { [unowned self] in
+        let selectedBar = UIView(frame: CGRect(x: 0, y: 0, width: self.frame.size.width, height: self.frame.size.height))
         return selectedBar
     }()
     
@@ -53,12 +53,12 @@ public class BarView: UIView {
     
     // MARK: - Helpers
     
-    private func updateSelectedBarPositionWithAnimation(animation: Bool) {
+    fileprivate func updateSelectedBarPositionWithAnimation(_ animation: Bool) {
         var frame = selectedBar.frame
         frame.size.width = self.frame.size.width / CGFloat(optionsCount)
         frame.origin.x = frame.size.width * CGFloat(selectedIndex)
         if animation {
-            UIView.animateWithDuration(0.3, animations: { [weak self] in
+            UIView.animate(withDuration: 0.3, animations: { [weak self] in
                 self?.selectedBar.frame = frame
             })
         }
@@ -67,12 +67,12 @@ public class BarView: UIView {
         }
     }
     
-    public func moveToIndex(index index: Int, animated: Bool) {
+    open func moveToIndex(index: Int, animated: Bool) {
         selectedIndex = index
         updateSelectedBarPositionWithAnimation(animated)
     }
     
-    public func moveToIndex(fromIndex fromIndex: Int, toIndex: Int, progressPercentage: CGFloat) {
+    open func moveToIndex(fromIndex: Int, toIndex: Int, progressPercentage: CGFloat) {
         selectedIndex = (progressPercentage > 0.5) ? toIndex : fromIndex
         
         var newFrame = selectedBar.frame
@@ -86,7 +86,7 @@ public class BarView: UIView {
         selectedBar.frame = targetFrame
     }
     
-    public override func layoutSubviews() {
+    open override func layoutSubviews() {
         super.layoutSubviews()
         updateSelectedBarPositionWithAnimation(false)
     }
