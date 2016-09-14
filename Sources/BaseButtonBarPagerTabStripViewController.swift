@@ -276,7 +276,7 @@ public class BaseButtonBarPagerTabStripViewController<ButtonBarCellType : UIColl
             let childController = viewController as! IndicatorInfoProvider
             let indicatorInfo = childController.indicatorInfoForPagerTabStrip(self)
             switch buttonBarItemSpec! {
-            case .CellClass(let widthCallback):
+            case .CellClass(_, let widthCallback):
                 let width = widthCallback(indicatorInfo)
                 minimumCellWidths.append(width)
                 collectionViewContentWidth += width
