@@ -135,7 +135,7 @@ open class ButtonBarPagerTabStripViewController: PagerTabStripViewController, Pa
         buttonBarView.backgroundColor = settings.style.buttonBarBackgroundColor ?? buttonBarView.backgroundColor
         buttonBarView.selectedBar.backgroundColor = settings.style.selectedBarBackgroundColor
         
-        buttonBarView.selectedBarHeight = settings.style.selectedBarHeight ?? buttonBarView.selectedBarHeight
+        buttonBarView.selectedBarHeight = settings.style.selectedBarHeight
         // register button bar item cell
         switch buttonBarItemSpec {
         case .nibFile(let nibName, let bundle, _):
@@ -271,7 +271,7 @@ open class ButtonBarPagerTabStripViewController: PagerTabStripViewController, Pa
         let indicatorInfo = childController.indicatorInfoForPagerTabStrip(self)
         
         cell.label.text = indicatorInfo.title
-        cell.label.font = settings.style.buttonBarItemFont ?? cell.label.font
+        cell.label.font = settings.style.buttonBarItemFont
         cell.label.textColor = settings.style.buttonBarItemTitleColor ?? cell.label.textColor
         cell.contentView.backgroundColor = settings.style.buttonBarItemBackgroundColor ?? cell.contentView.backgroundColor
         cell.backgroundColor = settings.style.buttonBarItemBackgroundColor ?? cell.backgroundColor
