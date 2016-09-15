@@ -191,6 +191,9 @@ public class TwitterPagerTabStripViewController: PagerTabStripViewController, Pa
     
     private func setNavigationViewItemsPosition(updateAlpha updateAlpha: Bool) {
         let distance = distanceValue
+        if distance == -1 {
+            return
+        }
         let isPortrait = UIApplication.sharedApplication().statusBarOrientation.isPortrait
         let navBarHeight: CGFloat = navigationController!.navigationBar.frame.size.height
         for (index, label) in childTitleLabels.enumerate() {
@@ -229,6 +232,9 @@ public class TwitterPagerTabStripViewController: PagerTabStripViewController, Pa
     }
     
     private var distanceValue: CGFloat {
+        if (navigationController == nil) {
+            return -1
+        }
         let middle = navigationController!.navigationBar.convertPoint(navigationController!.navigationBar.center, toView: titleView)
         return middle.x
     }
