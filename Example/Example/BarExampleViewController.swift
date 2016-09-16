@@ -35,7 +35,7 @@ class BarExampleViewController: BarPagerTabStripViewController {
     override func viewDidLoad() {
         
         // set up style before super view did load is executed
-        settings.style.selectedBarBackgroundColor = .orangeColor()
+        settings.style.selectedBarBackgroundColor = .orange
         // - 
         
         super.viewDidLoad()
@@ -43,11 +43,11 @@ class BarExampleViewController: BarPagerTabStripViewController {
     
     // MARK: - PagerTabStripDataSource
     
-    override func viewControllersForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
+    override func viewControllers(for pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
         
-        let child_1 = TableChildExampleViewController(style: .Plain, itemInfo: "Table View")
+        let child_1 = TableChildExampleViewController(style: .plain, itemInfo: "Table View")
         let child_2 = ChildExampleViewController(itemInfo: "View")
-        let child_3 = TableChildExampleViewController(style: .Grouped, itemInfo: "Table View 2")
+        let child_3 = TableChildExampleViewController(style: .grouped, itemInfo: "Table View 2")
         let child_4 = ChildExampleViewController(itemInfo: "View 2")
         
         guard isReload else {
@@ -55,24 +55,24 @@ class BarExampleViewController: BarPagerTabStripViewController {
         }
         
         var childViewControllers = [child_1, child_2, child_3, child_4]
-        for (index, _) in childViewControllers.enumerate(){
+        for (index, _) in childViewControllers.enumerated(){
             let nElements = childViewControllers.count - index
             let n = (Int(arc4random()) % nElements) + index
             if n != index{
                 swap(&childViewControllers[index], &childViewControllers[n])
             }
         }
-        let nItems = 1 + (rand() % 4)
+        let nItems = 1 + (arc4random() % 4)
         return Array(childViewControllers.prefix(Int(nItems)))
     }
     
     override func reloadPagerTabStripView() {
         isReload = true
-        if rand() % 2 == 0 {
-            pagerBehaviour = .Progressive(skipIntermediateViewControllers: rand() % 2 == 0 , elasticIndicatorLimit: rand() % 2 == 0 )
+        if arc4random() % 2 == 0 {
+            pagerBehaviour = .progressive(skipIntermediateViewControllers: arc4random() % 2 == 0, elasticIndicatorLimit: arc4random() % 2 == 0 )
         }
         else {
-            pagerBehaviour = .Common(skipIntermediateViewControllers: rand() % 2 == 0)
+            pagerBehaviour = .common(skipIntermediateViewControllers: arc4random() % 2 == 0)
         }
         super.reloadPagerTabStripView()
     }

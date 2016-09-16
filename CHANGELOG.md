@@ -1,6 +1,15 @@
 # Change Log
 All notable changes to XLPagerTabStrip will be documented in this file.
 
+### [6.0.0](https://github.com/xmartlabs/XLPagerTabStrip/releases/tag/5.0.0)
+
+* Swift 3 support
+* **Breaking change**: Swiftified names of functions (you can see more details about it [here](https://github.com/xmartlabs/XLPagerTabStrip/Migration.md))
+
+### [5.1.0](https://github.com/xmartlabs/XLPagerTabStrip/releases/tag/5.0.0)
+
+* Xcode 8 support. (Swift 2.3)
+
 ### [5.0.0](https://github.com/xmartlabs/XLPagerTabStrip/releases/tag/5.0.0)
 
 * Xcode 7.3 support.

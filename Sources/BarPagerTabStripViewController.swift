@@ -23,6 +23,7 @@
 // THE SOFTWARE.
 
 import Foundation
+import UIKit
 
 public struct BarPagerTabStripSettings {
     
@@ -35,25 +36,25 @@ public struct BarPagerTabStripSettings {
     public var style = Style()
 }
 
-public class BarPagerTabStripViewController: PagerTabStripViewController, PagerTabStripDataSource, PagerTabStripIsProgressiveDelegate {
+open class BarPagerTabStripViewController: PagerTabStripViewController, PagerTabStripDataSource, PagerTabStripIsProgressiveDelegate {
     
-    public var settings = BarPagerTabStripSettings()
+    open var settings = BarPagerTabStripSettings()
     
-    @IBOutlet lazy public var barView: BarView! = { [unowned self] in
-        let barView = BarView(frame: CGRectMake(0, 0, self.view.frame.size.width, self.settings.style.barHeight))
-        barView.autoresizingMask = .FlexibleWidth
-        barView.backgroundColor = .blackColor()
-        barView.selectedBar.backgroundColor = .whiteColor()
+    @IBOutlet lazy open var barView: BarView! = { [unowned self] in
+        let barView = BarView(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.settings.style.barHeight))
+        barView.autoresizingMask = .flexibleWidth
+        barView.backgroundColor = .black
+        barView.selectedBar.backgroundColor = .white
         return barView
     }()
     
-    public override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
+    public override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         delegate = self
         datasource = self
     }
     
-    public override func viewDidLoad() {
+    open override func viewDidLoad() {
         super.viewDidLoad()
         barView.backgroundColor = self.settings.style.barBackgroundColor ?? barView.backgroundColor
         barView.selectedBar.backgroundColor = self.settings.style.selectedBarBackgroundColor ?? barView.selectedBar.backgroundColor
@@ -65,30 +66,31 @@ public class BarPagerTabStripViewController: PagerTabStripViewController, PagerT
         datasource = self
     }
     
-    public override func viewWillAppear(animated: Bool) {
+    open override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         if barView.superview == nil {
             view.addSubview(barView)
         }
         barView.optionsCount = viewControllers.count
-        barView.moveToIndex(index: currentIndex, animated: false)
+        barView.moveTo(index: currentIndex, animated: false)
     }
     
-    public override func reloadPagerTabStripView() {
+    open override func reloadPagerTabStripView() {
         super.reloadPagerTabStripView()
         barView.optionsCount = viewControllers.count
-        if isViewLoaded(){
-            barView.moveToIndex(index: currentIndex, animated: false)
+        if isViewLoaded{
+            barView.moveTo(index: currentIndex, animated: false)
         }
     }
     
     // MARK: - PagerTabStripDelegate
-    
-    public func pagerTabStripViewController(pagerTabStripViewController: PagerTabStripViewController, updateIndicatorFromIndex fromIndex: Int, toIndex: Int) {
-        barView.moveToIndex(index: toIndex, animated: true)
+
+    open func updateIndicator(for viewController: PagerTabStripViewController, fromIndex: Int, toIndex: Int, withProgressPercentage progressPercentage: CGFloat, indexWasChanged: Bool) {
+
+        barView.move(fromIndex: fromIndex, toIndex: toIndex, progressPercentage: progressPercentage)
     }
-    
-    public func pagerTabStripViewController(pagerTabStripViewController: PagerTabStripViewController, updateIndicatorFromIndex fromIndex: Int, toIndex: Int, withProgressPercentage progressPercentage: CGFloat, indexWasChanged: Bool) {
-        barView.moveToIndex(fromIndex: fromIndex, toIndex: toIndex, progressPercentage: progressPercentage)
+
+    open func updateIndicator(for viewController: PagerTabStripViewController, fromIndex: Int, toIndex: Int) {
+        barView.moveTo(index: toIndex, animated: true)
     }
 }

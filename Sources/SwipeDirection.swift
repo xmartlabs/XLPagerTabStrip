@@ -25,7 +25,7 @@
 import Foundation
 
 public enum SwipeDirection {
-    case Left
-    case Right
-    case None
+    case left
+    case right
+    case none
 }

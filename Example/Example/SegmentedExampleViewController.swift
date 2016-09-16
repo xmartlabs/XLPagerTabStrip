@@ -32,15 +32,15 @@ class SegmentedExampleViewController: SegmentedPagerTabStripViewController {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         // change segmented style
-        settings.style.segmentedControlColor = .whiteColor()
+        settings.style.segmentedControlColor = .white
     }
     
     // MARK: - PagerTabStripDataSource
     
-    override func viewControllersForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
-        let child_1 = TableChildExampleViewController(style: .Plain, itemInfo: "Table View")
+    override func viewControllers(for pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
+        let child_1 = TableChildExampleViewController(style: .plain, itemInfo: "Table View")
         let child_2 = ChildExampleViewController(itemInfo: "View")
-        let child_3 = TableChildExampleViewController(style: .Grouped, itemInfo: "Table View 2")
+        let child_3 = TableChildExampleViewController(style: .grouped, itemInfo: "Table View 2")
         let child_4 = ChildExampleViewController(itemInfo: "View 2")
         
         guard isReload else {
@@ -50,21 +50,20 @@ class SegmentedExampleViewController: SegmentedPagerTabStripViewController {
         var childViewControllers = [child_1, child_2, child_3, child_4]
         let count = childViewControllers.count
         
-        for (index, _) in childViewControllers.enumerate(){
+        for (index, _) in childViewControllers.enumerated(){
             let nElements = count - index
             let n = (Int(arc4random()) % nElements) + index
             if n != index{
                 swap(&childViewControllers[index], &childViewControllers[n])
             }
         }
-        let nItems = 1 + (rand() % 4)
+        let nItems = 1 + (arc4random() % 4)
         return Array(childViewControllers.prefix(Int(nItems)))
     }
     
-    @IBAction func reloadTapped(sender: UIBarButtonItem) {
+    @IBAction func reloadTapped(_ sender: UIBarButtonItem) {
         isReload = true
-        pagerBehaviour = .Common(skipIntermediateViewControllers: rand() % 2 == 0)
-        pagerBehaviour.skipIntermediateViewControllers
+        pagerBehaviour = .common(skipIntermediateViewControllers: arc4random() % 2 == 0)
         reloadPagerTabStripView()
     }
 }

@@ -37,18 +37,20 @@ class PostCell: UITableViewCell {
     }
     
     
-    func configureWithData(data: NSDictionary){
-        postName.text = data["post"]!["user"]!!["name"] as? String
-        postText.text = data["post"]!["text"] as? String
-        userImage.image = UIImage(named: postName.text!.stringByReplacingOccurrencesOfString(" ", withString: "_"))
+    func configureWithData(_ data: NSDictionary){
+        if let post = data["post"] as? NSDictionary, let user = post["user"] as? NSDictionary {
+            postName.text = user["name"] as? String
+            postText.text = post["text"] as? String
+            userImage.image = UIImage(named: postName.text!.replacingOccurrences(of: " ", with: "_"))
+        }
     }
     
     
     func changeStylToBlack(){
         userImage?.layer.cornerRadius = 30.0
         postText.text = nil
-        postName.font = UIFont(name: "HelveticaNeue-Light", size:18) ?? UIFont.systemFontOfSize(18)
-        postName.textColor = .whiteColor()
+        postName.font = UIFont(name: "HelveticaNeue-Light", size:18) ?? .systemFont(ofSize: 18)
+        postName.textColor = .white
         backgroundColor = UIColor(red: 15/255.0, green: 16/255.0, blue: 16/255.0, alpha: 1.0)
     }
 }
