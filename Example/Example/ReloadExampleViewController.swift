@@ -50,7 +50,7 @@ class ReloadExampleViewController: UIViewController {
         }
         
         if let pagerViewController = childViewControllers.filter( { $0 is PagerTabStripViewController } ).first as? PagerTabStripViewController {
-            updateTitle(pagerViewController)
+            updateTitle(of: pagerViewController)
         }
     }
     
@@ -60,7 +60,7 @@ class ReloadExampleViewController: UIViewController {
                 continue
             }
             child.reloadPagerTabStripView()
-            updateTitle(child)
+            updateTitle(of: child)
             break;
         }
     }
@@ -70,7 +70,7 @@ class ReloadExampleViewController: UIViewController {
         dismiss(animated: true, completion: nil)
     }
     
-    func updateTitle(_ pagerTabStripViewController: PagerTabStripViewController) {
+    func updateTitle(of pagerTabStripViewController: PagerTabStripViewController) {
         func stringFromBool(_ bool: Bool) -> String {
             return bool ? "YES" : "NO"
         }

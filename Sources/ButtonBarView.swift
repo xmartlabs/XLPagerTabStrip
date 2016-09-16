@@ -63,12 +63,12 @@ open class ButtonBarView: UICollectionView {
         addSubview(selectedBar)
     }
     
-    open func moveToIndex(_ toIndex: Int, animated: Bool, swipeDirection: SwipeDirection, pagerScroll: PagerScroll) {
-        selectedIndex = toIndex
+    open func moveTo(index: Int, animated: Bool, swipeDirection: SwipeDirection, pagerScroll: PagerScroll) {
+        selectedIndex = index
         updateSelectedBarPosition(animated, swipeDirection: swipeDirection, pagerScroll: pagerScroll)
     }
     
-    open func moveFromIndex(_ fromIndex: Int, toIndex: Int, progressPercentage: CGFloat,pagerScroll: PagerScroll) {
+    open func move(fromIndex: Int, toIndex: Int, progressPercentage: CGFloat,pagerScroll: PagerScroll) {
         selectedIndex = progressPercentage > 0.5 ? toIndex : fromIndex
         
         let fromFrame = layoutAttributesForItem(at: IndexPath(item: fromIndex, section: 0))!.frame
@@ -116,7 +116,7 @@ open class ButtonBarView: UICollectionView {
         let attributes = layoutAttributesForItem(at: selectedCellIndexPath)
         let selectedCellFrame = attributes!.frame
         
-        updateContentOffset(animated, pagerScroll: pagerScroll, toFrame: selectedCellFrame, toIndex: (selectedCellIndexPath as NSIndexPath).row)
+        updateContentOffset(animated: animated, pagerScroll: pagerScroll, toFrame: selectedCellFrame, toIndex: (selectedCellIndexPath as NSIndexPath).row)
         
         selectedBarFrame.size.width = selectedCellFrame.size.width
         selectedBarFrame.origin.x = selectedCellFrame.origin.x
@@ -133,13 +133,13 @@ open class ButtonBarView: UICollectionView {
     
     // MARK: - Helpers
     
-    fileprivate func updateContentOffset(_ animated: Bool, pagerScroll: PagerScroll, toFrame: CGRect, toIndex: Int) -> Void {
+    private func updateContentOffset(animated: Bool, pagerScroll: PagerScroll, toFrame: CGRect, toIndex: Int) -> Void {
         guard pagerScroll != .no || (pagerScroll != .scrollOnlyIfOutOfScreen && (toFrame.origin.x < contentOffset.x || toFrame.origin.x >= (contentOffset.x + frame.size.width - contentInset.left))) else { return }
         let targetContentOffset = contentSize.width > frame.size.width ? contentOffsetForCell(withFrame: toFrame, andIndex: toIndex) : 0
         setContentOffset(CGPoint(x: targetContentOffset, y: 0), animated: animated)
     }
     
-    fileprivate func contentOffsetForCell(withFrame cellFrame: CGRect, andIndex index: Int) -> CGFloat {
+    private func contentOffsetForCell(withFrame cellFrame: CGRect, andIndex index: Int) -> CGFloat {
         let sectionInset = (collectionViewLayout as! UICollectionViewFlowLayout).sectionInset
         var alignmentOffset: CGFloat = 0.0
         
@@ -165,7 +165,7 @@ open class ButtonBarView: UICollectionView {
         return contentOffset
     }
     
-    fileprivate func updateSlectedBarYPosition() {
+    private func updateSlectedBarYPosition() {
         var selectedBarFrame = selectedBar.frame
         selectedBarFrame.origin.y = frame.size.height - selectedBarHeight
         selectedBarFrame.size.height = selectedBarHeight

@@ -39,7 +39,7 @@ class NavController: UINavigationController {
     
     
     override var preferredStatusBarStyle : UIStatusBarStyle {
-        return UIStatusBarStyle.lightContent
+        return .lightContent
     }
     
 }
@@ -48,7 +48,7 @@ class NavController: UINavigationController {
 class TabBarController : UITabBarController {
     
     override var preferredStatusBarStyle : UIStatusBarStyle {
-        return UIStatusBarStyle.lightContent
+        return .lightContent
     }
     
 }

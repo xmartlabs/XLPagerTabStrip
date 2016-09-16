@@ -72,24 +72,25 @@ open class BarPagerTabStripViewController: PagerTabStripViewController, PagerTab
             view.addSubview(barView)
         }
         barView.optionsCount = viewControllers.count
-        barView.moveToIndex(index: currentIndex, animated: false)
+        barView.moveTo(index: currentIndex, animated: false)
     }
     
     open override func reloadPagerTabStripView() {
         super.reloadPagerTabStripView()
         barView.optionsCount = viewControllers.count
         if isViewLoaded{
-            barView.moveToIndex(index: currentIndex, animated: false)
+            barView.moveTo(index: currentIndex, animated: false)
         }
     }
     
     // MARK: - PagerTabStripDelegate
-    
-    open func pagerTabStripViewController(_ pagerTabStripViewController: PagerTabStripViewController, updateIndicatorFromIndex fromIndex: Int, toIndex: Int) {
-        barView.moveToIndex(index: toIndex, animated: true)
+
+    open func updateIndicator(for viewController: PagerTabStripViewController, fromIndex: Int, toIndex: Int, withProgressPercentage progressPercentage: CGFloat, indexWasChanged: Bool) {
+
+        barView.move(fromIndex: fromIndex, toIndex: toIndex, progressPercentage: progressPercentage)
     }
-    
-    open func pagerTabStripViewController(_ pagerTabStripViewController: PagerTabStripViewController, updateIndicatorFromIndex fromIndex: Int, toIndex: Int, withProgressPercentage progressPercentage: CGFloat, indexWasChanged: Bool) {
-        barView.moveToIndex(fromIndex: fromIndex, toIndex: toIndex, progressPercentage: progressPercentage)
+
+    open func updateIndicator(for viewController: PagerTabStripViewController, fromIndex: Int, toIndex: Int) {
+        barView.moveTo(index: toIndex, animated: true)
     }
 }

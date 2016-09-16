@@ -54,7 +54,7 @@ open class SegmentedPagerTabStripViewController: PagerTabStripViewController, Pa
         datasource = self
     }
     
-    fileprivate(set) var shouldUpdateSegmentedControl = true
+    private(set) var shouldUpdateSegmentedControl = true
     
     open override func viewDidLoad() {
         super.viewDidLoad()
@@ -77,11 +77,11 @@ open class SegmentedPagerTabStripViewController: PagerTabStripViewController, Pa
         segmentedControl.removeAllSegments()
         for (index, item) in viewControllers.enumerated(){
             let child = item as! IndicatorInfoProvider
-            if let image = child.indicatorInfoForPagerTabStrip(self).image {
+            if let image = child.indicatorInfo(for: self).image {
                 segmentedControl.insertSegment(with: image, at: index, animated: false)
             }
             else {
-                segmentedControl.insertSegment(withTitle: child.indicatorInfoForPagerTabStrip(self).title, at: index, animated: false)
+                segmentedControl.insertSegment(withTitle: child.indicatorInfo(for: self).title, at: index, animated: false)
             }
         }
         segmentedControl.selectedSegmentIndex = currentIndex
@@ -89,14 +89,14 @@ open class SegmentedPagerTabStripViewController: PagerTabStripViewController, Pa
     
     func segmentedControlChanged(_ sender: UISegmentedControl) {
         let index = sender.selectedSegmentIndex
-        pagerTabStripViewController(self, updateIndicatorFromIndex: currentIndex, toIndex: index)
+        updateIndicator(for: self, fromIndex: currentIndex, toIndex: index)
         shouldUpdateSegmentedControl = false
-        moveToViewControllerAtIndex(index)
+        moveToViewController(at: index)
     }
     
     // MARK: - PagerTabStripDelegate
-    
-    open func pagerTabStripViewController(_ pagerTabStripViewController: PagerTabStripViewController, updateIndicatorFromIndex fromIndex: Int, toIndex: Int) {
+
+    open func updateIndicator(for viewController: PagerTabStripViewController, fromIndex: Int, toIndex: Int) {
         if shouldUpdateSegmentedControl {
             segmentedControl.selectedSegmentIndex = toIndex
         }

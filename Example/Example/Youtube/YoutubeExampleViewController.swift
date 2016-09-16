@@ -70,7 +70,7 @@ class YoutubeExampleViewController: BaseButtonBarPagerTabStripViewController<You
     
     // MARK: - PagerTabStripDataSource
     
-    override func viewControllersForPagerTabStrip(_ pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
+    override func viewControllers(for pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
         let child_1 = TableChildExampleViewController(style: .plain, itemInfo: IndicatorInfo(title: " HOME", image: UIImage(named: "home")))
         let child_2 = TableChildExampleViewController(style: .plain, itemInfo: IndicatorInfo(title: " TRENDING", image: UIImage(named: "trending")))
         let child_3 = ChildExampleViewController(itemInfo: IndicatorInfo(title: " ACCOUNT", image: UIImage(named: "profile")))
@@ -78,18 +78,17 @@ class YoutubeExampleViewController: BaseButtonBarPagerTabStripViewController<You
     }
     
     
-    override func configureCell(_ cell: YoutubeIconCell, indicatorInfo: IndicatorInfo) {
+    override func configure(cell: YoutubeIconCell, for indicatorInfo: IndicatorInfo) {
         cell.iconImage.image = indicatorInfo.image?.withRenderingMode(.alwaysTemplate)
     }
     
-    
-    override func pagerTabStripViewController(_ pagerTabStripViewController: PagerTabStripViewController, updateIndicatorFromIndex fromIndex: Int, toIndex: Int, withProgressPercentage progressPercentage: CGFloat, indexWasChanged: Bool) {
-        super.pagerTabStripViewController(pagerTabStripViewController, updateIndicatorFromIndex: fromIndex, toIndex: toIndex, withProgressPercentage: progressPercentage, indexWasChanged: indexWasChanged)
+    override func updateIndicator(for viewController: PagerTabStripViewController, fromIndex: Int, toIndex: Int, withProgressPercentage progressPercentage: CGFloat, indexWasChanged: Bool) {
+        super.updateIndicator(for: viewController, fromIndex: fromIndex, toIndex: toIndex, withProgressPercentage: progressPercentage, indexWasChanged: indexWasChanged)
         if indexWasChanged && toIndex > -1 && toIndex < viewControllers.count {
             let child = viewControllers[toIndex] as! IndicatorInfoProvider
             UIView.performWithoutAnimation({ [weak self] () -> Void in
                 guard let me = self else { return }
-                me.navigationItem.leftBarButtonItem?.title =  child.indicatorInfoForPagerTabStrip(me).title
+                me.navigationItem.leftBarButtonItem?.title =  child.indicatorInfo(for: me).title
             })
         }
     }

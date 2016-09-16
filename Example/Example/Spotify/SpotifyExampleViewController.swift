@@ -56,7 +56,7 @@ open class SpotifyExampleViewController: ButtonBarPagerTabStripViewController {
     
     // MARK: - PagerTabStripDataSource
     
-    open override func viewControllersForPagerTabStrip(_ pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
+    open override func viewControllers(for pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
         let child_1 = TableChildExampleViewController(style: .plain, itemInfo: IndicatorInfo(title: "FRIENDS"))
         child_1.blackTheme = true
         let child_2 = TableChildExampleViewController(style: .plain, itemInfo: IndicatorInfo(title: "FEATURED"))

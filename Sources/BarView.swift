@@ -53,7 +53,7 @@ open class BarView: UIView {
     
     // MARK: - Helpers
     
-    fileprivate func updateSelectedBarPositionWithAnimation(_ animation: Bool) {
+    private func updateSelectedBarPosition(with animation: Bool) {
         var frame = selectedBar.frame
         frame.size.width = self.frame.size.width / CGFloat(optionsCount)
         frame.origin.x = frame.size.width * CGFloat(selectedIndex)
@@ -67,12 +67,12 @@ open class BarView: UIView {
         }
     }
     
-    open func moveToIndex(index: Int, animated: Bool) {
+    open func moveTo(index: Int, animated: Bool) {
         selectedIndex = index
-        updateSelectedBarPositionWithAnimation(animated)
+        updateSelectedBarPosition(with: animated)
     }
     
-    open func moveToIndex(fromIndex: Int, toIndex: Int, progressPercentage: CGFloat) {
+    open func move(fromIndex: Int, toIndex: Int, progressPercentage: CGFloat) {
         selectedIndex = (progressPercentage > 0.5) ? toIndex : fromIndex
         
         var newFrame = selectedBar.frame
@@ -88,6 +88,6 @@ open class BarView: UIView {
     
     open override func layoutSubviews() {
         super.layoutSubviews()
-        updateSelectedBarPositionWithAnimation(false)
+        updateSelectedBarPosition(with: false)
     }
 }

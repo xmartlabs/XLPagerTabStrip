@@ -100,10 +100,10 @@ For `BarPagerTabStripViewController` we should connect `barView` outlet. barView
 
 ##### Provide the view controllers that will appear embedded into the PagerTabStrip view controller
 
-You can provide the view controllers by overriding `func viewControllersForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> [UIViewController]` method.
+You can provide the view controllers by overriding `func viewControllers(for: pagerTabStripController: PagerTabStripViewController) -> [UIViewController]` method.
 
 ```swift
-override public func viewControllersForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
+override public func viewControllers(for pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
   return [MyEmbeddedViewController(), MySecondEmbeddedViewController()]
 }
 ```
@@ -114,13 +114,13 @@ override public func viewControllersForPagerTabStrip(pagerTabStripController: Pa
 ##### Provide information to show in each indicator
 
 Every UIViewController that will appear within the PagerTabStrip needs to provide either a title or an image.
-In order to do so they should conform to `IndicatorInfoProvider` by implementing `func indicatorInfoForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo`
+In order to do so they should conform to `IndicatorInfoProvider` by implementing `func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo`
  which provides the information required to show the PagerTabStrip menu (indicator) associated with the view controller.
 
 ```swift
 class MyEmbeddedViewController: UITableViewController, IndicatorInfoProvider {
 
-  func indicatorInfoForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
+  func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
     return IndicatorInfo(title: "My Child title")
   }
 }
@@ -172,12 +172,12 @@ Normally we don't need to implement these protocols because each pager type alre
 ```swift
 public protocol PagerTabStripDelegate: class {
 
-    func pagerTabStripViewController(pagerTabStripViewController: PagerTabStripViewController, updateIndicatorFromIndex fromIndex: Int, toIndex: Int) throws
+    func updateIndicator(for viewController: PagerTabStripViewController, fromIndex: Int, toIndex: Int)
 }
 
 public protocol PagerTabStripIsProgressiveDelegate : PagerTabStripDelegate {
 
-    func pagerTabStripViewController(pagerTabStripViewController: PagerTabStripViewController, updateIndicatorFromIndex fromIndex: Int, toIndex: Int, withProgressPercentage progressPercentage: CGFloat, indexWasChanged: Bool) throws
+    func updateIndicator(for viewController: PagerTabStripViewController, fromIndex: Int, toIndex: Int, withProgressPercentage progressPercentage: CGFloat, indexWasChanged: Bool)
 }
 ```
 
@@ -319,15 +319,19 @@ github "xmartlabs/XLPagerTabStrip" ~> 5.0
 
 #### How to change the visible child view controller programmatically
 
-`XLPagerTabStripViewController` provides the following methods to programmatically change the visible child view controller:
+`PagerTabStripViewController` provides the following methods to programmatically change the visible child view controller:
 
 ```swift
-func moveToViewControllerAtIndex(index: Int)
-func moveToViewControllerAtIndex(index: Int, animated: Bool)
-func moveToViewController(viewController: UIViewController)
-func moveToViewController(viewController: UIViewController, animated: Bool)
+func moveToViewController(at index: Int)
+func moveToViewController(at index: Int, animated: Bool)
+func moveTo(viewController: UIViewController)
+func moveTo(viewController: UIViewController, animated: Bool)
 ```
 
+
+#### How to migrate from Swift 2 to Swift 3 <a name="migrate"></a>
+
+Check out [our migration guide](https://github.com/xmartlabs/XLPagerTabStrip/Migration.md)
 
 ## Author
 
