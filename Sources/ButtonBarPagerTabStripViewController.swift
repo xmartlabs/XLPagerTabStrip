@@ -68,7 +68,7 @@ open class ButtonBarPagerTabStripViewController: PagerTabStripViewController, Pa
     
     open var settings = ButtonBarPagerTabStripSettings()
     
-    lazy open var buttonBarItemSpec: ButtonBarItemSpec<ButtonBarViewCell> = .nibFile(nibName: "ButtonCell", bundle: Bundle(for: ButtonBarViewCell.self), width:{ [weak self] (childItemInfo) -> CGFloat in
+    lazy public var buttonBarItemSpec: ButtonBarItemSpec<ButtonBarViewCell> = .nibFile(nibName: "ButtonCell", bundle: Bundle(for: ButtonBarViewCell.self), width:{ [weak self] (childItemInfo) -> CGFloat in
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = self?.settings.style.buttonBarItemFont

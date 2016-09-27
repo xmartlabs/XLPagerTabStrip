@@ -40,7 +40,7 @@ open class BarPagerTabStripViewController: PagerTabStripViewController, PagerTab
     
     open var settings = BarPagerTabStripSettings()
     
-    @IBOutlet lazy open var barView: BarView! = { [unowned self] in
+    @IBOutlet lazy public var barView: BarView! = { [unowned self] in
         let barView = BarView(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.settings.style.barHeight))
         barView.autoresizingMask = .flexibleWidth
         barView.backgroundColor = .black
