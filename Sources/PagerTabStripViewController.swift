@@ -52,12 +52,8 @@ public protocol PagerTabStripDataSource: class {
 //MARK: PagerTabStripViewController
 
 open class PagerTabStripViewController: UIViewController, UIScrollViewDelegate {
-    
-    @IBOutlet lazy open var containerView: UIScrollView! = { [unowned self] in
-        let containerView = UIScrollView(frame: CGRect(x: 0, y: 0, width: self.view.bounds.width, height: self.view.bounds.height))
-        containerView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        return containerView
-    }()
+
+    @IBOutlet open var containerView: UIScrollView!
     
     open weak var delegate: PagerTabStripDelegate?
     open weak var datasource: PagerTabStripDataSource?
@@ -88,9 +84,28 @@ open class PagerTabStripViewController: UIViewController, UIScrollViewDelegate {
         }
         return .none
     }
-    
+
+    required public init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        initializeContainerView()
+    }
+
+    public override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        initializeContainerView()
+    }
+
+    private func initializeContainerView() {
+        if containerView == nil {
+            containerView = UIScrollView(frame: .zero)
+            containerView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        }
+    }
+
     override open func viewDidLoad() {
         super.viewDidLoad()
+
+
         if containerView.superview == nil {
             view.addSubview(containerView)
         }
@@ -107,6 +122,9 @@ open class PagerTabStripViewController: UIViewController, UIScrollViewDelegate {
     
     open override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        if containerView.frame == .zero {
+            containerView.frame = view.frame
+        }
         isViewAppearing = true
     }
     
