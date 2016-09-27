@@ -25,14 +25,14 @@
 import Foundation
 import XLPagerTabStrip
 
-open class SpotifyExampleViewController: ButtonBarPagerTabStripViewController {
+class SpotifyExampleViewController: ButtonBarPagerTabStripViewController {
     
     @IBOutlet weak var shadowView: UIView!
     
     let graySpotifyColor = UIColor(red: 21/255.0, green: 21/255.0, blue: 24/255.0, alpha: 1.0)
     let darkGraySpotifyColor = UIColor(red: 19/255.0, green: 20/255.0, blue: 20/255.0, alpha: 1.0)
     
-    open override func viewDidLoad() {
+    override func viewDidLoad() {
         // change selected bar color
         settings.style.buttonBarBackgroundColor = graySpotifyColor
         settings.style.buttonBarItemBackgroundColor = graySpotifyColor
@@ -56,7 +56,7 @@ open class SpotifyExampleViewController: ButtonBarPagerTabStripViewController {
     
     // MARK: - PagerTabStripDataSource
     
-    open override func viewControllers(for pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
+    override func viewControllers(for pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
         let child_1 = TableChildExampleViewController(style: .plain, itemInfo: IndicatorInfo(title: "FRIENDS"))
         child_1.blackTheme = true
         let child_2 = TableChildExampleViewController(style: .plain, itemInfo: IndicatorInfo(title: "FEATURED"))

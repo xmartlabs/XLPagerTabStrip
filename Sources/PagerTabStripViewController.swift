@@ -53,11 +53,7 @@ public protocol PagerTabStripDataSource: class {
 
 open class PagerTabStripViewController: UIViewController, UIScrollViewDelegate {
     
-    @IBOutlet lazy public var containerView: UIScrollView! = { [unowned self] in
-        let containerView = UIScrollView(frame: CGRect(x: 0, y: 0, width: self.view.bounds.width, height: self.view.bounds.height))
-        containerView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        return containerView
-    }()
+    @IBOutlet weak public var containerView: UIScrollView!
     
     open weak var delegate: PagerTabStripDelegate?
     open weak var datasource: PagerTabStripDataSource?
@@ -91,6 +87,12 @@ open class PagerTabStripViewController: UIViewController, UIScrollViewDelegate {
     
     override open func viewDidLoad() {
         super.viewDidLoad()
+        let conteinerViewAux = containerView ?? {
+            let containerView = UIScrollView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height))
+            containerView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+            return containerView
+        }()
+        containerView = conteinerViewAux
         if containerView.superview == nil {
             view.addSubview(containerView)
         }
@@ -152,7 +154,7 @@ open class PagerTabStripViewController: UIViewController, UIScrollViewDelegate {
     //MARK: - PagerTabStripDataSource
     
     open func viewControllers(for pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
-        assertionFailure("Sub-class must implement the PagerTabStripDataSource viewControllersForPagerTabStrip: method")
+        assertionFailure("Sub-class must implement the PagerTabStripDataSource viewControllers(for:) method")
         return []
     }
     
@@ -359,9 +361,9 @@ open class PagerTabStripViewController: UIViewController, UIScrollViewDelegate {
         viewControllers = dataSource.viewControllers(for: self)
         // viewControllers
         guard viewControllers.count != 0 else {
-            fatalError("viewControllersForPagerTabStrip should provide at least one child view controller")
+            fatalError("viewControllers(for:) should provide at least one child view controller")
         }
-        viewControllers.forEach { if !($0 is IndicatorInfoProvider) { fatalError("Every view controller provided by PagerTabStripDataSource's viewControllersForPagerTabStrip method must conform to  InfoProvider") }}
+        viewControllers.forEach { if !($0 is IndicatorInfoProvider) { fatalError("Every view controller provided by PagerTabStripDataSource's viewControllers(for:) method must conform to  InfoProvider") }}
 
     }
     

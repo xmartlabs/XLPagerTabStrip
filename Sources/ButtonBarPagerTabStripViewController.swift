@@ -66,34 +66,14 @@ public struct ButtonBarPagerTabStripSettings {
 
 open class ButtonBarPagerTabStripViewController: PagerTabStripViewController, PagerTabStripDataSource, PagerTabStripIsProgressiveDelegate, UICollectionViewDelegate, UICollectionViewDataSource {
     
-    open var settings = ButtonBarPagerTabStripSettings()
+    public var settings = ButtonBarPagerTabStripSettings()
     
-    lazy public var buttonBarItemSpec: ButtonBarItemSpec<ButtonBarViewCell> = .nibFile(nibName: "ButtonCell", bundle: Bundle(for: ButtonBarViewCell.self), width:{ [weak self] (childItemInfo) -> CGFloat in
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = self?.settings.style.buttonBarItemFont
-        label.text = childItemInfo.title
-        let labelSize = label.intrinsicContentSize
-        return labelSize.width + (self?.settings.style.buttonBarItemLeftRightMargin ?? 8) * 2
-    })
+    public var buttonBarItemSpec: ButtonBarItemSpec<ButtonBarViewCell>!
     
-    open var changeCurrentIndex: ((_ oldCell: ButtonBarViewCell?, _ newCell: ButtonBarViewCell?, _ animated: Bool) -> Void)?
-    open var changeCurrentIndexProgressive: ((_ oldCell: ButtonBarViewCell?, _ newCell: ButtonBarViewCell?, _ progressPercentage: CGFloat, _ changeCurrentIndex: Bool, _ animated: Bool) -> Void)?
+    public var changeCurrentIndex: ((_ oldCell: ButtonBarViewCell?, _ newCell: ButtonBarViewCell?, _ animated: Bool) -> Void)?
+    public var changeCurrentIndexProgressive: ((_ oldCell: ButtonBarViewCell?, _ newCell: ButtonBarViewCell?, _ progressPercentage: CGFloat, _ changeCurrentIndex: Bool, _ animated: Bool) -> Void)?
     
-    @IBOutlet open lazy var buttonBarView: ButtonBarView! = { [unowned self] in
-        var flowLayout = UICollectionViewFlowLayout()
-        flowLayout.scrollDirection = .horizontal
-        let buttonBarHeight = self.settings.style.buttonBarHeight ?? 44
-        let buttonBar = ButtonBarView(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: buttonBarHeight), collectionViewLayout: flowLayout)
-        buttonBar.backgroundColor = .orange
-        buttonBar.selectedBar.backgroundColor = .black
-        buttonBar.autoresizingMask = .flexibleWidth
-        var newContainerViewFrame = self.containerView.frame
-        newContainerViewFrame.origin.y = buttonBarHeight
-        newContainerViewFrame.size.height = self.containerView.frame.size.height - (buttonBarHeight - self.containerView.frame.origin.y)
-        self.containerView.frame = newContainerViewFrame
-        return buttonBar
-    }()
+    @IBOutlet public weak var buttonBarView: ButtonBarView!
     
     lazy private var cachedCellWidths: [CGFloat]? = { [unowned self] in
         return self.calculateWidths()
@@ -113,6 +93,31 @@ open class ButtonBarPagerTabStripViewController: PagerTabStripViewController, Pa
     
     open override func viewDidLoad() {
         super.viewDidLoad()
+        buttonBarItemSpec = .nibFile(nibName: "ButtonCell", bundle: Bundle(for: ButtonBarViewCell.self), width:{ [weak self] (childItemInfo) -> CGFloat in
+                let label = UILabel()
+                label.translatesAutoresizingMaskIntoConstraints = false
+                label.font = self?.settings.style.buttonBarItemFont
+                label.text = childItemInfo.title
+                let labelSize = label.intrinsicContentSize
+                return labelSize.width + (self?.settings.style.buttonBarItemLeftRightMargin ?? 8) * 2
+        })
+        
+        
+        let buttonBarViewAux = buttonBarView ?? {
+                let flowLayout = UICollectionViewFlowLayout()
+                flowLayout.scrollDirection = .horizontal
+                let buttonBarHeight = settings.style.buttonBarHeight ?? 44
+                let buttonBar = ButtonBarView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: buttonBarHeight), collectionViewLayout: flowLayout)
+                buttonBar.backgroundColor = .orange
+                buttonBar.selectedBar.backgroundColor = .black
+                buttonBar.autoresizingMask = .flexibleWidth
+                var newContainerViewFrame = containerView.frame
+                newContainerViewFrame.origin.y = buttonBarHeight
+                newContainerViewFrame.size.height = containerView.frame.size.height - (buttonBarHeight - containerView.frame.origin.y)
+                containerView.frame = newContainerViewFrame
+                return buttonBar
+            }()
+        buttonBarView = buttonBarViewAux
         
         if buttonBarView.superview == nil {
             view.addSubview(buttonBarView)
@@ -129,7 +134,7 @@ open class ButtonBarPagerTabStripViewController: PagerTabStripViewController, Pa
         flowLayout.minimumInteritemSpacing = 0
         flowLayout.minimumLineSpacing = settings.style.buttonBarMinimumLineSpacing ?? flowLayout.minimumLineSpacing
         let sectionInset = flowLayout.sectionInset
-        flowLayout.sectionInset = UIEdgeInsetsMake(sectionInset.top, self.settings.style.buttonBarLeftContentInset ?? sectionInset.left, sectionInset.bottom, self.settings.style.buttonBarRightContentInset ?? sectionInset.right)
+        flowLayout.sectionInset = UIEdgeInsetsMake(sectionInset.top, settings.style.buttonBarLeftContentInset ?? sectionInset.left, sectionInset.bottom, settings.style.buttonBarRightContentInset ?? sectionInset.right)
 
         buttonBarView.showsHorizontalScrollIndicator = false
         buttonBarView.backgroundColor = settings.style.buttonBarBackgroundColor ?? buttonBarView.backgroundColor
@@ -137,7 +142,7 @@ open class ButtonBarPagerTabStripViewController: PagerTabStripViewController, Pa
         
         buttonBarView.selectedBarHeight = settings.style.selectedBarHeight
         // register button bar item cell
-        switch buttonBarItemSpec {
+        switch buttonBarItemSpec! {
         case .nibFile(let nibName, let bundle, _):
             buttonBarView.register(UINib(nibName: nibName, bundle: bundle), forCellWithReuseIdentifier:"Cell")
         case .cellClass:
@@ -310,16 +315,16 @@ open class ButtonBarPagerTabStripViewController: PagerTabStripViewController, Pa
     }
     
     private func calculateWidths() -> [CGFloat] {
-        let flowLayout = self.buttonBarView.collectionViewLayout as! UICollectionViewFlowLayout
-        let numberOfCells = self.viewControllers.count
+        let flowLayout = buttonBarView.collectionViewLayout as! UICollectionViewFlowLayout
+        let numberOfCells = viewControllers.count
         
         var minimumCellWidths = [CGFloat]()
         var collectionViewContentWidth: CGFloat = 0
         
-        for viewController in self.viewControllers {
+        for viewController in viewControllers {
             let childController = viewController as! IndicatorInfoProvider
             let indicatorInfo = childController.indicatorInfo(for: self)
-            switch buttonBarItemSpec {
+            switch buttonBarItemSpec! {
             case .cellClass(let widthCallback):
                 let width = widthCallback(indicatorInfo)
                 minimumCellWidths.append(width)
@@ -334,14 +339,14 @@ open class ButtonBarPagerTabStripViewController: PagerTabStripViewController, Pa
         let cellSpacingTotal = CGFloat(numberOfCells - 1) * flowLayout.minimumLineSpacing
         collectionViewContentWidth += cellSpacingTotal
         
-        let collectionViewAvailableVisibleWidth = self.buttonBarView.frame.size.width - flowLayout.sectionInset.left - flowLayout.sectionInset.right
+        let collectionViewAvailableVisibleWidth = buttonBarView.frame.size.width - flowLayout.sectionInset.left - flowLayout.sectionInset.right
         
         if !settings.style.buttonBarItemsShouldFillAvailiableWidth || collectionViewAvailableVisibleWidth < collectionViewContentWidth {
             return minimumCellWidths
         }
         else {
             let stretchedCellWidthIfAllEqual = (collectionViewAvailableVisibleWidth - cellSpacingTotal) / CGFloat(numberOfCells)
-            let generalMinimumCellWidth = self.calculateStretchedCellWidths(minimumCellWidths, suggestedStretchedCellWidth: stretchedCellWidthIfAllEqual, previousNumberOfLargeCells: 0)
+            let generalMinimumCellWidth = calculateStretchedCellWidths(minimumCellWidths, suggestedStretchedCellWidth: stretchedCellWidthIfAllEqual, previousNumberOfLargeCells: 0)
             var stretchedCellWidths = [CGFloat]()
             
             for minimumCellWidthValue in minimumCellWidths {
