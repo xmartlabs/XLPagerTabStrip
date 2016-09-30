@@ -38,15 +38,15 @@ public struct BarPagerTabStripSettings {
 
 open class BarPagerTabStripViewController: PagerTabStripViewController, PagerTabStripDataSource, PagerTabStripIsProgressiveDelegate {
     
-    open var settings = BarPagerTabStripSettings()
+    public var settings = BarPagerTabStripSettings()
     
-    @IBOutlet lazy open var barView: BarView! = { [unowned self] in
-        let barView = BarView(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.settings.style.barHeight))
-        barView.autoresizingMask = .flexibleWidth
-        barView.backgroundColor = .black
-        barView.selectedBar.backgroundColor = .white
-        return barView
-    }()
+    @IBOutlet weak public var barView: BarView!
+    
+    required public init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        delegate = self
+        datasource = self
+    }
     
     public override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -56,14 +56,16 @@ open class BarPagerTabStripViewController: PagerTabStripViewController, PagerTab
     
     open override func viewDidLoad() {
         super.viewDidLoad()
-        barView.backgroundColor = self.settings.style.barBackgroundColor ?? barView.backgroundColor
-        barView.selectedBar.backgroundColor = self.settings.style.selectedBarBackgroundColor ?? barView.selectedBar.backgroundColor
-    }
-    
-    required public init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        delegate = self
-        datasource = self
+        barView = barView ?? {
+            let barView = BarView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: settings.style.barHeight))
+            barView.autoresizingMask = .flexibleWidth
+            barView.backgroundColor = .black
+            barView.selectedBar.backgroundColor = .white
+            return barView
+        }()
+        
+        barView.backgroundColor = settings.style.barBackgroundColor ?? barView.backgroundColor
+        barView.selectedBar.backgroundColor = settings.style.selectedBarBackgroundColor ?? barView.selectedBar.backgroundColor
     }
     
     open override func viewWillAppear(_ animated: Bool) {

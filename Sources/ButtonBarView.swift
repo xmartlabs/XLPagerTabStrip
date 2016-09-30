@@ -47,7 +47,7 @@ open class ButtonBarView: UICollectionView {
     
     internal var selectedBarHeight: CGFloat = 4 {
         didSet {
-            self.updateSlectedBarYPosition()
+            updateSlectedBarYPosition()
         }
     }
     var selectedBarAlignment: SelectedBarAlignment = .center

@@ -124,7 +124,9 @@ open class TwitterPagerTabStripViewController: PagerTabStripViewController, Page
     }
     
     deinit {
-        titleView.removeObserver(self, forKeyPath: "frame")
+        if isViewLoaded {
+            titleView.removeObserver(self, forKeyPath: "frame")
+        }
     }
     
     open override func viewDidLayoutSubviews() {
