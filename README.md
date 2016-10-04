@@ -331,7 +331,7 @@ func moveTo(viewController: UIViewController, animated: Bool)
 
 #### How to migrate from Swift 2 to Swift 3 <a name="migrate"></a>
 
-Check out [our migration guide](https://github.com/xmartlabs/XLPagerTabStrip/Migration.md)
+Check out [our migration guide](https://github.com/xmartlabs/XLPagerTabStrip/blob/master/README.md)
 
 ## Author
 
