@@ -47,7 +47,7 @@ open class ButtonBarView: UICollectionView {
     
     internal var selectedBarHeight: CGFloat = 4 {
         didSet {
-            updateSlectedBarYPosition()
+            updateSelectedBarYPosition()
         }
     }
     var selectedBarAlignment: SelectedBarAlignment = .center
@@ -61,6 +61,11 @@ open class ButtonBarView: UICollectionView {
     override init(frame: CGRect, collectionViewLayout layout: UICollectionViewLayout) {
         super.init(frame: frame, collectionViewLayout: layout)
         addSubview(selectedBar)
+    }
+    
+    override open func layoutSubviews() {
+        super.layoutSubviews()
+        updateSelectedBarYPosition()
     }
     
     open func moveTo(index: Int, animated: Bool, swipeDirection: SwipeDirection, pagerScroll: PagerScroll) {
@@ -165,7 +170,7 @@ open class ButtonBarView: UICollectionView {
         return contentOffset
     }
     
-    private func updateSlectedBarYPosition() {
+    private func updateSelectedBarYPosition() {
         var selectedBarFrame = selectedBar.frame
         selectedBarFrame.origin.y = frame.size.height - selectedBarHeight
         selectedBarFrame.size.height = selectedBarHeight
