@@ -32,17 +32,18 @@ open class ButtonBarViewCell: UICollectionViewCell {
     open override func awakeFromNib() {
         super.awakeFromNib()
         
-        label = label ?? UILabel()
-        label.frame = self.contentView.bounds
-        label.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        label.textAlignment = .center
-        label.font = UIFont.boldSystemFont(ofSize: 14.0)
+        let labelAux = label ?? UILabel()
+        labelAux.frame = self.contentView.bounds
+        labelAux.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        labelAux.textAlignment = .center
+        labelAux.font = UIFont.boldSystemFont(ofSize: 14.0)
+        label = labelAux
     }
     
     open override func willMove(toSuperview newSuperview: UIView?) {
         super.willMove(toSuperview: newSuperview)
         
-        if label.superview != nil {
+        if label?.superview != nil {
             contentView.addSubview(label)
         }
     }
