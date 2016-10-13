@@ -26,14 +26,18 @@ import Foundation
 
 open class ButtonBarViewCell: UICollectionViewCell {
     
-    @IBOutlet open var imageView: UIImageView!
-    @IBOutlet open lazy var label: UILabel! = { [unowned self] in
-        let label = UILabel(frame: self.contentView.bounds)
+    @IBOutlet weak open var imageView: UIImageView!
+    @IBOutlet weak open var label: UILabel!
+    
+    open override func awakeFromNib() {
+        super.awakeFromNib()
+        
+        label = label ?? UILabel()
+        label.frame = self.contentView.bounds
         label.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         label.textAlignment = .center
         label.font = UIFont.boldSystemFont(ofSize: 14.0)
-        return label
-    }()
+    }
     
     open override func willMove(toSuperview newSuperview: UIView?) {
         super.willMove(toSuperview: newSuperview)
