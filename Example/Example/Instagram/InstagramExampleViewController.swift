@@ -32,20 +32,20 @@ class InstagramExampleViewController: ButtonBarPagerTabStripViewController {
     
     override func viewDidLoad() {
         // change selected bar color
-        settings.style.buttonBarBackgroundColor = .whiteColor()
-        settings.style.buttonBarItemBackgroundColor = .whiteColor()
+        settings.style.buttonBarBackgroundColor = .white
+        settings.style.buttonBarItemBackgroundColor = .white
         settings.style.selectedBarBackgroundColor = blueInstagramColor
-        settings.style.buttonBarItemFont = .boldSystemFontOfSize(14)
+        settings.style.buttonBarItemFont = .boldSystemFont(ofSize: 14)
         settings.style.selectedBarHeight = 2.0
         settings.style.buttonBarMinimumLineSpacing = 0
-        settings.style.buttonBarItemTitleColor = .blackColor()
+        settings.style.buttonBarItemTitleColor = .black
         settings.style.buttonBarItemsShouldFillAvailiableWidth = true
         settings.style.buttonBarLeftContentInset = 0
         settings.style.buttonBarRightContentInset = 0
         
         changeCurrentIndexProgressive = { [weak self] (oldCell: ButtonBarViewCell?, newCell: ButtonBarViewCell?, progressPercentage: CGFloat, changeCurrentIndex: Bool, animated: Bool) -> Void in
             guard changeCurrentIndex == true else { return }
-            oldCell?.label.textColor = .blackColor()
+            oldCell?.label.textColor = .black
             newCell?.label.textColor = self?.blueInstagramColor
         }
         super.viewDidLoad()
@@ -53,16 +53,16 @@ class InstagramExampleViewController: ButtonBarPagerTabStripViewController {
     
     // MARK: - PagerTabStripDataSource
     
-    override func viewControllersForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
-        let child_1 = TableChildExampleViewController(style: .Plain, itemInfo: "FOLLOWING")
+    override func viewControllers(for pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
+        let child_1 = TableChildExampleViewController(style: .plain, itemInfo: "FOLLOWING")
         let child_2 = ChildExampleViewController(itemInfo: "YOU")
         return [child_1, child_2]
     }
 
     // MARK: - Custom Action
     
-    @IBAction func closeAction(sender: UIButton) {
-        dismissViewControllerAnimated(true, completion: nil)
+    @IBAction func closeAction(_ sender: UIButton) {
+        dismiss(animated: true, completion: nil)
     }
 }
 

@@ -50,3 +50,5 @@ playground.xcworkspace
 # Carthage/Checkouts
 
 Carthage/Build
+
+.swift-version

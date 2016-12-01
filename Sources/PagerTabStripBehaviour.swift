@@ -26,14 +26,14 @@ import Foundation
 
 public enum PagerTabStripBehaviour {
     
-    case Common(skipIntermediateViewControllers: Bool)
-    case Progressive(skipIntermediateViewControllers: Bool, elasticIndicatorLimit: Bool)
+    case common(skipIntermediateViewControllers: Bool)
+    case progressive(skipIntermediateViewControllers: Bool, elasticIndicatorLimit: Bool)
     
     public var skipIntermediateViewControllers: Bool {
         switch self {
-        case .Common(let skipIntermediateViewControllers):
+        case .common(let skipIntermediateViewControllers):
             return skipIntermediateViewControllers
-        case .Progressive(let skipIntermediateViewControllers, _):
+        case .progressive(let skipIntermediateViewControllers, _):
             return skipIntermediateViewControllers
         }
     }
@@ -41,18 +41,18 @@ public enum PagerTabStripBehaviour {
     
     public var isProgressiveIndicator: Bool {
         switch self {
-        case .Common(_):
+        case .common(_):
             return false
-        case .Progressive(_, _):
+        case .progressive(_, _):
             return true
         }
     }
     
     public var isElasticIndicatorLimit: Bool {
         switch self {
-        case .Common(_):
+        case .common(_):
             return false
-        case .Progressive(_, let elasticIndicatorLimit):
+        case .progressive(_, let elasticIndicatorLimit):
             return elasticIndicatorLimit
         }
     }
