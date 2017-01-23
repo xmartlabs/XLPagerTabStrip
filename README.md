@@ -312,7 +312,7 @@ pod 'XLPagerTabStrip', '~> 5.0'
 To install XLPagerTabStrip, simply add the following line to your Cartfile:
 
 ```ogdl
-github "xmartlabs/XLPagerTabStrip" ~> 5.0
+github "xmartlabs/XLPagerTabStrip" ~> 6.0
 ```
 
 ## FAQ
