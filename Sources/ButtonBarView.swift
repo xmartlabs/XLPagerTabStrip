@@ -171,4 +171,9 @@ open class ButtonBarView: UICollectionView {
         selectedBarFrame.size.height = selectedBarHeight
         selectedBar.frame = selectedBarFrame
     }
+    
+    override open func layoutSubviews() {
+        super.layoutSubviews()
+        updateSlectedBarYPosition()
+    }
 }
