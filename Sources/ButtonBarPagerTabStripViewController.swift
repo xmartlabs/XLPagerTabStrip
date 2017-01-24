@@ -43,7 +43,6 @@ public struct ButtonBarPagerTabStripSettings {
     
     public struct Style {
         public var buttonBarBackgroundColor: UIColor?
-        @available(*, deprecated: 4.0.2) public var buttonBarMinimumInteritemSpacing: CGFloat? = 0
         public var buttonBarMinimumLineSpacing: CGFloat?
         public var buttonBarLeftContentInset: CGFloat?
         public var buttonBarRightContentInset: CGFloat?
@@ -55,8 +54,15 @@ public struct ButtonBarPagerTabStripSettings {
         public var buttonBarItemFont = UIFont.systemFont(ofSize: 18)
         public var buttonBarItemLeftRightMargin: CGFloat = 8
         public var buttonBarItemTitleColor: UIColor?
-        public var buttonBarItemsShouldFillAvailiableWidth = true
-       
+        @available(*, deprecated: 7.0.0) public var buttonBarItemsShouldFillAvailiableWidth: Bool {
+            set {
+                buttonBarItemsShouldFillAvailableWidth = newValue
+            }
+            get {
+                return buttonBarItemsShouldFillAvailableWidth
+            }
+        }
+        public var buttonBarItemsShouldFillAvailableWidth = true
         // only used if button bar is created programaticaly and not using storyboards or nib files
         public var buttonBarHeight: CGFloat?
     }
@@ -341,7 +347,7 @@ open class ButtonBarPagerTabStripViewController: PagerTabStripViewController, Pa
         
         let collectionViewAvailableVisibleWidth = buttonBarView.frame.size.width - flowLayout.sectionInset.left - flowLayout.sectionInset.right
         
-        if !settings.style.buttonBarItemsShouldFillAvailiableWidth || collectionViewAvailableVisibleWidth < collectionViewContentWidth {
+        if !settings.style.buttonBarItemsShouldFillAvailableWidth || collectionViewAvailableVisibleWidth < collectionViewContentWidth {
             return minimumCellWidths
         }
         else {
