@@ -126,7 +126,7 @@ class MyEmbeddedViewController: UITableViewController, IndicatorInfoProvider {
 }
 ```
 
-**For a detailed step by step guide about how to use the library, please check out this community [blog post](https://medium.com/michaeladeyeri/how-to-implement-android-like-tab-layouts-in-ios-using-swift-3-578516c3aa9).
+**For a detailed step by step guide about how to use the library, please check out this community [blog post](https://medium.com/michaeladeyeri/how-to-implement-android-like-tab-layouts-in-ios-using-swift-3-578516c3aa9).**
 
 That's it! We're done! 🍻🍻
 
