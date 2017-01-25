@@ -63,11 +63,6 @@ open class ButtonBarView: UICollectionView {
         addSubview(selectedBar)
     }
     
-    override open func layoutSubviews() {
-        super.layoutSubviews()
-        updateSelectedBarYPosition()
-    }
-    
     open func moveTo(index: Int, animated: Bool, swipeDirection: SwipeDirection, pagerScroll: PagerScroll) {
         selectedIndex = index
         updateSelectedBarPosition(animated, swipeDirection: swipeDirection, pagerScroll: pagerScroll)
@@ -179,6 +174,6 @@ open class ButtonBarView: UICollectionView {
     
     override open func layoutSubviews() {
         super.layoutSubviews()
-        updateSlectedBarYPosition()
+        updateSelectedBarYPosition()
     }
 }
