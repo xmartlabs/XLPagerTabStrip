@@ -1,6 +1,10 @@
 # Change Log
 All notable changes to XLPagerTabStrip will be documented in this file.
 
+### [7.0.0](https://github.com/xmartlabs/XLPagerTabStrip/releases/tag/7.0.0)
+
+* Bug fixes and stability improvements. 
+
 ### [6.0.0](https://github.com/xmartlabs/XLPagerTabStrip/releases/tag/5.0.0)
 
 * Swift 3 support

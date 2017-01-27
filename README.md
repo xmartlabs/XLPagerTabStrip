@@ -5,10 +5,11 @@
 <img src="https://img.shields.io/badge/platform-iOS-blue.svg?style=flat" alt="Platform iOS" />
 <a href="https://developer.apple.com/swift"><img src="https://img.shields.io/badge/swift2-compatible-4BC51D.svg?style=flat" alt="Swift 2 compatible" /></a>
 <a href="https://github.com/Carthage/Carthage"><img src="https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat" alt="Carthage compatible" /></a>
-<a href="https://cocoapods.org/pods/XLActionController"><img src="https://img.shields.io/badge/pod-6.0.0-blue.svg" alt="CocoaPods compatible" /></a>
+<a href="https://cocoapods.org/pods/XLActionController"><img src="https://img.shields.io/badge/pod-7.0.0-blue.svg" alt="CocoaPods compatible" /></a>
 <a href="https://raw.githubusercontent.com/xmartlabs/XLPagerTabStrip/master/LICENSE"><img src="http://img.shields.io/badge/license-MIT-blue.svg?style=flat" alt="License: MIT" />
-<a href="https://codebeat.co/projects/github-com-xmartlabs-xlpagertabstrip"><img alt="codebeat badge" src="https://codebeat.co/badges/f32c9ad3-0aa1-4b40-a632-9421211bd39e" /></a>
 </a>
+<!-- <a href="https://codebeat.co/projects/github-com-xmartlabs-xlpagertabstrip"><img alt="codebeat badge" src="https://codebeat.co/badges/f32c9ad3-0aa1-4b40-a632-9421211bd39e" /></a> -->
+
 </p>
 
 Made with ❤️ by [XMARTLABS](http://xmartlabs.com).
@@ -289,7 +290,7 @@ settings.style.segmentedControlColor: UIColor?
 ## Requirements
 
 * iOS 8.0+
-* Xcode 7.3+
+* Xcode 8.0+
 
 ## Examples
 
@@ -304,7 +305,7 @@ Follow these 3 steps to run Example project: Clone XLPagerTabStrip repository, o
 To install XLPagerTabStrip, simply add the following line to your Podfile:
 
 ```ruby
-pod 'XLPagerTabStrip', '~> 6.0'
+pod 'XLPagerTabStrip', '~> 7.0'
 ```
 
 ### Carthage
@@ -314,7 +315,7 @@ pod 'XLPagerTabStrip', '~> 6.0'
 To install XLPagerTabStrip, simply add the following line to your Cartfile:
 
 ```ogdl
-github "xmartlabs/XLPagerTabStrip" ~> 6.0
+github "xmartlabs/XLPagerTabStrip" ~> 7.0
 ```
 
 ## FAQ
@@ -338,7 +339,6 @@ Check out [our migration guide](https://github.com/xmartlabs/XLPagerTabStrip/blo
 ## Author
 
 * [Martin Barreto](https://github.com/mtnBarreto) ([@mtnBarreto](https://twitter.com/mtnBarreto))
-
 
 ## Change Log
 
