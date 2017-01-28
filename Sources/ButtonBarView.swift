@@ -50,6 +50,11 @@ open class ButtonBarView: UICollectionView {
             updateSlectedBarYPosition()
         }
     }
+    internal var selectedBarInsets: CGFloat = 0 {
+        didSet {
+            updateSlectedBarYPosition()
+        }
+    }
     var selectedBarAlignment: SelectedBarAlignment = .center
     var selectedIndex = 0
     
@@ -118,8 +123,8 @@ open class ButtonBarView: UICollectionView {
         
         updateContentOffset(animated: animated, pagerScroll: pagerScroll, toFrame: selectedCellFrame, toIndex: (selectedCellIndexPath as NSIndexPath).row)
         
-        selectedBarFrame.size.width = selectedCellFrame.size.width
-        selectedBarFrame.origin.x = selectedCellFrame.origin.x
+        selectedBarFrame.size.width = selectedCellFrame.size.width - (selectedBarInsets * 2)
+        selectedBarFrame.origin.x = selectedCellFrame.origin.x + selectedBarInsets
         
         if animated {
             UIView.animate(withDuration: 0.3, animations: { [weak self] in
