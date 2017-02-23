@@ -299,6 +299,10 @@ open class ButtonBarPagerTabStripViewController: PagerTabStripViewController, Pa
                 changeCurrentIndex(currentIndex == indexPath.item ? nil : cell, currentIndex == indexPath.item ? cell : nil, false)
             }
         }
+        cell.isAccessibilityElement = true
+        cell.accessibilityLabel = cell.label.text
+        cell.accessibilityTraits |= UIAccessibilityTraitButton
+        cell.accessibilityTraits |= UIAccessibilityTraitHeader
         return cell
     }
     
