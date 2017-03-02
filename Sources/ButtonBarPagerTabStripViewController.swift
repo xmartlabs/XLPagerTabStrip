@@ -49,6 +49,7 @@ public struct ButtonBarPagerTabStripSettings {
 
         public var selectedBarBackgroundColor = UIColor.black
         public var selectedBarHeight: CGFloat = 5
+        public var selectedBarVerticalAlignment: SelectedBarVerticalAlignment = .bottom
         
         public var buttonBarItemBackgroundColor: UIColor?
         public var buttonBarItemFont = UIFont.systemFont(ofSize: 18)
@@ -147,6 +148,8 @@ open class ButtonBarPagerTabStripViewController: PagerTabStripViewController, Pa
         buttonBarView.selectedBar.backgroundColor = settings.style.selectedBarBackgroundColor
         
         buttonBarView.selectedBarHeight = settings.style.selectedBarHeight
+        buttonBarView.selectedBarVerticalAlignment = settings.style.selectedBarVerticalAlignment
+        
         // register button bar item cell
         switch buttonBarItemSpec! {
         case .nibFile(let nibName, let bundle, _):
