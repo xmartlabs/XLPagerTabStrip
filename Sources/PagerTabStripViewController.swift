@@ -305,13 +305,13 @@ open class PagerTabStripViewController: UIViewController, UIScrollViewDelegate {
     open func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if containerView == scrollView {
             updateContent()
+            lastContentOffset = scrollView.contentOffset.x
         }
     }
     
     open func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         if containerView == scrollView {
             lastPageNumber = pageFor(contentOffset: scrollView.contentOffset.x)
-            lastContentOffset = scrollView.contentOffset.x
         }
     }
     
