@@ -50,6 +50,8 @@ open class ButtonBarView: UICollectionView {
             updateSelectedBarYPosition()
         }
     }
+    internal var selectedBarWidthGroup: [CGFloat] = []
+  
     var selectedBarAlignment: SelectedBarAlignment = .center
     var selectedIndex = 0
     
@@ -71,7 +73,7 @@ open class ButtonBarView: UICollectionView {
     open func move(fromIndex: Int, toIndex: Int, progressPercentage: CGFloat,pagerScroll: PagerScroll) {
         selectedIndex = progressPercentage > 0.5 ? toIndex : fromIndex
         
-        let fromFrame = layoutAttributesForItem(at: IndexPath(item: fromIndex, section: 0))!.frame
+        var fromFrame = layoutAttributesForItem(at: IndexPath(item: fromIndex, section: 0))!.frame
         let numberOfItems = dataSource!.collectionView(self, numberOfItemsInSection: 0)
         
         var toFrame: CGRect
@@ -89,7 +91,14 @@ open class ButtonBarView: UICollectionView {
         else {
             toFrame = layoutAttributesForItem(at: IndexPath(item: toIndex, section: 0))!.frame
         }
-        
+      
+        if selectedBarWidthGroup.count > 1 {
+            var barWidth = selectedBarWidthGroup[fromIndex]
+            fromFrame = CGRect(x: fromFrame.origin.x + (fromFrame.size.width - barWidth) / 2, y: fromFrame.origin.y, width: barWidth, height: fromFrame.size.height)
+            barWidth = selectedBarWidthGroup[toIndex]
+            toFrame = CGRect(x: toFrame.origin.x + (toFrame.size.width - barWidth) / 2, y: toFrame.origin.y, width: barWidth, height: toFrame.size.height)
+        }
+      
         var targetFrame = fromFrame
         targetFrame.size.height = selectedBar.frame.size.height
         targetFrame.size.width += (toFrame.size.width - fromFrame.size.width) * progressPercentage
@@ -117,9 +126,16 @@ open class ButtonBarView: UICollectionView {
         let selectedCellFrame = attributes!.frame
         
         updateContentOffset(animated: animated, pagerScroll: pagerScroll, toFrame: selectedCellFrame, toIndex: (selectedCellIndexPath as NSIndexPath).row)
-        
-        selectedBarFrame.size.width = selectedCellFrame.size.width
-        selectedBarFrame.origin.x = selectedCellFrame.origin.x
+      
+        let barWidth: CGFloat
+        if selectedBarWidthGroup.count >= selectedIndex {
+            barWidth = selectedBarWidthGroup[selectedIndex]
+        } else {
+            barWidth = selectedCellFrame.size.width
+        }
+      
+        selectedBarFrame.size.width = barWidth
+        selectedBarFrame.origin.x = selectedCellFrame.origin.x + (selectedCellFrame.size.width - barWidth) / 2
         
         if animated {
             UIView.animate(withDuration: 0.3, animations: { [weak self] in
