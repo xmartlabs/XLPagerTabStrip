@@ -250,8 +250,8 @@ open class ButtonBarPagerTabStripViewController: PagerTabStripViewController, Pa
                 .flatMap { index, cell in
                     return cell == nil ? indexPaths[index] : nil
                 }
-                .flatMap {
-                    return ($0.item >= 0 && $0.item < buttonBarView.numberOfItems(inSection: $0.section)) ? $0 : nil
+                .flatMap { (indexPath: IndexPath) -> IndexPath? in
+                    return (indexPath.item >= 0 && indexPath.item < buttonBarView.numberOfItems(inSection: indexPath.section)) ? indexPath : nil
                 }
             buttonBarView.reloadItems(at: indexPathsToReload)
         }
