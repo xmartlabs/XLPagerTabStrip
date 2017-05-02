@@ -30,6 +30,8 @@ class ButtonBarExampleViewController: ButtonBarPagerTabStripViewController {
     var isReload = false
     
     override func viewDidLoad() {
+        settings.style.selectedBarInsets = 5
+        
         super.viewDidLoad()
         
         buttonBarView.selectedBar.backgroundColor = .orange

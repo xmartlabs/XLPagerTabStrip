@@ -50,6 +50,11 @@ open class ButtonBarView: UICollectionView {
             updateSelectedBarYPosition()
         }
     }
+    internal var selectedBarInsets: CGFloat = 0 {
+        didSet {
+            updateSlectedBarYPosition()
+        }
+    }
     var selectedBarAlignment: SelectedBarAlignment = .center
     var selectedIndex = 0
     
@@ -95,7 +100,7 @@ open class ButtonBarView: UICollectionView {
         targetFrame.size.width += (toFrame.size.width - fromFrame.size.width) * progressPercentage
         targetFrame.origin.x += (toFrame.origin.x - fromFrame.origin.x) * progressPercentage
         
-        selectedBar.frame = CGRect(x: targetFrame.origin.x, y: selectedBar.frame.origin.y, width: targetFrame.size.width, height: selectedBar.frame.size.height)
+        selectedBar.frame = CGRect(x: targetFrame.origin.x + selectedBarInsets, y: selectedBar.frame.origin.y, width: targetFrame.size.width - (selectedBarInsets * 2), height: selectedBar.frame.size.height)
         
         var targetContentOffset: CGFloat = 0.0
         if contentSize.width > frame.size.width {
@@ -118,8 +123,8 @@ open class ButtonBarView: UICollectionView {
         
         updateContentOffset(animated: animated, pagerScroll: pagerScroll, toFrame: selectedCellFrame, toIndex: (selectedCellIndexPath as NSIndexPath).row)
         
-        selectedBarFrame.size.width = selectedCellFrame.size.width
-        selectedBarFrame.origin.x = selectedCellFrame.origin.x
+        selectedBarFrame.size.width = selectedCellFrame.size.width - (selectedBarInsets * 2)
+        selectedBarFrame.origin.x = selectedCellFrame.origin.x + selectedBarInsets
         
         if animated {
             UIView.animate(withDuration: 0.3, animations: { [weak self] in
