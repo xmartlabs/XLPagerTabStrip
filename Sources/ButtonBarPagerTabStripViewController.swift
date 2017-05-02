@@ -222,9 +222,11 @@ open class ButtonBarPagerTabStripViewController: PagerTabStripViewController, Pa
         buttonBarView.moveTo(index: toIndex, animated: true, swipeDirection: toIndex < fromIndex ? .right : .left, pagerScroll: .yes)
         
         if let changeCurrentIndex = changeCurrentIndex {
-            let oldCell = buttonBarView.cellForItem(at: IndexPath(item: currentIndex != fromIndex ? fromIndex : toIndex, section: 0)) as? ButtonBarViewCell
-            let newCell = buttonBarView.cellForItem(at: IndexPath(item: currentIndex, section: 0)) as? ButtonBarViewCell
-            changeCurrentIndex(oldCell, newCell, true)
+            let oldIndexPath = IndexPath(item: currentIndex != fromIndex ? fromIndex : toIndex, section: 0)
+            let newIndexPath = IndexPath(item: currentIndex, section: 0)
+
+            let cells = cellForItems(at: [oldIndexPath, newIndexPath])
+            changeCurrentIndex(cells.first!, cells.last!, true)
         }
     }
 
@@ -232,12 +234,31 @@ open class ButtonBarPagerTabStripViewController: PagerTabStripViewController, Pa
         guard shouldUpdateButtonBarView else { return }
         buttonBarView.move(fromIndex: fromIndex, toIndex: toIndex, progressPercentage: progressPercentage, pagerScroll: .yes)
         if let changeCurrentIndexProgressive = changeCurrentIndexProgressive {
-            let oldCell = buttonBarView.cellForItem(at: IndexPath(item: currentIndex != fromIndex ? fromIndex : toIndex, section: 0)) as? ButtonBarViewCell
-            let newCell = buttonBarView.cellForItem(at: IndexPath(item: currentIndex, section: 0)) as? ButtonBarViewCell
-            changeCurrentIndexProgressive(oldCell, newCell, progressPercentage, indexWasChanged, true)
+            let oldIndexPath = IndexPath(item: currentIndex != fromIndex ? fromIndex : toIndex, section: 0)
+            let newIndexPath = IndexPath(item: currentIndex, section: 0)
+
+            let cells = cellForItems(at: [oldIndexPath, newIndexPath])
+            changeCurrentIndexProgressive(cells.first!, cells.last!, progressPercentage, indexWasChanged, true)
         }
     }
-    
+
+    private func cellForItems(at indexPaths: [IndexPath], reloadIfNotVisible reload: Bool = true) -> [ButtonBarViewCell?] {
+        let cells = indexPaths.map { buttonBarView.cellForItem(at: $0) as? ButtonBarViewCell }
+
+        if reload {
+            let indexPathsToReload = cells.enumerated()
+                .flatMap { index, cell in
+                    return cell == nil ? indexPaths[index] : nil
+                }
+                .flatMap { (indexPath: IndexPath) -> IndexPath? in
+                    return (indexPath.item >= 0 && indexPath.item < buttonBarView.numberOfItems(inSection: indexPath.section)) ? indexPath : nil
+                }
+            buttonBarView.reloadItems(at: indexPathsToReload)
+        }
+
+        return cells
+    }
+
     // MARK: - UICollectionViewDelegateFlowLayut
     
     open func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: IndexPath) -> CGSize {
