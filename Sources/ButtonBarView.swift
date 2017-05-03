@@ -37,6 +37,12 @@ public enum SelectedBarAlignment {
     case progressive
 }
 
+public enum SelectedBarVerticalAlignment {
+    case top
+    case middle
+    case bottom
+}
+
 open class ButtonBarView: UICollectionView {
     
     open lazy var selectedBar: UIView = { [unowned self] in
@@ -50,6 +56,7 @@ open class ButtonBarView: UICollectionView {
             updateSelectedBarYPosition()
         }
     }
+    var selectedBarVerticalAlignment: SelectedBarVerticalAlignment = .bottom
     var selectedBarAlignment: SelectedBarAlignment = .center
     var selectedIndex = 0
     
@@ -167,7 +174,16 @@ open class ButtonBarView: UICollectionView {
     
     private func updateSelectedBarYPosition() {
         var selectedBarFrame = selectedBar.frame
-        selectedBarFrame.origin.y = frame.size.height - selectedBarHeight
+        
+        switch selectedBarVerticalAlignment {
+        case .top:
+            selectedBarFrame.origin.y = 0
+        case .middle:
+            selectedBarFrame.origin.y = (frame.size.height - selectedBarHeight) / 2
+        case .bottom:
+            selectedBarFrame.origin.y = frame.size.height - selectedBarHeight
+        }
+        
         selectedBarFrame.size.height = selectedBarHeight
         selectedBar.frame = selectedBarFrame
     }
