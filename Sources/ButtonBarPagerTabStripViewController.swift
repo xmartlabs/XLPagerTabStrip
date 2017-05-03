@@ -222,13 +222,13 @@ open class ButtonBarPagerTabStripViewController: PagerTabStripViewController, Pa
 
     open func updateIndicator(for viewController: PagerTabStripViewController, fromIndex: Int, toIndex: Int) {
         guard shouldUpdateButtonBarView else { return }
-        buttonBarView.moveTo(index: toIndex, animated: true, swipeDirection: toIndex < fromIndex ? .right : .left, pagerScroll: .yes)
+        buttonBarView.moveTo(index: toIndex, animated: false, swipeDirection: toIndex < fromIndex ? .right : .left, pagerScroll: .yes)
         
         if let changeCurrentIndex = changeCurrentIndex {
             let oldIndexPath = IndexPath(item: currentIndex != fromIndex ? fromIndex : toIndex, section: 0)
             let newIndexPath = IndexPath(item: currentIndex, section: 0)
 
-            let cells = cellForItems(at: [oldIndexPath, newIndexPath])
+            let cells = cellForItems(at: [oldIndexPath, newIndexPath], reloadIfNotVisible: collectionViewDidLoad)
             changeCurrentIndex(cells.first!, cells.last!, true)
         }
     }
@@ -240,7 +240,7 @@ open class ButtonBarPagerTabStripViewController: PagerTabStripViewController, Pa
             let oldIndexPath = IndexPath(item: currentIndex != fromIndex ? fromIndex : toIndex, section: 0)
             let newIndexPath = IndexPath(item: currentIndex, section: 0)
 
-            let cells = cellForItems(at: [oldIndexPath, newIndexPath])
+            let cells = cellForItems(at: [oldIndexPath, newIndexPath], reloadIfNotVisible: collectionViewDidLoad)
             changeCurrentIndexProgressive(cells.first!, cells.last!, progressPercentage, indexWasChanged, true)
         }
     }
@@ -256,6 +256,7 @@ open class ButtonBarPagerTabStripViewController: PagerTabStripViewController, Pa
                 .flatMap { (indexPath: IndexPath) -> IndexPath? in
                     return (indexPath.item >= 0 && indexPath.item < buttonBarView.numberOfItems(inSection: indexPath.section)) ? indexPath : nil
                 }
+
             buttonBarView.reloadItems(at: indexPathsToReload)
         }
 
@@ -277,16 +278,19 @@ open class ButtonBarPagerTabStripViewController: PagerTabStripViewController, Pa
         buttonBarView.moveTo(index: indexPath.item, animated: true, swipeDirection: .none, pagerScroll: .yes)
         shouldUpdateButtonBarView = false
         
-        let oldCell = buttonBarView.cellForItem(at: IndexPath(item: currentIndex, section: 0)) as? ButtonBarViewCell
-        let newCell = buttonBarView.cellForItem(at: IndexPath(item: indexPath.item, section: 0)) as? ButtonBarViewCell
+        let oldIndexPath = IndexPath(item: currentIndex, section: 0)
+        let newIndexPath = IndexPath(item: indexPath.item, section: 0)
+
+        let cells = cellForItems(at: [oldIndexPath, newIndexPath], reloadIfNotVisible: collectionViewDidLoad)
+
         if pagerBehaviour.isProgressiveIndicator {
             if let changeCurrentIndexProgressive = changeCurrentIndexProgressive {
-                changeCurrentIndexProgressive(oldCell, newCell, 1, true, true)
+                changeCurrentIndexProgressive(cells.first!, cells.last!, 1, true, true)
             }
         }
         else {
             if let changeCurrentIndex = changeCurrentIndex {
-                changeCurrentIndex(oldCell, newCell, true)
+                changeCurrentIndex(cells.first!, cells.last!, true)
             }
         }
         moveToViewController(at: indexPath.item)
@@ -302,6 +306,9 @@ open class ButtonBarPagerTabStripViewController: PagerTabStripViewController, Pa
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as? ButtonBarViewCell else {
             fatalError("UICollectionViewCell should be or extend from ButtonBarViewCell")
         }
+
+        collectionViewDidLoad = true
+
         let childController = viewControllers[indexPath.item] as! IndicatorInfoProvider
         let indicatorInfo = childController.indicatorInfo(for: self)
         
@@ -389,5 +396,6 @@ open class ButtonBarPagerTabStripViewController: PagerTabStripViewController, Pa
     }
     
     private var shouldUpdateButtonBarView = true
+    private var collectionViewDidLoad = false
     
 }
