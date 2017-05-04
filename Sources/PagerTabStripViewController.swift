@@ -61,7 +61,7 @@ open class PagerTabStripViewController: UIViewController, UIScrollViewDelegate {
     open var pagerBehaviour = PagerTabStripBehaviour.progressive(skipIntermediateViewControllers: true, elasticIndicatorLimit: true)
     
     open private(set) var viewControllers = [UIViewController]()
-    open private(set) var currentIndex = 0
+    open var currentIndex = 0
     
     open var pageWidth: CGFloat {
         return containerView.bounds.width
