@@ -258,7 +258,9 @@ open class ButtonBarPagerTabStripViewController: PagerTabStripViewController, Pa
                     return (indexPath.item >= 0 && indexPath.item < buttonBarView.numberOfItems(inSection: indexPath.section)) ? indexPath : nil
                 }
 
-            buttonBarView.reloadItems(at: indexPathsToReload)
+            if !indexPathsToReload.isEmpty {
+                buttonBarView.reloadItems(at: indexPathsToReload)
+            }
         }
 
         return cells
