@@ -26,23 +26,19 @@ import Foundation
 
 public struct IndicatorInfo {
     
-    public var title: String
+    public var title: String?
     public var image: UIImage?
     public var highlightedImage: UIImage?
     
-    public init(title: String) {
+    public init(title: String?) {
         self.title = title
     }
     
-    public init(title: String, image: UIImage?) {
-        self.init(title: title)
+    public init(image: UIImage?, highlightedImage: UIImage? = nil) {
         self.image = image
-    }
-    
-    public init(title: String, image: UIImage?, highlightedImage: UIImage?) {
-        self.init(title: title, image: image)
         self.highlightedImage = highlightedImage
     }
+
 }
 
 

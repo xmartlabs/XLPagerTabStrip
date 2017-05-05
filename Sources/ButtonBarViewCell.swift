@@ -27,19 +27,6 @@ import Foundation
 open class ButtonBarViewCell: UICollectionViewCell {
     
     @IBOutlet open var imageView: UIImageView!
-    @IBOutlet open lazy var label: UILabel! = { [unowned self] in
-        let label = UILabel(frame: self.contentView.bounds)
-        label.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        label.textAlignment = .center
-        label.font = UIFont.boldSystemFont(ofSize: 14.0)
-        return label
-    }()
+    @IBOutlet open var label: UILabel!
     
-    open override func willMove(toSuperview newSuperview: UIView?) {
-        super.willMove(toSuperview: newSuperview)
-        
-        if label.superview != nil {
-            contentView.addSubview(label)
-        }
-    }
 }
