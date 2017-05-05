@@ -25,5 +25,7 @@
 import Foundation
 
 public enum PagerTabStripError: Error {
-    case viewControllerNotContainedInPagerTabStrip
+
+    case viewControllerOutOfBounds
+
 }
