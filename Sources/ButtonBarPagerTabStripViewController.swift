@@ -266,7 +266,7 @@ open class ButtonBarPagerTabStripViewController: PagerTabStripViewController, Pa
         return cells
     }
 
-    // MARK: - UICollectionViewDelegateFlowLayut
+    // MARK: - UICollectionViewDelegateFlowLayout
     
     open func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: IndexPath) -> CGSize {
         guard let cellWidthValue = cachedCellWidths?[indexPath.row] else {
