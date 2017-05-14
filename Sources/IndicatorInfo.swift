@@ -29,6 +29,8 @@ public struct IndicatorInfo {
     public var title: String?
     public var image: UIImage?
     public var highlightedImage: UIImage?
+    public var badge: Int?
+    public var userInfo: Any?
     
     public init(title: String?) {
         self.title = title
@@ -43,6 +45,20 @@ public struct IndicatorInfo {
         self.title = title
         self.image = image
         self.highlightedImage = highlightedImage
+    }
+    
+    public init(title: String?, image: UIImage?, badge: Int?) {
+        self.title = title
+        self.image = image
+        self.badge = badge
+    }
+    
+    public init(title: String?, image: UIImage?, highlightedImage: UIImage? = nil, badge: Int?, userInfo: Any? = nil) {
+        self.title = title
+        self.image = image
+        self.highlightedImage = highlightedImage
+        self.badge = badge
+        self.userInfo = userInfo
     }
 
 }
