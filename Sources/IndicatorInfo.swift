@@ -52,6 +52,14 @@ public struct IndicatorInfo {
         self.image = image
         self.badge = badge
     }
+    
+    public init(title: String?, image: UIImage?, highlightedImage: UIImage?, badge: Int?, userInfo: Any?) {
+        self.title = title
+        self.image = image
+        self.highlightedImage = highlightedImage
+        self.badge = badge
+        self.userInfo = userInfo
+    }
 
 }
 
