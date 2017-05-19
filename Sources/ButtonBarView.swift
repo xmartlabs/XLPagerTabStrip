@@ -112,8 +112,7 @@ open class ButtonBarView: UICollectionView {
             targetContentOffset = fromContentOffset + ((toContentOffset - fromContentOffset) * progressPercentage)
         }
         
-        let animated = abs(contentOffset.x - targetContentOffset) > 30 || (fromIndex == toIndex)
-        setContentOffset(CGPoint(x: targetContentOffset, y: 0), animated: animated)
+        setContentOffset(CGPoint(x: targetContentOffset, y: 0), animated: false)
     }
     
     open func updateSelectedBarPosition(_ animated: Bool, swipeDirection: SwipeDirection, pagerScroll: PagerScroll) -> Void {
