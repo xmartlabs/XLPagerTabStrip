@@ -60,6 +60,12 @@ open class ButtonBarView: UICollectionView {
     var selectedBarAlignment: SelectedBarAlignment = .center
     var selectedIndex = 0
     
+    open var selectedBarMoveAnimation: (UIView, CGRect) -> Void = { (selectedBar, selectedBarFrame) in
+        UIView.animate(withDuration: 0.3, animations: {
+            selectedBar.frame = selectedBarFrame
+        })
+    }
+    
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         addSubview(selectedBar)
@@ -128,9 +134,7 @@ open class ButtonBarView: UICollectionView {
         selectedBarFrame.origin.x = selectedCellFrame.origin.x
         
         if animated {
-            UIView.animate(withDuration: 0.3, animations: { [weak self] in
-                self?.selectedBar.frame = selectedBarFrame
-            })
+            selectedBarMoveAnimation(selectedBar, selectedBarFrame)
         }
         else {
             selectedBar.frame = selectedBarFrame

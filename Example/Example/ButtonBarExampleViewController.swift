@@ -34,6 +34,30 @@ class ButtonBarExampleViewController: ButtonBarPagerTabStripViewController {
         
         buttonBarView.selectedBar.backgroundColor = .orange
         buttonBarView.backgroundColor = UIColor(red: 7/255, green: 185/255, blue: 155/255, alpha: 1)
+        buttonBarView.selectedBarMoveAnimation = { selectedBar, selectedBarFrame in
+            let initialFrame = selectedBar.frame
+            let movingLeft = initialFrame.origin.x > selectedBarFrame.origin.x
+            UIView.animate(withDuration: 0.20, animations: {
+                if movingLeft {
+                    let origin = selectedBarFrame.origin
+                    let size = CGSize(width: initialFrame.maxX - selectedBarFrame.minX, height: selectedBarFrame.height)
+                    selectedBar.frame = CGRect(origin: origin, size: size)
+                }
+                else {
+                    let origin = initialFrame.origin
+                    let size = CGSize(width: selectedBarFrame.maxX - initialFrame.minX, height: selectedBarFrame.height)
+                    selectedBar.frame = CGRect(origin: origin, size: size)
+                }
+            }, completion: { completed in
+                guard completed else {
+                    selectedBar.frame = selectedBarFrame
+                    return
+                }
+                UIView.animate(withDuration: 0.20, animations: {
+                    selectedBar.frame = selectedBarFrame
+                })
+            })
+        }
     }
     
     // MARK: - PagerTabStripDataSource
