@@ -52,7 +52,7 @@ open class BaseButtonBarPagerTabStripViewController<ButtonBarCellType : UICollec
 
     open override func viewDidLoad() {
         super.viewDidLoad()
-        buttonBarView = buttonBarView ?? {
+        let buttonBarViewAux = buttonBarView ?? {
             let flowLayout = UICollectionViewFlowLayout()
             flowLayout.scrollDirection = .horizontal
             flowLayout.sectionInset = UIEdgeInsetsMake(0, settings.style.buttonBarLeftContentInset ?? 35, 0, settings.style.buttonBarRightContentInset ?? 35)
@@ -67,6 +67,8 @@ open class BaseButtonBarPagerTabStripViewController<ButtonBarCellType : UICollec
             containerView.frame = newContainerViewFrame
             return buttonBar
         }()
+        buttonBarView = buttonBarViewAux
+
         if buttonBarView.superview == nil {
             view.addSubview(buttonBarView)
         }
