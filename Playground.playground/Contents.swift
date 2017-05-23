@@ -10,4 +10,4 @@
 import UIKit
 import XLPagerTabStrip
 
-var str = "Hello, playground"
+var helloWorld = "Hello, playground"
