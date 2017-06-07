@@ -49,7 +49,7 @@ class TwitterExampleViewController: TwitterPagerTabStripViewController {
             let nElements = childViewControllers.count - index
             let n = (Int(arc4random()) % nElements) + index
             if n != index {
-                swap(&childViewControllers[index], &childViewControllers[n])
+                childViewControllers.swapAt(index, n)
             }
         }
         let nItems = 1 + (arc4random() % 8)
