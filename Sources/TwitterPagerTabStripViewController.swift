@@ -178,7 +178,15 @@ open class TwitterPagerTabStripViewController: PagerTabStripViewController, Page
             let navTitleLabel: UILabel = {
                 let label = UILabel()
                 label.text = indicatorInfo.title
-                label.font = UIApplication.shared.statusBarOrientation.isPortrait ? settings.style.portraitTitleFont : settings.style.landscapeTitleFont
+                #if (TAPSTRIP_APP_EXTENSIONS)
+                    if let preferredLocalization = Bundle.main.preferredLocalizations.first {
+                        let localeOrientation = Locale.characterDirection(forLanguage: preferredLocalization)
+                        let isPortrait = (localeOrientation == Locale.LanguageDirection.topToBottom || localeOrientation == Locale.LanguageDirection.bottomToTop)
+                        label.font = isPortrait ? settings.style.portraitTitleFont : settings.style.landscapeTitleFont
+                    }
+                #else
+                    label.font = UIApplication.shared.statusBarOrientation.isPortrait ? settings.style.portraitTitleFont : settings.style.landscapeTitleFont
+                #endif
                 label.textColor = settings.style.titleColor
                 label.alpha = 0
                 return label
@@ -192,7 +200,17 @@ open class TwitterPagerTabStripViewController: PagerTabStripViewController, Page
 
     private func setNavigationViewItemsPosition(updateAlpha: Bool) {
         guard let distance = distanceValue else { return }
-        let isPortrait = UIApplication.shared.statusBarOrientation.isPortrait
+        var isPortrait = true
+
+        #if (TAPSTRIP_APP_EXTENSIONS)
+            if let preferredLocalization = Bundle.main.preferredLocalizations.first {
+                let localeOrientation = Locale.characterDirection(forLanguage: preferredLocalization)
+                isPortrait = (localeOrientation == Locale.LanguageDirection.topToBottom || localeOrientation == Locale.LanguageDirection.bottomToTop)
+            }
+        #else
+        isPortrait = UIApplication.shared.statusBarOrientation.isPortrait
+        #endif
+
         let navBarHeight: CGFloat = navigationController!.navigationBar.frame.size.height
         for (index, label) in childTitleLabels.enumerated() {
             if updateAlpha {
