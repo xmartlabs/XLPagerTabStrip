@@ -1,7 +1,7 @@
 //  ButtonBarViewCell.swift
 //  XLPagerTabStrip ( https://github.com/xmartlabs/XLPagerTabStrip )
 //
-//  Copyright (c) 2016 Xmartlabs ( http://xmartlabs.com )
+//  Copyright (c) 2017 Xmartlabs ( http://xmartlabs.com )
 //
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -25,21 +25,8 @@
 import Foundation
 
 open class ButtonBarViewCell: UICollectionViewCell {
-    
+
     @IBOutlet open var imageView: UIImageView!
-    @IBOutlet open lazy var label: UILabel! = { [unowned self] in
-        let label = UILabel(frame: self.contentView.bounds)
-        label.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        label.textAlignment = .center
-        label.font = UIFont.boldSystemFont(ofSize: 14.0)
-        return label
-    }()
-    
-    open override func willMove(toSuperview newSuperview: UIView?) {
-        super.willMove(toSuperview: newSuperview)
-        
-        if label.superview != nil {
-            contentView.addSubview(label)
-        }
-    }
+    @IBOutlet open var label: UILabel!
+
 }
