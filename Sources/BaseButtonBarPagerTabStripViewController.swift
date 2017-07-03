@@ -179,6 +179,8 @@ open class BaseButtonBarPagerTabStripViewController<ButtonBarCellType : UICollec
         if let changeCurrentIndex = changeCurrentIndex {
             let oldCell = buttonBarView.cellForItem(at: IndexPath(item: currentIndex != fromIndex ? fromIndex : toIndex, section: 0)) as? ButtonBarCellType
             let newCell = buttonBarView.cellForItem(at: IndexPath(item: currentIndex, section: 0)) as? ButtonBarCellType
+            newCell?.accessibilityTraits |= UIAccessibilityTraitSelected
+            oldCell?.accessibilityTraits  &= ~(UIAccessibilityTraitSelected);
             changeCurrentIndex(oldCell, newCell, true)
         }
     }
@@ -189,6 +191,8 @@ open class BaseButtonBarPagerTabStripViewController<ButtonBarCellType : UICollec
         if let changeCurrentIndexProgressive = changeCurrentIndexProgressive {
             let oldCell = buttonBarView.cellForItem(at: IndexPath(item: currentIndex != fromIndex ? fromIndex : toIndex, section: 0)) as? ButtonBarCellType
             let newCell = buttonBarView.cellForItem(at: IndexPath(item: currentIndex, section: 0)) as? ButtonBarCellType
+            newCell?.accessibilityTraits |= UIAccessibilityTraitSelected
+            oldCell?.accessibilityTraits  &= ~(UIAccessibilityTraitSelected);
             changeCurrentIndexProgressive(oldCell, newCell, progressPercentage, indexWasChanged, true)
         }
     }
