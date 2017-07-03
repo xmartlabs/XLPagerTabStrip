@@ -250,7 +250,7 @@ open class ButtonBarPagerTabStripViewController: PagerTabStripViewController, Pa
         let oldCell = buttonBarView.cellForItem(at: IndexPath(item: currentIndex, section: 0)) as? ButtonBarViewCell
         let newCell = buttonBarView.cellForItem(at: IndexPath(item: indexPath.item, section: 0)) as? ButtonBarViewCell
         newCell?.accessibilityTraits |= UIAccessibilityTraitSelected
-        oldCell?.accessibilityTraits = UIAccessibilityTraitNone;
+        oldCell?.accessibilityTraits  &= ~(UIAccessibilityTraitSelected);
         if pagerBehaviour.isProgressiveIndicator {
             if let changeCurrentIndexProgressive = changeCurrentIndexProgressive {
                 changeCurrentIndexProgressive(oldCell, newCell, 1, true, true)
