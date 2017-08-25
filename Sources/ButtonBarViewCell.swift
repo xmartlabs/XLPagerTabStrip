@@ -29,4 +29,6 @@ open class ButtonBarViewCell: UICollectionViewCell {
     @IBOutlet open var imageView: UIImageView!
     @IBOutlet open var label: UILabel!
 
+    @IBOutlet open var widthConstraint: NSLayoutConstraint!
+    @IBOutlet open var heightConstraint: NSLayoutConstraint!
 }

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -41,8 +41,10 @@
                 <constraint firstItem="s7f-rk-sQl" firstAttribute="centerX" secondItem="zg4-fX-zUF" secondAttribute="centerX" id="c15-bZ-hPG"/>
             </constraints>
             <connections>
+                <outlet property="heightConstraint" destination="ojk-Ug-Lgh" id="X2Z-wW-ts7"/>
                 <outlet property="imageView" destination="tFG-yJ-6Th" id="Odb-dR-tf4"/>
                 <outlet property="label" destination="s7f-rk-sQl" id="4gU-tb-BMB"/>
+                <outlet property="widthConstraint" destination="VRw-5F-5WY" id="yAO-eg-6AY"/>
             </connections>
             <point key="canvasLocation" x="307" y="541"/>
         </collectionViewCell>
