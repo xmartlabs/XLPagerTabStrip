@@ -250,7 +250,8 @@ open class ButtonBarPagerTabStripViewController: PagerTabStripViewController, Pa
 
         if reload {
             let indexPathsToReload = cells.enumerated()
-                .flatMap { index, cell in
+                .flatMap { (arg) -> IndexPath? in
+                    let (index, cell) = arg
                     return cell == nil ? indexPaths[index] : nil
                 }
                 .flatMap { (indexPath: IndexPath) -> IndexPath? in
@@ -267,7 +268,7 @@ open class ButtonBarPagerTabStripViewController: PagerTabStripViewController, Pa
 
     // MARK: - UICollectionViewDelegateFlowLayut
 
-    open func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: IndexPath) -> CGSize {
+    @objc open func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: IndexPath) -> CGSize {
         guard let cellWidthValue = cachedCellWidths?[indexPath.row] else {
             fatalError("cachedCellWidths for \(indexPath.row) must not be nil")
         }
