@@ -5,7 +5,7 @@
 <img src="https://img.shields.io/badge/platform-iOS-blue.svg?style=flat" alt="Platform iOS" />
 <a href="https://developer.apple.com/swift"><img src="https://img.shields.io/badge/swift4-compatible-4BC51D.svg?style=flat" alt="Swift 3 compatible" /></a>
 <a href="https://github.com/Carthage/Carthage"><img src="https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat" alt="Carthage compatible" /></a>
-<a href="https://cocoapods.org/pods/XLActionController"><img src="https://img.shields.io/badge/pod-8.0.0-blue.svg" alt="CocoaPods compatible" /></a>
+<a href="https://cocoapods.org/pods/XLPagerTabStrip"><img src="https://img.shields.io/cocoapods/v/XLPagerTabStrip.svg" alt="CocoaPods compatible" /></a>
 <a href="https://raw.githubusercontent.com/xmartlabs/XLPagerTabStrip/master/LICENSE"><img src="http://img.shields.io/badge/license-MIT-blue.svg?style=flat" alt="License: MIT" />
 </a>
 <!-- <a href="https://codebeat.co/projects/github-com-xmartlabs-xlpagertabstrip"><img alt="codebeat badge" src="https://codebeat.co/badges/f32c9ad3-0aa1-4b40-a632-9421211bd39e" /></a> -->
