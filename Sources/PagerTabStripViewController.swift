@@ -85,14 +85,16 @@ open class PagerTabStripViewController: UIViewController, UIScrollViewDelegate {
 
     override open func viewDidLoad() {
         super.viewDidLoad()
-        let conteinerViewAux = containerView ?? {
-            let containerView = UIScrollView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height))
-            containerView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-            return containerView
-        }()
+        let conteinerViewAux = containerView ?? UIScrollView()
         containerView = conteinerViewAux
         if containerView.superview == nil {
+            containerView.translatesAutoresizingMaskIntoConstraints = false
             view.addSubview(containerView)
+
+            view.addConstraint(NSLayoutConstraint(item: containerView, attribute: .top, relatedBy: .equal, toItem: view, attribute: .top, multiplier: 1.0, constant: 0.0))
+            view.addConstraint(NSLayoutConstraint(item: containerView, attribute: .leading, relatedBy: .equal, toItem: view, attribute: .leading, multiplier: 1.0, constant: 0.0))
+            view.addConstraint(NSLayoutConstraint(item: containerView, attribute: .bottom, relatedBy: .equal, toItem: view, attribute: .bottom, multiplier: 1.0, constant: 0.0))
+            view.addConstraint(NSLayoutConstraint(item: containerView, attribute: .trailing, relatedBy: .equal, toItem: view, attribute: .trailing, multiplier: 1.0, constant: 0.0))
         }
         containerView.bounces = true
         containerView.alwaysBounceHorizontal = true
