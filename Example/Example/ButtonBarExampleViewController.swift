@@ -52,13 +52,13 @@ class ButtonBarExampleViewController: ButtonBarPagerTabStripViewController {
             return [child_1, child_2, child_3, child_4, child_5, child_6, child_7, child_8]
         }
 
-        var childViewControllers = [child_1, child_2, child_3, child_4, child_6, child_7, child_8]
+        var childViewControllers = [child_1, child_2, child_3, child_4, child_5, child_6, child_7, child_8]
 
         for index in childViewControllers.indices {
             let nElements = childViewControllers.count - index
             let n = (Int(arc4random()) % nElements) + index
             if n != index {
-                swap(&childViewControllers[index], &childViewControllers[n])
+                childViewControllers.swapAt(index, n)
             }
         }
         let nItems = 1 + (arc4random() % 8)
