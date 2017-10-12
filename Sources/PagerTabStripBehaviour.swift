@@ -40,16 +40,16 @@ public enum PagerTabStripBehaviour {
 
     public var isProgressiveIndicator: Bool {
         switch self {
-        case .common(_):
+        case .common:
             return false
-        case .progressive(_, _):
+        case .progressive:
             return true
         }
     }
 
     public var isElasticIndicatorLimit: Bool {
         switch self {
-        case .common(_):
+        case .common:
             return false
         case .progressive(_, let elasticIndicatorLimit):
             return elasticIndicatorLimit

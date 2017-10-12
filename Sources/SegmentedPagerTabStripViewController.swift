@@ -86,7 +86,7 @@ open class SegmentedPagerTabStripViewController: PagerTabStripViewController, Pa
         segmentedControl.selectedSegmentIndex = currentIndex
     }
 
-    func segmentedControlChanged(_ sender: UISegmentedControl) {
+    @objc func segmentedControlChanged(_ sender: UISegmentedControl) {
         let index = sender.selectedSegmentIndex
         updateIndicator(for: self, fromIndex: currentIndex, toIndex: index)
         shouldUpdateSegmentedControl = false
