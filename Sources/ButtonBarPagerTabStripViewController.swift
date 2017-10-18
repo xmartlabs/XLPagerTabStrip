@@ -101,7 +101,15 @@ open class ButtonBarPagerTabStripViewController: PagerTabStripViewController, Pa
 
     open override func viewDidLoad() {
         super.viewDidLoad()
-        buttonBarItemSpec = .nibFile(nibName: "ButtonCell", bundle: Bundle(for: ButtonBarViewCell.self), width: { [weak self] (childItemInfo) -> CGFloat in
+        
+        var bundle = Bundle(for: ButtonBarViewCell.self)
+        if let resourcePath = bundle.path(forResource: "XLPagerTabStrip", ofType: "bundle") {
+            if let resourcesBundle = Bundle(path: resourcePath) {
+                bundle = resourcesBundle
+            }
+        }
+        
+        buttonBarItemSpec = .nibFile(nibName: "ButtonCell", bundle: bundle, width: { [weak self] (childItemInfo) -> CGFloat in
                 let label = UILabel()
                 label.translatesAutoresizingMaskIntoConstraints = false
                 label.font = self?.settings.style.buttonBarItemFont
@@ -250,7 +258,8 @@ open class ButtonBarPagerTabStripViewController: PagerTabStripViewController, Pa
 
         if reload {
             let indexPathsToReload = cells.enumerated()
-                .flatMap { index, cell in
+                .flatMap { (arg) -> IndexPath? in
+                    let (index, cell) = arg
                     return cell == nil ? indexPaths[index] : nil
                 }
                 .flatMap { (indexPath: IndexPath) -> IndexPath? in
@@ -267,7 +276,7 @@ open class ButtonBarPagerTabStripViewController: PagerTabStripViewController, Pa
 
     // MARK: - UICollectionViewDelegateFlowLayut
 
-    open func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: IndexPath) -> CGSize {
+    @objc open func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: IndexPath) -> CGSize {
         guard let cellWidthValue = cachedCellWidths?[indexPath.row] else {
             fatalError("cachedCellWidths for \(indexPath.row) must not be nil")
         }
