@@ -29,17 +29,18 @@ public struct IndicatorInfo {
     public var title: String?
     public var image: UIImage?
     public var highlightedImage: UIImage?
-
+    public var userInfo: Any?
+    
     public init(title: String?) {
         self.title = title
     }
-
-    public init(image: UIImage?, highlightedImage: UIImage? = nil) {
+    
+    public init(image: UIImage?, highlightedImage: UIImage? = nil, userInfo: Any? = nil) {
         self.image = image
         self.highlightedImage = highlightedImage
     }
-
-    public init(title: String?, image: UIImage?, highlightedImage: UIImage? = nil) {
+    
+    public init(title: String?, image: UIImage?, highlightedImage: UIImage? = nil, userInfo: Any? = nil) {
         self.title = title
         self.image = image
         self.highlightedImage = highlightedImage
