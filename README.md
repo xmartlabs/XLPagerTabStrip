@@ -95,7 +95,7 @@ Drag a `UIScrollView` into your view controller view and connect `PagerTabStripV
 
 Depending on which type of paging view controller you are working with you may have to connect more outlets.
 
-For `BarPagerTabStripViewController` we should connect `barView` outlet. barView type is UIView. `ButtonBarPagerTabStripViewController` requires us to connect `buttonBarView` outlet. `buttonBarView` type is `ButtonBarView` which extends from `UICollectionView`. `SegmentedPagerTabStripViewController` has a `segmentedControl` outlet, if the outlet is not connected the library try to set up the navigationItem `titleView` property using a `UISegmentedControl`. `TwitterPagerTabStripViewController` doesn't require us to connect any additional outlet.
+For `BarPagerTabStripViewController` we should connect `barView` outlet. barView type is UIView. `ButtonBarPagerTabStripViewController` requires us to connect `buttonBarView` outlet. `buttonBarView` type is `ButtonBarView` which extends from `UICollectionView`. Alternatively, you can connect a `UIView` as the `buttonBarContainerView`, and it will be created and added there. `SegmentedPagerTabStripViewController` has a `segmentedControl` outlet, if the outlet is not connected the library try to set up the navigationItem `titleView` property using a `UISegmentedControl`. `TwitterPagerTabStripViewController` doesn't require us to connect any additional outlet.
 
 > The example project contains a example for each pager controller type and we can look into it to see how views were added and how outlets were connected.
 

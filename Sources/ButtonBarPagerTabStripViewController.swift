@@ -82,6 +82,7 @@ open class ButtonBarPagerTabStripViewController: PagerTabStripViewController, Pa
     public var changeCurrentIndexProgressive: ((_ oldCell: ButtonBarViewCell?, _ newCell: ButtonBarViewCell?, _ progressPercentage: CGFloat, _ changeCurrentIndex: Bool, _ animated: Bool) -> Void)?
 
     @IBOutlet public weak var buttonBarView: ButtonBarView!
+    @IBOutlet public weak var buttonBarContainerView: UIView!
 
     lazy private var cachedCellWidths: [CGFloat]? = { [unowned self] in
         return self.calculateWidths()
@@ -135,7 +136,11 @@ open class ButtonBarPagerTabStripViewController: PagerTabStripViewController, Pa
         buttonBarView = buttonBarViewAux
 
         if buttonBarView.superview == nil {
-            view.addSubview(buttonBarView)
+            if buttonBarContainerView != nil {
+                buttonBarContainerView.addSubview(buttonBarView)
+            } else {
+                view.addSubview(buttonBarView)
+            }
         }
         if buttonBarView.delegate == nil {
             buttonBarView.delegate = self
