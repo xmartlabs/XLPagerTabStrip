@@ -280,7 +280,7 @@ open class ButtonBarPagerTabStripViewController: PagerTabStripViewController, Pa
         guard let cellWidthValue = cachedCellWidths?[indexPath.row] else {
             fatalError("cachedCellWidths for \(indexPath.row) must not be nil")
         }
-        return CGSize(width: pageWidth / CGFloat((cachedCellWidths?.count)!), height: collectionView.frame.size.height)
+        return CGSize(width: pageWidth / CGFloat(3), height: collectionView.frame.size.height)
     }
     
     open func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
