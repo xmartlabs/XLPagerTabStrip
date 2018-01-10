@@ -138,6 +138,17 @@ open class ButtonBarPagerTabStripViewController: PagerTabStripViewController, Pa
         if buttonBarView.superview == nil {
             if buttonBarContainerView != nil {
                 buttonBarContainerView.addSubview(buttonBarView)
+
+                // fill the container
+                buttonBarView.translatesAutoresizingMaskIntoConstraints = false
+                buttonBarContainerView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-0-[sub]-0-|",
+                                                                                     options: .directionLeadingToTrailing,
+                                                                                     metrics: nil,
+                                                                                     views: ["sub": buttonBarView]))
+                buttonBarContainerView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-0-[sub]-0-|",
+                                                                                     options: .directionLeadingToTrailing,
+                                                                                     metrics: nil,
+                                                                                     views: ["sub": buttonBarView]))
             } else {
                 view.addSubview(buttonBarView)
             }
