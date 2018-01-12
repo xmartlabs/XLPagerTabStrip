@@ -247,15 +247,18 @@ open class ButtonBarPagerTabStripViewController: PagerTabStripViewController, Pa
         if let changeCurrentIndexProgressive = changeCurrentIndexProgressive {
             let oldIndexPath = IndexPath(item: currentIndex != fromIndex ? fromIndex : toIndex, section: 0)
             let newIndexPath = IndexPath(item: currentIndex, section: 0)
-
+    
             let cells = cellForItems(at: [oldIndexPath, newIndexPath], reloadIfNotVisible: collectionViewDidLoad)
-            changeCurrentIndexProgressive(cells.first!, cells.last!, progressPercentage, indexWasChanged, true)
+    
+            if let firstCell = cells.first, let lastCell = cells.last {
+                changeCurrentIndexProgressive(firstCell, lastCell, progressPercentage, indexWasChanged, true)
+            }
         }
     }
 
-    private func cellForItems(at indexPaths: [IndexPath], reloadIfNotVisible reload: Bool = true) -> [ButtonBarViewCell?] {
-        let cells = indexPaths.map { buttonBarView.cellForItem(at: $0) as? ButtonBarViewCell }
-
+    private func cellForItems(at indexPaths: [IndexPath], reloadIfNotVisible reload: Bool = true) -> [ButtonBarViewCell] {
+        let cells = indexPaths.flatMap { buttonBarView.cellForItem(at: $0) as? ButtonBarViewCell }
+    
         if reload {
             let indexPathsToReload = cells.enumerated()
                 .flatMap { (arg) -> IndexPath? in
