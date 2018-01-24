@@ -56,8 +56,8 @@ public struct ButtonBarPagerTabStripSettings {
         public var buttonBarItemBackgroundColor: UIColor?
         public var buttonBarItemFont = UIFont.systemFont(ofSize: 18)
         public var buttonBarItemLeftRightMargin: CGFloat = 8
-        public var buttonBarSelectedItemTitleColor: UIColor?
-        public var buttonBarItemTitleColor: UIColor?
+        public var buttonBarSelectedItemTitleColor: UIColor = .white
+        public var buttonBarItemTitleColor: UIColor = .gray
         @available(*, deprecated: 7.0.0) public var buttonBarItemsShouldFillAvailiableWidth: Bool {
             set {
                 buttonBarItemsShouldFillAvailableWidth = newValue
@@ -314,10 +314,10 @@ open class ButtonBarPagerTabStripViewController: PagerTabStripViewController, Pa
         let cells = cellForItems(at: [oldIndexPath, newIndexPath], reloadIfNotVisible: collectionViewDidLoad)
 
         let oldCell = collectionView.cellForItem(at: oldIndexPath) as! ButtonBarViewCell
-        oldCell.label.textColor = settings.style.buttonBarItemTitleColor ?? oldCell.label.textColor
+        oldCell.label.textColor = settings.style.buttonBarItemTitleColor
         let newCell = collectionView.cellForItem(at: newIndexPath) as! ButtonBarViewCell
-        newCell.label.textColor = settings.style.buttonBarSelectedItemTitleColor ?? newCell.label.textColor
-        
+        newCell.label.textColor = settings.style.buttonBarSelectedItemTitleColor
+
         if pagerBehaviour.isProgressiveIndicator {
             if let changeCurrentIndexProgressive = changeCurrentIndexProgressive {
                 changeCurrentIndexProgressive(cells.first!, cells.last!, 1, true, true)
@@ -349,9 +349,9 @@ open class ButtonBarPagerTabStripViewController: PagerTabStripViewController, Pa
         cell.label.text = indicatorInfo.title
         cell.label.font = settings.style.buttonBarItemFont
         if currentIndex == indexPath.last! {
-            cell.label.textColor = settings.style.buttonBarSelectedItemTitleColor ?? cell.label.textColor
+            cell.label.textColor = settings.style.buttonBarSelectedItemTitleColor
         } else {
-            cell.label.textColor = settings.style.buttonBarItemTitleColor ?? cell.label.textColor
+            cell.label.textColor = settings.style.buttonBarItemTitleColor
         }
         cell.contentView.backgroundColor = settings.style.buttonBarItemBackgroundColor ?? cell.contentView.backgroundColor
         cell.backgroundColor = settings.style.buttonBarItemBackgroundColor ?? cell.backgroundColor
