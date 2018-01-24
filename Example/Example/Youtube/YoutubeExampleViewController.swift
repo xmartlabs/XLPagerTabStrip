@@ -44,6 +44,7 @@ class YoutubeExampleViewController: BaseButtonBarPagerTabStripViewController<You
 
     override func viewDidLoad() {
         // change selected bar color
+		settings.style.barBackgroundColor = UIColor.yellow
         settings.style.buttonBarBackgroundColor = redColor
         settings.style.buttonBarItemBackgroundColor = .clear
         settings.style.selectedBarBackgroundColor = UIColor(red: 234/255.0, green: 234/255.0, blue: 234/255.0, alpha: 1.0)
