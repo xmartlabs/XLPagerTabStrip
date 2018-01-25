@@ -179,18 +179,24 @@ open class ButtonBarView: UICollectionView {
     }
 
     private func updateSelectedBarYPosition() {
+        var barFrame = bar.frame
         var selectedBarFrame = selectedBar.frame
 
         switch selectedBarVerticalAlignment {
         case .top:
+            barFrame.origin.y = 0
             selectedBarFrame.origin.y = 0
         case .middle:
+            barFrame.origin.y = (frame.size.height - selectedBarHeight) / 2
             selectedBarFrame.origin.y = (frame.size.height - selectedBarHeight) / 2
         case .bottom:
+            barFrame.origin.y = frame.size.height - selectedBarHeight
             selectedBarFrame.origin.y = frame.size.height - selectedBarHeight
         }
 
+        barFrame.size.height = selectedBarHeight
         selectedBarFrame.size.height = selectedBarHeight
+        bar.frame = barFrame
         selectedBar.frame = selectedBarFrame
     }
 
