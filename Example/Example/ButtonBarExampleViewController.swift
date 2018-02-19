@@ -35,7 +35,6 @@ class ButtonBarExampleViewController: ButtonBarPagerTabStripViewController {
         buttonBarView.selectedBar.backgroundColor = .orange
         buttonBarView.backgroundColor = UIColor(red: 7/255, green: 185/255, blue: 155/255, alpha: 1)
 		settings.style.buttonBarItemTitleColor = .red
-		settings.style.buttonBarSelectedItemTitleColor = .green
     }
 
     // MARK: - PagerTabStripDataSource
