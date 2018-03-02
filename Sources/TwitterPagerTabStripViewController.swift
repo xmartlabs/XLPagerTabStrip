@@ -111,11 +111,14 @@ open class TwitterPagerTabStripViewController: PagerTabStripViewController, Page
     }
 
     open override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-        guard object as AnyObject === titleView && keyPath == "frame" && change?[NSKeyValueChangeKey.kindKey] as? UInt == NSKeyValueChange.setting.rawValue else { return }
-
-        let oldRect = (change![NSKeyValueChangeKey.oldKey]! as AnyObject).cgRectValue
-        let newRect = (change![NSKeyValueChangeKey.oldKey]! as AnyObject).cgRectValue
-        if (oldRect?.equalTo(newRect!))! {
+        guard let change = change,
+            object as AnyObject === titleView && keyPath == "frame" && change[NSKeyValueChangeKey.kindKey] as? UInt == NSKeyValueChange.setting.rawValue else {
+                return
+        }
+        
+        let oldRect = (change[NSKeyValueChangeKey.oldKey] as! NSValue).cgRectValue
+        let newRect = (change[NSKeyValueChangeKey.oldKey] as! NSValue).cgRectValue
+        if oldRect.equalTo(newRect) {
             titleScrollView.frame = CGRect(x: 0, y: 0, width: titleView.frame.width, height: titleScrollView.frame.height)
             setNavigationViewItemsPosition(updateAlpha: true)
         }
