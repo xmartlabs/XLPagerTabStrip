@@ -38,12 +38,14 @@ public struct IndicatorInfo {
     public init(image: UIImage?, highlightedImage: UIImage? = nil, userInfo: Any? = nil) {
         self.image = image
         self.highlightedImage = highlightedImage
+        self.userInfo = userInfo
     }
     
     public init(title: String?, image: UIImage?, highlightedImage: UIImage? = nil, userInfo: Any? = nil) {
         self.title = title
         self.image = image
         self.highlightedImage = highlightedImage
+        self.userInfo = userInfo
     }
 
 }
