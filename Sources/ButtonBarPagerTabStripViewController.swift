@@ -194,6 +194,7 @@ open class ButtonBarPagerTabStripViewController: PagerTabStripViewController, Pa
         // selectedBar is resized and its contentOffset/scroll is set correctly (the selected
         // tab/cell may end up either skewed or off screen after a rotation otherwise)
         buttonBarView.moveTo(index: currentIndex, animated: false, swipeDirection: .none, pagerScroll: .scrollOnlyIfOutOfScreen)
+        buttonBarView.selectItem(at: IndexPath(item: currentIndex, section: 0), animated: false, scrollPosition: [])
     }
 
     // MARK: - Public Methods
@@ -323,6 +324,7 @@ open class ButtonBarPagerTabStripViewController: PagerTabStripViewController, Pa
         let indicatorInfo = childController.indicatorInfo(for: self)
 
         cell.label.text = indicatorInfo.title
+        cell.accessibilityLabel = indicatorInfo.accessibilityLabel
         cell.label.font = settings.style.buttonBarItemFont
         cell.label.textColor = settings.style.buttonBarItemTitleColor ?? cell.label.textColor
         cell.contentView.backgroundColor = settings.style.buttonBarItemBackgroundColor ?? cell.contentView.backgroundColor
