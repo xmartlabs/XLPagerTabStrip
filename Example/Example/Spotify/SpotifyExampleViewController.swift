@@ -45,6 +45,12 @@ class SpotifyExampleViewController: ButtonBarPagerTabStripViewController {
 
         settings.style.buttonBarLeftContentInset = 20
         settings.style.buttonBarRightContentInset = 20
+        
+        if let limitBarWidthSwitch = presentingViewController?.view.viewWithTag(2) as? UISwitch, limitBarWidthSwitch.isOn {
+            if let barWidth = presentingViewController?.view.viewWithTag(1) as? UITextField, let width = Int(barWidth.text ?? "") {
+                settings.style.selectedBarWidth = CGFloat(width)
+            }
+        }
 
         changeCurrentIndexProgressive = { (oldCell: ButtonBarViewCell?, newCell: ButtonBarViewCell?, progressPercentage: CGFloat, changeCurrentIndex: Bool, animated: Bool) -> Void in
             guard changeCurrentIndex == true else { return }

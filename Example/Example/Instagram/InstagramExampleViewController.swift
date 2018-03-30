@@ -42,6 +42,12 @@ class InstagramExampleViewController: ButtonBarPagerTabStripViewController {
         settings.style.buttonBarItemsShouldFillAvailableWidth = true
         settings.style.buttonBarLeftContentInset = 0
         settings.style.buttonBarRightContentInset = 0
+        
+        if let limitBarWidthSwitch = presentingViewController?.view.viewWithTag(2) as? UISwitch, limitBarWidthSwitch.isOn {
+            if let barWidth = presentingViewController?.view.viewWithTag(1) as? UITextField, let width = Int(barWidth.text ?? "") {
+                settings.style.selectedBarWidth = CGFloat(width)
+            }
+        }
 
         changeCurrentIndexProgressive = { [weak self] (oldCell: ButtonBarViewCell?, newCell: ButtonBarViewCell?, progressPercentage: CGFloat, changeCurrentIndex: Bool, animated: Bool) -> Void in
             guard changeCurrentIndex == true else { return }
