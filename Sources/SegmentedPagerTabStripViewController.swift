@@ -57,7 +57,8 @@ open class SegmentedPagerTabStripViewController: PagerTabStripViewController, Pa
 
     open override func viewDidLoad() {
         super.viewDidLoad()
-        segmentedControl = segmentedControl ?? UISegmentedControl()
+        let auxSegmentedControl = segmentedControl ?? UISegmentedControl()
+        segmentedControl = auxSegmentedControl
         if segmentedControl.superview == nil {
             navigationItem.titleView = segmentedControl
         }

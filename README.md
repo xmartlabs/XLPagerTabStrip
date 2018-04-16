@@ -290,7 +290,7 @@ settings.style.segmentedControlColor: UIColor?
 ## Requirements
 
 * iOS 8.0+
-* Xcode 8.0+
+* Xcode 9.3+
 
 ## Examples
 
