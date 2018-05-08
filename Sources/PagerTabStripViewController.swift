@@ -313,7 +313,7 @@ open class PagerTabStripViewController: UIViewController, UIScrollViewDelegate {
         updateContent()
     }
 
-    // MARK: - UIScrollDelegate
+    // MARK: - UIScrollViewDelegate
 
     open func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if containerView == scrollView {
