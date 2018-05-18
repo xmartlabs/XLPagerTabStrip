@@ -248,14 +248,14 @@ changeCurrentIndexProgressive = { (oldCell: ButtonBarViewCell?, newCell: ButtonB
     newCell?.label.textColor = UIColor.white
 
     if animated {
-        UIView.animateWithDuration(0.1, animations: { () -> Void in
-            newCell?.transform = CGAffineTransformMakeScale(1.0, 1.0)
-            oldCell?.transform = CGAffineTransformMakeScale(0.8, 0.8)
+        UIView.animate(withDuration: 0.1, animations: { () -> Void in
+            newCell?.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+            oldCell?.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
         })
     }
     else {
-        newCell?.transform = CGAffineTransformMakeScale(1.0, 1.0)
-        oldCell?.transform = CGAffineTransformMakeScale(0.8, 0.8)
+        newCell?.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+        oldCell?.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
     }
 }
 ```
