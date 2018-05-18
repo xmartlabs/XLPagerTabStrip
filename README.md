@@ -204,12 +204,12 @@ settings.style.buttonBarLeftContentInset: CGFloat?
 settings.style.buttonBarRightContentInset: CGFloat?
 
 // selected bar view is created programmatically so it's important to set up the following 2 properties properly
-settings.style.selectedBarBackgroundColor = UIColor.blackColor()
+settings.style.selectedBarBackgroundColor = UIColor.black
 settings.style.selectedBarHeight: CGFloat = 5
 
 // each buttonBar item is a UICollectionView cell of type ButtonBarViewCell
 settings.style.buttonBarItemBackgroundColor: UIColor?
-settings.style.buttonBarItemFont = UIFont.systemFontOfSize(18)
+settings.style.buttonBarItemFont = UIFont.systemFont(ofSize: 18)
 // helps to determine the cell width, it represent the space before and after the title label
 settings.style.buttonBarItemLeftRightMargin: CGFloat = 8
 settings.style.buttonBarItemTitleColor: UIColor?
@@ -223,7 +223,7 @@ public var buttonBarHeight: CGFloat?
 ```swift
 override func viewDidLoad() {
    self.settings.style.selectedBarHeight = 2
-   self.settings.style.selectedBarBackgroundColor = UIColor.whiteColor()
+   self.settings.style.selectedBarBackgroundColor = UIColor.white
 
    super.viewDidLoad()
 }
@@ -245,7 +245,7 @@ changeCurrentIndexProgressive = { (oldCell: ButtonBarViewCell?, newCell: ButtonB
     guard changeCurrentIndex == true else { return }
 
     oldCell?.label.textColor = UIColor(white: 1, alpha: 0.6)
-    newCell?.label.textColor = .whiteColor()
+    newCell?.label.textColor = UIColor.white
 
     if animated {
         UIView.animateWithDuration(0.1, animations: { () -> Void in
@@ -273,10 +273,10 @@ settings.style.barHeight: CGFloat = 5
 
 ```swift
 settings.style.dotColor = UIColor(white: 1, alpha: 0.4)
-settings.style.selectedDotColor = UIColor.whiteColor()
-settings.style.portraitTitleFont = UIFont.systemFontOfSize(18)
-settings.style.landscapeTitleFont = UIFont.systemFontOfSize(15)
-settings.style.titleColor = UIColor.whiteColor()
+settings.style.selectedDotColor = UIColor.white
+settings.style.portraitTitleFont = UIFont.systemFont(ofSize: 18)
+settings.style.landscapeTitleFont = UIFont.systemFont(ofSize: 15)
+settings.style.titleColor = UIColor.white
 ```
 
 ### Segmented Type Customization
