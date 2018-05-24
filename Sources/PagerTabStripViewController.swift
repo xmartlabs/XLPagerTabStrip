@@ -35,6 +35,12 @@ public protocol IndicatorInfoProvider {
 public protocol PagerTabStripDelegate: class {
 
     func updateIndicator(for viewController: PagerTabStripViewController, fromIndex: Int, toIndex: Int)
+    func updatePage(for viewController: PagerTabStripViewController, index: Int)
+}
+
+public extension PagerTabStripDelegate {
+
+    func updatePage(for viewController: PagerTabStripViewController, index: Int) { }
 }
 
 public protocol PagerTabStripIsProgressiveDelegate: PagerTabStripDelegate {
@@ -252,6 +258,8 @@ open class PagerTabStripViewController: UIViewController, UIScrollViewDelegate {
                     containerView.addSubview(childController.view)
                     childController.didMove(toParentViewController: self)
                     childController.endAppearanceTransition()
+
+                    self.delegate?.updatePage(for: self, index: index)
                 }
             } else {
                 if childController.parent != nil {

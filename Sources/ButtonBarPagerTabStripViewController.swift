@@ -257,6 +257,10 @@ open class ButtonBarPagerTabStripViewController: PagerTabStripViewController, Pa
         }
     }
 
+    open func updatePage(for viewController: PagerTabStripViewController, index: Int) {
+        
+    }
+
     private func cellForItems(at indexPaths: [IndexPath], reloadIfNotVisible reload: Bool = true) -> [ButtonBarViewCell] {
         let cells = indexPaths.flatMap { buttonBarView.cellForItem(at: $0) as? ButtonBarViewCell }
     
