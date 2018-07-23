@@ -101,14 +101,14 @@ open class ButtonBarPagerTabStripViewController: PagerTabStripViewController, Pa
 
     open override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         var bundle = Bundle(for: ButtonBarViewCell.self)
         if let resourcePath = bundle.path(forResource: "XLPagerTabStrip", ofType: "bundle") {
             if let resourcesBundle = Bundle(path: resourcePath) {
                 bundle = resourcesBundle
             }
         }
-        
+
         buttonBarItemSpec = .nibFile(nibName: "ButtonCell", bundle: bundle, width: { [weak self] (childItemInfo) -> CGFloat in
                 let label = UILabel()
                 label.translatesAutoresizingMaskIntoConstraints = false
@@ -161,9 +161,9 @@ open class ButtonBarPagerTabStripViewController: PagerTabStripViewController, Pa
         // register button bar item cell
         switch buttonBarItemSpec! {
         case .nibFile(let nibName, let bundle, _):
-            buttonBarView.register(UINib(nibName: nibName, bundle: bundle), forCellWithReuseIdentifier:"Cell")
+            buttonBarView.register(UINib(nibName: nibName, bundle: bundle), forCellWithReuseIdentifier: "Cell")
         case .cellClass:
-            buttonBarView.register(ButtonBarViewCell.self, forCellWithReuseIdentifier:"Cell")
+            buttonBarView.register(ButtonBarViewCell.self, forCellWithReuseIdentifier: "Cell")
         }
         //-
     }
@@ -248,9 +248,9 @@ open class ButtonBarPagerTabStripViewController: PagerTabStripViewController, Pa
         if let changeCurrentIndexProgressive = changeCurrentIndexProgressive {
             let oldIndexPath = IndexPath(item: currentIndex != fromIndex ? fromIndex : toIndex, section: 0)
             let newIndexPath = IndexPath(item: currentIndex, section: 0)
-    
+
             let cells = cellForItems(at: [oldIndexPath, newIndexPath], reloadIfNotVisible: collectionViewDidLoad)
-    
+
             if let firstCell = cells.first, let lastCell = cells.last {
                 changeCurrentIndexProgressive(firstCell, lastCell, progressPercentage, indexWasChanged, true)
             }
@@ -258,19 +258,19 @@ open class ButtonBarPagerTabStripViewController: PagerTabStripViewController, Pa
     }
 
     open func updatePage(for viewController: PagerTabStripViewController, index: Int) {
-        
+
     }
 
     private func cellForItems(at indexPaths: [IndexPath], reloadIfNotVisible reload: Bool = true) -> [ButtonBarViewCell] {
-        let cells = indexPaths.flatMap { buttonBarView.cellForItem(at: $0) as? ButtonBarViewCell }
-    
+        let cells = indexPaths.compactMap { buttonBarView.cellForItem(at: $0) as? ButtonBarViewCell }
+
         if reload {
             let indexPathsToReload = cells.enumerated()
-                .flatMap { (arg) -> IndexPath? in
+                .compactMap { (arg) -> IndexPath? in
                     let (index, cell) = arg
                     return cell == nil ? indexPaths[index] : nil
                 }
-                .flatMap { (indexPath: IndexPath) -> IndexPath? in
+                .compactMap { (indexPath: IndexPath) -> IndexPath? in
                     return (indexPath.item >= 0 && indexPath.item < buttonBarView.numberOfItems(inSection: indexPath.section)) ? indexPath : nil
                 }
 
