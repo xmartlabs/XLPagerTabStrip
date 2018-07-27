@@ -15,6 +15,7 @@ DerivedData
 *.perspectivev3
 !default.perspectivev3
 xcuserdata
+XLPagerTabStrip.xcworkspace/xcshareddata/
 
 ## Other
 *.xccheckout

@@ -56,6 +56,7 @@ public struct ButtonBarPagerTabStripSettings {
         public var buttonBarItemFont = UIFont.systemFont(ofSize: 18)
         public var buttonBarItemLeftRightMargin: CGFloat = 8
         public var buttonBarItemTitleColor: UIColor?
+        public var buttonBarItemUnselectedColor: UIColor?
         @available(*, deprecated: 7.0.0) public var buttonBarItemsShouldFillAvailiableWidth: Bool {
             set {
                 buttonBarItemsShouldFillAvailableWidth = newValue
@@ -329,6 +330,7 @@ open class ButtonBarPagerTabStripViewController: PagerTabStripViewController, Pa
         cell.label.textColor = settings.style.buttonBarItemTitleColor ?? cell.label.textColor
         cell.contentView.backgroundColor = settings.style.buttonBarItemBackgroundColor ?? cell.contentView.backgroundColor
         cell.backgroundColor = settings.style.buttonBarItemBackgroundColor ?? cell.backgroundColor
+        cell.unselectedBottomView.backgroundColor = settings.style.buttonBarItemUnselectedColor ?? cell.backgroundColor
         if let image = indicatorInfo.image {
             cell.imageView.image = image
         }
