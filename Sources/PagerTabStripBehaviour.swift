@@ -30,13 +30,12 @@ public enum PagerTabStripBehaviour {
     case progressive(skipIntermediateViewControllers: Bool, elasticIndicatorLimit: Bool)
 
     public var skipIntermediateViewControllers: Bool {
-        return true
-//        switch self {
-//        case .common(let skipIntermediateViewControllers):
-//            return skipIntermediateViewControllers
-//        case .progressive(let skipIntermediateViewControllers, _):
-//            return skipIntermediateViewControllers
-//        }
+        switch self {
+        case .common(let skipIntermediateViewControllers):
+            return skipIntermediateViewControllers
+        case .progressive(let skipIntermediateViewControllers, _):
+            return skipIntermediateViewControllers
+        }
     }
 
     public var isProgressiveIndicator: Bool {
