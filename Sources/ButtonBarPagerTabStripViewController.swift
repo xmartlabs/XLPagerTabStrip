@@ -261,8 +261,8 @@ open class ButtonBarPagerTabStripViewController: PagerTabStripViewController, Pa
 
     }
 
-    private func cellForItems(at indexPaths: [IndexPath], reloadIfNotVisible reload: Bool = true) -> [ButtonBarViewCell] {
-        let cells = indexPaths.compactMap { buttonBarView.cellForItem(at: $0) as? ButtonBarViewCell }
+    private func cellForItems(at indexPaths: [IndexPath], reloadIfNotVisible reload: Bool = true) -> [ButtonBarViewCell?] {
+        let cells = indexPaths.map { buttonBarView.cellForItem(at: $0) as? ButtonBarViewCell }
 
         if reload {
             let indexPathsToReload = cells.enumerated()
@@ -304,7 +304,10 @@ open class ButtonBarPagerTabStripViewController: PagerTabStripViewController, Pa
 
         if pagerBehaviour.isProgressiveIndicator {
             if let changeCurrentIndexProgressive = changeCurrentIndexProgressive {
-                changeCurrentIndexProgressive(cells.first!, cells.last!, 1, true, true)
+
+                if let firstCell = cells.first, let lastCell = cells.last {
+                    changeCurrentIndexProgressive(firstCell, lastCell, 1, true, true)
+                }
             }
         } else {
             if let changeCurrentIndex = changeCurrentIndex {
@@ -347,7 +350,9 @@ open class ButtonBarPagerTabStripViewController: PagerTabStripViewController, Pa
 
         if pagerBehaviour.isProgressiveIndicator {
             if let changeCurrentIndexProgressive = changeCurrentIndexProgressive {
-                changeCurrentIndexProgressive(currentIndex == indexPath.item ? nil : cell, currentIndex == indexPath.item ? cell : nil, 1, true, false)
+                let oldCell: ButtonBarViewCell? = currentIndex == indexPath.item ? nil : cell
+                let newCell: ButtonBarViewCell? = currentIndex == indexPath.item ? cell: nil
+                changeCurrentIndexProgressive(oldCell, newCell, 1, true, false)
             }
         } else {
             if let changeCurrentIndex = changeCurrentIndex {
