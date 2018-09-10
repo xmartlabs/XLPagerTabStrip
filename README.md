@@ -145,26 +145,26 @@ public var pagerBehaviour: PagerTabStripBehaviour
 
 ```swift
 public enum PagerTabStripBehaviour {
-    case Common(skipIntermediteViewControllers: Bool)
-    case Progressive(skipIntermediteViewControllers: Bool, elasticIndicatorLimit: Bool)
+    case common(skipIntermediteViewControllers: Bool)
+    case progressive(skipIntermediteViewControllers: Bool, elasticIndicatorLimit: Bool)
 }
 ```
 
 Default Values:
 ```swift
 // Twitter Type
-PagerTabStripBehaviour.Common(skipIntermediteViewControllers: true)
+PagerTabStripBehaviour.common(skipIntermediateViewControllers: true)
 // Segmented Type
-PagerTabStripBehaviour.Common(skipIntermediteViewControllers: true)
+PagerTabStripBehaviour.common(skipIntermediateViewControllers: true)
 // Bar Type
-PagerTabStripBehaviour.Progressive(skipIntermediteViewControllers: true, elasticIndicatorLimit: true)
+PagerTabStripBehaviour.progressive(skipIntermediateViewControllers: true, elasticIndicatorLimit: true)
 // ButtonBar Type
-PagerTabStripBehaviour.Progressive(skipIntermediteViewControllers: true, elasticIndicatorLimit: true)`
+PagerTabStripBehaviour.progressive(skipIntermediateViewControllers: true, elasticIndicatorLimit: true)
 ```
 
-As you might have noticed `Common` and `Progressive` enumeration cases has `skipIntermediteViewControllers` and `elasticIndicatorLimit` associated values.
+As you might have noticed `common` and `progressive` enumeration cases has `skipIntermediateViewControllers` and `elasticIndicatorLimit` associated values.
 
-`skipIntermediteViewControllers` allows us to skip intermediate view controllers when a tab indicator is tapped.
+`skipIntermediateViewControllers` allows us to skip intermediate view controllers when a tab indicator is tapped.
 
 `elasticIndicatorLimit` allows us to tension the indicator when we reach a limit, I mean when we try to move forward from last indicator or move back from first indicator.
 
