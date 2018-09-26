@@ -203,6 +203,7 @@ open class PagerTabStripViewController: UIViewController, UIScrollViewDelegate {
 
     open func offsetForChild(at index: Int) -> CGFloat {
         var inset = (containerView.bounds.width - view.bounds.width) * 0.5
+        if allowNarrowerContainerView {
             inset = 0
         }
         
