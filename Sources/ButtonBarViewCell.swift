@@ -45,9 +45,9 @@ open class ButtonBarViewCell: UICollectionViewCell {
         set {
             super.isSelected = newValue
             if (newValue) {
-                accessibilityTraits |= UIAccessibilityTraitSelected
+                  accessibilityTraits.insert(.selected)
             } else {
-                accessibilityTraits &= ~UIAccessibilityTraitSelected
+                accessibilityTraits.remove(.selected)
             }
         }
     }
