@@ -41,8 +41,8 @@ class NavButtonBarExampleViewController: ButtonBarPagerTabStripViewController {
         changeCurrentIndexProgressive = { (oldCell: ButtonBarViewCell?, newCell: ButtonBarViewCell?, progressPercentage: CGFloat, changeCurrentIndex: Bool, animated: Bool) -> Void in
             guard changeCurrentIndex == true else { return }
 
-            oldCell?.label.textColor = UIColor(white: 1, alpha: 0.6)
-            newCell?.label.textColor = .white
+            oldCell?.titleLabel.textColor = UIColor(white: 1, alpha: 0.6)
+            newCell?.titleLabel.textColor = .white
 
             if animated {
                 UIView.animate(withDuration: 0.1, animations: { () -> Void in

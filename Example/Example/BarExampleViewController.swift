@@ -45,7 +45,7 @@ class BarExampleViewController: BarPagerTabStripViewController {
 
     override func viewControllers(for pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
 
-        let child_1 = TableChildExampleViewController(style: .plain, itemInfo: "Table View")
+        let child_1 = TableChildExampleViewController(style: .plain, itemInfo: IndicatorInfo(title: "Table View", counter: 12))
         let child_2 = ChildExampleViewController(itemInfo: "View")
         let child_3 = TableChildExampleViewController(style: .grouped, itemInfo: "Table View 2")
         let child_4 = ChildExampleViewController(itemInfo: "View 2")

@@ -27,6 +27,7 @@ import Foundation
 public struct IndicatorInfo {
 
     public var title: String?
+    public var counter: Int?
     public var image: UIImage?
     public var highlightedImage: UIImage?
     public var accessibilityLabel: String?
@@ -34,6 +35,12 @@ public struct IndicatorInfo {
     
     public init(title: String?) {
         self.title = title
+        self.accessibilityLabel = title
+    }
+    
+    public init(title: String?, counter: Int?) {
+        self.title = title
+        self.counter = counter
         self.accessibilityLabel = title
     }
     
@@ -51,8 +58,26 @@ public struct IndicatorInfo {
         self.userInfo = userInfo
     }
     
-    public init(title: String?, accessibilityLabel:String?, image: UIImage?, highlightedImage: UIImage? = nil, userInfo: Any? = nil) {
+    public init(title: String?, accessibilityLabel: String?, image: UIImage?, highlightedImage: UIImage? = nil, userInfo: Any? = nil) {
         self.title = title
+        self.accessibilityLabel = accessibilityLabel
+        self.image = image
+        self.highlightedImage = highlightedImage
+        self.userInfo = userInfo
+    }
+    
+    public init(title: String?, counter: Int?, image: UIImage?, highlightedImage: UIImage? = nil, userInfo: Any? = nil) {
+        self.title = title
+        self.counter = counter
+        self.accessibilityLabel = title
+        self.image = image
+        self.highlightedImage = highlightedImage
+        self.userInfo = userInfo
+    }
+    
+    public init(title: String?, counter: Int?, accessibilityLabel:String?, image: UIImage?, highlightedImage: UIImage? = nil, userInfo: Any? = nil) {
+        self.title = title
+        self.counter = counter
         self.accessibilityLabel = accessibilityLabel
         self.image = image
         self.highlightedImage = highlightedImage
@@ -77,4 +102,5 @@ extension IndicatorInfo : ExpressibleByStringLiteral {
         title = value
         accessibilityLabel = value
     }
+
 }

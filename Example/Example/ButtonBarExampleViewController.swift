@@ -39,14 +39,30 @@ class ButtonBarExampleViewController: ButtonBarPagerTabStripViewController {
     // MARK: - PagerTabStripDataSource
 
     override func viewControllers(for pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
-        let child_1 = TableChildExampleViewController(style: .plain, itemInfo: "Table View")
-        let child_2 = ChildExampleViewController(itemInfo: "View")
-        let child_3 = TableChildExampleViewController(style: .grouped, itemInfo: "Table View 2")
-        let child_4 = ChildExampleViewController(itemInfo: "View 2")
-        let child_5 = TableChildExampleViewController(style: .plain, itemInfo: "Table View 3")
-        let child_6 = ChildExampleViewController(itemInfo: "View 3")
-        let child_7 = TableChildExampleViewController(style: .grouped, itemInfo: "Table View 4")
-        let child_8 = ChildExampleViewController(itemInfo: "View 4")
+        
+        let child_1_item = IndicatorInfo(title: "Table View", counter: 1)
+        let child_1 = TableChildExampleViewController(style: .plain, itemInfo: child_1_item)
+        
+        let child_2_item = IndicatorInfo(title: "View", counter: 2)
+        let child_2 = ChildExampleViewController(itemInfo: child_2_item)
+        
+        let child_3_item = IndicatorInfo(title: "Table View 2", counter: 3)
+        let child_3 = TableChildExampleViewController(style: .grouped, itemInfo: child_3_item)
+        
+        let child_4_item = IndicatorInfo(title: "View 2", counter: 4)
+        let child_4 = ChildExampleViewController(itemInfo: child_4_item)
+        
+        let child_5_item = IndicatorInfo(title: "Table View 3", counter: 5)
+        let child_5 = TableChildExampleViewController(style: .plain, itemInfo: child_5_item)
+        
+        let child_6_item = IndicatorInfo(title: "View 3", counter: 6)
+        let child_6 = ChildExampleViewController(itemInfo: child_6_item)
+        
+        let child_7_item = IndicatorInfo(title: "Table View 4", counter: 7)
+        let child_7 = TableChildExampleViewController(style: .grouped, itemInfo: child_7_item)
+        
+        let child_8_item = IndicatorInfo(title: "View 4", counter: 8)
+        let child_8 = ChildExampleViewController(itemInfo: child_8_item)
 
         guard isReload else {
             return [child_1, child_2, child_3, child_4, child_5, child_6, child_7, child_8]

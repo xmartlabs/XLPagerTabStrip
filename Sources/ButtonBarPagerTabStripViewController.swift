@@ -53,9 +53,11 @@ public struct ButtonBarPagerTabStripSettings {
         public var selectedBarVerticalAlignment: SelectedBarVerticalAlignment = .bottom
 
         public var buttonBarItemBackgroundColor: UIColor?
-        public var buttonBarItemFont = UIFont.systemFont(ofSize: 18)
-        public var buttonBarItemLeftRightMargin: CGFloat = 8
+        public var buttonBarItemTitleFont = UIFont.systemFont(ofSize: 18)
+        public var buttonBarItemCounterFont = UIFont.systemFont(ofSize: 18)
+        public var buttonBarItemLeftRightMargin: CGFloat = 20
         public var buttonBarItemTitleColor: UIColor?
+        
         @available(*, deprecated: 7.0.0) public var buttonBarItemsShouldFillAvailiableWidth: Bool {
             set {
                 buttonBarItemsShouldFillAvailableWidth = newValue
@@ -110,12 +112,28 @@ open class ButtonBarPagerTabStripViewController: PagerTabStripViewController, Pa
         }
         
         buttonBarItemSpec = .nibFile(nibName: "ButtonCell", bundle: bundle, width: { [weak self] (childItemInfo) -> CGFloat in
-                let label = UILabel()
-                label.translatesAutoresizingMaskIntoConstraints = false
-                label.font = self?.settings.style.buttonBarItemFont
-                label.text = childItemInfo.title
-                let labelSize = label.intrinsicContentSize
-                return labelSize.width + (self?.settings.style.buttonBarItemLeftRightMargin ?? 8) * 2
+            
+            let titleLabel = UILabel()
+            titleLabel.translatesAutoresizingMaskIntoConstraints = false
+            titleLabel.font = self?.settings.style.buttonBarItemTitleFont ?? titleLabel.font
+            titleLabel.text = childItemInfo.title
+            let titleLabelSize = titleLabel.intrinsicContentSize.width
+            
+            let topAndLeftMargin = CGFloat(self?.settings.style.buttonBarItemLeftRightMargin ?? 50)
+            
+            if let counter = childItemInfo.counter {
+                let counterLabel = UILabel()
+                counterLabel.translatesAutoresizingMaskIntoConstraints = false
+                counterLabel.font = self?.settings.style.buttonBarItemCounterFont ?? counterLabel.font
+                counterLabel.text = "\(counter)"
+                let counterLabelSize = counterLabel.intrinsicContentSize.width
+                
+                let marginBetweenTitleAndCounter = CGFloat(10)
+                
+                return topAndLeftMargin + titleLabelSize + marginBetweenTitleAndCounter + counterLabelSize + topAndLeftMargin
+            } else {
+                return topAndLeftMargin + titleLabelSize + topAndLeftMargin
+            }
         })
 
         let buttonBarViewAux = buttonBarView ?? {
@@ -323,17 +341,24 @@ open class ButtonBarPagerTabStripViewController: PagerTabStripViewController, Pa
         let childController = viewControllers[indexPath.item] as! IndicatorInfoProvider // swiftlint:disable:this force_cast
         let indicatorInfo = childController.indicatorInfo(for: self)
 
-        cell.label.text = indicatorInfo.title
+        cell.titleLabel.text = indicatorInfo.title
         cell.accessibilityLabel = indicatorInfo.accessibilityLabel
-        cell.label.font = settings.style.buttonBarItemFont
-        cell.label.textColor = settings.style.buttonBarItemTitleColor ?? cell.label.textColor
+        cell.titleLabel.font = settings.style.buttonBarItemTitleFont
+        cell.counterLabel.font = settings.style.buttonBarItemCounterFont
+        cell.titleLabel.textColor = settings.style.buttonBarItemTitleColor ?? cell.titleLabel.textColor
         cell.contentView.backgroundColor = settings.style.buttonBarItemBackgroundColor ?? cell.contentView.backgroundColor
         cell.backgroundColor = settings.style.buttonBarItemBackgroundColor ?? cell.backgroundColor
+        
         if let image = indicatorInfo.image {
             cell.imageView.image = image
         }
+        
         if let highlightedImage = indicatorInfo.highlightedImage {
             cell.imageView.highlightedImage = highlightedImage
+        }
+        
+        if let counter = indicatorInfo.counter {
+            cell.counterLabel.text = "\(counter)"
         }
 
         configureCell(cell, indicatorInfo: indicatorInfo)
@@ -348,7 +373,7 @@ open class ButtonBarPagerTabStripViewController: PagerTabStripViewController, Pa
             }
         }
         cell.isAccessibilityElement = true
-        cell.accessibilityLabel = cell.label.text
+        cell.accessibilityLabel = cell.titleLabel.text
         cell.accessibilityTraits.insert([.button, .header])
         return cell
     }

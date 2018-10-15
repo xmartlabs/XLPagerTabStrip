@@ -27,7 +27,8 @@ import Foundation
 open class ButtonBarViewCell: UICollectionViewCell {
 
     @IBOutlet open var imageView: UIImageView!
-    @IBOutlet open var label: UILabel!
+    @IBOutlet open var titleLabel: UILabel!
+    @IBOutlet open var counterLabel: UILabel!
 
     public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)

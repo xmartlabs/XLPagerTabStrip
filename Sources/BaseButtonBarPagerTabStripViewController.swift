@@ -330,23 +330,44 @@ open class ExampleBaseButtonBarPagerTabStripViewController: BaseButtonBarPagerTa
         }
         
         buttonBarItemSpec = .nibFile(nibName: "ButtonCell", bundle: bundle, width: { [weak self] (childItemInfo) -> CGFloat in
-            let label = UILabel()
-            label.translatesAutoresizingMaskIntoConstraints = false
-            label.font = self?.settings.style.buttonBarItemFont ?? label.font
-            label.text = childItemInfo.title
-            let labelSize = label.intrinsicContentSize
-            return labelSize.width + CGFloat(self?.settings.style.buttonBarItemLeftRightMargin ?? 8 * 2)
-            })
+            let titleLabel = UILabel()
+            titleLabel.translatesAutoresizingMaskIntoConstraints = false
+            titleLabel.font = self?.settings.style.buttonBarItemTitleFont ?? titleLabel.font
+            titleLabel.text = childItemInfo.title
+            let titleLabelSize = titleLabel.intrinsicContentSize.width
+            
+            let topAndLeftMargin = CGFloat(self?.settings.style.buttonBarItemLeftRightMargin ?? 50)
+            
+            if let counter = childItemInfo.counter {
+                let counterLabel = UILabel()
+                counterLabel.translatesAutoresizingMaskIntoConstraints = false
+                counterLabel.font = self?.settings.style.buttonBarItemCounterFont ?? counterLabel.font
+                counterLabel.text = "\(counter)"
+                let counterLabelSize = counterLabel.intrinsicContentSize.width
+                
+                let marginBetweenTitleAndCounter = CGFloat(10)
+                
+                return topAndLeftMargin + titleLabelSize + marginBetweenTitleAndCounter + counterLabelSize + topAndLeftMargin
+            } else {
+                return topAndLeftMargin + titleLabelSize + topAndLeftMargin
+            }
+        })
     }
 
     open override func configure(cell: ButtonBarViewCell, for indicatorInfo: IndicatorInfo) {
-        cell.label.text = indicatorInfo.title
+        cell.titleLabel.text = indicatorInfo.title
         cell.accessibilityLabel = indicatorInfo.accessibilityLabel
+        
         if let image = indicatorInfo.image {
             cell.imageView.image = image
         }
+        
         if let highlightedImage = indicatorInfo.highlightedImage {
             cell.imageView.highlightedImage = highlightedImage
+        }
+        
+        if let counter = indicatorInfo.counter {
+            cell.counterLabel.text = "\(counter)"
         }
     }
 }
