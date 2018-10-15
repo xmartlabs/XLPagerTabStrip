@@ -1,4 +1,4 @@
-//  ButtonBarViewCell.swift
+//  YoutubeIconWithLabelCell.swift
 //  XLPagerTabStrip ( https://github.com/xmartlabs/XLPagerTabStrip )
 //
 //  Copyright (c) 2017 Xmartlabs ( http://xmartlabs.com )
@@ -23,30 +23,11 @@
 // THE SOFTWARE.
 
 import Foundation
+import UIKit
 
-open class ButtonBarViewCell: UICollectionViewCell {
+class YoutubeIconWithLabelCell: UICollectionViewCell {
 
-    @IBOutlet open var imageView: UIImageView!
-    @IBOutlet open var label: UILabel!
+    @IBOutlet weak var iconImage: UIImageView!
+    @IBOutlet weak var iconLabel: UILabel!
 
-    public required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        
-        isAccessibilityElement = true
-        accessibilityTraits.insert([.button, .header])
-    }
-    
-    open override var isSelected: Bool {
-        get {
-            return super.isSelected
-        }
-        set {
-            super.isSelected = newValue
-            if (newValue) {
-                accessibilityTraits.insert(.selected)
-            } else {
-                accessibilityTraits.remove(.selected)
-            }
-        }
-    }
 }
