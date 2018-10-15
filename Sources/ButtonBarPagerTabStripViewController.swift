@@ -268,7 +268,7 @@ open class ButtonBarPagerTabStripViewController: PagerTabStripViewController, Pa
                 }
 
             if !indexPathsToReload.isEmpty {
-                buttonBarView.reloadItems(at: indexPathsToReload)
+                buttonBarView.reloadItems(at: Array(Set(indexPathsToReload)))
             }
         }
 
