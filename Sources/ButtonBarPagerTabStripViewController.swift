@@ -108,12 +108,6 @@ open class ButtonBarPagerTabStripViewController: PagerTabStripViewController, Pa
     open override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.settings.style.buttonBarItemTitleColor = UIColor.white
-        self.settings.style.buttonBarItemUnselectedTitleColor = UIColor.white.withAlphaComponent(0.3)
-        
-        self.settings.style.buttonBarItemCounterColor = UIColor.blue
-        self.settings.style.buttonBarItemUnselectedCounterColor = UIColor.blue.withAlphaComponent(0.3)
-        
         var bundle = Bundle(for: ButtonBarViewCell.self)
         if let resourcePath = bundle.path(forResource: "XLPagerTabStrip", ofType: "bundle") {
             if let resourcesBundle = Bundle(path: resourcePath) {
