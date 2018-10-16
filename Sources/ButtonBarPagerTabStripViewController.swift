@@ -108,6 +108,12 @@ open class ButtonBarPagerTabStripViewController: PagerTabStripViewController, Pa
     open override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.settings.style.buttonBarItemTitleColor = UIColor.white
+        self.settings.style.buttonBarItemUnselectedTitleColor = UIColor.white.withAlphaComponent(0.3)
+        
+        self.settings.style.buttonBarItemCounterColor = UIColor.blue
+        self.settings.style.buttonBarItemUnselectedCounterColor = UIColor.blue.withAlphaComponent(0.3)
+        
         var bundle = Bundle(for: ButtonBarViewCell.self)
         if let resourcePath = bundle.path(forResource: "XLPagerTabStrip", ofType: "bundle") {
             if let resourcesBundle = Bundle(path: resourcePath) {
@@ -335,6 +341,14 @@ open class ButtonBarPagerTabStripViewController: PagerTabStripViewController, Pa
         let newIndexPath = IndexPath(item: indexPath.item, section: 0)
 
         let cells = cellForItems(at: [oldIndexPath, newIndexPath], reloadIfNotVisible: collectionViewDidLoad)
+        
+        if let oldCell = cells.first {
+            self.styleUnselectedCell(oldCell)
+        }
+        
+        if let newCell = cells.last {
+            self.styleSelectedCell(newCell)
+        }
 
         if pagerBehaviour.isProgressiveIndicator {
             if let changeCurrentIndexProgressive = changeCurrentIndexProgressive {
