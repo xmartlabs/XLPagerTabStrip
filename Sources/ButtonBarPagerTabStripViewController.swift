@@ -59,6 +59,9 @@ public struct ButtonBarPagerTabStripSettings {
         public var buttonBarItemTitleColor: UIColor?
         public var buttonBarItemCounterColor: UIColor?
         
+        public var buttonBarItemUnselectedTitleColor: UIColor?
+        public var buttonBarItemUnselectedCounterColor: UIColor?
+        
         @available(*, deprecated: 7.0.0) public var buttonBarItemsShouldFillAvailiableWidth: Bool {
             set {
                 buttonBarItemsShouldFillAvailableWidth = newValue
@@ -257,6 +260,15 @@ open class ButtonBarPagerTabStripViewController: PagerTabStripViewController, Pa
             let newIndexPath = IndexPath(item: currentIndex, section: 0)
 
             let cells = cellForItems(at: [oldIndexPath, newIndexPath], reloadIfNotVisible: collectionViewDidLoad)
+            
+            if let oldCell = cells.first {
+                self.styleUnselectedCell(oldCell)
+            }
+            
+            if let newCell = cells.last {
+                self.styleSelectedCell(newCell)
+            }
+            
             changeCurrentIndex(cells.first!, cells.last!, true)
         }
     }
@@ -264,11 +276,21 @@ open class ButtonBarPagerTabStripViewController: PagerTabStripViewController, Pa
     open func updateIndicator(for viewController: PagerTabStripViewController, fromIndex: Int, toIndex: Int, withProgressPercentage progressPercentage: CGFloat, indexWasChanged: Bool) {
         guard shouldUpdateButtonBarView else { return }
         buttonBarView.move(fromIndex: fromIndex, toIndex: toIndex, progressPercentage: progressPercentage, pagerScroll: .yes)
+        
+        let oldIndexPath = IndexPath(item: currentIndex != fromIndex ? fromIndex : toIndex, section: 0)
+        let newIndexPath = IndexPath(item: currentIndex, section: 0)
+        
+        let cells = cellForItems(at: [oldIndexPath, newIndexPath], reloadIfNotVisible: collectionViewDidLoad)
+        
+        if let oldCell = cells.first {
+            self.styleUnselectedCell(oldCell)
+        }
+        
+        if let newCell = cells.last {
+            self.styleSelectedCell(newCell)
+        }
+        
         if let changeCurrentIndexProgressive = changeCurrentIndexProgressive {
-            let oldIndexPath = IndexPath(item: currentIndex != fromIndex ? fromIndex : toIndex, section: 0)
-            let newIndexPath = IndexPath(item: currentIndex, section: 0)
-
-            let cells = cellForItems(at: [oldIndexPath, newIndexPath], reloadIfNotVisible: collectionViewDidLoad)
             changeCurrentIndexProgressive(cells.first!, cells.last!, progressPercentage, indexWasChanged, true)
         }
     }
@@ -323,6 +345,7 @@ open class ButtonBarPagerTabStripViewController: PagerTabStripViewController, Pa
                 changeCurrentIndex(cells.first!, cells.last!, true)
             }
         }
+        
         moveToViewController(at: indexPath.item)
     }
 
@@ -330,6 +353,16 @@ open class ButtonBarPagerTabStripViewController: PagerTabStripViewController, Pa
 
     open func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return viewControllers.count
+    }
+    
+    open func styleSelectedCell(_ cell: ButtonBarViewCell?) {
+        cell?.titleLabel.textColor = settings.style.buttonBarItemTitleColor ?? cell?.titleLabel.textColor
+        cell?.counterLabel.textColor = settings.style.buttonBarItemCounterColor ?? cell?.counterLabel.textColor
+    }
+    
+    open func styleUnselectedCell(_ cell: ButtonBarViewCell?) {
+        cell?.titleLabel.textColor = settings.style.buttonBarItemUnselectedTitleColor ?? cell?.titleLabel.textColor
+        cell?.counterLabel.textColor = settings.style.buttonBarItemUnselectedCounterColor ?? cell?.counterLabel.textColor
     }
 
     open func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -346,10 +379,18 @@ open class ButtonBarPagerTabStripViewController: PagerTabStripViewController, Pa
 
         cell.titleLabel.text = indicatorInfo.title
         cell.titleLabel.font = settings.style.buttonBarItemTitleFont
-        cell.titleLabel.textColor = settings.style.buttonBarItemTitleColor ?? cell.titleLabel.textColor
         
         cell.counterLabel.font = settings.style.buttonBarItemCounterFont
-        cell.counterLabel.textColor = settings.style.buttonBarItemCounterColor ?? cell.counterLabel.textColor
+        
+        if let counter = indicatorInfo.counter {
+            cell.counterLabel.text = "\(counter)"
+        }
+        
+        if (indexPath.row == currentIndex) {
+            self.styleSelectedCell(cell)
+        } else {
+            self.styleUnselectedCell(cell)
+        }
         
         cell.contentView.backgroundColor = settings.style.buttonBarItemBackgroundColor ?? cell.contentView.backgroundColor
         cell.backgroundColor = settings.style.buttonBarItemBackgroundColor ?? cell.backgroundColor
@@ -360,10 +401,6 @@ open class ButtonBarPagerTabStripViewController: PagerTabStripViewController, Pa
         
         if let highlightedImage = indicatorInfo.highlightedImage {
             cell.imageView.highlightedImage = highlightedImage
-        }
-        
-        if let counter = indicatorInfo.counter {
-            cell.counterLabel.text = "\(counter)"
         }
 
         configureCell(cell, indicatorInfo: indicatorInfo)
