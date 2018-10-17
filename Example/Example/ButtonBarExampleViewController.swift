@@ -40,7 +40,7 @@ class ButtonBarExampleViewController: ButtonBarPagerTabStripViewController {
 
     override func viewControllers(for pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
         
-        let child_1_item = IndicatorInfo(title: "Table View", counter: 1)
+        let child_1_item = IndicatorInfo(title: "Table View", counter: nil)
         let child_1 = TableChildExampleViewController(style: .plain, itemInfo: child_1_item)
         
         let child_2_item = IndicatorInfo(title: "View", counter: 2)

@@ -392,6 +392,8 @@ open class ButtonBarPagerTabStripViewController: PagerTabStripViewController, Pa
         
         if let counter = indicatorInfo.counter {
             cell.counterLabel.text = "\(counter)"
+        } else {
+            cell.counterLabel.text = ""
         }
         
         if (indexPath.row == currentIndex) {
