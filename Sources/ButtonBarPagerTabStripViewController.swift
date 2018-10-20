@@ -176,7 +176,7 @@ open class ButtonBarPagerTabStripViewController: PagerTabStripViewController, Pa
     open override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
 
-        guard isViewAppearing || isViewRotating else { return }
+        guard isViewAppearing || isViewRotating || isViewResizing else { return }
 
         // Force the UICollectionViewFlowLayout to get laid out again with the new size if
         // a) The view is appearing.  This ensures that
@@ -188,6 +188,10 @@ open class ButtonBarPagerTabStripViewController: PagerTabStripViewController, Pa
         // b) The view is rotating.  This ensures that
         //    collectionView:layout:sizeForItemAtIndexPath: is called again and can use the views
         //    *new* frame so that the buttonBarView cell's actually get resized correctly
+        // c) In case the view controller is encapsulated inside a split view controller
+        // make sure to set isViewResizing to true in the split controller's delegate method
+        // splitViewController(_ svc: UISplitViewController, willChangeTo displayMode: UISplitViewController.DisplayMode)
+        isViewResizing = false
         cachedCellWidths = calculateWidths()
         buttonBarView.collectionViewLayout.invalidateLayout()
         // When the view first appears or is rotated we also need to ensure that the barButtonView's
