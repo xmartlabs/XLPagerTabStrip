@@ -269,6 +269,9 @@ open class ButtonBarPagerTabStripViewController: PagerTabStripViewController, Pa
     private func cellForItems(at indexPaths: [IndexPath], reloadIfNotVisible reload: Bool = true) -> [ButtonBarViewCell?] {
         let cells = indexPaths.map { buttonBarView.cellForItem(at: $0) as? ButtonBarViewCell }
 
+        let uniqueIndexPaths = Set<IndexPath>(indexPaths)
+        guard uniqueIndexPaths.count > 1 else { return cells }
+
         if reload {
             let indexPathsToReload = cells.enumerated()
                 .compactMap { (arg) -> IndexPath? in
