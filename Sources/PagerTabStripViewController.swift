@@ -248,7 +248,7 @@ open class PagerTabStripViewController: UIViewController, UIScrollViewDelegate {
 
         for (index, childController) in pagerViewControllers.enumerated() {
             let pageOffsetForChild = self.pageOffsetForChild(at: index)
-            if fabs(containerView.contentOffset.x - pageOffsetForChild) < containerView.bounds.width {
+            if abs(containerView.contentOffset.x - pageOffsetForChild) < containerView.bounds.width {
                 // 9/26/18; Prior to this, in both of these blocks of code below, `containerView.bounds.width` was `view.bounds.width`. But why would you want to use the containerView height but not its width? Seems like a bug.
                 if childController.parent != nil {
                     childController.view.frame = CGRect(x: offsetForChild(at: index), y: 0, width: containerView.bounds.width, height: containerView.bounds.height)
