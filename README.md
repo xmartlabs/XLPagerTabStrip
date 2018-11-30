@@ -3,7 +3,7 @@
 <p align="left">
 <a href="https://travis-ci.org/xmartlabs/XLPagerTabStrip"><img src="https://travis-ci.org/xmartlabs/XLPagerTabStrip.svg?branch=master" alt="Build status" /></a>
 <img src="https://img.shields.io/badge/platform-iOS-blue.svg?style=flat" alt="Platform iOS" />
-<a href="https://developer.apple.com/swift"><img src="https://img.shields.io/badge/swift4-compatible-4BC51D.svg?style=flat" alt="Swift 3 compatible" /></a>
+<a href="https://developer.apple.com/swift"><img src="https://img.shields.io/badge/swift4-compatible-4BC51D.svg?style=flat" alt="Swift 4 compatible" /></a>
 <a href="https://github.com/Carthage/Carthage"><img src="https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat" alt="Carthage compatible" /></a>
 <a href="https://cocoapods.org/pods/XLPagerTabStrip"><img src="https://img.shields.io/cocoapods/v/XLPagerTabStrip.svg" alt="CocoaPods compatible" /></a>
 <a href="https://raw.githubusercontent.com/xmartlabs/XLPagerTabStrip/master/LICENSE"><img src="http://img.shields.io/badge/license-MIT-blue.svg?style=flat" alt="License: MIT" />
@@ -145,26 +145,26 @@ public var pagerBehaviour: PagerTabStripBehaviour
 
 ```swift
 public enum PagerTabStripBehaviour {
-    case Common(skipIntermediteViewControllers: Bool)
-    case Progressive(skipIntermediteViewControllers: Bool, elasticIndicatorLimit: Bool)
+    case common(skipIntermediteViewControllers: Bool)
+    case progressive(skipIntermediteViewControllers: Bool, elasticIndicatorLimit: Bool)
 }
 ```
 
 Default Values:
 ```swift
 // Twitter Type
-PagerTabStripBehaviour.Common(skipIntermediteViewControllers: true)
+PagerTabStripBehaviour.common(skipIntermediateViewControllers: true)
 // Segmented Type
-PagerTabStripBehaviour.Common(skipIntermediteViewControllers: true)
+PagerTabStripBehaviour.common(skipIntermediateViewControllers: true)
 // Bar Type
-PagerTabStripBehaviour.Progressive(skipIntermediteViewControllers: true, elasticIndicatorLimit: true)
+PagerTabStripBehaviour.progressive(skipIntermediateViewControllers: true, elasticIndicatorLimit: true)
 // ButtonBar Type
-PagerTabStripBehaviour.Progressive(skipIntermediteViewControllers: true, elasticIndicatorLimit: true)`
+PagerTabStripBehaviour.progressive(skipIntermediateViewControllers: true, elasticIndicatorLimit: true)
 ```
 
-As you might have noticed `Common` and `Progressive` enumeration cases has `skipIntermediteViewControllers` and `elasticIndicatorLimit` associated values.
+As you might have noticed `common` and `progressive` enumeration cases has `skipIntermediateViewControllers` and `elasticIndicatorLimit` associated values.
 
-`skipIntermediteViewControllers` allows us to skip intermediate view controllers when a tab indicator is tapped.
+`skipIntermediateViewControllers` allows us to skip intermediate view controllers when a tab indicator is tapped.
 
 `elasticIndicatorLimit` allows us to tension the indicator when we reach a limit, I mean when we try to move forward from last indicator or move back from first indicator.
 
@@ -204,12 +204,12 @@ settings.style.buttonBarLeftContentInset: CGFloat?
 settings.style.buttonBarRightContentInset: CGFloat?
 
 // selected bar view is created programmatically so it's important to set up the following 2 properties properly
-settings.style.selectedBarBackgroundColor = UIColor.blackColor()
+settings.style.selectedBarBackgroundColor = UIColor.black
 settings.style.selectedBarHeight: CGFloat = 5
 
 // each buttonBar item is a UICollectionView cell of type ButtonBarViewCell
 settings.style.buttonBarItemBackgroundColor: UIColor?
-settings.style.buttonBarItemFont = UIFont.systemFontOfSize(18)
+settings.style.buttonBarItemFont = UIFont.systemFont(ofSize: 18)
 // helps to determine the cell width, it represent the space before and after the title label
 settings.style.buttonBarItemLeftRightMargin: CGFloat = 8
 settings.style.buttonBarItemTitleColor: UIColor?
@@ -223,7 +223,7 @@ public var buttonBarHeight: CGFloat?
 ```swift
 override func viewDidLoad() {
    self.settings.style.selectedBarHeight = 2
-   self.settings.style.selectedBarBackgroundColor = UIColor.whiteColor()
+   self.settings.style.selectedBarBackgroundColor = UIColor.white
 
    super.viewDidLoad()
 }
@@ -245,17 +245,17 @@ changeCurrentIndexProgressive = { (oldCell: ButtonBarViewCell?, newCell: ButtonB
     guard changeCurrentIndex == true else { return }
 
     oldCell?.label.textColor = UIColor(white: 1, alpha: 0.6)
-    newCell?.label.textColor = .whiteColor()
+    newCell?.label.textColor = UIColor.white
 
     if animated {
-        UIView.animateWithDuration(0.1, animations: { () -> Void in
-            newCell?.transform = CGAffineTransformMakeScale(1.0, 1.0)
-            oldCell?.transform = CGAffineTransformMakeScale(0.8, 0.8)
+        UIView.animate(withDuration: 0.1, animations: { () -> Void in
+            newCell?.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+            oldCell?.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
         })
     }
     else {
-        newCell?.transform = CGAffineTransformMakeScale(1.0, 1.0)
-        oldCell?.transform = CGAffineTransformMakeScale(0.8, 0.8)
+        newCell?.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+        oldCell?.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
     }
 }
 ```
@@ -273,10 +273,10 @@ settings.style.barHeight: CGFloat = 5
 
 ```swift
 settings.style.dotColor = UIColor(white: 1, alpha: 0.4)
-settings.style.selectedDotColor = UIColor.whiteColor()
-settings.style.portraitTitleFont = UIFont.systemFontOfSize(18)
-settings.style.landscapeTitleFont = UIFont.systemFontOfSize(15)
-settings.style.titleColor = UIColor.whiteColor()
+settings.style.selectedDotColor = UIColor.white
+settings.style.portraitTitleFont = UIFont.systemFont(ofSize: 18)
+settings.style.landscapeTitleFont = UIFont.systemFont(ofSize: 15)
+settings.style.titleColor = UIColor.white
 ```
 
 ### Segmented Type Customization
@@ -290,7 +290,7 @@ settings.style.segmentedControlColor: UIColor?
 ## Requirements
 
 * iOS 8.0+
-* Xcode 9.3+
+* Xcode 10+
 
 ## Examples
 
@@ -305,7 +305,7 @@ Follow these 3 steps to run Example project: Clone XLPagerTabStrip repository, o
 To install XLPagerTabStrip, simply add the following line to your Podfile:
 
 ```ruby
-pod 'XLPagerTabStrip', '~> 8.0'
+pod 'XLPagerTabStrip', '~> 8.1'
 ```
 
 ### Carthage
@@ -315,7 +315,7 @@ pod 'XLPagerTabStrip', '~> 8.0'
 To install XLPagerTabStrip, simply add the following line to your Cartfile:
 
 ```ogdl
-github "xmartlabs/XLPagerTabStrip" ~> 8.0
+github "xmartlabs/XLPagerTabStrip" ~> 8.1
 ```
 
 ## FAQ
