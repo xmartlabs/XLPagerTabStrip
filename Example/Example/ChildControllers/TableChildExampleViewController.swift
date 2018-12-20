@@ -31,7 +31,7 @@ class TableChildExampleViewController: UITableViewController, IndicatorInfoProvi
     var blackTheme = false
     var itemInfo = IndicatorInfo(title: "View")
 
-    init(style: UITableViewStyle, itemInfo: IndicatorInfo) {
+    init(style: UITableView.Style, itemInfo: IndicatorInfo) {
         self.itemInfo = itemInfo
         super.init(style: style)
     }
@@ -44,7 +44,7 @@ class TableChildExampleViewController: UITableViewController, IndicatorInfoProvi
         super.viewDidLoad()
         tableView.register(UINib(nibName: "PostCell", bundle: Bundle.main), forCellReuseIdentifier: cellIdentifier)
         tableView.estimatedRowHeight = 60.0
-        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.rowHeight = UITableView.automaticDimension
         tableView.allowsSelection = false
         if blackTheme {
             tableView.backgroundColor = UIColor(red: 15/255.0, green: 16/255.0, blue: 16/255.0, alpha: 1.0)
