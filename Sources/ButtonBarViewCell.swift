@@ -23,6 +23,7 @@
 // THE SOFTWARE.
 
 import UIKit
+import Foundation
 
 open class ButtonBarViewCell: UICollectionViewCell {
 
