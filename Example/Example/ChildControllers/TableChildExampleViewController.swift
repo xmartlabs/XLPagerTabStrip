@@ -43,7 +43,7 @@ class TableChildExampleViewController: UITableViewController, IndicatorInfoProvi
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.register(UINib(nibName: "PostCell", bundle: Bundle.main), forCellReuseIdentifier: cellIdentifier)
-        tableView.estimatedRowHeight = 60.0
+        tableView.estimatedRowHeight = 600.0
         tableView.rowHeight = UITableView.automaticDimension
         tableView.allowsSelection = false
         if blackTheme {
