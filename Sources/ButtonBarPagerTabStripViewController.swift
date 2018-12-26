@@ -194,6 +194,7 @@ open class ButtonBarPagerTabStripViewController: PagerTabStripViewController, Pa
         // selectedBar is resized and its contentOffset/scroll is set correctly (the selected
         // tab/cell may end up either skewed or off screen after a rotation otherwise)
         buttonBarView.moveTo(index: currentIndex, animated: false, swipeDirection: .none, pagerScroll: .scrollOnlyIfOutOfScreen)
+        buttonBarView.selectItem(at: IndexPath(item: currentIndex, section: 0), animated: false, scrollPosition: [])
     }
 
     // MARK: - Public Methods
@@ -258,11 +259,11 @@ open class ButtonBarPagerTabStripViewController: PagerTabStripViewController, Pa
 
         if reload {
             let indexPathsToReload = cells.enumerated()
-                .flatMap { (arg) -> IndexPath? in
+                .compactMap { (arg) -> IndexPath? in
                     let (index, cell) = arg
                     return cell == nil ? indexPaths[index] : nil
                 }
-                .flatMap { (indexPath: IndexPath) -> IndexPath? in
+                .compactMap { (indexPath: IndexPath) -> IndexPath? in
                     return (indexPath.item >= 0 && indexPath.item < buttonBarView.numberOfItems(inSection: indexPath.section)) ? indexPath : nil
                 }
 
@@ -345,6 +346,9 @@ open class ButtonBarPagerTabStripViewController: PagerTabStripViewController, Pa
                 changeCurrentIndex(currentIndex == indexPath.item ? nil : cell, currentIndex == indexPath.item ? cell : nil, false)
             }
         }
+        cell.isAccessibilityElement = true
+        cell.accessibilityLabel = indicatorInfo.accessibilityLabel ?? cell.label.text
+        cell.accessibilityTraits.insert([.button, .header])
         return cell
     }
 
