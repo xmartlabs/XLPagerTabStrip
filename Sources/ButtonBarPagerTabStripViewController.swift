@@ -81,9 +81,11 @@ open class ButtonBarPagerTabStripViewController: PagerTabStripViewController, Pa
     public var changeCurrentIndex: ((_ oldCell: ButtonBarViewCell?, _ newCell: ButtonBarViewCell?, _ animated: Bool) -> Void)?
     public var changeCurrentIndexProgressive: ((_ oldCell: ButtonBarViewCell?, _ newCell: ButtonBarViewCell?, _ progressPercentage: CGFloat, _ changeCurrentIndex: Bool, _ animated: Bool) -> Void)?
 
+    public var shouldUpdateButtonBarView = true
+
     @IBOutlet public weak var buttonBarView: ButtonBarView!
 
-    lazy private var cachedCellWidths: [CGFloat]? = { [unowned self] in
+    lazy private(set) var cachedCellWidths: [CGFloat]? = { [unowned self] in
         return self.calculateWidths()
     }()
 
@@ -244,7 +246,7 @@ open class ButtonBarPagerTabStripViewController: PagerTabStripViewController, Pa
 
     open func updateIndicator(for viewController: PagerTabStripViewController, fromIndex: Int, toIndex: Int, withProgressPercentage progressPercentage: CGFloat, indexWasChanged: Bool) {
         guard shouldUpdateButtonBarView else { return }
-        buttonBarView.move(fromIndex: fromIndex, toIndex: toIndex, progressPercentage: progressPercentage, pagerScroll: .yes)
+        buttonBarView.move(fromIndex: fromIndex, toIndex: toIndex, progressPercentage: progressPercentage, pagerScroll: .yes, scrollToSelectedButton: true)
         if let changeCurrentIndexProgressive = changeCurrentIndexProgressive {
             let oldIndexPath = IndexPath(item: currentIndex != fromIndex ? fromIndex : toIndex, section: 0)
             let newIndexPath = IndexPath(item: currentIndex, section: 0)
@@ -364,7 +366,7 @@ open class ButtonBarPagerTabStripViewController: PagerTabStripViewController, Pa
     open func configureCell(_ cell: ButtonBarViewCell, indicatorInfo: IndicatorInfo) {
     }
 
-    private func calculateWidths() -> [CGFloat] {
+    func calculateWidths() -> [CGFloat] {
         let flowLayout = buttonBarView.collectionViewLayout as! UICollectionViewFlowLayout // swiftlint:disable:this force_cast
         let numberOfCells = viewControllers.count
 
@@ -407,7 +409,6 @@ open class ButtonBarPagerTabStripViewController: PagerTabStripViewController, Pa
         }
     }
 
-    private var shouldUpdateButtonBarView = true
     private var collectionViewDidLoad = false
 
 }
