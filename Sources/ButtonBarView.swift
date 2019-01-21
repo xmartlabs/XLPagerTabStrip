@@ -46,7 +46,7 @@ public enum SelectedBarVerticalAlignment {
 open class ButtonBarView: UICollectionView {
 
     open lazy var selectedBar: UIView = { [unowned self] in
-        let bar  = UIView(frame: CGRect(x: 0, y: self.frame.size.height - CGFloat(self.selectedBarHeight), width: 0, height: CGFloat(self.selectedBarHeight)))
+        let bar  = UIView(frame: CGRect(x: 0, y: self.frame.size.height - CGFloat(self.selectedBarHeight), width: self.selectedBarWidth ?? 0, height: CGFloat(self.selectedBarHeight)))
         bar.layer.zPosition = 9999
         return bar
     }()
@@ -56,6 +56,7 @@ open class ButtonBarView: UICollectionView {
             updateSelectedBarYPosition()
         }
     }
+    internal var selectedBarWidth: CGFloat?
     var selectedBarVerticalAlignment: SelectedBarVerticalAlignment = .bottom
     var selectedBarAlignment: SelectedBarAlignment = .center
     var selectedIndex = 0
@@ -97,8 +98,14 @@ open class ButtonBarView: UICollectionView {
 
         var targetFrame = fromFrame
         targetFrame.size.height = selectedBar.frame.size.height
-        targetFrame.size.width += (toFrame.size.width - fromFrame.size.width) * progressPercentage
-        targetFrame.origin.x += (toFrame.origin.x - fromFrame.origin.x) * progressPercentage
+        if let sbWidth = self.selectedBarWidth {
+            targetFrame.origin.x = (fromFrame.origin.x + (fromFrame.width - sbWidth) / 2)
+                + ((toFrame.origin.x + toFrame.width / 2) - (fromFrame.origin.x + fromFrame.width / 2)) * progressPercentage
+            targetFrame.size.width = sbWidth
+        } else {
+            targetFrame.size.width += (toFrame.size.width - fromFrame.size.width) * progressPercentage
+            targetFrame.origin.x += (toFrame.origin.x - fromFrame.origin.x) * progressPercentage
+        }
 
         selectedBar.frame = CGRect(x: targetFrame.origin.x, y: selectedBar.frame.origin.y, width: targetFrame.size.width, height: selectedBar.frame.size.height)
 
@@ -122,8 +129,13 @@ open class ButtonBarView: UICollectionView {
 
         updateContentOffset(animated: animated, pagerScroll: pagerScroll, toFrame: selectedCellFrame, toIndex: (selectedCellIndexPath as NSIndexPath).row)
 
-        selectedBarFrame.size.width = selectedCellFrame.size.width
-        selectedBarFrame.origin.x = selectedCellFrame.origin.x
+        if let sbWidth = self.selectedBarWidth {
+            selectedBarFrame.size.width = sbWidth
+            selectedBarFrame.origin.x = selectedCellFrame.origin.x + (selectedCellFrame.width - sbWidth) / 2
+        } else {
+            selectedBarFrame.size.width = selectedCellFrame.size.width
+            selectedBarFrame.origin.x = selectedCellFrame.origin.x
+        }
 
         if animated {
             UIView.animate(withDuration: 0.3, animations: { [weak self] in
