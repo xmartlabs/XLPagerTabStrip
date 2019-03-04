@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="SCa-L8-uTr">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="SCa-L8-uTr">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
-        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -40,7 +38,7 @@
                     <navigationItem key="navigationItem" id="l1f-vB-6A8">
                         <nil key="title"/>
                         <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="31B-gy-WIH">
-                            <rect key="frame" x="26" y="7" width="304" height="30"/>
+                            <rect key="frame" x="20" y="7" width="304" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <segments>
                                 <segment title="First"/>
@@ -84,7 +82,7 @@
                                 </connections>
                             </containerView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jSE-G2-qe6">
-                                <rect key="frame" x="303" y="83" width="56" height="34"/>
+                                <rect key="frame" x="299" y="83" width="56" height="34"/>
                                 <state key="normal" title="Reload">
                                     <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
@@ -92,14 +90,8 @@
                                     <action selector="reloadTapped:" destination="uba-Iz-2L2" eventType="touchUpInside" id="KNI-Zr-Zz0"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Storyboard Demo" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="cZN-qT-VUq">
-                                <rect key="frame" x="16" y="52" width="343" height="21"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kmN-fg-NDL">
-                                <rect key="frame" x="17" y="82" width="46" height="34"/>
+                                <rect key="frame" x="20" y="82" width="46" height="34"/>
                                 <state key="normal" title="Close">
                                     <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
@@ -107,34 +99,29 @@
                                     <action selector="closeTapped:" destination="uba-Iz-2L2" eventType="touchUpInside" id="B1v-kE-kC0"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Storyboard Demo" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="cZN-qT-VUq">
+                                <rect key="frame" x="20" y="50" width="335" height="21"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.027450980390000001" green="0.72549019609999998" blue="0.60784313729999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="kmN-fg-NDL" secondAttribute="trailing" constant="50" id="1ha-hv-22z"/>
                             <constraint firstItem="kmN-fg-NDL" firstAttribute="top" secondItem="Emc-3r-MJi" secondAttribute="bottom" constant="62" id="7Rq-MO-b4m"/>
-                            <constraint firstItem="cZN-qT-VUq" firstAttribute="leading" secondItem="Mqm-sG-Qyv" secondAttribute="leadingMargin" id="9eC-5j-2zk"/>
-                            <constraint firstAttribute="centerX" secondItem="cZN-qT-VUq" secondAttribute="centerX" id="AYy-gw-Ryh"/>
+                            <constraint firstItem="kmN-fg-NDL" firstAttribute="leading" secondItem="Mqm-sG-Qyv" secondAttribute="leading" constant="20" symbolic="YES" id="Cpu-aA-0rq"/>
                             <constraint firstItem="NbE-e0-l2n" firstAttribute="top" secondItem="qkQ-UG-MKG" secondAttribute="bottom" id="K6Q-s5-nzV"/>
-                            <constraint firstItem="cZN-qT-VUq" firstAttribute="trailing" secondItem="Mqm-sG-Qyv" secondAttribute="trailingMargin" id="Lma-fO-UC9"/>
+                            <constraint firstAttribute="trailing" secondItem="jSE-G2-qe6" secondAttribute="trailing" constant="20" symbolic="YES" id="MMy-Mk-MhJ"/>
                             <constraint firstItem="jSE-G2-qe6" firstAttribute="top" secondItem="Emc-3r-MJi" secondAttribute="bottom" constant="63" id="NWc-fy-XOc"/>
-                            <constraint firstItem="cZN-qT-VUq" firstAttribute="top" secondItem="Emc-3r-MJi" secondAttribute="bottom" constant="32" id="RvZ-BV-1SL"/>
-                            <constraint firstItem="qkQ-UG-MKG" firstAttribute="leading" secondItem="Mqm-sG-Qyv" secondAttribute="leading" id="Slo-zY-IGj"/>
-                            <constraint firstItem="jSE-G2-qe6" firstAttribute="trailing" secondItem="Mqm-sG-Qyv" secondAttribute="trailingMargin" id="hbB-fi-M5S"/>
+                            <constraint firstItem="cZN-qT-VUq" firstAttribute="leading" secondItem="Mqm-sG-Qyv" secondAttribute="leading" constant="20" symbolic="YES" id="OiW-h4-ZuI"/>
+                            <constraint firstItem="qkQ-UG-MKG" firstAttribute="leading" secondItem="Mqm-sG-Qyv" secondAttribute="leading" id="bxR-0b-lVS"/>
+                            <constraint firstItem="jSE-G2-qe6" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Mqm-sG-Qyv" secondAttribute="leading" constant="50" id="cpm-b1-Y9n"/>
+                            <constraint firstItem="cZN-qT-VUq" firstAttribute="top" secondItem="Emc-3r-MJi" secondAttribute="bottom" constant="30" id="fk2-dC-KBI"/>
+                            <constraint firstAttribute="trailing" secondItem="qkQ-UG-MKG" secondAttribute="trailing" id="meZ-CC-eqh"/>
                             <constraint firstItem="qkQ-UG-MKG" firstAttribute="top" secondItem="Emc-3r-MJi" secondAttribute="bottom" constant="101" id="nJw-ag-ddh"/>
-                            <constraint firstAttribute="trailing" secondItem="qkQ-UG-MKG" secondAttribute="trailing" id="pTb-BC-Duc"/>
-                            <constraint firstItem="kmN-fg-NDL" firstAttribute="leading" secondItem="Mqm-sG-Qyv" secondAttribute="leadingMargin" constant="1" id="sXd-CC-BrV"/>
+                            <constraint firstAttribute="trailing" secondItem="cZN-qT-VUq" secondAttribute="trailing" constant="20" symbolic="YES" id="ue6-fg-BYA"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="9eC-5j-2zk"/>
-                                <exclude reference="Lma-fO-UC9"/>
-                            </mask>
-                        </variation>
-                        <variation key="heightClass=regular-widthClass=compact">
-                            <mask key="constraints">
-                                <include reference="9eC-5j-2zk"/>
-                                <include reference="Lma-fO-UC9"/>
-                            </mask>
-                        </variation>
                     </view>
                     <tabBarItem key="tabBarItem" title="Bar" image="icon_bar" id="1d9-i6-g9L">
                         <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="-4"/>
@@ -146,7 +133,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jkN-pv-eFH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2141" y="-825"/>
+            <point key="canvasLocation" x="2140" y="-827.13643178410803"/>
         </scene>
         <!--Buttons Example-->
         <scene sceneID="c3d-TB-Hyh">
@@ -437,7 +424,7 @@
                             <constraint firstItem="qpV-GA-z3E" firstAttribute="top" secondItem="mzt-Sj-o9z" secondAttribute="bottom" id="XJC-Gq-PXT"/>
                             <constraint firstItem="mzt-Sj-o9z" firstAttribute="top" secondItem="S6g-Ki-yYf" secondAttribute="bottom" id="c2z-nI-QeM"/>
                             <constraint firstAttribute="trailing" secondItem="mzt-Sj-o9z" secondAttribute="trailing" id="ksD-G3-ZFA"/>
-                            <constraint firstItem="MRO-1B-lmT" firstAttribute="top" secondItem="qpV-GA-z3E" secondAttribute="bottom" id="ne5-8Z-LlT"/>
+                            <constraint firstAttribute="bottom" secondItem="qpV-GA-z3E" secondAttribute="bottom" id="ne5-8Z-LlT"/>
                         </constraints>
                     </view>
                     <toolbarItems/>
@@ -460,6 +447,7 @@
                     </tabBarItem>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" opaque="NO" contentMode="scaleToFill" translucent="NO" id="TRx-vY-PeE">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.027450980390000001" green="0.72549019609999998" blue="0.60784313729999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </navigationBar>
@@ -481,6 +469,7 @@
                     </tabBarItem>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="2I8-g6-D4S">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.027450980390000001" green="0.72549019609999998" blue="0.60784313729999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <textAttributes key="titleTextAttributes">
@@ -600,6 +589,7 @@
                     </tabBarItem>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" opaque="NO" contentMode="scaleToFill" translucent="NO" id="iMm-hr-oOU">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.027450980390000001" green="0.72549019609999998" blue="0.60784313729999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </navigationBar>
@@ -621,6 +611,7 @@
                     </tabBarItem>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="PUj-LI-AQ6">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.027450980390000001" green="0.72549019609999998" blue="0.60784313729999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <textAttributes key="titleTextAttributes">
@@ -882,7 +873,7 @@
                             <constraint firstItem="CLm-XH-tEa" firstAttribute="leading" secondItem="yGV-Lf-LC4" secondAttribute="leading" id="qT9-rU-zer"/>
                             <constraint firstItem="KX5-0N-ToU" firstAttribute="leading" secondItem="yGV-Lf-LC4" secondAttribute="leading" id="sIi-YZ-SuG"/>
                             <constraint firstItem="KX5-0N-ToU" firstAttribute="top" secondItem="CLm-XH-tEa" secondAttribute="bottom" id="v7v-sW-2Vl"/>
-                            <constraint firstItem="AoG-Am-Q4c" firstAttribute="top" secondItem="KX5-0N-ToU" secondAttribute="bottom" id="xNR-eP-4e1"/>
+                            <constraint firstAttribute="bottom" secondItem="KX5-0N-ToU" secondAttribute="bottom" id="xNR-eP-4e1"/>
                         </constraints>
                     </view>
                     <toolbarItems/>
@@ -986,7 +977,7 @@
                             <constraint firstItem="OdC-5s-g0E" firstAttribute="leading" secondItem="srq-xV-ncW" secondAttribute="leading" id="Yhg-Df-lY8"/>
                             <constraint firstItem="NF8-r2-llj" firstAttribute="top" secondItem="nAm-L7-0C5" secondAttribute="bottom" id="cGp-RS-hTW"/>
                             <constraint firstAttribute="trailing" secondItem="NF8-r2-llj" secondAttribute="trailing" id="diI-XY-ee6"/>
-                            <constraint firstItem="h18-Xb-G4o" firstAttribute="top" secondItem="OdC-5s-g0E" secondAttribute="bottom" id="iOV-H7-dW1"/>
+                            <constraint firstAttribute="bottom" secondItem="OdC-5s-g0E" secondAttribute="bottom" id="iOV-H7-dW1"/>
                             <constraint firstItem="NF8-r2-llj" firstAttribute="leading" secondItem="srq-xV-ncW" secondAttribute="leading" id="rDI-Ht-8Px"/>
                             <constraint firstItem="OdC-5s-g0E" firstAttribute="top" secondItem="NF8-r2-llj" secondAttribute="bottom" id="vlA-DF-8l2"/>
                             <constraint firstAttribute="trailing" secondItem="OdC-5s-g0E" secondAttribute="trailing" id="xNh-E4-YQz"/>

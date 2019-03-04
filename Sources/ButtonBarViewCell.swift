@@ -22,6 +22,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+import UIKit
 import Foundation
 
 open class ButtonBarViewCell: UICollectionViewCell {
@@ -33,7 +34,7 @@ open class ButtonBarViewCell: UICollectionViewCell {
         super.init(coder: aDecoder)
         
         isAccessibilityElement = true
-        accessibilityTraits = [.button, .header]
+        accessibilityTraits.insert([.button, .header])
     }
     
     open override var isSelected: Bool {
@@ -43,9 +44,9 @@ open class ButtonBarViewCell: UICollectionViewCell {
         set {
             super.isSelected = newValue
             if (newValue) {
-                accessibilityTraits = [.selected]
+                accessibilityTraits.insert(.selected)
             } else {
-                accessibilityTraits.formUnion(.selected)
+                accessibilityTraits.remove(.selected)
             }
         }
     }
