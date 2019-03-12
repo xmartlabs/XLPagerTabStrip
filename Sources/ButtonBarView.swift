@@ -57,7 +57,6 @@ open class ButtonBarView: UICollectionView {
         }
     }
     var selectedBarVerticalAlignment: SelectedBarVerticalAlignment = .bottom
-    var selectedBarAlignment: SelectedBarAlignment = .center
     public var selectedBarAlignment: SelectedBarAlignment = .center
     var selectedIndex = 0
 
@@ -165,7 +164,11 @@ open class ButtonBarView: UICollectionView {
 
         var contentOffset = cellFrame.origin.x - alignmentOffset
         contentOffset = max(0, contentOffset)
-        contentOffset = min(contentSize.width - frame.size.width, contentOffset)
+
+        if selectedBarAlignment != .left {
+            contentOffset = min(contentSize.width - frame.size.width, contentOffset)
+        }
+
         return contentOffset
     }
 
@@ -183,6 +186,19 @@ open class ButtonBarView: UICollectionView {
 
         selectedBarFrame.size.height = selectedBarHeight
         selectedBar.frame = selectedBarFrame
+
+        if selectedBarAlignment == .left {
+            adaptForLeftAlignment()
+        }
+    }
+
+    private func adaptForLeftAlignment() {
+        let numberOfItems = dataSource!.collectionView(self, numberOfItemsInSection: 0)
+        let selectedCellIndexPath = IndexPath(item: (numberOfItems - 1), section: 0)
+        let attributes = layoutAttributesForItem(at: selectedCellIndexPath)
+        let selectedCellFrame = attributes!.frame
+        
+        contentInset = UIEdgeInsets(top: contentInset.top, left: contentInset.left, bottom: contentInset.bottom, right: self.frame.size.width - selectedCellFrame.size.width)
     }
 
     override open func layoutSubviews() {
