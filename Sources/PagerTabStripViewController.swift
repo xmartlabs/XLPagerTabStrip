@@ -104,7 +104,7 @@ open class PagerTabStripViewController: UIViewController, UIScrollViewDelegate {
         containerView.isPagingEnabled = true
         reloadViewControllers()
 
-		currentIndex = preCurrentIndex
+        currentIndex = preCurrentIndex
         let childController = viewControllers[currentIndex]
         addChild(childController)
         childController.view.autoresizingMask = [.flexibleHeight, .flexibleWidth]
