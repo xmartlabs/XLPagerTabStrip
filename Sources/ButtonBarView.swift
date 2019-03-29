@@ -58,16 +58,19 @@ open class ButtonBarView: UICollectionView {
     }
     var selectedBarVerticalAlignment: SelectedBarVerticalAlignment = .bottom
     public var selectedBarAlignment: SelectedBarAlignment = .center
+    public var forceAlignmentAlways = true
     var selectedIndex = 0
 
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         addSubview(selectedBar)
+        selectedBarAlignment = .center
     }
 
     public override init(frame: CGRect, collectionViewLayout layout: UICollectionViewLayout) {
         super.init(frame: frame, collectionViewLayout: layout)
         addSubview(selectedBar)
+        selectedBarAlignment = .center
     }
 
     open func moveTo(index: Int, animated: Bool, swipeDirection: SwipeDirection, pagerScroll: PagerScroll) {
@@ -165,8 +168,8 @@ open class ButtonBarView: UICollectionView {
         var contentOffset = cellFrame.origin.x - alignmentOffset
         contentOffset = max(0, contentOffset)
 
-        if selectedBarAlignment != .left {
-            contentOffset = min(contentSize.width - frame.size.width, contentOffset)
+        guard forceAlignmentAlways == true && (selectedBarAlignment == .left || selectedBarAlignment == .center) else {
+            return min(contentSize.width - frame.size.width, contentOffset)
         }
 
         return contentOffset
@@ -187,12 +190,16 @@ open class ButtonBarView: UICollectionView {
         selectedBarFrame.size.height = selectedBarHeight
         selectedBar.frame = selectedBarFrame
 
-        if selectedBarAlignment == .left {
-            adaptForLeftAlignment()
+        guard forceAlignmentAlways == true else {
+            return
+        }
+
+        if selectedBarAlignment == .left || selectedBarAlignment == .center {
+            forceAlignment()
         }
     }
 
-    private func adaptForLeftAlignment() {
+    private func forceAlignment() {
         let numberOfItems = dataSource!.collectionView(self, numberOfItemsInSection: 0)
         let selectedCellIndexPath = IndexPath(item: (numberOfItems - 1), section: 0)
         let attributes = layoutAttributesForItem(at: selectedCellIndexPath)
