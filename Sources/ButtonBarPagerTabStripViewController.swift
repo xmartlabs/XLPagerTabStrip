@@ -56,7 +56,7 @@ public struct ButtonBarPagerTabStripSettings {
         public var buttonBarItemFont = UIFont.systemFont(ofSize: 18)
         public var buttonBarItemLeftRightMargin: CGFloat = 8
         public var buttonBarItemTitleColor: UIColor?
-        @available(*, deprecated: 7.0.0) public var buttonBarItemsShouldFillAvailiableWidth: Bool {
+		@available(*, deprecated) public var buttonBarItemsShouldFillAvailiableWidth: Bool {
             set {
                 buttonBarItemsShouldFillAvailableWidth = newValue
             }
