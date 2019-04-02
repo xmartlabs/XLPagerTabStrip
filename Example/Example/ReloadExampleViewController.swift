@@ -49,13 +49,13 @@ class ReloadExampleViewController: UIViewController {
             bigLabel.sizeToFit()
         }
 
-        if let pagerViewController = childViewControllers.first as? PagerTabStripViewController {
+        if let pagerViewController = children.first as? PagerTabStripViewController {
             updateTitle(of: pagerViewController)
         }
     }
 
     @IBAction func reloadTapped(_ sender: UIBarButtonItem) {
-        for childViewController in childViewControllers {
+        for childViewController in children {
             guard let child = childViewController as? PagerTabStripViewController else {
                 continue
             }
