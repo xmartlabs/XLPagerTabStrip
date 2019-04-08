@@ -10,7 +10,8 @@ let package = Package(
     targets: [
         .target(
             name: "XLPagerTabStrip",
-            path: "Sources"
+            path: "Sources",
+            sources: ["Sources/PagerTabStripViewController.swift"]
         )
     ]
 )
