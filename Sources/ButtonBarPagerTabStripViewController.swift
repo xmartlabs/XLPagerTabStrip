@@ -250,7 +250,7 @@ open class ButtonBarPagerTabStripViewController: PagerTabStripViewController, Pa
         let cells = indexPaths.map { buttonBarView.cellForItem(at: $0) as? ButtonBarViewCell }
 
         if reload {
-            let indexPathsToReload = cells.enumerated()
+            var indexPathsToReload = cells.enumerated()
                 .compactMap { (arg) -> IndexPath? in
                     let (index, cell) = arg
                     return cell == nil ? indexPaths[index] : nil
@@ -260,6 +260,7 @@ open class ButtonBarPagerTabStripViewController: PagerTabStripViewController, Pa
                 }
 
             if !indexPathsToReload.isEmpty {
+                indexPathsToReload = Array(Set(indexPathsToReload))
                 buttonBarView.reloadItems(at: indexPathsToReload)
             }
         }
