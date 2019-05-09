@@ -206,6 +206,8 @@ settings.style.buttonBarRightContentInset: CGFloat?
 // selected bar view is created programmatically so it's important to set up the following 2 properties properly
 settings.style.selectedBarBackgroundColor = UIColor.black
 settings.style.selectedBarHeight: CGFloat = 5
+// Optional. If you want a fixed width, otherwise same as item's width.
+settings.style.selectedBarWidth: CGFloat?
 
 // each buttonBar item is a UICollectionView cell of type ButtonBarViewCell
 settings.style.buttonBarItemBackgroundColor: UIColor?
