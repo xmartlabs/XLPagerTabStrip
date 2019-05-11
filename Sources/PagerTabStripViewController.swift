@@ -173,7 +173,7 @@ open class PagerTabStripViewController: UIViewController, UIScrollViewDelegate {
     }
 
     open func moveTo(viewController: UIViewController, animated: Bool = true) {
-        moveToViewController(at: viewControllers.index(of: viewController)!, animated: animated)
+        moveToViewController(at: viewControllers.firstIndex(of: viewController)!, animated: animated)
     }
 
     // MARK: - PagerTabStripDataSource
@@ -204,7 +204,7 @@ open class PagerTabStripViewController: UIViewController, UIScrollViewDelegate {
     }
 
     open func offsetForChild(viewController: UIViewController) throws -> CGFloat {
-        guard let index = viewControllers.index(of: viewController) else {
+        guard let index = viewControllers.firstIndex(of: viewController) else {
             throw PagerTabStripError.viewControllerOutOfBounds
         }
         return offsetForChild(at: index)
