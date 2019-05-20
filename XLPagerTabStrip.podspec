@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = "XLPagerTabStrip"
-  s.version          = "8.1.1"
+  s.version          = "9.0.0"
   s.summary          = "Android PagerTabStrip for iOS and much more."
   s.homepage         = "https://github.com/xmartlabs/XLPagerTabStrip"
   s.license          = { type: 'MIT', file: 'LICENSE' }
@@ -12,5 +12,5 @@ Pod::Spec.new do |s|
   s.ios.source_files = 'Sources/**/*.{h,m,swift}'
   s.ios.frameworks = 'UIKit', 'Foundation'
   s.resource_bundles = { 'XLPagerTabStrip' => ['Sources/ButtonCell.xib'] }
-  s.swift_version = "4.2"
+  s.swift_version = "5.0"
 end
