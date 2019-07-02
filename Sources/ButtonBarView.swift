@@ -76,10 +76,28 @@ open class ButtonBarView: UICollectionView {
     }
 
     open func move(fromIndex: Int, toIndex: Int, progressPercentage: CGFloat, pagerScroll: PagerScroll) {
+
         selectedIndex = progressPercentage > 0.5 ? toIndex : fromIndex
 
-        let fromFrame = layoutAttributesForItem(at: IndexPath(item: fromIndex, section: 0))!.frame
         let numberOfItems = dataSource!.collectionView(self, numberOfItemsInSection: 0)
+        var progressPercentage = progressPercentage
+        
+        
+        var fromFrame: CGRect
+        
+        if fromIndex < 0 || fromIndex > numberOfItems - 1 {
+            if fromIndex < 0 {
+                let cellAtts = layoutAttributesForItem(at: IndexPath(item: 0, section: 0))
+                fromFrame = cellAtts!.frame.offsetBy(dx: -cellAtts!.frame.size.width, dy: 0)
+                progressPercentage = 1 - progressPercentage * -1
+            } else {
+                let cellAtts = layoutAttributesForItem(at: IndexPath(item: (numberOfItems - 1), section: 0))
+                fromFrame = cellAtts!.frame.offsetBy(dx: cellAtts!.frame.size.width, dy: 0)
+            }
+        } else {
+            fromFrame = layoutAttributesForItem(at: IndexPath(item: fromIndex, section: 0))!.frame
+        }
+        
 
         var toFrame: CGRect
 
@@ -95,11 +113,12 @@ open class ButtonBarView: UICollectionView {
             toFrame = layoutAttributesForItem(at: IndexPath(item: toIndex, section: 0))!.frame
         }
 
+        
         var targetFrame = fromFrame
         targetFrame.size.height = selectedBar.frame.size.height
         targetFrame.size.width += (toFrame.size.width - fromFrame.size.width) * progressPercentage
         targetFrame.origin.x += (toFrame.origin.x - fromFrame.origin.x) * progressPercentage
-
+        
         selectedBar.frame = CGRect(x: targetFrame.origin.x, y: selectedBar.frame.origin.y, width: targetFrame.size.width, height: selectedBar.frame.size.height)
 
         var targetContentOffset: CGFloat = 0.0

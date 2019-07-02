@@ -299,7 +299,7 @@ open class PagerTabStripViewController: UIViewController, UIScrollViewDelegate {
         updateContent()
     }
 
-    // MARK: - UIScrollViewDelegate
+    // MARK: - UIScrollDelegate
 
     open func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if containerView == scrollView {
@@ -350,14 +350,21 @@ open class PagerTabStripViewController: UIViewController, UIScrollViewDelegate {
                 fromIndex = count - 1
                 toIndex = count
             } else {
-                if self.scrollPercentage >= 0.5 {
+                if self.scrollPercentage <= 0 {
+                    toIndex = currentIndex
+                    fromIndex = currentIndex - 1
+                }
+                else if self.scrollPercentage >= 0.5 {
                     fromIndex = max(toIndex - 1, 0)
                 } else {
                     toIndex = fromIndex + 1
                 }
             }
         } else if direction == .right {
-            if virtualPage < 0 {
+            if virtualPage >= count - 1 && self.scrollPercentage > 0.5 {
+                fromIndex = count
+                toIndex = count - 1
+            } else if virtualPage < 0 {
                 fromIndex = 0
                 toIndex = -1
             } else {
