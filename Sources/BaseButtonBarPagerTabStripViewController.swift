@@ -148,7 +148,6 @@ open class BaseButtonBarPagerTabStripViewController<ButtonBarCellType: UICollect
         guard isViewLoaded else { return }
         
         buttonBarView.reloadData()
-        // Call performBatchUpdate to fix issue: `Invalid update: invalid number of items in section 0.` happened when logout, then login again.
         buttonBarView.performBatchUpdates(nil) { [weak self] (_) in
             guard let self = self else { return }
             self.cachedCellWidths = self.calculateWidths()
