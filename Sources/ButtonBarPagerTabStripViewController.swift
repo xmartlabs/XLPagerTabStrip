@@ -192,11 +192,17 @@ open class ButtonBarPagerTabStripViewController: PagerTabStripViewController, Pa
     // MARK: - Public Methods
 
     open override func reloadPagerTabStripView() {
+        
         super.reloadPagerTabStripView()
         guard isViewLoaded else { return }
+        
         buttonBarView.reloadData()
-        cachedCellWidths = calculateWidths()
-        buttonBarView.moveTo(index: currentIndex, animated: false, swipeDirection: .none, pagerScroll: .yes)
+        buttonBarView.performBatchUpdates(nil) { [weak self] (_) in
+            guard let self = self else { return }
+            self.cachedCellWidths = self.calculateWidths()
+            self.buttonBarView.moveTo(index: self.currentIndex, animated: false, swipeDirection: .none, pagerScroll: .yes)
+        }
+        
     }
 
     open func calculateStretchedCellWidths(_ minimumCellWidths: [CGFloat], suggestedStretchedCellWidth: CGFloat, previousNumberOfLargeCells: Int) -> CGFloat {
@@ -270,6 +276,7 @@ open class ButtonBarPagerTabStripViewController: PagerTabStripViewController, Pa
     // MARK: - UICollectionViewDelegateFlowLayut
 
     @objc open func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: IndexPath) -> CGSize {
+        guard (cachedCellWidths?.count ?? 0) > indexPath.row else { return .zero }
         guard let cellWidthValue = cachedCellWidths?[indexPath.row] else {
             fatalError("cachedCellWidths for \(indexPath.row) must not be nil")
         }
