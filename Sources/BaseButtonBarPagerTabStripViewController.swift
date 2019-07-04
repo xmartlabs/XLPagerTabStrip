@@ -143,11 +143,18 @@ open class BaseButtonBarPagerTabStripViewController<ButtonBarCellType: UICollect
     // MARK: - Public Methods
 
     open override func reloadPagerTabStripView() {
+        
         super.reloadPagerTabStripView()
         guard isViewLoaded else { return }
+        
         buttonBarView.reloadData()
-        cachedCellWidths = calculateWidths()
-        buttonBarView.moveTo(index: currentIndex, animated: false, swipeDirection: .none, pagerScroll: .yes)
+        // Call performBatchUpdate to fix issue: `Invalid update: invalid number of items in section 0.` happened when logout, then login again.
+        buttonBarView.performBatchUpdates(nil) { [weak self] (_) in
+            guard let self = self else { return }
+            self.cachedCellWidths = self.calculateWidths()
+            self.buttonBarView.moveTo(index: self.currentIndex, animated: false, swipeDirection: .none, pagerScroll: .yes)
+        }
+        
     }
 
     open func calculateStretchedCellWidths(_ minimumCellWidths: [CGFloat], suggestedStretchedCellWidth: CGFloat, previousNumberOfLargeCells: Int) -> CGFloat {
