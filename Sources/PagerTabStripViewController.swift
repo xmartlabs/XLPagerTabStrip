@@ -59,7 +59,7 @@ open class PagerTabStripViewController: UIViewController, UIScrollViewDelegate {
     open var pagerBehaviour = PagerTabStripBehaviour.progressive(skipIntermediateViewControllers: true, elasticIndicatorLimit: true)
 
     open private(set) var viewControllers = [UIViewController]()
-    open private(set) var currentIndex = 0
+    open var currentIndex = 0
     open private(set) var preCurrentIndex = 0 // used *only* to store the index to which move when the pager becomes visible
 
     open var pageWidth: CGFloat {
