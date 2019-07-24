@@ -57,7 +57,8 @@ open class SegmentedPagerTabStripViewController: PagerTabStripViewController, Pa
 
     open override func viewDidLoad() {
         super.viewDidLoad()
-        segmentedControl = segmentedControl ?? UISegmentedControl()
+        let auxSegmentedControl = segmentedControl ?? UISegmentedControl()
+        segmentedControl = auxSegmentedControl
         if segmentedControl.superview == nil {
             navigationItem.titleView = segmentedControl
         }
@@ -86,7 +87,7 @@ open class SegmentedPagerTabStripViewController: PagerTabStripViewController, Pa
         segmentedControl.selectedSegmentIndex = currentIndex
     }
 
-    func segmentedControlChanged(_ sender: UISegmentedControl) {
+    @objc func segmentedControlChanged(_ sender: UISegmentedControl) {
         let index = sender.selectedSegmentIndex
         updateIndicator(for: self, fromIndex: currentIndex, toIndex: index)
         shouldUpdateSegmentedControl = false

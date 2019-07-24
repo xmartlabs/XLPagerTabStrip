@@ -1,4 +1,4 @@
-//  PagerTabStripOptions.swift
+//  YoutubeIconWithLabelCell.swift
 //  XLPagerTabStrip ( https://github.com/xmartlabs/XLPagerTabStrip )
 //
 //  Copyright (c) 2017 Xmartlabs ( http://xmartlabs.com )
@@ -23,36 +23,11 @@
 // THE SOFTWARE.
 
 import Foundation
+import UIKit
 
-public enum PagerTabStripBehaviour {
+class YoutubeIconWithLabelCell: UICollectionViewCell {
 
-    case common(skipIntermediateViewControllers: Bool)
-    case progressive(skipIntermediateViewControllers: Bool, elasticIndicatorLimit: Bool)
+    @IBOutlet weak var iconImage: UIImageView!
+    @IBOutlet weak var iconLabel: UILabel!
 
-    public var skipIntermediateViewControllers: Bool {
-        switch self {
-        case .common(let skipIntermediateViewControllers):
-            return skipIntermediateViewControllers
-        case .progressive(let skipIntermediateViewControllers, _):
-            return skipIntermediateViewControllers
-        }
-    }
-
-    public var isProgressiveIndicator: Bool {
-        switch self {
-        case .common:
-            return false
-        case .progressive:
-            return true
-        }
-    }
-
-    public var isElasticIndicatorLimit: Bool {
-        switch self {
-        case .common:
-            return false
-        case .progressive(_, let elasticIndicatorLimit):
-            return elasticIndicatorLimit
-        }
-    }
 }

@@ -34,7 +34,6 @@
 
 
 #pragma GCC diagnostic ignored "-Wgnu"
-#pragma GCC diagnostic ignored "-Wreceiver-is-weak"
 #pragma GCC diagnostic ignored "-Warc-repeated-use-of-weak"
 #pragma GCC diagnostic ignored "-Wdirect-ivar-access"
 

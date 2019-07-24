@@ -87,7 +87,7 @@ open class BaseButtonBarPagerTabStripViewController<ButtonBarCellType: UICollect
         buttonBarView.showsHorizontalScrollIndicator = false
         buttonBarView.backgroundColor = settings.style.buttonBarBackgroundColor ?? buttonBarView.backgroundColor
         buttonBarView.selectedBar.backgroundColor = settings.style.selectedBarBackgroundColor
-
+        buttonBarView.selectedBarVerticalAlignment = settings.style.selectedBarVerticalAlignment
         buttonBarView.selectedBarHeight = settings.style.selectedBarHeight
         // register button bar item cell
         switch buttonBarItemSpec! {
@@ -131,6 +131,7 @@ open class BaseButtonBarPagerTabStripViewController<ButtonBarCellType: UICollect
         // selectedBar is resized and its contentOffset/scroll is set correctly (the selected
         // tab/cell may end up either skewed or off screen after a rotation otherwise)
         buttonBarView.moveTo(index: currentIndex, animated: false, swipeDirection: .none, pagerScroll: .scrollOnlyIfOutOfScreen)
+        buttonBarView.selectItem(at: IndexPath(item: currentIndex, section: 0), animated: false, scrollPosition: [])
     }
 
     // MARK: - View Rotation
@@ -194,7 +195,7 @@ open class BaseButtonBarPagerTabStripViewController<ButtonBarCellType: UICollect
 
     // MARK: - UICollectionViewDelegateFlowLayut
 
-    open func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: IndexPath) -> CGSize {
+    @objc open func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: IndexPath) -> CGSize {
         guard let cellWidthValue = cachedCellWidths?[indexPath.row] else {
             fatalError("cachedCellWidths for \(indexPath.row) must not be nil")
         }
@@ -321,7 +322,14 @@ open class ExampleBaseButtonBarPagerTabStripViewController: BaseButtonBarPagerTa
     }
 
     open func initialize() {
-        buttonBarItemSpec = .nibFile(nibName: "ButtonCell", bundle: Bundle(for: ButtonBarViewCell.self), width: { [weak self] (childItemInfo) -> CGFloat in
+        var bundle = Bundle(for: ButtonBarViewCell.self)
+        if let resourcePath = bundle.path(forResource: "XLPagerTabStrip", ofType: "bundle") {
+            if let resourcesBundle = Bundle(path: resourcePath) {
+                bundle = resourcesBundle
+            }
+        }
+        
+        buttonBarItemSpec = .nibFile(nibName: "ButtonCell", bundle: bundle, width: { [weak self] (childItemInfo) -> CGFloat in
             let label = UILabel()
             label.translatesAutoresizingMaskIntoConstraints = false
             label.font = self?.settings.style.buttonBarItemFont ?? label.font
@@ -333,6 +341,7 @@ open class ExampleBaseButtonBarPagerTabStripViewController: BaseButtonBarPagerTa
 
     open override func configure(cell: ButtonBarViewCell, for indicatorInfo: IndicatorInfo) {
         cell.label.text = indicatorInfo.title
+        cell.accessibilityLabel = indicatorInfo.accessibilityLabel
         if let image = indicatorInfo.image {
             cell.imageView.image = image
         }
