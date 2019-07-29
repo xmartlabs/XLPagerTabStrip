@@ -194,9 +194,13 @@ open class ButtonBarPagerTabStripViewController: PagerTabStripViewController, Pa
     open override func reloadPagerTabStripView() {
         super.reloadPagerTabStripView()
         guard isViewLoaded else { return }
+        reloadButtonBarView()
+        buttonBarView.moveTo(index: currentIndex, animated: false, swipeDirection: .none, pagerScroll: .yes)
+    }
+
+    open func reloadButtonBarView() {
         buttonBarView.reloadData()
         cachedCellWidths = calculateWidths()
-        buttonBarView.moveTo(index: currentIndex, animated: false, swipeDirection: .none, pagerScroll: .yes)
     }
 
     open func calculateStretchedCellWidths(_ minimumCellWidths: [CGFloat], suggestedStretchedCellWidth: CGFloat, previousNumberOfLargeCells: Int) -> CGFloat {
