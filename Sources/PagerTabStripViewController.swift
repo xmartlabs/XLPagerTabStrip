@@ -167,6 +167,7 @@ open class PagerTabStripViewController: UIViewController, UIScrollViewDelegate {
             containerView.setContentOffset(CGPoint(x: pageOffsetForChild(at: index), y: 0), animated: true)
         } else {
             if(view.window == nil) {
+                preCurrentIndex = index
                 currentIndex = index	//in case of bounds change - otherwise the contentOffset is being reset in updateContent()
             }
             (navigationController?.view ?? view).isUserInteractionEnabled = !animated
