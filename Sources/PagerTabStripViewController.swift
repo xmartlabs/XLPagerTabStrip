@@ -149,7 +149,7 @@ open class PagerTabStripViewController: UIViewController, UIScrollViewDelegate {
     }
 
     open func moveToViewController(at index: Int, animated: Bool = true) {
-        guard isViewLoaded && view.window != nil && currentIndex != index else {
+        guard isViewLoaded && (view.window != nil || animated == false) && currentIndex != index else {
             preCurrentIndex = index
             return
         }
@@ -166,6 +166,10 @@ open class PagerTabStripViewController: UIViewController, UIScrollViewDelegate {
             (navigationController?.view ?? view).isUserInteractionEnabled = !animated
             containerView.setContentOffset(CGPoint(x: pageOffsetForChild(at: index), y: 0), animated: true)
         } else {
+            if(view.window == nil) {
+                preCurrentIndex = index
+                currentIndex = index	//in case of bounds change - otherwise the contentOffset is being reset in updateContent()
+            }
             (navigationController?.view ?? view).isUserInteractionEnabled = !animated
             containerView.setContentOffset(CGPoint(x: pageOffsetForChild(at: index), y: 0), animated: animated)
         }
