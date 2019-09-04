@@ -30,6 +30,7 @@ open class BaseButtonBarPagerTabStripViewController<ButtonBarCellType: UICollect
     public var buttonBarItemSpec: ButtonBarItemSpec<ButtonBarCellType>!
     public var changeCurrentIndex: ((_ oldCell: ButtonBarCellType?, _ newCell: ButtonBarCellType?, _ animated: Bool) -> Void)?
     public var changeCurrentIndexProgressive: ((_ oldCell: ButtonBarCellType?, _ newCell: ButtonBarCellType?, _ progressPercentage: CGFloat, _ changeCurrentIndex: Bool, _ animated: Bool) -> Void)?
+    private var oldCurrentIndex: Int = -1
 
     @IBOutlet public weak var buttonBarView: ButtonBarView!
 
@@ -150,6 +151,11 @@ open class BaseButtonBarPagerTabStripViewController<ButtonBarCellType: UICollect
         buttonBarView.moveTo(index: currentIndex, animated: false, swipeDirection: .none, pagerScroll: .yes)
     }
 
+    open override func updateContent() {
+        oldCurrentIndex = currentIndex
+        super.updateContent()
+    }
+
     open func calculateStretchedCellWidths(_ minimumCellWidths: [CGFloat], suggestedStretchedCellWidth: CGFloat, previousNumberOfLargeCells: Int) -> CGFloat {
         var numberOfLargeCells = 0
         var totalWidthOfLargeCells: CGFloat = 0
@@ -205,6 +211,8 @@ open class BaseButtonBarPagerTabStripViewController<ButtonBarCellType: UICollect
     open func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard indexPath.item != currentIndex else { return }
 
+        oldCurrentIndex = currentIndex
+
         buttonBarView.moveTo(index: indexPath.item, animated: true, swipeDirection: .none, pagerScroll: .yes)
         shouldUpdateButtonBarView = false
 
@@ -237,13 +245,14 @@ open class BaseButtonBarPagerTabStripViewController<ButtonBarCellType: UICollect
 
         configure(cell: cell, for: indicatorInfo)
 
+        let isCurrentIndex = currentIndex == indexPath.item && oldCurrentIndex != indexPath.item
         if pagerBehaviour.isProgressiveIndicator {
             if let changeCurrentIndexProgressive = changeCurrentIndexProgressive {
-                changeCurrentIndexProgressive(currentIndex == indexPath.item ? nil : cell, currentIndex == indexPath.item ? cell : nil, 1, true, false)
+                changeCurrentIndexProgressive(isCurrentIndex ? nil : cell, isCurrentIndex ? cell : nil, 1, true, false)
             }
         } else {
             if let changeCurrentIndex = changeCurrentIndex {
-                changeCurrentIndex(currentIndex == indexPath.item ? nil : cell, currentIndex == indexPath.item ? cell : nil, false)
+                changeCurrentIndex(isCurrentIndex ? nil : cell, isCurrentIndex ? cell : nil, false)
             }
         }
 
