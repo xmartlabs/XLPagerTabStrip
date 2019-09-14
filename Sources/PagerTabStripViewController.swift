@@ -158,7 +158,7 @@ open class PagerTabStripViewController: UIViewController, UIScrollViewDelegate {
         if #available(iOS 11.0, *) {
             top = -containerView.adjustedContentInset.top
         } else {
-            top = 0
+            top = -containerView.contentInset.top
         }
         
         if animated && pagerBehaviour.skipIntermediateViewControllers && abs(currentIndex - index) > 1 {
