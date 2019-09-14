@@ -154,6 +154,13 @@ open class PagerTabStripViewController: UIViewController, UIScrollViewDelegate {
             return
         }
 
+        let top: CGFloat
+        if #available(iOS 11.0, *) {
+            top = -containerView.adjustedContentInset.top
+        } else {
+            top = -containerView.contentInset.top
+        }
+        
         if animated && pagerBehaviour.skipIntermediateViewControllers && abs(currentIndex - index) > 1 {
             var tmpViewControllers = viewControllers
             let currentChildVC = viewControllers[currentIndex]
@@ -162,12 +169,12 @@ open class PagerTabStripViewController: UIViewController, UIScrollViewDelegate {
             tmpViewControllers[currentIndex] = fromChildVC
             tmpViewControllers[fromIndex] = currentChildVC
             pagerTabStripChildViewControllersForScrolling = tmpViewControllers
-            containerView.setContentOffset(CGPoint(x: pageOffsetForChild(at: fromIndex), y: 0), animated: false)
+            containerView.setContentOffset(CGPoint(x: pageOffsetForChild(at: fromIndex), y: top), animated: false)
             (navigationController?.view ?? view).isUserInteractionEnabled = !animated
-            containerView.setContentOffset(CGPoint(x: pageOffsetForChild(at: index), y: 0), animated: true)
+            containerView.setContentOffset(CGPoint(x: pageOffsetForChild(at: index), y: top), animated: true)
         } else {
             (navigationController?.view ?? view).isUserInteractionEnabled = !animated
-            containerView.setContentOffset(CGPoint(x: pageOffsetForChild(at: index), y: 0), animated: animated)
+            containerView.setContentOffset(CGPoint(x: pageOffsetForChild(at: index), y: top), animated: animated)
         }
     }
 
