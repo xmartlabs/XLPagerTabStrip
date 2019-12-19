@@ -42,9 +42,11 @@ public protocol PagerTabStripIsProgressiveDelegate: PagerTabStripDelegate {
     func updateIndicator(for viewController: PagerTabStripViewController, fromIndex: Int, toIndex: Int, withProgressPercentage progressPercentage: CGFloat, indexWasChanged: Bool)
 }
 
+public typealias ViewControllerIndicatorInfoProvider = UIViewController & IndicatorInfoProvider
+
 public protocol PagerTabStripDataSource: class {
 
-    func viewControllers(for pagerTabStripController: PagerTabStripViewController) -> [UIViewController]
+    func viewControllers(for pagerTabStripController: PagerTabStripViewController) -> [ViewControllerIndicatorInfoProvider]
 }
 
 // MARK: PagerTabStripViewController
@@ -177,7 +179,7 @@ open class PagerTabStripViewController: UIViewController, UIScrollViewDelegate {
 
     // MARK: - PagerTabStripDataSource
 
-    open func viewControllers(for pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
+    open func viewControllers(for pagerTabStripController: PagerTabStripViewController) -> [ViewControllerIndicatorInfoProvider] {
         assertionFailure("Sub-class must implement the PagerTabStripDataSource viewControllers(for:) method")
         return []
     }
@@ -381,8 +383,6 @@ open class PagerTabStripViewController: UIViewController, UIScrollViewDelegate {
         guard !viewControllers.isEmpty else {
             fatalError("viewControllers(for:) should provide at least one child view controller")
         }
-        viewControllers.forEach { if !($0 is IndicatorInfoProvider) { fatalError("Every view controller provided by PagerTabStripDataSource's viewControllers(for:) method must conform to IndicatorInfoProvider") }}
-
     }
 
     private var pagerTabStripChildViewControllersForScrolling: [UIViewController]?
