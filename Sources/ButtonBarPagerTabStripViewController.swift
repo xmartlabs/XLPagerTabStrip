@@ -64,7 +64,7 @@ public struct ButtonBarPagerTabStripSettings {
     public var style = Style()
 }
 
-open class ButtonBarPagerTabStripViewController: PagerTabStripViewController, PagerTabStripDataSource, PagerTabStripIsProgressiveDelegate, UICollectionViewDelegate, UICollectionViewDataSource {
+open class ButtonBarPagerTabStripViewController: PagerTabStripViewController, PagerTabStripDataSource, PagerTabStripIsProgressiveDelegate, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
 
     public var settings = ButtonBarPagerTabStripSettings()
 
