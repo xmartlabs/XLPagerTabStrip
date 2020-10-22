@@ -23,6 +23,7 @@
 // THE SOFTWARE.
 
 import Foundation
+import UIKit
 
 public enum ButtonBarItemSpec<CellType: UICollectionViewCell> {
 

@@ -23,6 +23,8 @@
 // THE SOFTWARE.
 
 import Foundation
+import UIKit
+import FXPageControl
 
 public struct TwitterPagerTabStripSettings {
 
