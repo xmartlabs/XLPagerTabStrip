@@ -25,6 +25,34 @@
 import Foundation
 import UIKit
 
+
+extension Foundation.Bundle {
+    /// Returns the resource bundle associated with the current Swift module.
+    static var resourceBundle: Bundle = {
+         let candidates = [
+            // Bundle should be present here when the package is linked into an App.
+            Bundle.main.resourceURL,
+
+            // Bundle should be present here when the package is linked into a framework.
+            Bundle(for: ButtonBarViewCell.self).resourceURL,
+
+            // For command-line tools.
+            Bundle.main.bundleURL,
+        ]
+
+        for candidate in candidates {
+            let bundleNames = ["XLPagerTabStrip", "XLPagerTabStrip_XLPagerTabStrip"]
+            for name in bundleNames {
+                let bundlePath = candidate?.appendingPathComponent(name + ".bundle")
+                if let bundle = bundlePath.flatMap(Bundle.init(url:)) {
+                    return bundle
+                }
+            }
+        }
+        fatalError("unable to find bundle named XLPagerTabStrip_XLPagerTabStrip")
+    }()
+}
+
 public enum ButtonBarItemSpec<CellType: UICollectionViewCell> {
 
     case nibFile(nibName: String, bundle: Bundle?, width:((IndicatorInfo)-> CGFloat))
@@ -94,37 +122,32 @@ open class ButtonBarPagerTabStripViewController: PagerTabStripViewController, Pa
 
     open override func viewDidLoad() {
         super.viewDidLoad()
-        
-        var bundle = Bundle(for: ButtonBarViewCell.self)
-        if let resourcePath = bundle.path(forResource: "XLPagerTabStrip", ofType: "bundle") {
-            if let resourcesBundle = Bundle(path: resourcePath) {
-                bundle = resourcesBundle
-            }
-        }
+
+        let bundle = Bundle.resourceBundle
         
         buttonBarItemSpec = .nibFile(nibName: "ButtonCell", bundle: bundle, width: { [weak self] (childItemInfo) -> CGFloat in
-                let label = UILabel()
-                label.translatesAutoresizingMaskIntoConstraints = false
-                label.font = self?.settings.style.buttonBarItemFont
-                label.text = childItemInfo.title
-                let labelSize = label.intrinsicContentSize
-                return labelSize.width + (self?.settings.style.buttonBarItemLeftRightMargin ?? 8) * 2
+            let label = UILabel()
+            label.translatesAutoresizingMaskIntoConstraints = false
+            label.font = self?.settings.style.buttonBarItemFont
+            label.text = childItemInfo.title
+            let labelSize = label.intrinsicContentSize
+            return labelSize.width + (self?.settings.style.buttonBarItemLeftRightMargin ?? 8) * 2
         })
 
         let buttonBarViewAux = buttonBarView ?? {
-                let flowLayout = UICollectionViewFlowLayout()
-                flowLayout.scrollDirection = .horizontal
-                let buttonBarHeight = settings.style.buttonBarHeight ?? 44
-                let buttonBar = ButtonBarView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: buttonBarHeight), collectionViewLayout: flowLayout)
-                buttonBar.backgroundColor = .orange
-                buttonBar.selectedBar.backgroundColor = .black
-                buttonBar.autoresizingMask = .flexibleWidth
-                var newContainerViewFrame = containerView.frame
-                newContainerViewFrame.origin.y = buttonBarHeight
-                newContainerViewFrame.size.height = containerView.frame.size.height - (buttonBarHeight - containerView.frame.origin.y)
-                containerView.frame = newContainerViewFrame
-                return buttonBar
-            }()
+            let flowLayout = UICollectionViewFlowLayout()
+            flowLayout.scrollDirection = .horizontal
+            let buttonBarHeight = settings.style.buttonBarHeight ?? 44
+            let buttonBar = ButtonBarView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: buttonBarHeight), collectionViewLayout: flowLayout)
+            buttonBar.backgroundColor = .orange
+            buttonBar.selectedBar.backgroundColor = .black
+            buttonBar.autoresizingMask = .flexibleWidth
+            var newContainerViewFrame = containerView.frame
+            newContainerViewFrame.origin.y = buttonBarHeight
+            newContainerViewFrame.size.height = containerView.frame.size.height - (buttonBarHeight - containerView.frame.origin.y)
+            containerView.frame = newContainerViewFrame
+            return buttonBar
+        }()
         buttonBarView = buttonBarViewAux
 
         if buttonBarView.superview == nil {

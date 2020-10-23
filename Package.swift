@@ -20,11 +20,7 @@ let package = Package(
         ),
         .target(
             name: "XLPagerTabStrip",
-            dependencies: ["FXPageControl"],
-            exclude: ["Example", "XLPagerTabStrip"],
-            resources: [
-                .process("ButtonCell.xib")
-            ]
+            dependencies: ["FXPageControl"]
         ),
     ]
 )
