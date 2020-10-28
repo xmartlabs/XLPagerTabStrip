@@ -11,6 +11,6 @@ Pod::Spec.new do |s|
   s.requires_arc = true
   s.ios.source_files = 'Sources/**/*.{h,m,swift}'
   s.ios.frameworks = 'UIKit', 'Foundation'
-  s.resource_bundles = { 'XLPagerTabStrip' => ['Sources/ButtonCell.xib'] }
+  s.resource_bundles = { 'XLPagerTabStrip' => ['Sources/XLPagerTabStrip/Resources/ButtonCell.xib'] }
   s.swift_version = "5.0"
 end
