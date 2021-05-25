@@ -102,7 +102,7 @@ open class ButtonBarPagerTabStripViewController: PagerTabStripViewController, Pa
                 bundle = resourcesBundle
             }
         }
-        
+
         // First tries to load nib from swift package mannagers `Bundle.module`, if not found then tries to load from bundle variable
         // This is done so that project can be run both from SPM's `Package.swift` and cocoapods `xcworkspace`
         buttonBarItemSpec = .nibFile(nibName: "ButtonCell", bundle: .module ?? bundle, width: { [weak self] (childItemInfo) -> CGFloat in
@@ -260,7 +260,7 @@ open class ButtonBarPagerTabStripViewController: PagerTabStripViewController, Pa
 
     private func cellForItems(at indexPaths: [IndexPath], reloadIfNotVisible reload: Bool = true) -> [ButtonBarViewCell?] {
         let cells = indexPaths.map { buttonBarView.cellForItem(at: $0) as? ButtonBarViewCell }
-      
+
         let uniqueIndexPaths = Set<IndexPath>(indexPaths)
         guard uniqueIndexPaths.count > 1 else { return cells }
 
