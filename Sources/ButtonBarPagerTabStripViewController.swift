@@ -103,9 +103,9 @@ open class ButtonBarPagerTabStripViewController: PagerTabStripViewController, Pa
             }
         }
 
-        // First tries to load nib from swift package mannagers `Bundle.module`, if not found then tries to load from bundle variable
+        // First tries to load nib from swift package managers `Bundle.module`(spmBundle), if not found then tries to load from bundle variable
         // This is done so that project can be run both from SPM's `Package.swift` and cocoapods `xcworkspace`
-        buttonBarItemSpec = .nibFile(nibName: "ButtonCell", bundle: .module ?? bundle, width: { [weak self] (childItemInfo) -> CGFloat in
+        buttonBarItemSpec = .nibFile(nibName: "ButtonCell", bundle: .spmBundle ?? bundle, width: { [weak self] (childItemInfo) -> CGFloat in
                 let label = UILabel()
                 label.translatesAutoresizingMaskIntoConstraints = false
                 label.font = self?.settings.style.buttonBarItemFont

@@ -11,7 +11,7 @@ private class BundleFinder {}
 
 extension Foundation.Bundle {
     /// Returns the resource bundle associated with the current Swift module.
-    static var module: Bundle? = {
+    static var spmBundle: Bundle? = {
         let bundleName = "XLPagerTabStrip_XLPagerTabStrip"
 
         let candidates = [
