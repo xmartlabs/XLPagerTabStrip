@@ -22,12 +22,12 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-import Foundation
+import UIKit
 
 public enum ButtonBarItemSpec<CellType: UICollectionViewCell> {
 
-    case nibFile(nibName: String, bundle: Bundle?, width:((IndicatorInfo)-> CGFloat))
-    case cellClass(width:((IndicatorInfo)-> CGFloat))
+    case nibFile(nibName: String, bundle: Bundle?, width: ( (IndicatorInfo) -> CGFloat) )
+    case cellClass(width: ((IndicatorInfo) -> CGFloat))
 
     public var weight: ((IndicatorInfo) -> CGFloat) {
         switch self {
@@ -56,14 +56,6 @@ public struct ButtonBarPagerTabStripSettings {
         public var buttonBarItemFont = UIFont.systemFont(ofSize: 18)
         public var buttonBarItemLeftRightMargin: CGFloat = 8
         public var buttonBarItemTitleColor: UIColor?
-        @available(*, deprecated: 7.0.0) public var buttonBarItemsShouldFillAvailiableWidth: Bool {
-            set {
-                buttonBarItemsShouldFillAvailableWidth = newValue
-            }
-            get {
-                return buttonBarItemsShouldFillAvailableWidth
-            }
-        }
         public var buttonBarItemsShouldFillAvailableWidth = true
         // only used if button bar is created programaticaly and not using storyboards or nib files
         public var buttonBarHeight: CGFloat?
@@ -82,7 +74,7 @@ open class ButtonBarPagerTabStripViewController: PagerTabStripViewController, Pa
     public var changeCurrentIndexProgressive: ((_ oldCell: ButtonBarViewCell?, _ newCell: ButtonBarViewCell?, _ progressPercentage: CGFloat, _ changeCurrentIndex: Bool, _ animated: Bool) -> Void)?
 
     @IBOutlet public weak var buttonBarView: ButtonBarView!
-  
+
     private var shouldUpdateContent = true
 
     lazy private var cachedCellWidths: [CGFloat]? = { [unowned self] in
@@ -103,7 +95,7 @@ open class ButtonBarPagerTabStripViewController: PagerTabStripViewController, Pa
 
     open override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         var bundle = Bundle(for: ButtonBarViewCell.self)
         if let resourcePath = bundle.path(forResource: "XLPagerTabStrip", ofType: "bundle") {
             if let resourcesBundle = Bundle(path: resourcePath) {
@@ -111,7 +103,9 @@ open class ButtonBarPagerTabStripViewController: PagerTabStripViewController, Pa
             }
         }
         
-        buttonBarItemSpec = .nibFile(nibName: "ButtonCell", bundle: bundle, width: { [weak self] (childItemInfo) -> CGFloat in
+        // First tries to load nib from swift package mannagers `Bundle.module`, if not found then tries to load from bundle variable
+        // This is done so that project can be run both from SPM's `Package.swift` and cocoapods `xcworkspace`
+        buttonBarItemSpec = .nibFile(nibName: "ButtonCell", bundle: .module ?? bundle, width: { [weak self] (childItemInfo) -> CGFloat in
                 let label = UILabel()
                 label.translatesAutoresizingMaskIntoConstraints = false
                 label.font = self?.settings.style.buttonBarItemFont
@@ -163,11 +157,10 @@ open class ButtonBarPagerTabStripViewController: PagerTabStripViewController, Pa
         // register button bar item cell
         switch buttonBarItemSpec! {
         case .nibFile(let nibName, let bundle, _):
-            buttonBarView.register(UINib(nibName: nibName, bundle: bundle), forCellWithReuseIdentifier:"Cell")
+            buttonBarView.register(UINib(nibName: nibName, bundle: bundle), forCellWithReuseIdentifier: "Cell")
         case .cellClass:
-            buttonBarView.register(ButtonBarViewCell.self, forCellWithReuseIdentifier:"Cell")
+            buttonBarView.register(ButtonBarViewCell.self, forCellWithReuseIdentifier: "Cell")
         }
-        //-
     }
 
     open override func viewWillAppear(_ animated: Bool) {
@@ -211,7 +204,7 @@ open class ButtonBarPagerTabStripViewController: PagerTabStripViewController, Pa
         updateContent()
         buttonBarView.moveTo(index: currentIndex, animated: false, swipeDirection: .none, pagerScroll: .yes)
     }
-  
+
     open override func updateContent() {
         if shouldUpdateContent {
             super.updateContent()
