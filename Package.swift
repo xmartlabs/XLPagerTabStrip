@@ -8,8 +8,9 @@ let package = Package(
   products: [
     .library(name: "XLPagerTabStrip", targets: ["XLPagerTabStrip"])
   ],
-  dependencies: [.package(url: "git@github.com:everli/FXPageControl.git", .branch("spm"))],
+  dependencies: [],
   targets: [
+    .binaryTarget(name: "FXPageControl", path: "FXPageControl.xcframework"),
     .target(
       name: "XLPagerTabStrip",
       dependencies: ["FXPageControl"],
