@@ -23,7 +23,9 @@
 // THE SOFTWARE.
 
 import UIKit
+#if canImport(FXPageControl)
 import FXPageControl
+#endif
 
 public struct TwitterPagerTabStripSettings {
 
@@ -111,7 +113,8 @@ open class TwitterPagerTabStripViewController: PagerTabStripViewController, Page
         fatalError()
     }
 
-    open override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+   // swiftlint:disable:next block_based_kvo
+   open override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey: Any]?, context: UnsafeMutableRawPointer?) {
         guard object as AnyObject === titleView && keyPath == "frame" && change?[NSKeyValueChangeKey.kindKey] as? UInt == NSKeyValueChange.setting.rawValue else { return }
 
         let oldRect = (change![NSKeyValueChangeKey.oldKey]! as AnyObject).cgRectValue

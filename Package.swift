@@ -6,7 +6,7 @@ let package = Package(
   name: "XLPagerTabStrip",
   platforms: [.iOS(.v9)],
   products: [
-    .library(name: "XLPagerTabStrip",targets: ["XLPagerTabStrip"])
+    .library(name: "XLPagerTabStrip", targets: ["XLPagerTabStrip"])
   ],
   dependencies: [.package(url: "git@github.com:everli/FXPageControl.git", .branch("spm"))],
   targets: [
