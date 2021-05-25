@@ -23,7 +23,7 @@
 // THE SOFTWARE.
 
 import UIKit
-#if canImport(FXPageControl)
+#if SWIFT_PACKAGE
 import FXPageControl
 #endif
 
