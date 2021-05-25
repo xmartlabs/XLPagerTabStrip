@@ -1,0 +1,16 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "FXPageControl",
+        "repositoryURL": "git@github.com:everli/FXPageControl.git",
+        "state": {
+          "branch": "spm",
+          "revision": "c61360f77a2da5943ae252ab32b16a63a1256adc",
+          "version": null
+        }
+      }
+    ]
+  },
+  "version": 1
+}
