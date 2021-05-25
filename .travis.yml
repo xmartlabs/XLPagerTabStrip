@@ -1,16 +1,16 @@
 language: objective-c
-osx_image: xcode10.1
+osx_image: xcode10.2
+branches:
+  only:
+    - master
 env:
-  - DESTINATION="OS=12.1,name=iPhone 8" SCHEME="XLPagerTabStrip" SDK=iphonesimulator
+  - DESTINATION="OS=12.1,name=iPhone XS" SCHEME="XLPagerTabStrip" SDK=iphonesimulator
 before_install:
 - brew update
-#- brew outdated carthage || brew upgrade carthage
-- if brew outdated | grep -qx xctool; then brew upgrade xctool; fi
-#- carthage update --platform iOS
-- gem install xcpretty --no-rdoc --no-ri --no-document --quiet
-
+- brew outdated carthage || brew upgrade carthage
 script:
-- xcodebuild clean build -project XLPagerTabStrip.xcodeproj -scheme "$SCHEME" -sdk "$SDK"
-#- xcodebuild test -project XLPagerTabStrip.xcodeproj -scheme "$SCHEME" -sdk "$SDK"
-- xcodebuild -project XLPagerTabStrip.xcodeproj -scheme "$SCHEME" -sdk "$SDK" -destination "$DESTINATION"
-  -configuration Debug ONLY_ACTIVE_ARCH=NO test | xcpretty -c
+  - set -o pipefail
+  - xcodebuild -version
+  - xcodebuild clean build -project XLPagerTabStrip.xcodeproj -scheme "$SCHEME" -sdk "$SDK"
+  #- xcodebuild test -project XLPagerTabStrip.xcodeproj -scheme "$SCHEME" -sdk "$SDK"
+  - xcodebuild -project XLPagerTabStrip.xcodeproj -scheme "$SCHEME" -sdk "$SDK" -destination "$DESTINATION" -configuration Debug ONLY_ACTIVE_ARCH=NO test | xcpretty
