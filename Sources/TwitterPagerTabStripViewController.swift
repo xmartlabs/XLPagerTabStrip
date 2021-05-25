@@ -23,9 +23,7 @@
 // THE SOFTWARE.
 
 import UIKit
-#if SWIFT_PACKAGE
 import FXPageControl
-#endif
 
 public struct TwitterPagerTabStripSettings {
 
