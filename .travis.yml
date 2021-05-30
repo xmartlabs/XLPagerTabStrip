@@ -1,10 +1,10 @@
 language: objective-c
-osx_image: xcode10.2
+osx_image: xcode12.5
 branches:
   only:
     - master
 env:
-  - DESTINATION="OS=12.1,name=iPhone XS" SCHEME="XLPagerTabStrip" SDK=iphonesimulator
+  - DESTINATION="OS=14.5,name=iPhone 12" SCHEME="XLPagerTabStrip" SDK=iphonesimulator
 before_install:
 - brew update
 - brew outdated carthage || brew upgrade carthage

@@ -22,12 +22,12 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-import Foundation
+import UIKit
 
 public enum ButtonBarItemSpec<CellType: UICollectionViewCell> {
 
-    case nibFile(nibName: String, bundle: Bundle?, width:((IndicatorInfo)-> CGFloat))
-    case cellClass(width:((IndicatorInfo)-> CGFloat))
+    case nibFile(nibName: String, bundle: Bundle?, width: ( (IndicatorInfo) -> CGFloat) )
+    case cellClass(width: ((IndicatorInfo) -> CGFloat))
 
     public var weight: ((IndicatorInfo) -> CGFloat) {
         switch self {
@@ -75,6 +75,8 @@ open class ButtonBarPagerTabStripViewController: PagerTabStripViewController, Pa
 
     @IBOutlet public weak var buttonBarView: ButtonBarView!
 
+    private var shouldUpdateContent = true
+
     lazy private var cachedCellWidths: [CGFloat]? = { [unowned self] in
         return self.calculateWidths()
     }()
@@ -93,15 +95,17 @@ open class ButtonBarPagerTabStripViewController: PagerTabStripViewController, Pa
 
     open override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         var bundle = Bundle(for: ButtonBarViewCell.self)
         if let resourcePath = bundle.path(forResource: "XLPagerTabStrip", ofType: "bundle") {
             if let resourcesBundle = Bundle(path: resourcePath) {
                 bundle = resourcesBundle
             }
         }
-        
-        buttonBarItemSpec = .nibFile(nibName: "ButtonCell", bundle: bundle, width: { [weak self] (childItemInfo) -> CGFloat in
+
+        // First tries to load nib from swift package managers `Bundle.module`(spmBundle), if not found then tries to load from bundle variable
+        // This is done so that project can be run both from SPM's `Package.swift` and cocoapods `xcworkspace`
+        buttonBarItemSpec = .nibFile(nibName: "ButtonCell", bundle: .spmBundle ?? bundle, width: { [weak self] (childItemInfo) -> CGFloat in
                 let label = UILabel()
                 label.translatesAutoresizingMaskIntoConstraints = false
                 label.font = self?.settings.style.buttonBarItemFont
@@ -153,11 +157,10 @@ open class ButtonBarPagerTabStripViewController: PagerTabStripViewController, Pa
         // register button bar item cell
         switch buttonBarItemSpec! {
         case .nibFile(let nibName, let bundle, _):
-            buttonBarView.register(UINib(nibName: nibName, bundle: bundle), forCellWithReuseIdentifier:"Cell")
+            buttonBarView.register(UINib(nibName: nibName, bundle: bundle), forCellWithReuseIdentifier: "Cell")
         case .cellClass:
-            buttonBarView.register(ButtonBarViewCell.self, forCellWithReuseIdentifier:"Cell")
+            buttonBarView.register(ButtonBarViewCell.self, forCellWithReuseIdentifier: "Cell")
         }
-        //-
     }
 
     open override func viewWillAppear(_ animated: Bool) {
@@ -192,11 +195,20 @@ open class ButtonBarPagerTabStripViewController: PagerTabStripViewController, Pa
     // MARK: - Public Methods
 
     open override func reloadPagerTabStripView() {
+        shouldUpdateContent = false
         super.reloadPagerTabStripView()
+        shouldUpdateContent = true
         guard isViewLoaded else { return }
         buttonBarView.reloadData()
         cachedCellWidths = calculateWidths()
+        updateContent()
         buttonBarView.moveTo(index: currentIndex, animated: false, swipeDirection: .none, pagerScroll: .yes)
+    }
+
+    open override func updateContent() {
+        if shouldUpdateContent {
+            super.updateContent()
+        }
     }
 
     open func calculateStretchedCellWidths(_ minimumCellWidths: [CGFloat], suggestedStretchedCellWidth: CGFloat, previousNumberOfLargeCells: Int) -> CGFloat {
@@ -248,6 +260,9 @@ open class ButtonBarPagerTabStripViewController: PagerTabStripViewController, Pa
 
     private func cellForItems(at indexPaths: [IndexPath], reloadIfNotVisible reload: Bool = true) -> [ButtonBarViewCell?] {
         let cells = indexPaths.map { buttonBarView.cellForItem(at: $0) as? ButtonBarViewCell }
+
+        let uniqueIndexPaths = Set<IndexPath>(indexPaths)
+        guard uniqueIndexPaths.count > 1 else { return cells }
 
         if reload {
             let indexPathsToReload = cells.enumerated()
