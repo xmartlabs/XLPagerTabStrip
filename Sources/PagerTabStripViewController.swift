@@ -44,7 +44,7 @@ public protocol PagerTabStripIsProgressiveDelegate: PagerTabStripDelegate {
 
 public protocol PagerTabStripDataSource: class {
 
-    func viewControllers(for pagerTabStripController: PagerTabStripViewController) -> [UIViewController]
+    func viewControllers(for pagerTabStripController: PagerTabStripViewController) -> ContiguousArray<UIViewController>
 }
 
 // MARK: PagerTabStripViewController
@@ -58,7 +58,7 @@ open class PagerTabStripViewController: UIViewController, UIScrollViewDelegate {
 
     open var pagerBehaviour = PagerTabStripBehaviour.progressive(skipIntermediateViewControllers: true, elasticIndicatorLimit: true)
 
-    open private(set) var viewControllers = [UIViewController]()
+    open private(set) var viewControllers = ContiguousArray<UIViewController>()
     open private(set) var currentIndex = 0
     open private(set) var preCurrentIndex = 0 // used *only* to store the index to which move when the pager becomes visible
 
@@ -177,7 +177,7 @@ open class PagerTabStripViewController: UIViewController, UIScrollViewDelegate {
 
     // MARK: - PagerTabStripDataSource
 
-    open func viewControllers(for pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
+    open func viewControllers(for pagerTabStripController: PagerTabStripViewController) -> ContiguousArray<UIViewController> {
         assertionFailure("Sub-class must implement the PagerTabStripDataSource viewControllers(for:) method")
         return []
     }
@@ -385,7 +385,7 @@ open class PagerTabStripViewController: UIViewController, UIScrollViewDelegate {
 
     }
 
-    private var pagerTabStripChildViewControllersForScrolling: [UIViewController]?
+    private var pagerTabStripChildViewControllersForScrolling: ContiguousArray<UIViewController>?
     private var lastPageNumber = 0
     private var lastContentOffset: CGFloat = 0.0
     private var pageBeforeRotate = 0
