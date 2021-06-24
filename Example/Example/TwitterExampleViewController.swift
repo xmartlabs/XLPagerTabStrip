@@ -28,7 +28,7 @@ import XLPagerTabStrip
 class TwitterExampleViewController: TwitterPagerTabStripViewController {
     var isReload = false
 
-    override func viewControllers(for pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
+    override func viewControllers(for pagerTabStripController: PagerTabStripViewController) -> ContiguousArray<UIViewController> {
 
         let child_1 = TableChildExampleViewController(style: .plain, itemInfo: "TableView")
         let child_2 = ChildExampleViewController(itemInfo: "View")
@@ -53,7 +53,7 @@ class TwitterExampleViewController: TwitterPagerTabStripViewController {
             }
         }
         let nItems = 1 + (arc4random() % 8)
-        return Array(childViewControllers.prefix(Int(nItems)))
+        return ContiguousArray(childViewControllers.prefix(Int(nItems)))
     }
 
     @IBAction func reloadTapped(_ sender: AnyObject) {

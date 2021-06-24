@@ -43,7 +43,7 @@ class BarExampleViewController: BarPagerTabStripViewController {
 
     // MARK: - PagerTabStripDataSource
 
-    override func viewControllers(for pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
+    override func viewControllers(for pagerTabStripController: PagerTabStripViewController) -> ContiguousArray<UIViewController> {
 
         let child_1 = TableChildExampleViewController(style: .plain, itemInfo: "Table View")
         let child_2 = ChildExampleViewController(itemInfo: "View")
@@ -63,7 +63,7 @@ class BarExampleViewController: BarPagerTabStripViewController {
             }
         }
         let nItems = 1 + (arc4random() % 4)
-        return Array(childViewControllers.prefix(Int(nItems)))
+        return ContiguousArray(childViewControllers.prefix(Int(nItems)))
     }
 
     override func reloadPagerTabStripView() {
