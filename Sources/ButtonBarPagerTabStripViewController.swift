@@ -42,6 +42,8 @@ public enum ButtonBarItemSpec<CellType: UICollectionViewCell> {
 public struct ButtonBarPagerTabStripSettings {
 
     public struct Style {
+        public var animated: Bool = true
+        
         public var buttonBarBackgroundColor: UIColor?
         public var buttonBarMinimumInteritemSpacing: CGFloat?
         public var buttonBarMinimumLineSpacing: CGFloat?
@@ -296,7 +298,7 @@ open class ButtonBarPagerTabStripViewController: PagerTabStripViewController, Pa
                 changeCurrentIndex(cells.first!, cells.last!, true)
             }
         }
-        moveToViewController(at: indexPath.item)
+        moveToViewController(at: indexPath.item, animated: settings.style.animated)
     }
 
     // MARK: - UICollectionViewDataSource
