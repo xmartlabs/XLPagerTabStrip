@@ -94,15 +94,11 @@ open class ButtonBarPagerTabStripViewController: PagerTabStripViewController, Pa
 
     open override func viewDidLoad() {
         super.viewDidLoad()
-        
-        var bundle = Bundle(for: ButtonBarViewCell.self)
+
 #if SWIFT_PACKAGE
-        if let resourcePath = bundle.path(forResource: "XLPagerTabStrip_XLPagerTabStrip", ofType: "bundle") {
-            if let resourcesBundle = Bundle(path: resourcePath) {
-                bundle = resourcesBundle
-            }
-        }
+        var bundle = Bundle.module
 #else
+        var bundle = Bundle(for: ButtonBarViewCell.self)
         if let resourcePath = bundle.path(forResource: "XLPagerTabStrip", ofType: "bundle") {
             if let resourcesBundle = Bundle(path: resourcePath) {
                 bundle = resourcesBundle
