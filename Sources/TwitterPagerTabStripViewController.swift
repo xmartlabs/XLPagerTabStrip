@@ -24,6 +24,23 @@
 
 import Foundation
 
+extension UIWindow {
+    static var isLandscape: Bool {
+        return UIApplication.shared.windows
+            .first?
+            .windowScene?
+            .interfaceOrientation
+            .isLandscape ?? false
+    }
+    static var isPortrait: Bool {
+        return UIApplication.shared.windows
+            .first?
+            .windowScene?
+            .interfaceOrientation
+            .isPortrait ?? false
+    }
+}
+
 public struct TwitterPagerTabStripSettings {
 
     public struct Style {
@@ -178,7 +195,7 @@ open class TwitterPagerTabStripViewController: PagerTabStripViewController, Page
             let navTitleLabel: UILabel = {
                 let label = UILabel()
                 label.text = indicatorInfo.title
-                label.font = UIApplication.shared.statusBarOrientation.isPortrait ? settings.style.portraitTitleFont : settings.style.landscapeTitleFont
+                label.font = UIWindow.isPortrait ? settings.style.portraitTitleFont : settings.style.landscapeTitleFont
                 label.textColor = settings.style.titleColor
                 label.alpha = 0
                 return label
@@ -192,7 +209,7 @@ open class TwitterPagerTabStripViewController: PagerTabStripViewController, Page
 
     private func setNavigationViewItemsPosition(updateAlpha: Bool) {
         guard let distance = distanceValue else { return }
-        let isPortrait = UIApplication.shared.statusBarOrientation.isPortrait
+        let isPortrait = UIWindow.isPortrait
         let navBarHeight: CGFloat = navigationController!.navigationBar.frame.size.height
         for (index, label) in childTitleLabels.enumerated() {
             if updateAlpha {
