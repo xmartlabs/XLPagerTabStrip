@@ -156,7 +156,8 @@
 				281BFDC01C511C420090C26F /* IndicatorInfo.swift */,
 				281BFDC21C511F120090C26F /* PagerTabStripBehaviour.swift */,
 			);
-			path = Sources;
+			name = Sources;
+			path = Sources/XLPagerTabStrip;
 			sourceTree = "<group>";
 		};
 		3174BB0F28E2B81700847CF0 /* ObjC */ = {
@@ -173,7 +174,8 @@
 			children = (
 				3174BB1728E2C46A00847CF0 /* ButtonCell.xib */,
 			);
-			path = Resources;
+			name = Resources;
+			path = Sources/XLPagerTabStrip/Resources;
 			sourceTree = SOURCE_ROOT;
 		};
 /* End PBXGroup section */

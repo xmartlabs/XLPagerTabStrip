@@ -23,6 +23,10 @@
 // THE SOFTWARE.
 
 import Foundation
+import UIKit
+#if SWIFT_PACKAGE
+import FXPageControl
+#endif
 
 extension UIWindow {
     static var isLandscape: Bool {

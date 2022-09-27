@@ -27,15 +27,11 @@ let package = Package(
         // Targets can depend on other targets in this package, and on products in packages this package depends on.
         .target(
             name: "XLPagerTabStrip",
-            dependencies: ["FXPageControl"],
-            path: "Sources/",
-            resources: [
-                            .process("Resources")
-                        ]),
-        .testTarget(
-            name: "XLPagerTabStripTests",
-            dependencies: ["XLPagerTabStrip"],
-            path: "Tests/"),
+            dependencies: ["FXPageControl"]),
+//        .testTarget(
+//            name: "XLPagerTabStripTests",
+//            dependencies: ["XLPagerTabStrip"],
+//            path: "Tests/"),
     ],
     swiftLanguageVersions: [
            .v5
