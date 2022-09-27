@@ -27,7 +27,7 @@ import XLPagerTabStrip
 
 class SpotifyExampleViewController: ButtonBarPagerTabStripViewController {
 
-    @IBOutlet weak var shadowView: UIView!
+    @IBOutlet var shadowView: UIView!
 
     let graySpotifyColor = UIColor(red: 21/255.0, green: 21/255.0, blue: 24/255.0, alpha: 1.0)
     let darkGraySpotifyColor = UIColor(red: 19/255.0, green: 20/255.0, blue: 20/255.0, alpha: 1.0)

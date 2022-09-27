@@ -40,7 +40,7 @@ open class BarPagerTabStripViewController: PagerTabStripViewController, PagerTab
 
     public var settings = BarPagerTabStripSettings()
 
-    @IBOutlet weak public var barView: BarView!
+    @IBOutlet public var barView: BarView!
 
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
