@@ -323,7 +323,11 @@ open class ExampleBaseButtonBarPagerTabStripViewController: BaseButtonBarPagerTa
     }
 
     open func initialize() {
+        #if SWIFT_PACKAGE
+        var bundle = Bundle.module
+        #else
         var bundle = Bundle(for: ButtonBarViewCell.self)
+        #endif
         
         if let resourcePath = bundle.path(forResource: "XLPagerTabStrip", ofType: "bundle") {
             if let resourcesBundle = Bundle(path: resourcePath) {
