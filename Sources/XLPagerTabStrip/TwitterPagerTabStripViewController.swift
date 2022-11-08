@@ -30,18 +30,26 @@ import FXPageControl
 
 extension UIWindow {
     static var isLandscape: Bool {
-        return UIApplication.shared.windows
-            .first?
-            .windowScene?
-            .interfaceOrientation
-            .isLandscape ?? false
+        if #available(iOS 13.0, *) {
+            return UIApplication.shared.windows
+                .first?
+                .windowScene?
+                .interfaceOrientation
+                .isLandscape ?? false
+        } else {
+            return UIApplication.shared.statusBarOrientation.isLandscape
+        }
     }
     static var isPortrait: Bool {
-        return UIApplication.shared.windows
-            .first?
-            .windowScene?
-            .interfaceOrientation
-            .isPortrait ?? false
+        if #available(iOS 13.0, *) {
+            return UIApplication.shared.windows
+                .first?
+                .windowScene?
+                .interfaceOrientation
+                .isPortrait ?? false
+        } else {
+            return UIApplication.shared.statusBarOrientation.isPortrait
+        }
     }
 }
 
