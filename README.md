@@ -1,4 +1,4 @@
-![PagerTabStripView: First pager view built in pure SwiftUI](https://raw.githubusercontent.com/xmartlabs/PagerTabStripView/master/banner.png)
+![XLPagerTabStripView](https://raw.githubusercontent.com/xmartlabs/XLPagerTabStrip/master/XLPagerTabTrip.png)
 
 <p align="left">
 <a href="https://travis-ci.org/xmartlabs/XLPagerTabStrip"><img src="https://travis-ci.org/xmartlabs/XLPagerTabStrip.svg?branch=master" alt="Build status" /></a>
