@@ -26,7 +26,7 @@ import Foundation
 
 // MARK: Protocols
 
-public protocol IndicatorInfoProvider {
+@objc public protocol IndicatorInfoProvider {
 
     func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo
 
