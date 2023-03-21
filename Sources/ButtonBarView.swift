@@ -51,7 +51,7 @@ open class ButtonBarView: UICollectionView {
         return bar
     }()
 
-    internal var selectedBarHeight: CGFloat = 4 {
+    internal var selectedBarHeight: CGFloat = 2 {
         didSet {
             updateSelectedBarYPosition()
         }
@@ -99,7 +99,7 @@ open class ButtonBarView: UICollectionView {
         targetFrame.size.height = selectedBar.frame.size.height
         targetFrame.size.width += (toFrame.size.width - fromFrame.size.width) * progressPercentage
         targetFrame.origin.x += (toFrame.origin.x - fromFrame.origin.x) * progressPercentage
-
+        targetFrame.size.width = 76
         selectedBar.frame = CGRect(x: targetFrame.origin.x, y: selectedBar.frame.origin.y, width: targetFrame.size.width, height: selectedBar.frame.size.height)
 
         var targetContentOffset: CGFloat = 0.0
@@ -122,7 +122,7 @@ open class ButtonBarView: UICollectionView {
 
         updateContentOffset(animated: animated, pagerScroll: pagerScroll, toFrame: selectedCellFrame, toIndex: (selectedCellIndexPath as NSIndexPath).row)
 
-        selectedBarFrame.size.width = selectedCellFrame.size.width
+        selectedBarFrame.size.width = 76
         selectedBarFrame.origin.x = selectedCellFrame.origin.x
 
         if animated {
@@ -179,7 +179,7 @@ open class ButtonBarView: UICollectionView {
         case .bottom:
             selectedBarFrame.origin.y = frame.size.height - selectedBarHeight
         }
-
+        selectedBarFrame.size.width = 76
         selectedBarFrame.size.height = selectedBarHeight
         selectedBar.frame = selectedBarFrame
     }

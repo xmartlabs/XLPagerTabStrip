@@ -49,9 +49,9 @@ public struct ButtonBarPagerTabStripSettings {
         public var buttonBarRightContentInset: CGFloat?
 
         public var selectedBarBackgroundColor = UIColor.black
-        public var selectedBarHeight: CGFloat = 5
+        public var selectedBarHeight: CGFloat = 2
         public var selectedBarVerticalAlignment: SelectedBarVerticalAlignment = .bottom
-
+        public var selectedBarAlignment: SelectedBarAlignment = .center
         public var buttonBarItemBackgroundColor: UIColor?
         public var buttonBarItemFont = UIFont.systemFont(ofSize: 18)
         public var buttonBarItemLeftRightMargin: CGFloat = 8
