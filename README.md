@@ -5,6 +5,7 @@
 <img src="https://img.shields.io/badge/platform-iOS-blue.svg?style=flat" alt="Platform iOS" />
 <a href="https://developer.apple.com/swift"><img src="https://img.shields.io/badge/swift5-compatible-4BC51D.svg?style=flat" alt="Swift 5 compatible" /></a>
 <a href="https://github.com/Carthage/Carthage"><img src="https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat" alt="Carthage compatible" /></a>
+<a href="https://github.com/JamitLabs/Accio"><img src="https://img.shields.io/badge/Accio-supported-0A7CF5.svg?style=flat" alt="Accio supported" /></a>
 <a href="https://cocoapods.org/pods/XLPagerTabStrip"><img src="https://img.shields.io/cocoapods/v/XLPagerTabStrip.svg" alt="CocoaPods compatible" /></a>
 <a href="https://raw.githubusercontent.com/xmartlabs/XLPagerTabStrip/master/LICENSE"><img src="http://img.shields.io/badge/license-MIT-blue.svg?style=flat" alt="License: MIT" />
 </a>
@@ -319,6 +320,29 @@ To install XLPagerTabStrip, simply add the following line to your Cartfile:
 ```ogdl
 github "xmartlabs/XLPagerTabStrip" ~> 9.0
 ```
+
+### Accio
+
+[Accio](https://github.com/JamitLabs/Accio) is a SwiftPM based dependency manager with improvements over Carthage.
+
+To install XLPagerTabStrip, simply add the following to your Package.swift:
+
+```swift
+.package(url: "https://github.com/xmartlabs/XLPagerTabStrip.git", .upToNextMajor(from: "9.0.0")),
+```
+
+Next, add `XLPagerTabStrip` to your App targets dependencies like so:
+
+```swift
+.target(
+    name: "App",
+    dependencies: [
+        "XLPagerTabStrip",
+    ]
+),
+```
+
+Then run `accio update`.
 
 ## FAQ
 
