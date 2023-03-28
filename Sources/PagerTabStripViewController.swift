@@ -52,6 +52,9 @@ public protocol PagerTabStripDataSource: class {
 open class PagerTabStripViewController: UIViewController, UIScrollViewDelegate {
 
     @IBOutlet weak public var containerView: UIScrollView!
+    
+    // Set this to true to enable the containerView to be narrower (less wide) than self.view; leaving this as `false` gives the original behavior of this class.
+    open var allowNarrowerContainerView: Bool = false
 
     open weak var delegate: PagerTabStripDelegate?
     open weak var datasource: PagerTabStripDataSource?
@@ -199,7 +202,12 @@ open class PagerTabStripViewController: UIViewController, UIScrollViewDelegate {
     }
 
     open func offsetForChild(at index: Int) -> CGFloat {
-        return (CGFloat(index) * containerView.bounds.width) + ((containerView.bounds.width - view.bounds.width) * 0.5)
+        var inset = (containerView.bounds.width - view.bounds.width) * 0.5
+        if allowNarrowerContainerView {
+            inset = 0
+        }
+        
+        return (CGFloat(index) * containerView.bounds.width) + inset
     }
 
     open func offsetForChild(viewController: UIViewController) throws -> CGFloat {
@@ -241,13 +249,14 @@ open class PagerTabStripViewController: UIViewController, UIScrollViewDelegate {
         for (index, childController) in pagerViewControllers.enumerated() {
             let pageOffsetForChild = self.pageOffsetForChild(at: index)
             if abs(containerView.contentOffset.x - pageOffsetForChild) < containerView.bounds.width {
+                // 9/26/18; Prior to this, in both of these blocks of code below, `containerView.bounds.width` was `view.bounds.width`. But why would you want to use the containerView height but not its width? Seems like a bug.
                 if childController.parent != nil {
-                    childController.view.frame = CGRect(x: offsetForChild(at: index), y: 0, width: view.bounds.width, height: containerView.bounds.height)
+                    childController.view.frame = CGRect(x: offsetForChild(at: index), y: 0, width: containerView.bounds.width, height: containerView.bounds.height)
                     childController.view.autoresizingMask = [.flexibleHeight, .flexibleWidth]
                 } else {
                     childController.beginAppearanceTransition(true, animated: false)
                     addChild(childController)
-                    childController.view.frame = CGRect(x: offsetForChild(at: index), y: 0, width: view.bounds.width, height: containerView.bounds.height)
+                    childController.view.frame = CGRect(x: offsetForChild(at: index), y: 0, width: containerView.bounds.width, height: containerView.bounds.height)
                     childController.view.autoresizingMask = [.flexibleHeight, .flexibleWidth]
                     containerView.addSubview(childController.view)
                     childController.didMove(toParent: self)
