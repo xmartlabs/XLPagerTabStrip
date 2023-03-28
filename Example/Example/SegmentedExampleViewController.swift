@@ -37,7 +37,7 @@ class SegmentedExampleViewController: SegmentedPagerTabStripViewController {
 
     // MARK: - PagerTabStripDataSource
 
-    override func viewControllers(for pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
+    override func viewControllers(for pagerTabStripController: PagerTabStripViewController) -> ContiguousArray<UIViewController> {
         let child_1 = TableChildExampleViewController(style: .plain, itemInfo: "Table View")
         let child_2 = ChildExampleViewController(itemInfo: "View")
         let child_3 = TableChildExampleViewController(style: .grouped, itemInfo: "Table View 2")
@@ -58,7 +58,7 @@ class SegmentedExampleViewController: SegmentedPagerTabStripViewController {
             }
         }
         let nItems = 1 + (arc4random() % 4)
-        return Array(childViewControllers.prefix(Int(nItems)))
+        return ContiguousArray(childViewControllers.prefix(Int(nItems)))
     }
 
     @IBAction func reloadTapped(_ sender: UIBarButtonItem) {
