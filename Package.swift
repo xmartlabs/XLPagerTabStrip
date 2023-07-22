@@ -16,8 +16,8 @@ let package = Package(
     ],
     dependencies: [
         .package(
-                    url: "https://github.com/Climbatize/FXPageControl.git",
-                    .upToNextMajor(from: "1.5.1")
+                    url: "https://github.com/nicklockwood/FXPageControl.git",
+                    .upToNextMajor(from: "1.6.0")
                 )
     ],
     targets: [
