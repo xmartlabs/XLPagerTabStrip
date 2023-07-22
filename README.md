@@ -1,4 +1,4 @@
-# XLPagerTabStrip
+![XLPagerTabStripView](https://raw.githubusercontent.com/xmartlabs/XLPagerTabStrip/master/XLPagerTabTrip.png)
 
 <p align="left">
 <a href="https://travis-ci.org/xmartlabs/XLPagerTabStrip"><img src="https://travis-ci.org/xmartlabs/XLPagerTabStrip.svg?branch=master" alt="Build status" /></a>
@@ -216,7 +216,7 @@ settings.style.buttonBarItemFont = UIFont.systemFont(ofSize: 18)
 settings.style.buttonBarItemLeftRightMargin: CGFloat = 8
 settings.style.buttonBarItemTitleColor: UIColor?
 // in case the barView items do not fill the screen width this property stretch the cells to fill the screen
-settings.style.buttonBarItemsShouldFillAvailiableWidth = true
+settings.style.buttonBarItemsShouldFillAvailableWidth = true
 // only used if button bar is created programmatically and not using storyboards or nib files as recommended.
 public var buttonBarHeight: CGFloat?
 ```
