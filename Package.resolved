@@ -3,11 +3,11 @@
     "pins": [
       {
         "package": "FXPageControl",
-        "repositoryURL": "https://github.com/Climbatize/FXPageControl.git",
+        "repositoryURL": "https://github.com/nicklockwood/FXPageControl.git",
         "state": {
           "branch": null,
-          "revision": "83486601bcf23c0f168e2cce71b5cc42202fa484",
-          "version": "1.5.5"
+          "revision": "a94633402ba98c52f86c2a70e61ff086dec9de78",
+          "version": "1.6.0"
         }
       }
     ]
