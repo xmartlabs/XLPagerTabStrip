@@ -1,7 +1,7 @@
 //
 //  FXPageControl.h
 //
-//  Version 1.4
+//  Version 1.6
 //
 //  Created by Nick Lockwood on 07/01/2010.
 //  Copyright 2010 Charcoal Design
@@ -31,18 +31,12 @@
 //
 
 
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wobjc-missing-property-synthesis"
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wobjc-missing-property-synthesis"
 #import <UIKit/UIKit.h>
 
 
-#import <Availability.h>
-#undef weak_delegate
-#if __has_feature(objc_arc_weak)
-#define weak_delegate weak
-#else
-#define weak_delegate unsafe_unretained
-#endif
+NS_ASSUME_NONNULL_BEGIN
 
 
 extern const CGPathRef FXPageControlDotShapeCircle;
@@ -59,7 +53,7 @@ IB_DESIGNABLE @interface FXPageControl : UIControl
 - (CGSize)sizeForNumberOfPages:(NSInteger)pageCount;
 - (void)updateCurrentPageDisplay;
 
-@property (nonatomic, weak_delegate) IBOutlet id <FXPageControlDelegate> delegate;
+@property (nonatomic, weak) IBOutlet id <FXPageControlDelegate> delegate;
 
 @property (nonatomic, assign) IBInspectable NSInteger currentPage;
 @property (nonatomic, assign) IBInspectable NSInteger numberOfPages;
@@ -68,21 +62,25 @@ IB_DESIGNABLE @interface FXPageControl : UIControl
 @property (nonatomic, assign, getter = isWrapEnabled) IBInspectable BOOL wrapEnabled;
 @property (nonatomic, assign, getter = isVertical) IBInspectable BOOL vertical;
 
-@property (nonatomic, strong) IBInspectable UIImage *dotImage;
 @property (nonatomic, assign) IBInspectable CGPathRef dotShape;
 @property (nonatomic, assign) IBInspectable CGFloat dotSize;
-@property (nonatomic, strong) IBInspectable UIColor *dotColor;
-@property (nonatomic, strong) IBInspectable UIColor *dotShadowColor;
 @property (nonatomic, assign) IBInspectable CGFloat dotShadowBlur;
 @property (nonatomic, assign) IBInspectable CGSize dotShadowOffset;
+@property (nonatomic, assign) IBInspectable CGFloat dotBorderWidth;
+@property (nonatomic, strong, nullable) IBInspectable UIImage *dotImage;
+@property (nonatomic, strong, nullable) IBInspectable UIColor *dotColor;
+@property (nonatomic, strong, nullable) IBInspectable UIColor *dotShadowColor;
+@property (nonatomic, strong, nullable) IBInspectable UIColor *dotBorderColor;
 
-@property (nonatomic, strong) IBInspectable UIImage *selectedDotImage;
 @property (nonatomic, assign) IBInspectable CGPathRef selectedDotShape;
 @property (nonatomic, assign) IBInspectable CGFloat selectedDotSize;
-@property (nonatomic, strong) IBInspectable UIColor *selectedDotColor;
-@property (nonatomic, strong) IBInspectable UIColor *selectedDotShadowColor;
 @property (nonatomic, assign) IBInspectable CGFloat selectedDotShadowBlur;
 @property (nonatomic, assign) IBInspectable CGSize selectedDotShadowOffset;
+@property (nonatomic, assign) IBInspectable CGFloat selectedDotBorderWidth;
+@property (nonatomic, strong, nullable) IBInspectable UIImage *selectedDotImage;
+@property (nonatomic, strong, nullable) IBInspectable UIColor *selectedDotColor;
+@property (nonatomic, strong, nullable) IBInspectable UIColor *selectedDotShadowColor;
+@property (nonatomic, strong, nullable) IBInspectable UIColor *selectedDotBorderColor;
 
 @property (nonatomic, assign) IBInspectable CGFloat dotSpacing;
 
@@ -92,15 +90,18 @@ IB_DESIGNABLE @interface FXPageControl : UIControl
 @protocol FXPageControlDelegate <NSObject>
 @optional
 
-- (UIImage *)pageControl:(FXPageControl *)pageControl imageForDotAtIndex:(NSInteger)index;
+- (nullable UIImage *)pageControl:(FXPageControl *)pageControl imageForDotAtIndex:(NSInteger)index;
 - (CGPathRef)pageControl:(FXPageControl *)pageControl shapeForDotAtIndex:(NSInteger)index;
 - (UIColor *)pageControl:(FXPageControl *)pageControl colorForDotAtIndex:(NSInteger)index;
 
-- (UIImage *)pageControl:(FXPageControl *)pageControl selectedImageForDotAtIndex:(NSInteger)index;
+- (nullable UIImage *)pageControl:(FXPageControl *)pageControl selectedImageForDotAtIndex:(NSInteger)index;
 - (CGPathRef)pageControl:(FXPageControl *)pageControl selectedShapeForDotAtIndex:(NSInteger)index;
 - (UIColor *)pageControl:(FXPageControl *)pageControl selectedColorForDotAtIndex:(NSInteger)index;
 
 @end
 
 
-#pragma GCC diagnostic pop
+NS_ASSUME_NONNULL_END
+
+
+#pragma clang diagnostic pop

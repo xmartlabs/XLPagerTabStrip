@@ -23,6 +23,7 @@
 // THE SOFTWARE.
 
 import Foundation
+import UIKit
 
 // MARK: Protocols
 
@@ -32,7 +33,7 @@ public protocol IndicatorInfoProvider {
 
 }
 
-public protocol PagerTabStripDelegate: class {
+public protocol PagerTabStripDelegate: AnyObject {
 
     func updateIndicator(for viewController: PagerTabStripViewController, fromIndex: Int, toIndex: Int)
 }
@@ -42,7 +43,7 @@ public protocol PagerTabStripIsProgressiveDelegate: PagerTabStripDelegate {
     func updateIndicator(for viewController: PagerTabStripViewController, fromIndex: Int, toIndex: Int, withProgressPercentage progressPercentage: CGFloat, indexWasChanged: Bool)
 }
 
-public protocol PagerTabStripDataSource: class {
+public protocol PagerTabStripDataSource: AnyObject {
 
     func viewControllers(for pagerTabStripController: PagerTabStripViewController) -> [UIViewController]
 }

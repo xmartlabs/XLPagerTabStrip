@@ -320,6 +320,12 @@ To install XLPagerTabStrip, simply add the following line to your Cartfile:
 github "xmartlabs/XLPagerTabStrip" ~> 9.0
 ```
 
+### SPM
+
+- File > Swift Packages > Add Package Dependency
+- Add `https://github.com/xmartlabs/XLPagerTabStrip.git`
+- Select "Up to Next Major" with "9.0.0"
+
 ## FAQ
 
 #### How to change the visible child view controller programmatically
