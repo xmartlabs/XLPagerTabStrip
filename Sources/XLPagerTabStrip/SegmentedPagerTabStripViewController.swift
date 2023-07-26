@@ -36,7 +36,7 @@ public struct SegmentedPagerTabStripSettings {
 
 open class SegmentedPagerTabStripViewController: PagerTabStripViewController, PagerTabStripDataSource, PagerTabStripDelegate {
 
-    @IBOutlet public var segmentedControl: UISegmentedControl!
+    @IBOutlet weak public var segmentedControl: UISegmentedControl!
 
     open var settings = SegmentedPagerTabStripSettings()
 

@@ -27,7 +27,7 @@ import XLPagerTabStrip
 
 class InstagramExampleViewController: ButtonBarPagerTabStripViewController {
 
-    @IBOutlet var shadowView: UIView!
+    @IBOutlet weak var shadowView: UIView!
     let blueInstagramColor = UIColor(red: 37/255.0, green: 111/255.0, blue: 206/255.0, alpha: 1.0)
 
     override func viewDidLoad() {

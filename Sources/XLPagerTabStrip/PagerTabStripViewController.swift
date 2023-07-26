@@ -52,7 +52,7 @@ public protocol PagerTabStripDataSource: AnyObject {
 
 open class PagerTabStripViewController: UIViewController, UIScrollViewDelegate {
 
-    @IBOutlet public var containerView: UIScrollView!
+    @IBOutlet weak public var containerView: UIScrollView!
 
     open weak var delegate: PagerTabStripDelegate?
     open weak var datasource: PagerTabStripDataSource?

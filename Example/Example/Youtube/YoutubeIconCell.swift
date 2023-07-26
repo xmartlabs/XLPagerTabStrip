@@ -27,6 +27,6 @@ import UIKit
 
 class YoutubeIconCell: UICollectionViewCell {
 
-    @IBOutlet var iconImage: UIImageView!
+    @IBOutlet weak var iconImage: UIImageView!
 
 }

@@ -26,9 +26,9 @@ import UIKit
 
 class PostCell: UITableViewCell {
 
-    @IBOutlet var userImage: UIImageView!
-    @IBOutlet var postName: UILabel!
-    @IBOutlet var postText: UILabel!
+    @IBOutlet weak var userImage: UIImageView!
+    @IBOutlet weak var postName: UILabel!
+    @IBOutlet weak var postText: UILabel!
 
     override func awakeFromNib() {
         super.awakeFromNib()
