@@ -1,7 +1,7 @@
 //
 //  FXPageControl.m
 //
-//  Version 1.5
+//  Version 1.6
 //
 //  Created by Nick Lockwood on 07/01/2010.
 //  Copyright 2010 Charcoal Design
@@ -101,7 +101,7 @@ const CGPathRef FXPageControlDotShapeTriangle = (const CGPathRef)3;
     [self setNeedsDisplay];
 }
 
-- (void)drawRect:(__unused CGRect)rect
+- (void)drawRect:(CGRect)rect
 {
     if (_numberOfPages > 1 || !_hidesForSinglePage)
     {

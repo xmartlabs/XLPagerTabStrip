@@ -1,7 +1,7 @@
 //
 //  FXPageControl.h
 //
-//  Version 1.5
+//  Version 1.6
 //
 //  Created by Nick Lockwood on 07/01/2010.
 //  Copyright 2010 Charcoal Design
