@@ -18,6 +18,7 @@
 		3174BB1228E2B81700847CF0 /* FXPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 3174BB1028E2B81700847CF0 /* FXPageControl.m */; };
 		3174BB1328E2B81700847CF0 /* FXPageControl.h in Headers */ = {isa = PBXBuildFile; fileRef = 3174BB1128E2B81700847CF0 /* FXPageControl.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3174BB1828E2C46A00847CF0 /* ButtonCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3174BB1728E2C46A00847CF0 /* ButtonCell.xib */; };
+		8C0CB7692B05197F009CDBDE /* UIWindow+Pager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0CB7682B05197F009CDBDE /* UIWindow+Pager.swift */; };
 		CB0986C41C51391600DF7087 /* ButtonBarPagerTabStripViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB0986C31C51391600DF7087 /* ButtonBarPagerTabStripViewController.swift */; };
 		CB0986C61C51395E00DF7087 /* ButtonBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB0986C51C51395E00DF7087 /* ButtonBarView.swift */; };
 		CB0986C81C5158A000DF7087 /* ButtonBarViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB0986C71C5158A000DF7087 /* ButtonBarViewCell.swift */; };
@@ -54,6 +55,7 @@
 		3174BB1028E2B81700847CF0 /* FXPageControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FXPageControl.m; sourceTree = "<group>"; };
 		3174BB1128E2B81700847CF0 /* FXPageControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FXPageControl.h; sourceTree = "<group>"; };
 		3174BB1728E2C46A00847CF0 /* ButtonCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ButtonCell.xib; sourceTree = "<group>"; };
+		8C0CB7682B05197F009CDBDE /* UIWindow+Pager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIWindow+Pager.swift"; sourceTree = "<group>"; };
 		CB0986C31C51391600DF7087 /* ButtonBarPagerTabStripViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonBarPagerTabStripViewController.swift; sourceTree = "<group>"; };
 		CB0986C51C51395E00DF7087 /* ButtonBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonBarView.swift; sourceTree = "<group>"; };
 		CB0986C71C5158A000DF7087 /* ButtonBarViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonBarViewCell.swift; sourceTree = "<group>"; };
@@ -155,6 +157,7 @@
 				28E098BF1C5003130083B788 /* SwipeDirection.swift */,
 				281BFDC01C511C420090C26F /* IndicatorInfo.swift */,
 				281BFDC21C511F120090C26F /* PagerTabStripBehaviour.swift */,
+				8C0CB7682B05197F009CDBDE /* UIWindow+Pager.swift */,
 			);
 			name = Sources;
 			path = Sources/XLPagerTabStrip;
@@ -320,6 +323,7 @@
 				28E098BE1C5002D90083B788 /* PagerTabStripError.swift in Sources */,
 				281BFDC11C511C420090C26F /* IndicatorInfo.swift in Sources */,
 				CB86ED6B1C4D6E6C00DA463B /* PagerTabStripViewController.swift in Sources */,
+				8C0CB7692B05197F009CDBDE /* UIWindow+Pager.swift in Sources */,
 				28E098C01C5003130083B788 /* SwipeDirection.swift in Sources */,
 				CB0986C81C5158A000DF7087 /* ButtonBarViewCell.swift in Sources */,
 				CB0986C41C51391600DF7087 /* ButtonBarPagerTabStripViewController.swift in Sources */,
