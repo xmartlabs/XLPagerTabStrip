@@ -23,6 +23,7 @@
 // THE SOFTWARE.
 
 import Foundation
+import UIKit
 
 public enum ButtonBarItemSpec<CellType: UICollectionViewCell> {
 
@@ -95,7 +96,12 @@ open class ButtonBarPagerTabStripViewController: PagerTabStripViewController, Pa
     open override func viewDidLoad() {
         super.viewDidLoad()
         
+        #if SWIFT_PACKAGE
+        var bundle = Bundle.module
+        #else
         var bundle = Bundle(for: ButtonBarViewCell.self)
+        #endif
+
         if let resourcePath = bundle.path(forResource: "XLPagerTabStrip", ofType: "bundle") {
             if let resourcesBundle = Bundle(path: resourcePath) {
                 bundle = resourcesBundle

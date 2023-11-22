@@ -1,0 +1,16 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "FXPageControl",
+        "repositoryURL": "https://github.com/nicklockwood/FXPageControl.git",
+        "state": {
+          "branch": null,
+          "revision": "a94633402ba98c52f86c2a70e61ff086dec9de78",
+          "version": "1.6.0"
+        }
+      }
+    ]
+  },
+  "version": 1
+}

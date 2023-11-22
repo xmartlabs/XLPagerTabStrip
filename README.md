@@ -1,4 +1,4 @@
-# XLPagerTabStrip
+![XLPagerTabStripView](https://raw.githubusercontent.com/xmartlabs/XLPagerTabStrip/master/XLPagerTabTrip.png)
 
 <p align="left">
 <a href="https://travis-ci.org/xmartlabs/XLPagerTabStrip"><img src="https://travis-ci.org/xmartlabs/XLPagerTabStrip.svg?branch=master" alt="Build status" /></a>
@@ -15,6 +15,8 @@
 Made with ❤️ by [XMARTLABS](http://xmartlabs.com).
 
 Android [PagerTabStrip](http://developer.android.com/reference/android/support/v4/view/PagerTabStrip.html) for iOS!
+
+👉 Looking for a SwiftUI version? Check out [PagerTabStripView](https://github.com/xmartlabs/PagerTabStripView), it's fully written in pure SwiftUI. 👈
 
 **XLPagerTabStrip** is a *Container View Controller* that allows us to switch easily among a collection of view controllers. Pan gesture can be used to move on to next or previous view controller. It shows a interactive indicator of the current, previous, next child view controllers.
 
@@ -216,7 +218,7 @@ settings.style.buttonBarItemFont = UIFont.systemFont(ofSize: 18)
 settings.style.buttonBarItemLeftRightMargin: CGFloat = 8
 settings.style.buttonBarItemTitleColor: UIColor?
 // in case the barView items do not fill the screen width this property stretch the cells to fill the screen
-settings.style.buttonBarItemsShouldFillAvailiableWidth = true
+settings.style.buttonBarItemsShouldFillAvailableWidth = true
 // only used if button bar is created programmatically and not using storyboards or nib files as recommended.
 public var buttonBarHeight: CGFloat?
 ```
@@ -319,6 +321,12 @@ To install XLPagerTabStrip, simply add the following line to your Cartfile:
 ```ogdl
 github "xmartlabs/XLPagerTabStrip" ~> 9.0
 ```
+
+### SPM
+
+- File > Swift Packages > Add Package Dependency
+- Add `https://github.com/xmartlabs/XLPagerTabStrip.git`
+- Select "Up to Next Major" with "9.0.0"
 
 ## FAQ
 

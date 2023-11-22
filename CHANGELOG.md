@@ -1,6 +1,10 @@
 # Change Log
 All notable changes to XLPagerTabStrip will be documented in this file.
 
+### [9.1.0](https://github.com/xmartlabs/XLPagerTabStrip/releases/tag/9.1.0)
+
+* SPM support.
+
 ### [9.0.0](https://github.com/xmartlabs/XLPagerTabStrip/releases/tag/9.0.0)
 
 * Xcode 10.2 and Swift 5.0 support.
